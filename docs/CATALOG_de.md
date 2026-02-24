@@ -30,9 +30,9 @@ Kopiere den Skill aus ~/Schreibtisch/skill-library/skills/patterns/testing-patte
 
 **Agent installieren:**
 ```
-Kopiere den Agent aus ~/Schreibtisch/skill-library/agents/review/python-reviewer.md in mein Projekt
+Kopiere den Agent aus ~/Schreibtisch/skill-library/agents/review/reviewer.md in mein Projekt
 ```
-→ Claude kopiert die Datei nach `.claude/agents/python-reviewer.md`
+→ Claude kopiert die Datei nach `.claude/agents/reviewer.md`
 
 **Mehrere auf einmal:**
 ```
@@ -122,40 +122,29 @@ Immer geladene Verhaltensregeln, die Claudes Verhalten bei allen Aufgaben präge
 
 ---
 
-## Agents (16)
+## Agents (5)
 
-### Review (4)
-
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| python-reviewer | Prüft Python-Code auf Sicherheitslücken, Typsicherheit und Best Practices. | [agents/review/python-reviewer.md](../agents/review/python-reviewer.md) |
-| logging-reviewer | Prüft Python-Code auf Logging-Best-Practices, fehlende Logs, falsche Log-Levels und Offenlegung sensibler Daten. | [agents/review/logging-reviewer.md](../agents/review/logging-reviewer.md) |
-| security-reviewer | Prüft Python-Code auf Sicherheitslücken nach OWASP-Top-10 — Input-Validierung, Injection, Path Traversal, Secrets und Auth. | [agents/review/security-reviewer.md](../agents/review/security-reviewer.md) |
-| privacy-auditor | Auditiert Code auf Offline-Konformität und Datenschutz — findet externe API-Aufrufe, Telemetrie und Cloud-Zugriffe. | [agents/review/privacy-auditor.md](../agents/review/privacy-auditor.md) |
-
-### Analyze (5)
+### Review (1)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
-| performance-analyzer | Analysiert Python-Code auf Performance-Probleme: N+1-Queries, Memory-Leaks, blockierendes I/O, O(n²)-Komplexität. | [agents/analyze/performance-analyzer.md](../agents/analyze/performance-analyzer.md) |
-| scalability-analyzer | Analysiert Code auf Skalierungsprobleme: fehlendes Caching, Connection-Pooling, zustandsbehaftetes Design, horizontale Skalierung. | [agents/analyze/scalability-analyzer.md](../agents/analyze/scalability-analyzer.md) |
-| dead-code-detector | Erkennt toten, unerreichbaren und verwaisten Code — ungenutzte Funktionen, Klassen, Imports und Variablen. | [agents/analyze/dead-code-detector.md](../agents/analyze/dead-code-detector.md) |
-| dependency-auditor | Auditiert Python-Abhängigkeiten auf CVEs, veraltete Versionen und Lizenzprobleme. | [agents/analyze/dependency-auditor.md](../agents/analyze/dependency-auditor.md) |
-| architecture-analyzer | Analysiert, ob Implementierungspläne zur bestehenden Codebase-Architektur passen — Modulstruktur, Import-Konventionen, Integrationspunkte. | [agents/analyze/architecture-analyzer.md](../agents/analyze/architecture-analyzer.md) |
+| reviewer | Prueft Python-Code auf Sicherheit (OWASP), Typsicherheit, Logging, Datenschutz/Offline-Konformitaet und Best Practices. Konsolidiert python-reviewer, security-reviewer, logging-reviewer und privacy-auditor. | [agents/review/reviewer.md](../agents/review/reviewer.md) |
 
-### Plan (3)
+### Analyze (1)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
-| plan-completeness | Prüft Implementierungspläne auf Vollständigkeit: alle Schritte definiert, Abhängigkeiten klar, Randfälle abgedeckt. | [agents/plan/plan-completeness.md](../agents/plan/plan-completeness.md) |
-| risk-assessor | Bewertet Implementierungsrisiken: Breaking Changes, Sicherheitsbedenken, Komplexität und Machbarkeit. | [agents/plan/risk-assessor.md](../agents/plan/risk-assessor.md) |
-| requirements-verifier | Verifiziert, dass die Implementierung mit Benutzeranforderungen übereinstimmt — identifiziert Lücken und Randfälle. | [agents/plan/requirements-verifier.md](../agents/plan/requirements-verifier.md) |
+| analyzer | Analysiert Codebasen auf Architektur-Passung, Performance, Skalierbarkeit, toten Code und Abhaengigkeits-Gesundheit. Konsolidiert architecture-analyzer, performance-analyzer, scalability-analyzer, dead-code-detector und dependency-auditor. | [agents/analyze/analyzer.md](../agents/analyze/analyzer.md) |
 
-### Build (4)
+### Plan (1)
+
+| Name | Beschreibung | Pfad |
+|------|-------------|------|
+| planner | Validiert Implementierungsplaene auf Vollstaendigkeit, Anforderungsabdeckung und Risiken. Konsolidiert plan-completeness, requirements-verifier und risk-assessor. | [agents/plan/planner.md](../agents/plan/planner.md) |
+
+### Build (2)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
 | code-simplifier | Vereinfacht und verfeinert Code hinsichtlich Klarheit, Konsistenz und Wartbarkeit bei voller Funktionserhaltung. | [agents/build/code-simplifier.md](../agents/build/code-simplifier.md) |
-| test-architect | Erstellt pytest-Tests und prüft bestehende Testsuiten auf Qualität und Abdeckung. | [agents/build/test-architect.md](../agents/build/test-architect.md) |
-| warmgold-frontend-builder | Baut UI-Komponenten mit dem warmgold-Designsystem: warme Goldakzente, warme Grautöne, iOS-inspiriert. | [agents/build/warmgold-frontend-builder.md](../agents/build/warmgold-frontend-builder.md) |
-| migration-writer | Generiert Datenbank- und Schema-Migrationsskripte nach Alembic-Patterns mit Sicherheitsprüfungen gegen Datenverlust. | [agents/build/migration-writer.md](../agents/build/migration-writer.md) |
+| test-architect | Erstellt pytest-Tests und prueft bestehende Testsuiten auf Qualitaet und Abdeckung. | [agents/build/test-architect.md](../agents/build/test-architect.md) |

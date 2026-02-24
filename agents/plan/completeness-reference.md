@@ -1,29 +1,6 @@
----
-name: plan-completeness
-description: |
-  Checks implementation plans for completeness: all steps defined, dependencies clear, edge cases covered.
-  Use when reviewing plans before implementation or when user asks "is the plan complete?".
-  Recognizes: "plan-completeness", "check plan completeness", "missing steps?",
-  "plan complete?", "anything missing from the plan?", "all steps covered?"
-tools: Read, Grep, Glob
-model: opus
-color: cyan
----
+# Completeness
 
-You are a **Plan Completeness Checker**. Analyze implementation plans for gaps and missing details.
-
-Report findings by category:
-- **COMPLETE**: Step/aspect fully defined
-- **INCOMPLETE**: Step mentioned but lacks detail
-- **MISSING**: Expected step not present
-- **AMBIGUOUS**: Step unclear or open to interpretation
-- **DEPENDENCY_UNCLEAR**: Order or prerequisite not specified
-
----
-
-## Analysis Process
-
-### Step 1: Parse the Plan Structure
+### Plan Structure Analysis
 
 Identify plan components:
 
@@ -45,7 +22,7 @@ Identify plan components:
 - [ ] Manual verification steps
 ```
 
-### Step 2: Check Completeness Criteria
+### Completeness Criteria
 
 For each step, verify:
 
@@ -57,7 +34,7 @@ For each step, verify:
 | **Why** | Is the rationale stated? | ✓/✗ |
 | **When** | Is the order/timing clear? | ✓/✗ |
 
-### Step 3: Identify Missing Elements
+### Missing Elements Checklist
 
 Common gaps to check:
 
@@ -90,11 +67,9 @@ Common gaps to check:
 - [ ] Backwards compatibility
 ```
 
----
+### Completeness Patterns
 
-## Completeness Patterns
-
-### Well-Defined Step
+#### Well-Defined Step
 
 ```markdown
 COMPLETE:
@@ -106,7 +81,7 @@ COMPLETE:
  - Test: Add test_retry_exhausted() in test_ollama_client.py"
 ```
 
-### Incomplete Step
+#### Incomplete Step
 
 ```markdown
 INCOMPLETE:
@@ -117,7 +92,7 @@ INCOMPLETE:
 - Missing: How to test?
 ```
 
-### Ambiguous Step
+#### Ambiguous Step
 
 ```markdown
 AMBIGUOUS:
@@ -127,11 +102,9 @@ AMBIGUOUS:
 - Question: Which modules affected?
 ```
 
----
+### Edge Case Analysis
 
-## Edge Case Analysis
-
-### Common Edge Cases to Verify
+#### Common Edge Cases to Verify
 
 ```markdown
 ## Edge Cases in Plan
@@ -154,11 +127,9 @@ AMBIGUOUS:
 - [ ] Config default for new options
 ```
 
----
+### Dependency Analysis
 
-## Dependency Analysis
-
-### Internal Dependencies
+#### Internal Dependencies
 
 ```markdown
 | Step | Depends On | Reason |
@@ -167,7 +138,7 @@ AMBIGUOUS:
 | Step 4 | Step 2, 3 | Integrates both components |
 ```
 
-### External Dependencies
+#### External Dependencies
 
 ```markdown
 | Dependency | Type | Status |
@@ -177,9 +148,7 @@ AMBIGUOUS:
 | Config change | YAML | Default value specified? |
 ```
 
----
-
-## Output Format
+### Completeness Output Format
 
 ```markdown
 ## Plan Completeness Report
@@ -244,9 +213,7 @@ AMBIGUOUS:
 **Verdict**: NEEDS REFINEMENT - Address incomplete steps before implementation.
 ```
 
----
-
-## Questions to Surface
+### Questions to Surface
 
 When gaps are found, formulate specific questions:
 
@@ -259,3 +226,5 @@ Questions for clarification:
 4. New config field planned - what should the default value be?
 5. Breaking change possible - is backwards compatibility required?
 ```
+
+---

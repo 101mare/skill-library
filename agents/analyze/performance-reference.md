@@ -1,30 +1,8 @@
----
-name: performance-analyzer
-description: |
-  Analyzes Python code for performance problems: N+1 queries, memory leaks, blocking I/O, O(n²).
-  Use when code is slow, memory usage is high, or async isn't performing well.
-  Recognizes: "performance-analyzer", "performance analyzer", "why is this slow?", "optimize this",
-  "memory leak?", "find bottlenecks", "N+1 problem?", "improve performance"
-tools: Read, Grep, Glob
-model: inherit
-permissionMode: plan
-color: magenta
----
+# Performance
 
-You are a **Performance Analyzer**. Review code for performance issues and report by severity:
+### N+1 Query Patterns (HIGH)
 
-- **CRITICAL**: Memory leaks, blocking operations in async, infinite loops
-- **HIGH**: N+1 queries, O(n²) in hot paths, missing generators
-- **MEDIUM**: Inefficient patterns, missing caching, suboptimal data structures
-- **LOW**: Minor optimizations, style improvements
-
-Reference specific line numbers. Explain the performance impact.
-
----
-
-## N+1 Query Patterns (HIGH)
-
-### Database N+1
+#### Database N+1
 
 ```python
 # BAD: N+1 - one query per item
@@ -39,7 +17,7 @@ users = db.query(User).options(joinedload(User.orders)).all()
 users_with_orders = db.query(User, Order).join(Order).all()
 ```
 
-### API N+1
+#### API N+1
 
 ```python
 # BAD: N+1 API calls
@@ -55,7 +33,7 @@ async def fetch_all(ids):
     return await asyncio.gather(*tasks)
 ```
 
-### File N+1
+#### File N+1
 
 ```python
 # BAD: Opening file in loop
@@ -67,11 +45,9 @@ for filename in filenames:
 contents = [Path(f).read_text() for f in filenames]
 ```
 
----
+### Memory Issues (CRITICAL/HIGH)
 
-## Memory Issues (CRITICAL/HIGH)
-
-### Unclosed Resources
+#### Unclosed Resources
 
 ```python
 # BAD: File never closed
@@ -93,7 +69,7 @@ with database.connect() as conn:
     result = conn.execute(query)
 ```
 
-### Large Collections in Memory
+#### Large Collections in Memory
 
 ```python
 # BAD: Loading everything into memory
@@ -112,7 +88,7 @@ def process_large_file(path):
             yield process(line)
 ```
 
-### Growing Collections
+#### Growing Collections
 
 ```python
 # BAD: Unbounded growth
@@ -130,11 +106,9 @@ def get_data(key):
     return expensive_fetch(key)
 ```
 
----
+### Async Anti-Patterns (CRITICAL)
 
-## Async Anti-Patterns (CRITICAL)
-
-### Blocking in Async
+#### Blocking in Async
 
 ```python
 # BAD: Blocking call in async function
@@ -159,7 +133,7 @@ async def read_file():
         return await f.read()
 ```
 
-### Sequential Async (Defeats Purpose)
+#### Sequential Async (Defeats Purpose)
 
 ```python
 # BAD: Sequential - no benefit from async
@@ -176,7 +150,7 @@ async def fetch_all(urls):
     return await asyncio.gather(*tasks)
 ```
 
-### Missing Timeout
+#### Missing Timeout
 
 ```python
 # BAD: Can hang forever
@@ -187,14 +161,12 @@ async with asyncio.timeout(30):
     result = await client.fetch(url)
 ```
 
----
+### Inefficient Algorithms (HIGH)
 
-## Inefficient Algorithms (HIGH)
-
-### O(n²) Patterns
+#### O(n^2) Patterns
 
 ```python
-# BAD: O(n²) - nested loops with list
+# BAD: O(n^2) - nested loops with list
 for item in items:
     if item in other_items:  # O(n) lookup each time!
         process(item)
@@ -205,7 +177,7 @@ for item in items:
     if item in other_set:  # O(1) lookup
         process(item)
 
-# BAD: O(n²) - repeated list operations
+# BAD: O(n^2) - repeated list operations
 result = []
 for item in items:
     if item not in result:  # O(n) each time
@@ -223,10 +195,10 @@ for item in items:
 result = list(set(items))
 ```
 
-### String Concatenation in Loops
+#### String Concatenation in Loops
 
 ```python
-# BAD: O(n²) string concatenation
+# BAD: O(n^2) string concatenation
 result = ""
 for item in items:
     result += str(item)  # Creates new string each time!
@@ -241,11 +213,9 @@ for item in items:
 result = "".join(parts)
 ```
 
----
+### Missing Optimizations (MEDIUM)
 
-## Missing Optimizations (MEDIUM)
-
-### Missing Caching
+#### Missing Caching
 
 ```python
 # BAD: Repeated expensive computation
@@ -267,7 +237,7 @@ def get_config():
     return load_config()
 ```
 
-### Inefficient Data Structures
+#### Inefficient Data Structures
 
 ```python
 # BAD: List for membership testing
@@ -289,7 +259,7 @@ pairs = {"a": 1, "b": 2, "c": 3}
 return pairs.get(target)
 ```
 
-### Unnecessary Work
+#### Unnecessary Work
 
 ```python
 # BAD: Sorting when only need min/max
@@ -307,9 +277,7 @@ first = matches[0] if matches else None
 first = next((x for x in items if condition(x)), None)
 ```
 
----
-
-## List Comprehension vs Generator (MEDIUM)
+### List Comprehension vs Generator (MEDIUM)
 
 ```python
 # BAD: Creates full list in memory
@@ -328,9 +296,7 @@ result = list(filter(lambda x: x > 0, (abs(n) for n in numbers)))
 result = [abs(n) for n in numbers if abs(n) > 0]
 ```
 
----
-
-## Hot Path Identification
+### Hot Path Identification
 
 Look for performance issues in:
 1. **Request handlers**: Code run on every HTTP request
@@ -352,61 +318,3 @@ class Model:
 ```
 
 ---
-
-## Review Output Format
-
-```markdown
-## Performance Analysis: [filename/module]
-
-### CRITICAL
-- **file.py:42**: Blocking `requests.get()` in async function
-  - Impact: Blocks entire event loop, kills concurrency
-  - Fix: Use `aiohttp` or `httpx` async client
-
-### HIGH
-- **file.py:78-82**: N+1 query pattern
-  ```python
-  for user in users:
-      orders = db.query(Order).filter_by(user_id=user.id)
-  ```
-  - Impact: 1 + N database queries instead of 1
-  - Fix: Use `joinedload()` or batch query
-
-### MEDIUM
-- **file.py:120**: List used for membership testing
-  - Impact: O(n) instead of O(1) lookup
-  - Fix: Convert to `set()`
-
-### LOW
-- **file.py:95**: Could use generator instead of list comprehension
-  - Impact: Minor memory improvement
-  - Fix: `sum(x for x in items)` instead of `sum([x for x in items])`
-
-### Summary
-- Critical issues: X
-- Estimated impact: [High/Medium/Low]
-- Hot paths identified: [list]
-- Recommendations priority: [ordered list]
-
-### Profiling Suggestions
-If performance is critical, profile with:
-```bash
-python -m cProfile -o profile.stats script.py
-# Or for line-by-line:
-pip install line_profiler
-```
-```
-
----
-
-## Analysis Process
-
-1. **Identify hot paths**: Request handlers, loops, frequently called code
-2. **Check async patterns**: Look for blocking calls, sequential awaits
-3. **Find N+1 patterns**: Database/API calls inside loops
-4. **Review data structures**: Lists vs sets/dicts for lookups
-5. **Check memory patterns**: Unclosed resources, growing collections
-6. **Look for O(n²)**: Nested loops, repeated list operations
-7. **Find missing generators**: Large list returns that could yield
-
-Prioritize fixes by impact and frequency of execution.

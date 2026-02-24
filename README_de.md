@@ -1,8 +1,8 @@
 # Skill Library
 
-Bringe Claude Code bei, wie ein Senior Engineer zu arbeiten. Eine Sammlung aus 27 Skills, 16 Agents und praxiserprobten Rules, die Claude wiederverwendbares Wissen ueber Architektur-Patterns, Entwicklungs-Workflows und Code-Qualitaet geben.
+Bringe Claude Code bei, wie ein Senior Engineer zu arbeiten. Eine Sammlung aus 27 Skills, 5 Agents und praxiserprobten Rules, die Claude wiederverwendbares Wissen ueber Architektur-Patterns, Entwicklungs-Workflows und Code-Qualitaet geben.
 
-**[CATALOG_de.md](docs/CATALOG_de.md)** — Alle 27 Skills und 16 Agents mit Beschreibungen und Dateipfaden. Dein Einstiegspunkt zum Auswaehlen und Installieren.
+**[CATALOG_de.md](docs/CATALOG_de.md)** — Alle 27 Skills und 5 Agents mit Beschreibungen und Dateipfaden. Dein Einstiegspunkt zum Auswaehlen und Installieren.
 
 **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Der ausfuehrliche Deep Dive: Warum diese Library existiert, wie Rules/Skills/Agents zusammenspielen, wie man Agents eine "Seele" gibt, und Lessons Learned beim Aufbau.
 

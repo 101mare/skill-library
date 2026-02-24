@@ -2,6 +2,22 @@
 
 > **Note:** This repo contains Anthropic's implementation of Skills for Claude. For information about the Agent Skills Standard, see [agentskills.io](https://agentskills.io).
 
+## Table of Contents
+
+1. [Chaos](#chaos)
+2. [Three Layers, One Repo](#three-layers-one-repo)
+3. [Rules: What Claude Always Needs to Know](#rules-what-claude-always-needs-to-know)
+4. [Skills Teach, Agents Act](#skills-teach-agents-act)
+5. [Don't Give the Agent a Flat Role, Give It a "Soul"](#dont-give-the-agent-a-flat-role-give-it-a-soul)
+6. [Workflow Skills: Skills That Control Agents](#workflow-skills-skills-that-control-agents)
+7. [Agent Teams: When Subagents Aren't Enough](#agent-teams-when-subagents-arent-enough)
+8. [Advanced: Ralph Loop — Autonomous Work Loops](#advanced-ralph-loop--autonomous-work-loops)
+9. [Context Management: 27 Skills, But Please Not All at Once](#context-management-27-skills-but-please-not-all-at-once)
+10. [How to Use It](#how-to-use-it)
+11. [Don't Forget Codex](#dont-forget-codex)
+12. [What I Got Wrong at First](#what-i-got-wrong-at-first)
+13. [Closing](#closing)
+
 ## Chaos
 
 You know how it goes. You start a new project and the first thing you do is create a fresh CLAUDE.md configuration file. To save time, you copy your standard rules from an old project: "Never log PII", "Type hints mandatory". The problem: you adjust these rules over time, independently across different projects. Three months later, you have five projects with five completely different versions of your "standard rules" — and absolute chaos.
@@ -12,7 +28,7 @@ Or: You put skills and agents in the same folder, treat them the same way, and w
 
 At some point I asked myself: What if I built the generic parts of my Claude Code configuration properly once and carried them into every project? Not as a monolithic framework, but as a toolkit — universal rules, callable knowledge, and delegated expertise, cleanly separated.
 
-The result is a skill library with 4 rules, 27 skills, 16 agents, and a CLAUDE.md template. It has changed how every one of my projects works with Claude. Not because the individual pieces are so special, but because the separation of rules, knowledge, and expertise is right.
+The result is a skill library with 4 rules, 27 skills, 5 agents, and a CLAUDE.md template. It has changed how every one of my projects works with Claude. Not because the individual pieces are so special, but because the separation of rules, knowledge, and expertise is right.
 
 ---
 
@@ -24,7 +40,7 @@ The library separates three concerns that are mixed together in most setups:
 
 **Skills** are callable knowledge. They are loaded when they're relevant — like opening a manual. 27 skills in four categories.
 
-**Agents** are delegated expertise with their own scope. They run as isolated subprocesses, receive zero context from the parent process, and return a result. 16 agents in four categories.
+**Agents** are delegated expertise with their own scope. They run as isolated subprocesses, receive zero context from the parent process, and return a result. 5 agents in four categories.
 
 This gives a clear structure:
 
@@ -73,25 +89,14 @@ skill-library/
 │       └── systematic-debugging/
 └── agents/
     ├── review/                       # Code Review & Audit
-    │   ├── python-reviewer.md
-    │   ├── logging-reviewer.md
-    │   ├── security-reviewer.md
-    │   └── privacy-auditor.md
+    │   └── reviewer.md
     ├── analyze/                      # Analysis & Detection
-    │   ├── performance-analyzer.md
-    │   ├── scalability-analyzer.md
-    │   ├── dead-code-detector.md
-    │   ├── dependency-auditor.md
-    │   └── architecture-analyzer.md
+    │   └── analyzer.md
     ├── plan/                         # Planning & Assessment
-    │   ├── plan-completeness.md
-    │   ├── risk-assessor.md
-    │   └── requirements-verifier.md
+    │   └── planner.md
     └── build/                        # Code Generation & Modification
         ├── code-simplifier.md
-        ├── test-architect.md
-        ├── warmgold-frontend-builder.md
-        └── migration-writer.md
+        └── test-architect.md
 ```
 
 The crucial point: **Rules replace the generic part of CLAUDE.md.** Once you've extracted fundamental standards like DRY, security, and agent behavior into rules, your CLAUDE.md only needs what truly makes your project unique. The DRY principle, applied to AI configuration.
@@ -101,6 +106,18 @@ The crucial point: **Rules replace the generic part of CLAUDE.md.** Once you've 
 No annoying installs or setup scripts. This library is kept simple but effective as a pure reference and toolkit. For each project, you browse the categories and copy what you need:
 
 Project A is a pure Python API and needs the database-analyzer agent but certainly not a react-component-builder. Project B is a frontend and needs exactly the opposite. No project drags along agents it doesn't use. This way you keep control over your project's dependencies.
+
+Your agent can also fetch skills directly from the GitHub repo — no local clone needed. A simple call is enough:
+
+```
+Read https://github.com/101mare/skill-library/blob/main/docs/CATALOG.md and copy the tdd skill into my project
+```
+
+Alternatively, clone the library once and reference it locally:
+
+```bash
+git clone https://github.com/101mare/skill-library.git ~/skill-library
+```
 
 ---
 
@@ -116,11 +133,11 @@ This isn't splitting hairs. Without this distinction, Claude produces abstractio
 
 **`agent-behavior.md`** defines how Claude should work: Read first, Scope Discipline, minimal changes. The highlights:
 
-> A bug fix doesn't need surrounding code cleaned up.
+> Read first, write second: Always read existing code before modifying. Understand patterns before proposing changes.
 
 > Three similar lines are better than a premature helper.
 
-> No backwards-compatibility hacks: No unused `_vars`, no `# removed` comments, no re-exports of deleted functions. Delete means delete.
+> Ask, don't assume: When in doubt, ALWAYS ask. Better to ask once too many than to implement incorrectly.
 
 **`security.md`** defines the basics that are never negotiable: Input Validation, PII-free Logging, Secrets in environment variables, no new dependencies without asking first.
 
@@ -148,7 +165,7 @@ Four skill categories:
 
 **build/** (9 Skills) — Split into `frontend/` and `backend/`. Frontend: Frontend Design, Warmgold Design System. Backend: Config (Pydantic + YAML + Env-Vars), Logging, Exceptions, Docker, CI/CD (GitHub Actions), Prompts, Project Structure.
 
-The two frontend skills deliberately solve different problems: `frontend-design` (based on [Impeccable](https://impeccable.style)) = Design quality. "Make it visually good, avoid AI slop." Generic principles for any project. `warmgold-frontend` = A specific design system. Concrete tokens, colors, components. Both skills compose naturally, without explicit dependency.
+> The two frontend skills deliberately solve different problems: `frontend-design` (based on [Impeccable](https://impeccable.style)) = Design quality. "Make it visually good, avoid AI slop." Generic principles for any project. `warmgold-frontend` = A specific design system. Concrete tokens, colors, components. Both skills compose naturally, without explicit dependency.
 
 **workflow/** (7 Skills) — Orchestration of multi-agent workflows: Plan Review before implementation, Session Verification after work, PR Review for pull requests, TDD (RED-GREEN-REFACTOR cycle), Deep Research (structured research before technical decisions), Ralph Loop (autonomous iteration loop via hooks), and Ralph Loop Prompt Builder (interactive prompt builder for it).
 
@@ -227,43 +244,6 @@ SKILL.md files over 500 lines will only be partially processed. The solution: ke
 
 More on this in the blog post: [Equipping agents for the real world with Agent Skills](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills)
 
-### Concrete Example: Strategy Registry
-
-The `strategy-registry` skill demonstrates the pattern well. The SKILL.md delivers immediately usable code:
-
-```python
-from typing import Protocol
-
-class Extractor(Protocol):
-    def extract(self, path: Path) -> str: ...
-
-# Registry: maps keys to strategy instances
-EXTRACTORS: dict[str, Extractor] = {
-    ".pdf": PdfExtractor(),
-    ".txt": TextExtractor(),
-    ".md": TextExtractor(),
-    ".png": ImageExtractor(),
-}
-
-def extract(path: Path) -> str:
-    ext = path.suffix.lower()
-    extractor = EXTRACTORS.get(ext)
-    if extractor is None:
-        raise ValueError(f"Unsupported file type: {ext}")
-    return extractor.extract(path)
-```
-
-Plus an anti-patterns table that's equally valuable:
-
-| Anti-Pattern | Problem | Fix |
-|---|---|---|
-| Giant if/elif chain | Hard to extend, violates OCP | Use registry dict |
-| Missing default handler | Crashes on unknown input | Raise clear error (avoid silent fallbacks that swallow errors) |
-| Mutable global registry | Test pollution | Use instance-based registry or reset in tests |
-| Handler with too many responsibilities | God handler | One handler per concern |
-
-The pattern is immediately understandable and gives Claude exactly the context needed for the next file handler — without superfluous text.
-
 ### Lifecycle Mapping
 
 The library maps skills and agents to development phases:
@@ -271,14 +251,14 @@ The library maps skills and agents to development phases:
 | Phase | Skills | Agents |
 |---|---|---|
 | **Research** | deep-research | -- |
-| **Plan** | plan-review | plan-completeness, risk-assessor, architecture-analyzer |
+| **Plan** | plan-review | planner |
 | **Scaffold** | project-scaffold, config-builder, exception-builder, docker-builder, ci-cd-builder | -- |
 | **Code** | di-container, protocol-design, strategy-registry, error-handling, resilience-patterns, logging-builder, api-design, ralph-loop, ralph-loop-prompt-builder | -- |
-| **Frontend** | frontend-design, warmgold-frontend | warmgold-frontend-builder |
-| **Review** | pr-review, session-verify | python-reviewer, security-reviewer, logging-reviewer, privacy-auditor |
+| **Frontend** | frontend-design, warmgold-frontend | -- |
+| **Review** | pr-review, session-verify | reviewer |
 | **Test** | tdd, testing-patterns | test-architect |
 | **Debug** | systematic-debugging | -- |
-| **Analyze** | -- | performance-analyzer, scalability-analyzer, dead-code-detector, dependency-auditor |
+| **Analyze** | -- | analyzer |
 
 Skills for building, agents for reviewing. That's no coincidence — it reflects how the two mechanisms work.
 
@@ -292,7 +272,7 @@ The research on this is fairly clear by now. The NAACL 2024 paper "Better Zero-S
 
 As researcher @tolibear_ aptly analyzed on Twitter ([Post](https://x.com/tolibear_/status/2024155081281560700)): The most important lever is the agent's "soul." A generic label only activates broad, shallow associations. What works are so-called *experiential identities* — specific experiences, beliefs, and working methods instead of rigid labels.
 
-This fundamentally changed how I write agent files. Let's look at the `security-reviewer.md`.
+This fundamentally changed how I write agent files. Let's look at the security review dimension of `reviewer.md`.
 
 ### Soul (Identity)
 
@@ -339,14 +319,14 @@ The most interesting category is workflow skills. They orchestrate multiple agen
 `plan-review` is the best example. When you have an implementation plan and say "review my plan," the following happens:
 
 1. The skill identifies the plan and clarifies the context
-2. It reads the agent files (`python-reviewer.md`, `performance-analyzer.md`)
+2. It reads the agent files (`reviewer.md`, `analyzer.md`, `planner.md`)
 3. It spawns four parallel review agents — Completeness, Architecture, Risk, Requirements
 4. Each agent receives the system prompt from the corresponding agent file injected
 5. The results are aggregated into a traffic light verdict: GREEN (approved), YELLOW (needs work), RED (blocked)
 
 The pattern behind it: Workflow skills read the agent files and feed the task calls with exactly this expertise as context. Skills control, agents work. And because Claude Code can send multiple task calls in parallel, all four reviews run simultaneously.
 
-`session-verify` uses the same pattern at the end of a session. The workflow: First clarify what the original task was. Then identify what changed — via Git diff if available, otherwise via conversation context. Then spawn review agents (at minimum Python Reviewer and Code Simplifier, situationally Security, Performance, Logging). Then check whether the requirement is met. Then ask whether the documentation should be updated.
+`session-verify` uses the same pattern at the end of a session. The workflow: First clarify what the original task was. Then identify what changed — via Git diff if available, otherwise via conversation context. Then spawn review agents (at minimum Reviewer and Code Simplifier, situationally Analyzer for performance and architecture). Then check whether the requirement is met. Then ask whether the documentation should be updated.
 
 That sounds like a lot. In practice, it's a `/verify` at the end of the session and two minutes of waiting. The alternative — manually going through all changed files and hoping you don't miss anything — takes longer and is less thorough.
 
@@ -358,20 +338,13 @@ That sounds like a lot. In practice, it's a `/verify` at the end of the session 
 
 Recently, a new feature was added to Claude Code: Agent Teams. Where subagents are isolated workers that deliver their result back to the caller, agent teams are complete sessions that communicate with each other — with a shared task list, direct messages, and a team lead that coordinates.
 
-```
-Subagents:    Main Agent  ←──  Worker A
-                          ←──  Worker B
-                          ←──  Worker C
-              (only results back, no exchange between workers)
-
-Agent Teams:  Team Lead  ←→  Teammate A  ←→  Teammate B
-                         ←→  Teammate C  ←→  Teammate A
-              (shared task list, direct communication between them)
-```
+![Subagents vs Agent Teams](images/subagents-vs-agent-teams-dark.png)
 
 The strongest use case: tasks where parallel exploration provides real value. Code reviews with three different focus lenses simultaneously. Debugging with competing hypotheses, where teammates actively try to disprove each other's theories.
 
 **Important to know:** Agent Teams consume significantly more tokens. Each teammate is its own session with its own context window. For sequential tasks, edits in the same file, or work with many dependencies, subagents or a single session remain the better choice.
+
+> **Reference:** [Claude Code Agent Teams Documentation](https://code.claude.com/docs/en/agent-teams)
 
 ---
 
@@ -503,7 +476,7 @@ Skills from this library work in both environments — and beyond. The SKILL.md 
 
 **Early SKILL.md files were novels.** 800+ lines, everything in one file. Claude only partially processed them. Progressive disclosure (compact SKILL.md plus separate reference.md) solved the problem.
 
-**Not everything needs an agent.** The temptation is great to build an agent for every conceivable scenario. Build for your actual workflow, not the theoretically possible one. The library has 16 agents, but a typical project copies four or five of them. The rest is there when you need it.
+**Not everything needs an agent.** The temptation is great to build an agent for every conceivable scenario. Build for your actual workflow, not the theoretically possible one. The library has 5 agents, but a typical project copies three or four of them. The rest is there when you need it.
 
 ---
 

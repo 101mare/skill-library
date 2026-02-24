@@ -1,25 +1,13 @@
----
-name: logging-reviewer
-description: "Reviews Python code for logging best practices, identifies missing logs, improper levels,\nand sensitive data exposure. Audits logging configuration and suggests improvements.\nUse proactively after code changes or when debugging is difficult.\nRecognizes: \"logging-reviewer\", \"logging agent\", \"check my logs\", \"add logging\",\n\"why no logs?\", \"debug logging\", \"log levels\", \"sensitive data in logs\"\n"
-tools: Read, Grep, Glob
-model: opus
-color: green
----
+# Logging
 
-You are a **Python Logging Specialist**. Audit code for logging quality and report issues by severity.
-
-## Severity Levels
+### Severity Levels
 
 - **CRITICAL**: Sensitive data logged (passwords, tokens, PII), secrets in log output
 - **HIGH**: Missing error logging, wrong log levels, no exception context
 - **MEDIUM**: Inconsistent formatting, missing structured data, verbose debug logs
 - **LOW**: Style suggestions, performance optimizations
 
----
-
-## Logging Best Practices
-
-### 1. Logger Setup
+### Logger Setup
 
 ```python
 # GOOD: Module-level logger with __name__
@@ -31,7 +19,7 @@ logging.info("...")  # Uses root logger
 logger = logging.getLogger("myapp")  # Hardcoded
 ```
 
-### 2. Log Levels
+### Log Levels
 
 | Level | Use Case | Example |
 |-------|----------|---------|
@@ -41,7 +29,7 @@ logger = logging.getLogger("myapp")  # Hardcoded
 | `ERROR` | Failures that stop current operation | `logger.error("Failed to parse JSON")` |
 | `CRITICAL` | System-wide failures | `logger.critical("Database connection lost")` |
 
-### 3. Exception Logging
+### Exception Logging
 
 ```python
 # GOOD: Use exception() for full traceback
@@ -59,7 +47,7 @@ except Exception as e:
     logger.error(f"Error: {e}")  # No traceback!
 ```
 
-### 4. Structured Logging
+### Structured Logging
 
 ```python
 # GOOD: Use extra dict for structured data
@@ -79,7 +67,7 @@ logger.debug("Processing %d items in batch %s", len(items), batch_id)
 logger.debug(f"Large object: {expensive_repr(obj)}")  # Always computed!
 ```
 
-### 5. Sensitive Data Protection
+### Sensitive Data Protection
 
 ```python
 # CRITICAL: Never log these
@@ -98,7 +86,7 @@ logger.debug(f"Connecting with token {api_token}")
 logger.info(f"User login: {username}:{password}")
 ```
 
-### 6. LLM Logging (Privacy-Critical)
+### LLM Logging (Privacy-Critical)
 
 For local LLM projects (Ollama, llama.cpp, etc.), responses may contain sensitive extracted data:
 
@@ -113,7 +101,7 @@ logger.info("Extracted: %s", llm_output)
 logger.warning(f"Parse failed. Response: {response}")  # Also bad!
 ```
 
-Also check **exception messages** - they may contain LLM responses:
+Also check **exception messages** -- they may contain LLM responses:
 
 ```python
 # BAD: Exception contains full response
@@ -123,7 +111,7 @@ raise ValueError(f"Invalid JSON in LLM response: {response}")
 raise ValueError(f"Invalid JSON in LLM response ({len(response)} chars)")
 ```
 
-### 7. Performance Considerations
+### Performance Considerations
 
 ```python
 # GOOD: Guard expensive log construction
@@ -137,11 +125,9 @@ logger.debug("Items: %r", items)  # Only formatted if DEBUG enabled
 logger.debug(f"Complex: {json.dumps(large_dict, indent=2)}")
 ```
 
----
+### Configuration Patterns
 
-## Configuration Patterns
-
-### Basic Setup
+#### Basic Setup
 
 ```python
 # GOOD: Configure once in main/entry point
@@ -156,7 +142,7 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 logging.getLogger("sentence_transformers").setLevel(logging.WARNING)
 ```
 
-### File + Console Logging
+#### File + Console Logging with Rotation
 
 ```python
 import logging
@@ -184,7 +170,7 @@ def setup_logging(log_file: str = "app.log", level: int = logging.INFO):
     root_logger.addHandler(file_handler)
 ```
 
-### JSON Logging (Production)
+#### JSON Formatter (Production)
 
 ```python
 import json
@@ -205,9 +191,7 @@ class JSONFormatter(logging.Formatter):
         return json.dumps(log_data)
 ```
 
----
-
-## Common Anti-Patterns
+### Common Anti-Patterns
 
 | Anti-Pattern | Problem | Fix |
 |--------------|---------|-----|
@@ -218,9 +202,7 @@ class JSONFormatter(logging.Formatter):
 | `logging.debug(f"...")` | Always evaluated | Use % formatting |
 | Root logger only | No granular control | `getLogger(__name__)` |
 
----
-
-## Audit Checklist
+### Full Audit Checklist
 
 1. **Setup**
    - [ ] Each module uses `logger = logging.getLogger(__name__)`
@@ -258,29 +240,3 @@ class JSONFormatter(logging.Formatter):
    - [ ] `view_logs.py` provided for easy access
 
 ---
-
-## Review Output Format
-
-```markdown
-## Logging Review: [filename]
-
-### CRITICAL
-- **Line X**: Sensitive data logged → Redact or remove
-
-### HIGH
-- **Line X**: Missing exception logging → Add `logger.exception()`
-- **Line X**: Wrong level (ERROR for info) → Change to INFO
-
-### MEDIUM
-- **Line X**: Uses print() → Replace with logger.info()
-- **Line X**: f-string in debug → Use % formatting
-
-### Configuration
-- Logger setup: [OK/MISSING/INCORRECT]
-- Exception handling: [OK/NEEDS IMPROVEMENT]
-- Sensitive data: [SAFE/AT RISK]
-
-### Recommendations
-1. [Specific improvement]
-2. [Specific improvement]
-```

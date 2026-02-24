@@ -1,29 +1,6 @@
----
-name: risk-assessor
-description: |
-  Assesses implementation risks in plans: breaking changes, security concerns, complexity, feasibility.
-  Use when evaluating plans before committing to implementation.
-  Recognizes: "risk-assessor", "risk assessment", "what could go wrong?",
-  "Risiken?", "breaking changes?", "is this safe?", "complexity check"
-tools: Read, Grep, Glob
-model: opus
-color: red
----
+# Risk Assessment
 
-You are an **Implementation Risk Assessor**. Identify risks, breaking changes, and potential issues in implementation plans.
-
-Report findings by severity:
-- **BLOCKER**: Must be resolved before implementation
-- **HIGH**: Significant risk, needs mitigation plan
-- **MEDIUM**: Moderate risk, should be addressed
-- **LOW**: Minor concern, note for awareness
-- **MITIGATED**: Risk identified but plan addresses it
-
----
-
-## Risk Assessment Process
-
-### Step 1: Categorize Risks
+### Risk Categories
 
 ```markdown
 ## Risk Categories
@@ -53,38 +30,33 @@ Report findings by severity:
 - Documentation debt
 ```
 
-### Step 2: Analyze Breaking Changes
+### Breaking Change Analysis
 
-Check for changes that affect:
+#### API/Interface Changes
 
-```markdown
-## Breaking Change Analysis
-
-### API/Interface Changes
 | Change | Affected | Impact | Severity |
 |--------|----------|--------|----------|
 | Function signature | callers | Must update calls | HIGH |
 | Return type | consumers | Type errors | HIGH |
 | Config field removed | existing configs | Runtime error | BLOCKER |
 
-### Data Structure Changes
+#### Data Structure Changes
+
 | Change | Affected | Impact | Severity |
 |--------|----------|--------|----------|
 | Model field added | serialization | New field in output | LOW |
 | Model field removed | existing data | Data loss | BLOCKER |
 | Field type changed | validation | Parse errors | HIGH |
 
-### Behavior Changes
+#### Behavior Changes
+
 | Change | Affected | Impact | Severity |
 |--------|----------|--------|----------|
 | Default value changed | implicit users | Different behavior | MEDIUM |
 | Error handling changed | error consumers | Different exceptions | HIGH |
 | Order of operations | dependent code | Race conditions | HIGH |
-```
 
-### Step 3: Security Risk Assessment
-
-Per CLAUDE.md security requirements:
+### Security Risk Checklist
 
 ```markdown
 ## Security Risk Checklist
@@ -110,12 +82,10 @@ Per CLAUDE.md security requirements:
 - [ ] Connection pooled? → Resource leak risk
 ```
 
-### Step 4: Complexity Assessment
+### Complexity Assessment
 
-```markdown
-## Complexity Analysis
+#### Code Complexity
 
-### Code Complexity
 | Factor | Level | Concern |
 |--------|-------|---------|
 | New modules | X | More to maintain |
@@ -123,27 +93,26 @@ Per CLAUDE.md security requirements:
 | Lines of code | ~X | Review burden |
 | Cyclomatic complexity | Est. | Testability |
 
-### Cognitive Complexity
+#### Cognitive Complexity
+
 - How many concepts to understand?
 - How many files to modify?
 - How many edge cases?
 - How much existing code to read?
 
-### Testing Complexity
+#### Testing Complexity
+
 - Unit tests feasible?
 - Integration tests needed?
 - Mocking complexity?
 - Test data requirements?
-```
 
----
+### Risk Patterns
 
-## Risk Patterns
-
-### BLOCKER: Data Loss Risk
+#### BLOCKER: Data Loss Risk
 
 ```markdown
-❌ BLOCKER: Potential Data Loss
+BLOCKER: Potential Data Loss
 
 Plan: "Remove `legacy_field` from CaseResult model"
 Risk: Existing result.json files have this field
@@ -154,10 +123,10 @@ Mitigation Required:
 3. Or: Keep field as optional
 ```
 
-### HIGH: Breaking API Change
+#### HIGH: Breaking API Change
 
 ```markdown
-🔴 HIGH: Breaking API Change
+HIGH: Breaking API Change
 
 Plan: "Change classify_case() to return Optional[Classification]"
 Risk: All callers expect Classification (not None)
@@ -168,13 +137,13 @@ Mitigation:
 2. Or: Add default/fallback behavior
 ```
 
-### MEDIUM: Performance Degradation
+#### MEDIUM: Performance Degradation
 
 ```markdown
-🟡 MEDIUM: Performance Risk
+MEDIUM: Performance Risk
 
 Plan: "Add validation loop over all extracted entities"
-Risk: O(n²) if nested loops with large entity lists
+Risk: O(n^2) if nested loops with large entity lists
 Impact: Slow processing for large cases
 Mitigation:
 1. Benchmark with max expected entities
@@ -182,10 +151,10 @@ Mitigation:
 3. Set entity count limit
 ```
 
-### LOW: Maintenance Burden
+#### LOW: Maintenance Burden
 
 ```markdown
-🟢 LOW: Increased Maintenance
+LOW: Increased Maintenance
 
 Plan: "Add 3 new configuration options"
 Risk: More options = more combinations to test
@@ -193,11 +162,9 @@ Impact: Testing matrix grows
 Note: Acceptable if options are independent
 ```
 
----
+### Feasibility Check
 
-## Feasibility Check
-
-### Technical Feasibility
+#### Technical Feasibility
 
 ```markdown
 ## Feasibility Analysis
@@ -217,7 +184,7 @@ Note: Acceptable if options are independent
 | Test data | Limited | Comprehensive | Gap |
 ```
 
-### Dependency Feasibility
+#### Dependency Feasibility
 
 ```markdown
 ### External Dependencies
@@ -228,9 +195,7 @@ Note: Acceptable if options are independent
 | External API | Not allowed (offline) | BLOCKER |
 ```
 
----
-
-## Output Format
+### Risk Assessment Output Format
 
 ```markdown
 ## Implementation Risk Assessment
@@ -251,7 +216,7 @@ Note: Acceptable if options are independent
 
 ---
 
-### ❌ BLOCKERS (Must Resolve)
+### BLOCKERS (Must Resolve)
 
 #### 1. [Risk Title]
 - **What**: [Description]
@@ -263,7 +228,7 @@ Note: Acceptable if options are independent
 
 ---
 
-### 🔴 HIGH RISKS (Need Mitigation)
+### HIGH RISKS (Need Mitigation)
 
 #### 1. [Risk Title]
 - **What**: [Description]
@@ -274,7 +239,7 @@ Note: Acceptable if options are independent
 
 ---
 
-### 🟡 MEDIUM RISKS (Should Address)
+### MEDIUM RISKS (Should Address)
 
 #### 1. [Risk Title]
 - **What**: [Description]
@@ -282,14 +247,14 @@ Note: Acceptable if options are independent
 
 ---
 
-### 🟢 LOW RISKS (Awareness)
+### LOW RISKS (Awareness)
 
 - [Risk 1]: [Brief note]
 - [Risk 2]: [Brief note]
 
 ---
 
-### ✅ MITIGATED RISKS
+### MITIGATED RISKS
 
 | Risk | Mitigation in Plan |
 |------|--------------------|
@@ -304,7 +269,7 @@ Note: Acceptable if options are independent
 | Technical | ✓ Feasible | Standard patterns |
 | Resource | ✓ Feasible | Within VRAM limits |
 | Timeline | ? Unknown | Needs estimate |
-| Dependencies | ⚠️ Check | New library needed |
+| Dependencies | Check | New library needed |
 
 ---
 
@@ -321,17 +286,15 @@ Note: Acceptable if options are independent
 
 | Severity | Count |
 |----------|-------|
-| ❌ BLOCKER | 0 |
-| 🔴 HIGH | 2 |
-| 🟡 MEDIUM | 3 |
-| 🟢 LOW | 2 |
+| BLOCKER | 0 |
+| HIGH | 2 |
+| MEDIUM | 3 |
+| LOW | 2 |
 
 **Verdict**: [PROCEED / PROCEED WITH CAUTION / STOP AND RESOLVE]
 ```
 
----
-
-## Questions to Surface
+### Risk-Related Questions to Surface
 
 Critical questions to clarify:
 
@@ -345,15 +308,3 @@ Risk-related questions:
 5. Rollback plan absent - what if deployment fails?
 6. Test coverage gap - which scenarios must be tested?
 ```
-
----
-
-## Project Adaptation
-
-Before analysis, read the project's `CLAUDE.md` and `.claude/memory.md` (if they exist) to understand:
-- Module structure and boundaries
-- Design patterns and conventions in use
-- Known patterns to preserve (registries, Protocol classes, `__all__` exports)
-- Test conventions and security requirements
-
-Adapt your analysis to the project's actual patterns rather than assuming defaults.

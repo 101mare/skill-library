@@ -34,13 +34,13 @@ and including the system prompt content in the Task prompt.
 
 ```
 # Step 1: Read the agent file
-Read(".claude/agents/python-reviewer.md")
+Read(".claude/agents/reviewer.md")
 
 # Step 2: Use its content in a Task call
 Task(
   subagent_type="general",
   prompt="""
-  You are acting as the python-reviewer agent. Follow these instructions:
+  You are acting as the reviewer agent. Follow these instructions:
 
   <agent-instructions>
   [paste the system prompt content from the .md file here]
@@ -56,17 +56,13 @@ Task(
 
 | Agent File | Use For |
 |------------|---------|
-| `.claude/agents/python-reviewer.md` | Security, types, best practices (Python) |
+| `.claude/agents/reviewer.md` | Security, types, logging, privacy, best practices |
+| `.claude/agents/analyzer.md` | Architecture, performance, scalability, dead code, dependencies |
 | `.claude/agents/code-simplifier.md` | Code clarity, simplification, maintainability |
 | `.claude/agents/test-architect.md` | Test creation, test quality review |
-| `.claude/agents/performance-analyzer.md` | Performance bottlenecks, N+1, memory |
-| `.claude/agents/logging-reviewer.md` | Logging best practices, sensitive data |
-| `.claude/agents/privacy-auditor.md` | Offline compliance, external calls |
-| `.claude/agents/dependency-auditor.md` | CVEs, outdated packages, licenses |
-| `.claude/agents/warmgold-frontend-builder.md` | Frontend component building |
 
-**IMPORTANT**: Always use `subagent_type="general"` for agents that need write access (code-simplifier, test-architect, warmgold-frontend-builder)
-and `subagent_type="explore"` for read-only review agents (python-reviewer, logging-reviewer, performance-analyzer, privacy-auditor, dependency-auditor).
+**IMPORTANT**: Always use `subagent_type="general"` for agents that need write access (code-simplifier, test-architect)
+and `subagent_type="explore"` for read-only review agents (reviewer, analyzer).
 
 ## Step 1: Clarify the Original Requirements
 
@@ -125,37 +121,33 @@ First **read the relevant agent .md files**, then spawn `general`/`explore` agen
 
 | Change Type | Agent File to Load | subagent_type |
 |-------------|-------------------|---------------|
-| Any Python code | `python-reviewer.md` | `explore` |
+| Any Python code | `reviewer.md` | `explore` |
 | Any Python code | `code-simplifier.md` | `general` |
 | New functions without tests | `test-architect.md` | `general` |
-| Performance-critical code | `performance-analyzer.md` | `explore` |
-| Added/changed logging | `logging-reviewer.md` | `explore` |
-| External calls/network | `privacy-auditor.md` | `explore` |
-| New dependencies | `dependency-auditor.md` | `explore` |
-| Frontend changes | `warmgold-frontend-builder.md` | `general` |
+| Performance / architecture / dependencies | `analyzer.md` | `explore` |
 
 ### Core Review Agents (Always Run for Code Changes)
 
-1. **`python-reviewer`** - Security, types, best practices
+1. **`reviewer`** - Security, types, logging, privacy, best practices
 2. **`code-simplifier`** - Clean up, simplify, ensure maintainability
 
 ### Execution Steps
 
 1. **Read agent files** (parallel Read calls):
    ```
-   Read(".claude/agents/python-reviewer.md")
+   Read(".claude/agents/reviewer.md")
    Read(".claude/agents/code-simplifier.md")
-   # + any situational agents
+   # + any situational agents (analyzer.md, test-architect.md)
    ```
 
 2. **Spawn Task agents in parallel** (single message, multiple Task calls):
    ```
    Task(
      subagent_type="explore",
-     prompt="""You are acting as the python-reviewer agent.
+     prompt="""You are acting as the reviewer agent.
 
      <agent-instructions>
-     [content from python-reviewer.md after frontmatter]
+     [content from reviewer.md after frontmatter]
      </agent-instructions>
 
      Review these files modified this session:
