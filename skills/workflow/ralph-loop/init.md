@@ -61,8 +61,15 @@ sed -i "s/^iteration: .*/iteration: ${NEW_ITERATION}/" "$STATE_FILE"
 
 PROMPT=$(awk '/^---$/{n++; next} n>=2' "$STATE_FILE")
 
+# Re-orient every 5 iterations (combat context degradation)
+if (( NEW_ITERATION % 5 == 0 )); then
+  REORIENT="IMPORTANT: Before continuing, re-read the relevant files from disk (do NOT rely on memory). Briefly summarize what is done and what remains. Then continue. "
+else
+  REORIENT=""
+fi
+
 jq -n \
-  --arg reason "Ralph Loop iteration ${NEW_ITERATION}/${MAX_ITERATIONS}. Continue working on the task. When fully done, output <promise>${COMPLETION_PROMISE}</promise>. Original task: ${PROMPT}" \
+  --arg reason "${REORIENT}Ralph Loop iteration ${NEW_ITERATION}/${MAX_ITERATIONS}. Continue working on the task. When fully done, output <promise>${COMPLETION_PROMISE}</promise>. Original task: ${PROMPT}" \
   '{"decision": "block", "reason": $reason}'
 ```
 
@@ -165,7 +172,11 @@ When ALL work is truly finished (implemented, tested if applicable), include thi
 - Stay focused on the original task — don't drift into unrelated improvements
 ```
 
-## Step 4: Optional — Install Prompt Template and Prompt Builder
+## Step 4: Enable Auto-Compact
+
+The Ralph Loop benefits greatly from auto-compact, which prevents context degradation during long loops. Tell the user to enable it via `/config` and set `autoCompact` to `true` (or verify it is already enabled). This is strongly recommended for any Ralph Loop usage.
+
+## Step 5: Optional — Install Prompt Template and Prompt Builder
 
 Two additional files from this library can help the user write effective Ralph Loop prompts:
 
@@ -175,7 +186,7 @@ Two additional files from this library can help the user write effective Ralph L
 
 Both are optional but recommended.
 
-## Step 5: Confirm Installation
+## Step 6: Confirm Installation
 
 Tell the user:
 
@@ -198,6 +209,6 @@ Cancel:
   or press Escape/Ctrl+C
 ```
 
-## Step 6: Remind About Restart
+## Step 7: Remind About Restart
 
 Hooks are loaded at session start. The user MUST restart Claude Code for the Stop hook to take effect. Emphasize this clearly.

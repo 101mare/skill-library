@@ -62,7 +62,14 @@ sed -i "s/^iteration: .*/iteration: ${NEW_ITERATION}/" "$STATE_FILE"
 # --- Extract original prompt (everything after second ---) ---
 PROMPT=$(awk '/^---$/{n++; next} n>=2' "$STATE_FILE")
 
+# --- Re-orient every 5 iterations ---
+if (( NEW_ITERATION % 5 == 0 )); then
+  REORIENT="IMPORTANT: Before continuing, re-read the relevant files from disk (do NOT rely on memory). Briefly summarize what is done and what remains. Then continue. "
+else
+  REORIENT=""
+fi
+
 # --- Block stop: re-feed prompt to Claude ---
 jq -n \
-  --arg reason "Ralph Loop iteration ${NEW_ITERATION}/${MAX_ITERATIONS}. Continue working on the task. When fully done, output <promise>${COMPLETION_PROMISE}</promise>. Original task: ${PROMPT}" \
+  --arg reason "${REORIENT}Ralph Loop iteration ${NEW_ITERATION}/${MAX_ITERATIONS}. Continue working on the task. When fully done, output <promise>${COMPLETION_PROMISE}</promise>. Original task: ${PROMPT}" \
   '{"decision": "block", "reason": $reason}'
