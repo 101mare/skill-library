@@ -7,23 +7,23 @@ Complete transformation examples showing the 3-phase workflow.
 ## Example 1: Simple Request → Structured Prompt
 
 ### User Request
-> "Ich brauche einen Prompt für Code Review"
+> "I need a prompt for code review"
 
 ### Phase 1: Clarifying Questions
 
 **Questions asked:**
-1. Ziel: Welche Aspekte soll das Review abdecken? (Bugs, Style, Performance, Security, alles?)
-2. Kontext: Welche Programmiersprache(n)? Gibt es Coding Guidelines?
-3. Input: Wie wird der Code übergeben? (Datei, Snippet, Diff?)
-4. Output: Welches Format? (Bullet Points, detaillierte Erklärungen, Severity-Levels?)
-5. Constraints: Soll der Reviewer Fixes vorschlagen oder nur Probleme auflisten?
+1. Goal: Which aspects should the review cover? (Bugs, style, performance, security, all?)
+2. Context: Which programming language(s)? Are there coding guidelines?
+3. Input: How is the code provided? (File, snippet, diff?)
+4. Output: What format? (Bullet points, detailed explanations, severity levels?)
+5. Constraints: Should the reviewer suggest fixes or only list problems?
 
 **User Answers:**
-- Python Code, PEP8 + Team Guidelines
-- Focus auf Bugs und Security
-- Code als Snippet
-- Bullet Points mit Severity (High/Medium/Low)
-- Fixes vorschlagen
+- Python code, PEP8 + team guidelines
+- Focus on bugs and security
+- Code as snippet
+- Bullet points with severity (High/Medium/Low)
+- Suggest fixes
 
 ### Phase 2: Improvement Suggestions
 
@@ -215,7 +215,7 @@ Purpose: Enable informed decision-making without reading full document
 ## Example 3: Complex Multi-Aspect Request → Professional Prompt
 
 ### User Request
-> "Ich brauche einen Prompt der mir hilft, technische Konzepte für verschiedene Zielgruppen zu erklären - mal für Entwickler, mal für Manager, mal für Enduser."
+> "I need a prompt that helps me explain technical concepts to different audiences - sometimes for developers, sometimes for managers, sometimes for end users."
 
 ### Phase 1: Clarifying Questions
 
@@ -225,20 +225,20 @@ Purpose: Enable informed decision-making without reading full document
 - Need for tone/depth adaptation
 
 **Questions asked:**
-1. Goal: Soll der Prompt eine Erklärung generieren oder mehrere Versionen?
-2. Context: Welche technischen Bereiche? (Software, Hardware, Data, etc.)
-3. Input: Wie wird das Konzept beschrieben? Wie wird die Zielgruppe ausgewählt?
-4. Output: Separate Versionen pro Audience oder eine adaptive Erklärung?
-5. Constraints: Maximale Länge pro Version? Spezifischer Stil?
-6. Examples: Gibt es Beispiele für gute Erklärungen in deinem Kontext?
+1. Goal: Should the prompt generate one explanation or multiple versions?
+2. Context: Which technical areas? (Software, hardware, data, etc.)
+3. Input: How is the concept described? How is the audience selected?
+4. Output: Separate versions per audience or one adaptive explanation?
+5. Constraints: Maximum length per version? Specific style?
+6. Examples: Are there examples of good explanations in your context?
 
 **User Answers:**
-- Drei separate Versionen auf einmal
-- Primär Software/Cloud-Konzepte
-- Technisches Konzept als Input, Zielgruppe per Variable
-- Alle drei Versionen parallel generieren
-- Max 200 Wörter pro Version
-- Developer: technisch präzise, Manager: Business-Impact, User: praktischer Nutzen
+- Three separate versions at once
+- Primarily software/cloud concepts
+- Technical concept as input, audience via variable
+- Generate all three versions in parallel
+- Max 200 words per version
+- Developer: technically precise, Manager: business impact, User: practical benefit
 
 ### Phase 2: Improvement Suggestions
 

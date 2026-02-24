@@ -5,148 +5,148 @@ Use this template to write effective prompts for `/ralph-loop`.
 ## Template
 
 ```
-/ralph-loop max=<N> <AUFGABE>
+/ralph-loop max=<N> <TASK>
 
-Anforderungen:
-1. <Konkretes Ergebnis 1>
-2. <Konkretes Ergebnis 2>
-3. <Konkretes Ergebnis 3>
+Requirements:
+1. <Concrete outcome 1>
+2. <Concrete outcome 2>
+3. <Concrete outcome 3>
 
-Verifikation nach jeder Iteration:
-- <Pruefbarer Befehl, z.B. pytest, ruff, etc.>
+Verification after each iteration:
+- <Testable command, e.g. pytest, ruff, etc.>
 
-Fertig wenn:
-- [ ] <Checklisten-Punkt 1>
-- [ ] <Checklisten-Punkt 2>
-- [ ] <Checklisten-Punkt 3>
+Done when:
+- [ ] <Checklist item 1>
+- [ ] <Checklist item 2>
+- [ ] <Checklist item 3>
 ```
 
-## Die drei Pflicht-Bestandteile
+## The Three Mandatory Components
 
-### 1. Klare Aufgabe (Was genau?)
+### 1. Clear Task (What exactly?)
 
-Konkret und pruefbar, nicht vage.
+Concrete and verifiable, not vague.
 
-| Schlecht | Gut |
-|----------|-----|
-| "Verbessere die Tests" | "Schreibe Unit-Tests fuer validators.py. Jede public Funktion braucht min. 2 Tests." |
-| "Mach den Code besser" | "Refactore extract_json_object() — extrahiere die Regex-Logik in eine eigene Funktion." |
-| "Finde Bugs" | "Fuehre ruff check src/ aus und behebe alle gemeldeten Fehler." |
+| Bad | Good |
+|-----|------|
+| "Improve the tests" | "Write unit tests for validators.py. Every public function needs at least 2 tests." |
+| "Make the code better" | "Refactor extract_json_object() — extract the regex logic into its own function." |
+| "Find bugs" | "Run ruff check src/ and fix all reported errors." |
 
-### 2. Verifikationsschritte (Woher weiss Claude ob es klappt?)
+### 2. Verification Steps (How does Claude know it's working?)
 
-Claude muss in jeder Iteration selbst pruefen koennen ob es Fortschritt macht.
+Claude must be able to verify progress on its own in each iteration.
 
 ```
-Verifikation nach jeder Iteration:
+Verification after each iteration:
 - pytest tests/test_validators.py -q --tb=short
 - ruff check src/services/validators.py
 ```
 
-Gute Verifikationen: `pytest`, `ruff check`, `mypy`, `bash script.sh`, Datei-Checks.
-Schlechte Verifikationen: "schau ob es gut aussieht", "teste manuell".
+Good verifications: `pytest`, `ruff check`, `mypy`, `bash script.sh`, file checks.
+Bad verifications: "see if it looks good", "test manually".
 
-### 3. Fertig-Kriterium (Wann ist Schluss?)
+### 3. Done Criterion (When is it finished?)
 
-Explizite Checkliste damit Claude weiss wann `<promise>COMPLETE</promise>` angebracht ist.
-
-```
-Fertig wenn:
-- [ ] Alle 5 Funktionen haben Tests
-- [ ] pytest laeuft gruen (0 failures)
-- [ ] Kein linting-Fehler
-```
-
-## Beispiele
-
-### Beispiel 1: Tests schreiben
+Explicit checklist so Claude knows when `<promise>COMPLETE</promise>` is appropriate.
 
 ```
-/ralph-loop max=15 Schreibe Unit-Tests fuer src/services/confidence.py.
+Done when:
+- [ ] All 5 functions have tests
+- [ ] pytest runs green (0 failures)
+- [ ] No linting errors
+```
 
-Anforderungen:
-1. Jede public Methode von ConfidenceScorer braucht min. 2 Tests
-2. Edge Cases testen: Score 0.0, Score 1.0, None-Werte
+## Examples
+
+### Example 1: Writing Tests
+
+```
+/ralph-loop max=15 Write unit tests for src/services/confidence.py.
+
+Requirements:
+1. Every public method of ConfidenceScorer needs at least 2 tests
+2. Test edge cases: score 0.0, score 1.0, None values
 3. Tests in tests/test_services/test_confidence.py
 
-Verifikation nach jeder Iteration:
+Verification after each iteration:
 - pytest tests/test_services/test_confidence.py -q --tb=short
 
-Fertig wenn:
-- [ ] Min. 10 Tests geschrieben
-- [ ] Alle Tests gruen
-- [ ] Edge Cases abgedeckt
+Done when:
+- [ ] At least 10 tests written
+- [ ] All tests green
+- [ ] Edge cases covered
 ```
 
-### Beispiel 2: Refactoring
+### Example 2: Refactoring
 
 ```
-/ralph-loop max=10 Refactore src/extractors/pdf.py — die extract() Methode ist zu lang.
+/ralph-loop max=10 Refactor src/extractors/pdf.py — the extract() method is too long.
 
-Anforderungen:
-1. extract() auf max 30 Zeilen reduzieren
-2. Logik in private Helper-Methoden extrahieren
-3. Keine Verhaltensaenderung (bestehende Tests muessen gruen bleiben)
+Requirements:
+1. Reduce extract() to max 30 lines
+2. Extract logic into private helper methods
+3. No behavior change (existing tests must stay green)
 
-Verifikation nach jeder Iteration:
+Verification after each iteration:
 - pytest tests/test_extractors/ -q --tb=short
 - ruff check src/extractors/pdf.py
 
-Fertig wenn:
-- [ ] extract() <= 30 Zeilen
-- [ ] Alle bestehenden Tests gruen
-- [ ] Kein linting-Fehler
+Done when:
+- [ ] extract() <= 30 lines
+- [ ] All existing tests green
+- [ ] No linting errors
 ```
 
-### Beispiel 3: Bug fixen
+### Example 3: Fixing a Bug
 
 ```
-/ralph-loop max=8 Behebe den Bug: IBAN-Validierung akzeptiert IBANs mit falscher Pruefziffer.
+/ralph-loop max=8 Fix the bug: IBAN validation accepts IBANs with incorrect check digits.
 
-Anforderungen:
-1. Pruefziffer-Validierung in EntityValidator.validate_iban() implementieren
-2. Test der den Bug reproduziert (falsche Pruefziffer → None)
-3. Test mit gueltigern IBANs die weiterhin akzeptiert werden
+Requirements:
+1. Implement check digit validation in EntityValidator.validate_iban()
+2. Test that reproduces the bug (incorrect check digit → None)
+3. Test with valid IBANs that continue to be accepted
 
-Verifikation nach jeder Iteration:
+Verification after each iteration:
 - pytest tests/test_services/test_validators.py -q --tb=short
 
-Fertig wenn:
-- [ ] Falsche Pruefziffern werden rejected
-- [ ] Gueltige IBANs werden weiterhin akzeptiert
-- [ ] Alle Tests gruen
+Done when:
+- [ ] Incorrect check digits are rejected
+- [ ] Valid IBANs continue to be accepted
+- [ ] All tests green
 ```
 
-### Beispiel 4: Batch-Aufgabe
+### Example 4: Batch Task
 
 ```
-/ralph-loop max=20 Fuege type hints zu allen Funktionen in src/utils/ hinzu.
+/ralph-loop max=20 Add type hints to all functions in src/utils/.
 
-Anforderungen:
-1. Alle public Funktionen in src/utils/*.py brauchen vollstaendige type hints
-2. Parameter UND Return-Types annotieren
-3. mypy src/utils/ muss ohne Fehler laufen
+Requirements:
+1. All public functions in src/utils/*.py need complete type hints
+2. Annotate both parameters AND return types
+3. mypy src/utils/ must run without errors
 
-Verifikation nach jeder Iteration:
+Verification after each iteration:
 - mypy src/utils/ --ignore-missing-imports
 - pytest -q --tb=short
 
-Fertig wenn:
-- [ ] Alle public Funktionen in utils/ annotiert
-- [ ] mypy meldet keine Fehler
-- [ ] Bestehende Tests weiterhin gruen
+Done when:
+- [ ] All public functions in utils/ annotated
+- [ ] mypy reports no errors
+- [ ] Existing tests still green
 ```
 
 ## Anti-Patterns
 
-| Vermeiden | Warum | Besser |
-|-----------|-------|--------|
-| Vage Ziele | Claude weiss nicht wann fertig | Konkrete Checkliste |
-| Kein Verifikationsschritt | Kein Fortschritts-Check moeglich | `pytest`, `ruff`, etc. einbauen |
-| Zu grosser Scope | Drift, Kontext-Verlust nach vielen Iterationen | In Phasen aufteilen |
-| Design-Entscheidungen offen | Claude raet, du willst was anderes | Entscheidungen im Prompt treffen |
-| max zu hoch | Kosten explodieren | max=10-20 fuer die meisten Aufgaben |
+| Avoid | Why | Better |
+|-------|-----|--------|
+| Vague goals | Claude doesn't know when it's done | Concrete checklist |
+| No verification step | No progress check possible | Include `pytest`, `ruff`, etc. |
+| Scope too large | Drift, context loss after many iterations | Split into phases |
+| Design decisions left open | Claude guesses, you want something different | Make decisions in the prompt |
+| max too high | Costs explode | max=10-20 for most tasks |
 
-## Faustregel
+## Rule of Thumb
 
-> Wenn du einem Junior-Entwickler die Aufgabe geben koenntest und er sie ohne Rueckfragen abarbeiten kann — dann ist der Prompt gut fuer Ralph.
+> If you could hand the task to a junior developer and they could complete it without asking questions — then the prompt is good for Ralph.

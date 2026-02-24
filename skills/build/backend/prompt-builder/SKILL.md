@@ -5,8 +5,8 @@ description: |
   Systematically asks clarifying questions about goals, context, constraints,
   and output format. Suggests improvements before generating the final prompt.
   Adapts language to match user's input language automatically.
-  Triggers: "prompt bauen", "strukturiere anfrage", "prompt optimieren",
-  "besserer prompt", "mach prompt daraus", "build prompt", "improve prompt",
+  Triggers: "build prompt", "structure request", "optimize prompt",
+  "better prompt", "make a prompt from this", "improve prompt",
   "create a prompt for", "help me write a prompt"
 user-invocable: true
 ---
@@ -28,37 +28,37 @@ Match the user's language:
 Before generating any prompt, systematically gather information across these 7 categories.
 Present questions clearly and group related ones together.
 
-**1. Goal (Ziel)**
+**1. Goal**
 - What is the primary objective?
 - What should the AI accomplish?
 - Is this a single task or multi-step workflow?
 
-**2. Context (Kontext)**
+**2. Context**
 - What is the background/situation?
 - Who is the target audience?
 - What domain knowledge is relevant?
 
-**3. Input (Eingabe)**
+**3. Input**
 - What data/information will be provided?
 - What format is the input in?
 - Are there variable placeholders needed (use `{$VARIABLE_NAME}` format)?
 
-**4. Output (Ausgabe)**
+**4. Output**
 - What format should the response be in? (prose, list, JSON, XML, code, etc.)
 - What length/detail level is expected?
 - Are there specific sections or structure requirements?
 
-**5. Constraints (Einschränkungen)**
+**5. Constraints**
 - What must be avoided? (topics, styles, behaviors)
 - What must be included? (mandatory elements)
 - Are there word limits, tone requirements, or forbidden patterns?
 
-**6. Quality Criteria (Qualitätskriterien)**
+**6. Quality Criteria**
 - How will success be measured?
 - What makes a response "good" vs "bad"?
 - Are there edge cases to handle?
 
-**7. Examples (Beispiele)**
+**7. Examples**
 - Are there example inputs and desired outputs?
 - Are there anti-examples (what NOT to produce)?
 - Are there reference materials or style guides?

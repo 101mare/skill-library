@@ -1,6 +1,6 @@
 # Self-Improvement
 
-Activate when: user corrects a mistake, or says "merk dir das", "remember this", "lesson learned", "das merken", "never do that again".
+Activate when: user corrects a mistake, or says "remember this", "lesson learned", "remember that", "never do that again".
 
 ## After Every Correction
 

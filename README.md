@@ -2,6 +2,12 @@
 
 Teach Claude Code how to build like a senior engineer. A collection of 27 skills, 16 agents, and battle-tested rules that give Claude reusable knowledge about architecture patterns, development workflows, and code quality.
 
+**[CATALOG.md](CATALOG.md)** — Browse all 27 skills and 16 agents with descriptions and file paths. Your starting point for picking what to install.
+
+**[ARTICLE.md](ARTICLE.md)** — The full deep dive: Why this library exists, how rules/skills/agents work together, how to give agents a "soul," and lessons learned building it.
+
+> Deutsche Version: [README_de.md](README_de.md) | [CATALOG_de.md](CATALOG_de.md) | [ARTICLE_de.md](ARTICLE_de.md)
+
 ## Quickstart
 
 Tell Claude which skill or agent you want. That's it.
@@ -55,6 +61,7 @@ cp ~/skill-library/templates/CLAUDE.md.template my-project/CLAUDE.md
 
 Covers architecture, commands, import conventions, key patterns, and configuration. Generic rules (DRY, agent behavior, security) live in `rules/` and don't need to be repeated.
 
-## Deep Dive
+## Further Reading
 
-For a detailed walkthrough of the architecture, design decisions, and usage patterns, see [article.md](article.md).
+- **[CATALOG.md](CATALOG.md)** — Full catalog of all skills and agents
+- **[ARTICLE.md](ARTICLE.md)** — Architecture, design decisions, and usage patterns
