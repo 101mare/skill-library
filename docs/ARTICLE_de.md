@@ -423,7 +423,7 @@ Kein Plugin nötig. Drei Dateien reichen:
 | `.claude/skills/ralph-loop/SKILL.md` | `/ralph-loop` Befehl |
 | `.claude/settings.local.json` | Hook-Konfiguration |
 
-**Wann Ralph nutzen:** Klar definierte Aufgaben mit prüfbarem Ergebnis — Tests, Linting, Batch-Refactoring, Type Hints. **Wann nicht:** Design-Entscheidungen, unklare Anforderungen, Debugging.
+**Wann Ralph nutzen:** Klar definierte Aufgaben mit prüfbarem Ergebnis — Tests, Linting, Batch-Refactoring, Type Hints. **Wann nicht:** Design-Entscheidungen, unklare Anforderungen, Debugging. Die Qualität des Prompts ist entscheidend — ein vager Prompt führt zu Drift. Der **Ralph Loop Prompt Builder** (`/ralph-loop-prompt-builder`) hilft hier: Er stellt Klärungsfragen zur Aufgabe und generiert einen strukturierten Prompt mit klaren Anforderungen, Verifikationsschritten und Abschlusskriterien.
 
 Die komplette Implementierung mit Installationsanleitung (`init.md`), Prompt-Template (`prompt-template.md`) und interaktivem Prompt-Builder liegt unter `skills/workflow/ralph-loop/`. Installation: Sag deinem Agenten einfach *"Lies `skills/workflow/ralph-loop/init.md` und richte das in meinem Projekt ein"* — er erledigt den Rest.
 
@@ -487,11 +487,11 @@ Ein gutes Beispiel: Vielleicht hast du gerade ein komplexes Datenbankschema aufg
 
 ---
 
-## Orientierung im Ökosystem
+## Codex nicht vergessen
 
-CLAUDE.md, Rules, Skills, Agents, Subagents, Agent Teams, Hooks, MCP, Plugins — das kann anfangs ziemlich unübersichtlich wirken.
+Claude Code und Codex spielen gut zusammen. Bei komplexen, klar definierten Ausführungs-Aufgaben wirkt Codex oft methodischer. Claude Code glänzt dafür bei explorativer Arbeit, Architektur-Entscheidungen und Multi-Agent Reviews. Es lohnt sich, einen Workflow-Mix zu finden — die Tools schließen sich nicht aus.
 
-Für Best Practices empfiehlt sich immer ein Blick in die offizielle Anthropic-Dokumentation. Ein abschließendes Wort zu Codex: Bei komplexen, klar definierten Ausführungs-Aufgaben wirkt Codex oft methodischer. Claude Code glänzt dafür bei explorativer Arbeit, Architektur-Entscheidungen und Multi-Agent Reviews. Es lohnt sich, einen Workflow-Mix zu finden. Die Tools schließen sich nicht aus.
+Skills aus dieser Library funktionieren in beiden Umgebungen — und darüber hinaus. Das SKILL.md-Format folgt dem offenen [Agent Skills Standard](https://agentskills.io), ursprünglich von Anthropic entwickelt und mittlerweile von 30+ Tools unterstützt, darunter [OpenAI Codex](https://developers.openai.com/codex/skills/), Cursor, Gemini CLI, VS Code und viele mehr. Einmal schreiben, überall nutzen.
 
 ---
 
