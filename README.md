@@ -2,30 +2,53 @@
 
 A curated, hierarchically organized collection of Claude Code skills and agents. Source of truth for reusable AI-assisted development workflows.
 
+For a detailed walkthrough of the architecture, design decisions and usage patterns, see [article.md](article.md).
+
 ## Structure
 
 ```
 skill-library/
+├── templates/
+│   └── CLAUDE.md.template      # Generic CLAUDE.md for new projects
+├── rules/                          # Always-loaded behavior rules
+│   ├── coding-conventions.md   # DRY, naming, error handling, types, testing
+│   ├── agent-behavior.md       # Scope discipline, when to ask, post-writing
+│   ├── security.md             # Input validation, PII, secrets
+│   └── self-improvement.md     # Learn from corrections, iterate on lessons
 ├── skills/
-│   ├── meta/                    # Meta: Skills and Agents bauen
+│   ├── meta/                    # Meta: Skills, Agents and Teams bauen
 │   │   ├── skill-builder/       # How to create skills
-│   │   └── agent-builder/       # How to create agents
-│   ├── build/                   # Builder: Scaffolding & Infrastructure
-│   │   ├── prompt-builder/      # Structured prompt generation
-│   │   ├── logging-builder/     # Python logging infrastructure
-│   │   ├── config-builder/      # Pydantic config + YAML + env-vars
-│   │   ├── exception-builder/   # Exception hierarchy design
-│   │   ├── docker-builder/      # Dockerfile + Compose scaffolding
-│   │   └── project-scaffold/    # Python project from scratch
+│   │   ├── agent-builder/       # How to create agents
+│   │   └── team-builder/        # How to orchestrate agent teams
+│   ├── build/
+│   │   ├── frontend/            # Frontend: Design & Components
+│   │   │   ├── frontend-design/   # Production-grade frontend design (Impeccable)
+│   │   │   └── warmgold-frontend/  # Warmgold design system (vanilla HTML/CSS/JS)
+│   │   └── backend/             # Backend: Scaffolding & Infrastructure
+│   │       ├── prompt-builder/      # Structured prompt generation
+│   │       ├── logging-builder/     # Python logging infrastructure
+│   │       ├── config-builder/      # Pydantic config + YAML + env-vars
+│   │       ├── exception-builder/   # Exception hierarchy design
+│   │       ├── docker-builder/      # Dockerfile + Compose scaffolding
+│   │       ├── ci-cd-builder/       # GitHub Actions CI/CD pipelines
+│   │       └── project-scaffold/    # Python project from scratch
 │   ├── workflow/                # Orchestration: Multi-Agent Workflows
 │   │   ├── plan-review/         # Plan review before implementation
 │   │   ├── session-verify/      # End-of-session verification
-│   │   └── pr-review/           # Pull request review orchestration
+│   │   ├── pr-review/           # Pull request review orchestration
+│   │   ├── tdd/                 # Test-Driven Development (RED-GREEN-REFACTOR)
+│   │   ├── deep-research/       # Structured research workflow
+│   │   ├── ralph-loop/          # Autonomous iteration loop (hooks-based)
+│   │   └── ralph-loop-prompt-builder/ # Interactive prompt builder for Ralph Loop
 │   └── patterns/                # Reusable Architecture Patterns
 │       ├── di-container/        # Dependency Injection with Protocols
 │       ├── protocol-design/     # Python Protocol pattern
 │       ├── strategy-registry/   # Strategy + Registry dispatch
-│       └── error-handling/      # Exception mapping & retry patterns
+│       ├── error-handling/      # Exception mapping & retry patterns
+│       ├── resilience-patterns/ # Retry, Circuit Breaker, Timeout, Degradation
+│       ├── testing-patterns/    # pytest, mocking, property-based testing
+│       ├── api-design/          # REST API with FastAPI
+│       └── systematic-debugging/ # 4-phase debugging methodology
 └── agents/
     ├── review/                  # Code Review & Audit
     │   ├── python-reviewer.md
@@ -51,88 +74,7 @@ skill-library/
 
 ## Setup
 
-Connect this library to Claude Code via symlinks.
-
-### Skills
-
-```bash
-# Create skills directory if needed
-mkdir -p ~/.claude/skills
-
-# Link each skill directory
-ln -sf ~/skill-library/skills/meta/skill-builder ~/.claude/skills/skill-builder
-ln -sf ~/skill-library/skills/meta/agent-builder ~/.claude/skills/agent-builder
-ln -sf ~/skill-library/skills/build/prompt-builder ~/.claude/skills/prompt-builder
-ln -sf ~/skill-library/skills/build/logging-builder ~/.claude/skills/logging-builder
-ln -sf ~/skill-library/skills/build/config-builder ~/.claude/skills/config-builder
-ln -sf ~/skill-library/skills/build/exception-builder ~/.claude/skills/exception-builder
-ln -sf ~/skill-library/skills/build/docker-builder ~/.claude/skills/docker-builder
-ln -sf ~/skill-library/skills/build/project-scaffold ~/.claude/skills/project-scaffold
-ln -sf ~/skill-library/skills/workflow/plan-review ~/.claude/skills/plan-review
-ln -sf ~/skill-library/skills/workflow/session-verify ~/.claude/skills/session-verify
-ln -sf ~/skill-library/skills/workflow/pr-review ~/.claude/skills/pr-review
-ln -sf ~/skill-library/skills/patterns/di-container ~/.claude/skills/di-container
-ln -sf ~/skill-library/skills/patterns/protocol-design ~/.claude/skills/protocol-design
-ln -sf ~/skill-library/skills/patterns/strategy-registry ~/.claude/skills/strategy-registry
-ln -sf ~/skill-library/skills/patterns/error-handling ~/.claude/skills/error-handling
-```
-
-### Agents
-
-```bash
-# Create agents directory if needed
-mkdir -p ~/.claude/agents
-
-# Link each agent file
-ln -sf ~/skill-library/agents/review/python-reviewer.md ~/.claude/agents/python-reviewer.md
-ln -sf ~/skill-library/agents/review/logging-reviewer.md ~/.claude/agents/logging-reviewer.md
-ln -sf ~/skill-library/agents/review/security-reviewer.md ~/.claude/agents/security-reviewer.md
-ln -sf ~/skill-library/agents/review/privacy-auditor.md ~/.claude/agents/privacy-auditor.md
-ln -sf ~/skill-library/agents/analyze/performance-analyzer.md ~/.claude/agents/performance-analyzer.md
-ln -sf ~/skill-library/agents/analyze/scalability-analyzer.md ~/.claude/agents/scalability-analyzer.md
-ln -sf ~/skill-library/agents/analyze/dead-code-detector.md ~/.claude/agents/dead-code-detector.md
-ln -sf ~/skill-library/agents/analyze/dependency-auditor.md ~/.claude/agents/dependency-auditor.md
-ln -sf ~/skill-library/agents/analyze/architecture-analyzer.md ~/.claude/agents/architecture-analyzer.md
-ln -sf ~/skill-library/agents/plan/plan-completeness.md ~/.claude/agents/plan-completeness.md
-ln -sf ~/skill-library/agents/plan/risk-assessor.md ~/.claude/agents/risk-assessor.md
-ln -sf ~/skill-library/agents/plan/requirements-verifier.md ~/.claude/agents/requirements-verifier.md
-ln -sf ~/skill-library/agents/build/code-simplifier.md ~/.claude/agents/code-simplifier.md
-ln -sf ~/skill-library/agents/build/test-architect.md ~/.claude/agents/test-architect.md
-ln -sf ~/skill-library/agents/build/warmgold-frontend-builder.md ~/.claude/agents/warmgold-frontend-builder.md
-ln -sf ~/skill-library/agents/build/migration-writer.md ~/.claude/agents/migration-writer.md
-```
-
-### Quick Setup (All at once)
-
-```bash
-# Skills
-for skill in skill-builder agent-builder; do
-  ln -sf ~/skill-library/skills/meta/$skill ~/.claude/skills/$skill
-done
-for skill in prompt-builder logging-builder config-builder exception-builder docker-builder project-scaffold; do
-  ln -sf ~/skill-library/skills/build/$skill ~/.claude/skills/$skill
-done
-for skill in plan-review session-verify pr-review; do
-  ln -sf ~/skill-library/skills/workflow/$skill ~/.claude/skills/$skill
-done
-for skill in di-container protocol-design strategy-registry error-handling; do
-  ln -sf ~/skill-library/skills/patterns/$skill ~/.claude/skills/$skill
-done
-
-# Agents
-for agent in python-reviewer logging-reviewer security-reviewer privacy-auditor; do
-  ln -sf ~/skill-library/agents/review/$agent.md ~/.claude/agents/$agent.md
-done
-for agent in performance-analyzer scalability-analyzer dead-code-detector dependency-auditor architecture-analyzer; do
-  ln -sf ~/skill-library/agents/analyze/$agent.md ~/.claude/agents/$agent.md
-done
-for agent in plan-completeness risk-assessor requirements-verifier; do
-  ln -sf ~/skill-library/agents/plan/$agent.md ~/.claude/agents/$agent.md
-done
-for agent in code-simplifier test-architect warmgold-frontend-builder migration-writer; do
-  ln -sf ~/skill-library/agents/build/$agent.md ~/.claude/agents/$agent.md
-done
-```
+Browse the categories, pick what you need, and copy the `.md` files into your project's `.claude/` directory. Alternatively, you can symlink them from this repo to `~/.claude/rules/`, `~/.claude/skills/` and `~/.claude/agents/` for global availability.
 
 ## Lifecycle Mapping
 
@@ -140,13 +82,16 @@ Which skills/agents to use at each development phase:
 
 | Phase | Skills | Agents |
 |-------|--------|--------|
+| **Research** | deep-research | -- |
 | **Plan** | plan-review | plan-completeness, risk-assessor, architecture-analyzer |
-| **Scaffold** | project-scaffold, config-builder, exception-builder, docker-builder | -- |
-| **Code** | di-container, protocol-design, strategy-registry, error-handling, logging-builder | -- |
+| **Scaffold** | project-scaffold, config-builder, exception-builder, docker-builder, ci-cd-builder | -- |
+| **Code** | di-container, protocol-design, strategy-registry, error-handling, resilience-patterns, logging-builder, api-design, ralph-loop, ralph-loop-prompt-builder | -- |
+| **Frontend** | frontend-design, warmgold-frontend | warmgold-frontend-builder |
 | **Review** | pr-review, session-verify | python-reviewer, security-reviewer, logging-reviewer, privacy-auditor |
-| **Test** | -- | test-architect |
+| **Test** | tdd, testing-patterns | test-architect |
+| **Debug** | systematic-debugging | -- |
 | **Analyze** | -- | performance-analyzer, scalability-analyzer, dead-code-detector, dependency-auditor |
-| **Deploy** | docker-builder | -- |
+| **Deploy** | docker-builder, ci-cd-builder | -- |
 | **Maintain** | -- | dead-code-detector, dependency-auditor |
 
 ## Naming Conventions
@@ -154,6 +99,16 @@ Which skills/agents to use at each development phase:
 - **Skills**: `kebab-case` directories with `SKILL.md` inside
 - **Agents**: `kebab-case.md` files
 - **Categories**: Verb-based (`review/`, `analyze/`, `plan/`, `build/`)
+
+## CLAUDE.md Template
+
+A comprehensive CLAUDE.md template is available at `templates/CLAUDE.md.template`. Copy it into new projects and fill in the `[placeholders]`:
+
+```bash
+cp ~/skill-library/templates/CLAUDE.md.template my-project/CLAUDE.md
+```
+
+Covers project-specific content: Critical Constraints, Architecture, Commands, Import Conventions, Key Patterns, Configuration, Quick Reference. Generic rules (DRY, agent behavior, security) are in `rules/` and don't need to be repeated in CLAUDE.md.
 
 ## Adding Project-Specific Skills
 
@@ -171,11 +126,14 @@ my-project/
 
 | Category | Count |
 |----------|-------|
-| Skills (total) | 16 |
-| -- meta/ | 2 |
-| -- build/ | 6 |
-| -- workflow/ | 3 |
-| -- patterns/ | 4 |
+| Rules | 4 |
+| Templates | 1 |
+| Skills (total) | 27 |
+| -- meta/ | 3 |
+| -- build/frontend/ | 2 |
+| -- build/backend/ | 7 |
+| -- workflow/ | 7 |
+| -- patterns/ | 8 |
 | Agents (total) | 16 |
 | -- review/ | 4 |
 | -- analyze/ | 5 |

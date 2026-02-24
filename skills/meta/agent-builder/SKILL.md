@@ -11,6 +11,12 @@ description: |
 
 Use this knowledge to create well-designed subagent configuration files.
 
+## Official Docs
+
+- [Sub-agents](https://code.claude.com/docs/en/sub-agents) — Authoritative reference for agent format, frontmatter fields, and running modes
+
+---
+
 ## Agent File Format
 
 Agents are Markdown files with YAML frontmatter:

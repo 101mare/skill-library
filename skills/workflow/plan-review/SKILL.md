@@ -414,3 +414,4 @@ Aktiviert bei:
 - **Konstruktiv**: Nicht nur Probleme nennen, auch Loesungen vorschlagen
 - **Additional agents**: If the plan involves frontend changes, also read `warmgold-frontend-builder.md`. If it involves new dependencies, also read `dependency-auditor.md`. Spawn additional Task agents as needed.
 - **Project-agnostic**: This skill works for any project. Read the project's CLAUDE.md to understand its specific architecture, patterns, and constraints before running reviews.
+- **Research first**: If the plan involves unfamiliar technology or open technical decisions, use the `deep-research` skill first to gather evidence before reviewing.
