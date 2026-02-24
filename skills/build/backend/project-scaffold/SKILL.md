@@ -258,28 +258,21 @@ select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF"]
 testpaths = ["tests"]
 ```
 
-## CLAUDE.md Template
+## CLAUDE.md
 
-Every project should have a CLAUDE.md for AI-assisted development:
+Every project should have a CLAUDE.md for AI-assisted development. Use the comprehensive template from the skill library:
 
-```markdown
-# Project Name
-
-## Overview
-[What this project does, 1-2 sentences]
-
-## Architecture
-[Key modules, their responsibilities, data flow]
-
-## Commands
-[How to run, test, lint]
-
-## Key Patterns
-[Design patterns used, import conventions, error handling]
-
-## Constraints
-[Security rules, performance targets, privacy requirements]
+```bash
+cp ~/skill-library/templates/CLAUDE.md.template ./CLAUDE.md
 ```
+
+The template covers: Critical Constraints (positioned first for attention priority), Architecture, Commands, Coding Conventions (DRY, naming, error handling, testing), Agent Behavior (scope discipline, when to ask), Security & Privacy (PII, input validation, secrets), and Quick Reference.
+
+Key design principles applied in the template:
+- **U-shaped attention**: Non-negotiable rules go first (Critical Constraints) and last (Quick Reference)
+- **DRY as knowledge rule**: "DRY applies to knowledge, not code" -- avoid premature abstraction
+- **Anti-patterns as behaviors**: Specific things Claude must NOT do, not vague traits
+- **Scope discipline**: Only change what was asked, no drive-by refactors
 
 ## Definition of Done
 

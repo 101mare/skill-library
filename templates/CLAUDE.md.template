@@ -1,0 +1,92 @@
+# [Project Name]
+
+[What this project does in 1-2 sentences. Be specific — not "a web app" but "REST API for invoice processing with PDF extraction and tax calculation."]
+
+## Critical Constraints
+
+<!-- U-shaped attention: Claude weighs the beginning and end most heavily.
+     Put project-specific non-negotiable rules here.
+     Generic rules (DRY, security, agent behavior) are covered by ~/.claude/rules/ -->
+
+1. **[Project-specific constraint, e.g.: "Never import provider-specific types in services/"]**
+2. **[Another constraint, e.g.: "All processing must stay 100% local, no external API calls"]**
+3. **[Add more as needed]**
+
+## Architecture
+
+<!-- Keep this brief. Link to detailed docs if they exist. -->
+
+```
+[High-level data flow, e.g.:]
+Input -> Ingestion -> Processing -> Validation -> Output
+```
+
+| Module | Responsibility |
+|--------|----------------|
+| `src/[package]/services/` | Business logic |
+| `src/[package]/adapters/` | External integrations |
+| `src/[package]/config/` | Pydantic config models |
+| `src/[package]/models/` | Domain models, DTOs |
+
+<!-- Add: interfaces, key design patterns (DI, Strategy, etc.) -->
+
+## Commands
+
+```bash
+# Setup
+python -m venv .venv && source .venv/bin/activate
+pip install -e .
+
+# Run
+python -m [package]
+
+# Test
+pytest -q --tb=line
+
+# Lint + Format
+ruff check . --fix && ruff format .
+```
+
+## Project-Specific Patterns
+
+<!-- Document patterns unique to THIS project. Generic patterns (DRY, error handling,
+     testing) are in ~/.claude/rules/ and don't need to be repeated here. -->
+
+### Import Conventions
+
+```python
+# [Example of this project's import style]
+from [package].services.foo import FooService
+from [package].interfaces.bar import BarProtocol
+
+# Within a package: relative imports
+from .utils import helper
+```
+
+### [Key Pattern, e.g.: Provider Pattern]
+
+<!-- Document how the main design pattern works in this project -->
+
+### [Key Pattern, e.g.: Exception Hierarchy]
+
+<!-- Document project-specific exceptions and when to use them -->
+
+## Configuration
+
+<!-- How config works in this project: YAML structure, env-var overrides, Pydantic models -->
+
+```yaml
+# config.yaml — key sections
+[example config structure]
+```
+
+## Quick Reference
+
+| What | Where |
+|------|-------|
+| Config | `config.yaml` |
+| Config Models | `src/[package]/config/models.py` |
+| Entry Point | `src/[package]/cli.py` |
+| Tests | `tests/` |
+| Logs | `logs/` |
+| [Key domain file] | `src/[package]/...` |

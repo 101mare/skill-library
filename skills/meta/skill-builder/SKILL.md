@@ -19,6 +19,12 @@ Use skills when you want to teach Claude HOW to do something. Use agents when yo
 
 ---
 
+## Official Docs
+
+- [Skills](https://code.claude.com/docs/en/skills) — Authoritative reference for skill format, frontmatter fields, and storage locations
+
+---
+
 ## Skill File Format
 
 Skills are directories with a `SKILL.md` file:
