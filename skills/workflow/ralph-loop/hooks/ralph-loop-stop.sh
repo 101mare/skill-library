@@ -24,6 +24,9 @@ fi
 # --- Read hook input from stdin ---
 INPUT=$(cat)
 
+# --- Safety: if stop_hook_active but no state file iteration tracking, bail ---
+STOP_HOOK_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
+
 # --- Extract last assistant message from hook input ---
 LAST_MSG=$(echo "$INPUT" | jq -r '.last_assistant_message // ""')
 
@@ -45,6 +48,12 @@ fi
 
 # --- Safety: max iterations reached → stop loop, clean up ---
 if (( ITERATION >= MAX_ITERATIONS )); then
+  rm -f "$STATE_FILE"
+  exit 0
+fi
+
+# --- Safety: stop_hook_active but state file corrupt → prevent infinite loop ---
+if [[ "$STOP_HOOK_ACTIVE" == "true" ]] && (( ITERATION == 0 )); then
   rm -f "$STATE_FILE"
   exit 0
 fi

@@ -36,6 +36,7 @@ if [[ ! -f "$STATE_FILE" ]]; then
 fi
 
 INPUT=$(cat)
+STOP_HOOK_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
 LAST_MSG=$(echo "$INPUT" | jq -r '.last_assistant_message // ""')
 
 ITERATION=$(sed -n 's/^iteration: *//p' "$STATE_FILE" | head -1)
@@ -47,6 +48,11 @@ if ! [[ "$MAX_ITERATIONS" =~ ^[0-9]+$ ]]; then MAX_ITERATIONS=50; fi
 if [[ -z "$COMPLETION_PROMISE" ]]; then COMPLETION_PROMISE="COMPLETE"; fi
 
 if (( ITERATION >= MAX_ITERATIONS )); then
+  rm -f "$STATE_FILE"
+  exit 0
+fi
+
+if [[ "$STOP_HOOK_ACTIVE" == "true" ]] && (( ITERATION == 0 )); then
   rm -f "$STATE_FILE"
   exit 0
 fi

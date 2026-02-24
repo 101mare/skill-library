@@ -2,26 +2,27 @@
 
 Bringe Claude Code bei, wie ein Senior Engineer zu arbeiten. Eine Sammlung aus 27 Skills, 16 Agents und praxiserprobten Rules, die Claude wiederverwendbares Wissen ueber Architektur-Patterns, Entwicklungs-Workflows und Code-Qualitaet geben.
 
-**[CATALOG_de.md](CATALOG_de.md)** — Alle 27 Skills und 16 Agents mit Beschreibungen und Dateipfaden. Dein Einstiegspunkt zum Auswaehlen und Installieren.
+**[CATALOG_de.md](docs/CATALOG_de.md)** — Alle 27 Skills und 16 Agents mit Beschreibungen und Dateipfaden. Dein Einstiegspunkt zum Auswaehlen und Installieren.
 
-**[ARTICLE_de.md](ARTICLE_de.md)** — Der ausfuehrliche Deep Dive: Warum diese Library existiert, wie Rules/Skills/Agents zusammenspielen, wie man Agents eine "Seele" gibt, und Lessons Learned beim Aufbau.
+**[ARTICLE_de.md](docs/ARTICLE_de.md)** — Der ausfuehrliche Deep Dive: Warum diese Library existiert, wie Rules/Skills/Agents zusammenspielen, wie man Agents eine "Seele" gibt, und Lessons Learned beim Aufbau.
 
-> English version: [README.md](README.md) | [CATALOG.md](CATALOG.md) | [ARTICLE.md](ARTICLE.md)
+> English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
 
 ## Schnellstart
 
-Sag Claude, welchen Skill oder Agent du willst. Das war's.
+Sag Claude, welchen Skill, Agent oder Rule du willst. Das war's.
 
 ```
 Kopiere den Skill aus ~/skill-library/skills/workflow/tdd/SKILL.md in mein Projekt
 ```
 
-Claude liest die Datei, kopiert sie in dein Projekt unter `.claude/skills/` (oder `.claude/agents/`) und aktiviert sie automatisch. Die vollstaendige Liste findest du in [CATALOG_de.md](CATALOG_de.md).
+Claude liest die Datei, kopiert sie in dein Projekt unter `.claude/skills/` (oder `.claude/agents/`) und aktiviert sie automatisch. Die vollstaendige Liste findest du in [CATALOG_de.md](docs/CATALOG_de.md).
 
 ## Was drin steckt
 
 ```
 skill-library/
+├── docs/                       # CATALOG + ARTICLE (EN + DE)
 ├── templates/
 │   └── CLAUDE.md.template      # Generische CLAUDE.md fuer neue Projekte
 ├── rules/                      # Immer geladene Verhaltensregeln
@@ -63,5 +64,5 @@ Deckt Architektur, Commands, Import-Konventionen, Key Patterns und Konfiguration
 
 ## Weiterfuehrend
 
-- **[CATALOG_de.md](CATALOG_de.md)** — Vollstaendiger Katalog aller Skills und Agents
-- **[ARTICLE_de.md](ARTICLE_de.md)** — Architektur, Design-Entscheidungen und Nutzungsmuster
+- **[CATALOG_de.md](docs/CATALOG_de.md)** — Vollstaendiger Katalog aller Skills und Agents
+- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Architektur, Design-Entscheidungen und Nutzungsmuster

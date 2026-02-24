@@ -2,26 +2,27 @@
 
 Teach Claude Code how to build like a senior engineer. A collection of 27 skills, 16 agents, and battle-tested rules that give Claude reusable knowledge about architecture patterns, development workflows, and code quality.
 
-**[CATALOG.md](CATALOG.md)** — Browse all 27 skills and 16 agents with descriptions and file paths. Your starting point for picking what to install.
+**[CATALOG.md](docs/CATALOG.md)** — Browse all 27 skills and 16 agents with descriptions and file paths. Your starting point for picking what to install.
 
-**[ARTICLE.md](ARTICLE.md)** — The full deep dive: Why this library exists, how rules/skills/agents work together, how to give agents a "soul," and lessons learned building it.
+**[ARTICLE.md](docs/ARTICLE.md)** — The full deep dive: Why this library exists, how rules/skills/agents work together, how to give agents a "soul," and lessons learned building it.
 
-> Deutsche Version: [README_de.md](README_de.md) | [CATALOG_de.md](CATALOG_de.md) | [ARTICLE_de.md](ARTICLE_de.md)
+> Deutsche Version: [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
 ## Quickstart
 
-Tell Claude which skill or agent you want. That's it.
+Tell Claude which skill, agent, or rule you want. That's it.
 
 ```
 Kopiere den Skill aus ~/skill-library/skills/workflow/tdd/SKILL.md in mein Projekt
 ```
 
-Claude reads the file, copies it to your project's `.claude/skills/` (or `.claude/agents/`), and activates it automatically. Browse the full list in [CATALOG.md](CATALOG.md).
+Claude reads the file, copies it to your project's `.claude/skills/` (or `.claude/agents/`), and activates it automatically. Browse the full list in [CATALOG.md](docs/CATALOG.md).
 
 ## What's Inside
 
 ```
 skill-library/
+├── docs/                       # CATALOG + ARTICLE (EN + DE)
 ├── templates/
 │   └── CLAUDE.md.template      # Generic CLAUDE.md for new projects
 ├── rules/                      # Always-loaded behavior rules
@@ -63,5 +64,5 @@ Covers architecture, commands, import conventions, key patterns, and configurati
 
 ## Further Reading
 
-- **[CATALOG.md](CATALOG.md)** — Full catalog of all skills and agents
-- **[ARTICLE.md](ARTICLE.md)** — Architecture, design decisions, and usage patterns
+- **[CATALOG.md](docs/CATALOG.md)** — Full catalog of all skills and agents
+- **[ARTICLE.md](docs/ARTICLE.md)** — Architecture, design decisions, and usage patterns
