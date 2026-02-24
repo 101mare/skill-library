@@ -40,9 +40,9 @@ Replace `<MAX>` with the parsed max value and `<TASK DESCRIPTION>` with the actu
 ## Step 3: Confirm to User
 
 Tell the user:
-- Ralph Loop gestartet
+- Ralph Loop started
 - Max iterations: N
-- Abbrechen: `.claude/ralph-loop.local.md` loeschen oder Escape/Ctrl+C
+- Cancel: delete `.claude/ralph-loop.local.md` or press Escape/Ctrl+C
 
 ## Step 4: Work on the Task
 

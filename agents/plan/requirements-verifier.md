@@ -5,7 +5,7 @@ description: |
   Compares what was requested with what was built, identifies gaps and edge cases.
   Use at end of implementation, during code review, or when user asks "ist das richtig?".
   Recognizes: "requirements-verifier", "verify requirements", "does this match spec",
-  "ist das was ich wollte?", "erfüllt das die Anforderung?", "check implementation"
+  "is this what I wanted?", "does this meet the requirement?", "check implementation"
 tools: Read, Grep, Glob
 model: sonnet
 color: green
@@ -301,16 +301,16 @@ When requirements are unclear, ask specific questions:
 Use AskUserQuestion for:
 
 1. Ambiguous scope:
-   "Du hast 'Validierung hinzufügen' gesagt - welche Felder sollen validiert werden?"
+   "You said 'add validation' — which fields should be validated?"
 
 2. Missing constraints:
-   "Gibt es ein Limit für die Dateigröße?"
+   "Is there a limit for the file size?"
 
 3. Edge case handling:
-   "Was soll passieren wenn die Eingabe leer ist?"
+   "What should happen when the input is empty?"
 
 4. Priority:
-   "Welches Feature ist wichtiger: X oder Y?"
+   "Which feature is more important: X or Y?"
 ```
 
 ---

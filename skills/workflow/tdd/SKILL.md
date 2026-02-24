@@ -52,11 +52,11 @@ User said something like "add IBAN validation that returns True/False" — proce
 
 ```
 Use AskUserQuestion:
-Question: "Was genau soll das Verhalten sein?"
+Question: "What exactly should the behavior be?"
 Options:
-  - "Ich beschreibe die erwartete Ein-/Ausgabe"
-  - "Schau dir die bestehende Architektur an und schlage Tests vor"
-  - "Starte mit dem einfachsten Fall, wir iterieren"
+  - "I'll describe the expected input/output"
+  - "Look at the existing architecture and suggest tests"
+  - "Start with the simplest case, we'll iterate"
 ```
 
 ### Define the Behavior Contract
@@ -143,11 +143,11 @@ pytest tests/test_validators.py -q --tb=line
 
 ```
 Use AskUserQuestion:
-Question: "Der Test ist sofort grün. Was soll passieren?"
+Question: "The test passes immediately. What should happen?"
 Options:
-  - "Verhalten existiert schon — nächstes Verhalten"
-  - "Test ist falsch — nochmal schreiben lassen"
-  - "Abbrechen"
+  - "Behavior already exists — next behavior"
+  - "Test is wrong — have it rewritten"
+  - "Cancel"
 ```
 
 ### RED Exit Criterion
@@ -260,11 +260,11 @@ After one cycle completes:
 
 ```
 Use AskUserQuestion:
-Question: "TDD-Zyklus abgeschlossen. Wie weiter?"
+Question: "TDD cycle completed. What next?"
 Options:
-  - "Nächstes Verhalten — weiter mit RED"
-  - "Fertig für jetzt"
-  - "Zeig mir eine Zusammenfassung der Zyklen"
+  - "Next behavior — continue with RED"
+  - "Done for now"
+  - "Show me a summary of the cycles"
 ```
 
 If continuing, go back to Step 1 with the next behavior.
@@ -337,5 +337,5 @@ Use TDD for: business logic, validators, transformers, parsers, APIs, anything w
 - **test-architect writes ONLY tests**: Never let the RED agent also write the implementation
 - **GREEN stays in main context**: The implementation needs full project awareness
 - **Run tests between every phase**: Tests are the proof that TDD works
-- **Match language**: Deutsch wenn User Deutsch spricht
+- **Match the user's language**: Respond in the same language the user uses
 - **Project-agnostic**: Read the project's CLAUDE.md to understand testing conventions, import paths, and fixture patterns before starting

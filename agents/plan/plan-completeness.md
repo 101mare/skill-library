@@ -2,9 +2,9 @@
 name: plan-completeness
 description: |
   Checks implementation plans for completeness: all steps defined, dependencies clear, edge cases covered.
-  Use when reviewing plans before implementation or when user asks "ist der Plan vollständig?".
+  Use when reviewing plans before implementation or when user asks "is the plan complete?".
   Recognizes: "plan-completeness", "check plan completeness", "missing steps?",
-  "plan vollständig?", "fehlt was im Plan?", "all steps covered?"
+  "plan complete?", "anything missing from the plan?", "all steps covered?"
 tools: Read, Grep, Glob
 model: opus
 color: cyan

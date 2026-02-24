@@ -1,55 +1,55 @@
-# Skill Library — Katalog
+# Skill Library — Catalog
 
-Alle verfuegbaren Skills und Agents auf einen Blick.
+All available skills and agents at a glance.
 
 ---
 
-## Schnellstart: Skill oder Agent installieren
+## Quickstart: Installing a Skill or Agent
 
-Die Installation ist denkbar einfach — du musst nichts manuell konfigurieren. Sag Claude einfach, welchen Skill oder Agent du haben willst, und gib den Pfad zur Datei an.
+Installation couldn't be simpler — you don't need to configure anything manually. Just tell Claude which skill or agent you want and provide the path to the file.
 
-### So geht's
+### How It Works
 
-1. Waehle einen Skill oder Agent aus dem Katalog unten
-2. Kopiere den Dateipfad
-3. Sag Claude:
+1. Choose a skill or agent from the catalog below
+2. Copy the file path
+3. Tell Claude:
 
 ```
-Kopiere den Skill aus /pfad/zur/skill-library/skills/workflow/tdd/SKILL.md in mein Projekt
+Copy the skill from /path/to/skill-library/skills/workflow/tdd/SKILL.md into my project
 ```
 
-Claude liest die Datei, kopiert sie in dein Projekt (`.claude/skills/` fuer Skills, `.claude/agents/` fuer Agents) und registriert sie automatisch.
+Claude reads the file, copies it into your project (`.claude/skills/` for skills, `.claude/agents/` for agents) and registers it automatically.
 
-### Beispiele
+### Examples
 
-**Skill installieren:**
+**Install a skill:**
 ```
-Kopiere den Skill aus ~/Schreibtisch/skill-library/skills/patterns/testing-patterns/SKILL.md in mein Projekt
+Copy the skill from ~/Schreibtisch/skill-library/skills/patterns/testing-patterns/SKILL.md into my project
 ```
-→ Claude kopiert die Datei nach `.claude/skills/testing-patterns/SKILL.md`
+→ Claude copies the file to `.claude/skills/testing-patterns/SKILL.md`
 
-**Agent installieren:**
+**Install an agent:**
 ```
-Kopiere den Agent aus ~/Schreibtisch/skill-library/agents/review/python-reviewer.md in mein Projekt
+Copy the agent from ~/Schreibtisch/skill-library/agents/review/python-reviewer.md into my project
 ```
-→ Claude kopiert die Datei nach `.claude/agents/python-reviewer.md`
+→ Claude copies the file to `.claude/agents/python-reviewer.md`
 
-**Mehrere auf einmal:**
+**Multiple at once:**
 ```
-Kopiere folgende Skills in mein Projekt:
+Copy the following skills into my project:
 - ~/Schreibtisch/skill-library/skills/workflow/tdd/SKILL.md
 - ~/Schreibtisch/skill-library/skills/patterns/testing-patterns/SKILL.md
 - ~/Schreibtisch/skill-library/agents/build/test-architect.md
 ```
 
-### Anpassen nach der Installation
+### Customizing After Installation
 
-Nach dem Kopieren kannst du den Skill in `.claude/skills/` beliebig anpassen:
+After copying, you can customize the skill in `.claude/skills/` however you like:
 
-- **Trigger-Woerter aendern** — Wann soll Claude den Skill automatisch aktivieren?
-- **Projektspezifische Regeln ergaenzen** — Z.B. eigene Naming Conventions, bevorzugte Libraries
-- **Sektionen entfernen** — Was du nicht brauchst, einfach loeschen
-- **Kombinieren** — Teile aus mehreren Skills in einen eigenen Skill zusammenfuehren
+- **Change trigger words** — When should Claude automatically activate the skill?
+- **Add project-specific rules** — E.g., custom naming conventions, preferred libraries
+- **Remove sections** — Delete what you don't need
+- **Combine** — Merge parts from multiple skills into your own
 
 ---
 
@@ -57,55 +57,55 @@ Nach dem Kopieren kannst du den Skill in `.claude/skills/` beliebig anpassen:
 
 ### Meta (3)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| skill-builder | Vermittelt Wissen zum Erstellen von Claude Code Skill-Dateien im SKILL.md-Format mit Best Practices. | `skills/meta/skill-builder/SKILL.md` |
-| agent-builder | Vermittelt Wissen zum Erstellen von Claude Code Subagent-Konfigurationsdateien mit YAML-Frontmatter und Prompts. | `skills/meta/agent-builder/SKILL.md` |
-| team-builder | Orchestrierung von Claude Code Agent-Teams — mehrere unabhaengige Sessions, koordiniert durch einen Team Lead mit geteilter Task-Liste und Inter-Agent-Messaging. | `skills/meta/team-builder/SKILL.md` |
+| Name | Description | Path |
+|------|------------|------|
+| skill-builder | Teaches knowledge for creating Claude Code skill files in SKILL.md format with best practices. | `skills/meta/skill-builder/SKILL.md` |
+| agent-builder | Teaches knowledge for creating Claude Code subagent configuration files with YAML frontmatter and prompts. | `skills/meta/agent-builder/SKILL.md` |
+| team-builder | Orchestration of Claude Code agent teams — multiple independent sessions, coordinated by a team lead with shared task list and inter-agent messaging. | `skills/meta/team-builder/SKILL.md` |
 
 ### Build — Backend (7)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| prompt-builder | Transformiert unstrukturierte Benutzeranfragen in optimierte, strukturierte Prompts durch systematische Klaerungsfragen. | `skills/build/backend/prompt-builder/SKILL.md` |
-| logging-builder | Implementiert Python-Logging-Infrastruktur mit Logger-Konfiguration, Datei-Rotation und strukturiertem Logging. | `skills/build/backend/logging-builder/SKILL.md` |
-| config-builder | Erstellt Python-Konfigurationsinfrastruktur mit Pydantic-Modellen, YAML-Loading und Environment-Variable-Overrides. | `skills/build/backend/config-builder/SKILL.md` |
-| exception-builder | Entwirft Python-Exception-Hierarchien fuer geschichtete Anwendungen mit Base Exceptions, Layer Mapping und Chaining. | `skills/build/backend/exception-builder/SKILL.md` |
-| docker-builder | Erstellt Dockerfile und docker-compose.yml mit Multi-Stage Builds, Health Checks, Netzwerkisolation und GPU-Setup. | `skills/build/backend/docker-builder/SKILL.md` |
-| ci-cd-builder | Erstellt GitHub Actions CI/CD-Pipelines mit pytest, Linting, Docker Build und Release-Workflows. | `skills/build/backend/ci-cd-builder/SKILL.md` |
-| project-scaffold | Erstellt produktionsreife Python-Projektstrukturen mit Verzeichnislayout, pyproject.toml, Config, Logging und CI/CD. | `skills/build/backend/project-scaffold/SKILL.md` |
+| Name | Description | Path |
+|------|------------|------|
+| prompt-builder | Transforms unstructured user requests into optimized, structured prompts through systematic clarification questions. | `skills/build/backend/prompt-builder/SKILL.md` |
+| logging-builder | Implements Python logging infrastructure with logger configuration, file rotation, and structured logging. | `skills/build/backend/logging-builder/SKILL.md` |
+| config-builder | Creates Python configuration infrastructure with Pydantic models, YAML loading, and environment variable overrides. | `skills/build/backend/config-builder/SKILL.md` |
+| exception-builder | Designs Python exception hierarchies for layered applications with base exceptions, layer mapping, and chaining. | `skills/build/backend/exception-builder/SKILL.md` |
+| docker-builder | Creates Dockerfile and docker-compose.yml with multi-stage builds, health checks, network isolation, and GPU setup. | `skills/build/backend/docker-builder/SKILL.md` |
+| ci-cd-builder | Creates GitHub Actions CI/CD pipelines with pytest, linting, Docker build, and release workflows. | `skills/build/backend/ci-cd-builder/SKILL.md` |
+| project-scaffold | Creates production-ready Python project structures with directory layout, pyproject.toml, config, logging, and CI/CD. | `skills/build/backend/project-scaffold/SKILL.md` |
 
 ### Build — Frontend (2)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| frontend-design | Erstellt markante, produktionsreife Frontend-Interfaces mit hoher Designqualitaet, die generische KI-Aesthetik vermeiden. | `skills/build/frontend/frontend-design/SKILL.md` |
-| warmgold-frontend | Warmes, iOS-inspiriertes Design-System mit Component-Patterns fuer Vanilla-HTML/CSS/JS-Frontends. | `skills/build/frontend/warmgold-frontend/SKILL.md` |
+| Name | Description | Path |
+|------|------------|------|
+| frontend-design | Creates distinctive, production-ready frontend interfaces with high design quality that avoid generic AI aesthetics. | `skills/build/frontend/frontend-design/SKILL.md` |
+| warmgold-frontend | Warm, iOS-inspired design system with component patterns for vanilla HTML/CSS/JS frontends. | `skills/build/frontend/warmgold-frontend/SKILL.md` |
 
 ### Workflow (7)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| plan-review | Prueft Implementierungsplaene auf Vollstaendigkeit, Architektur-Passung, Risiken und Anforderungsabdeckung mittels paralleler Spezial-Agenten. | `skills/workflow/plan-review/SKILL.md` |
-| session-verify | Validiert am Session-Ende alle Aenderungen auf Bugs, Sicherheitsluecken, toten Code und Dokumentationsluecken. | `skills/workflow/session-verify/SKILL.md` |
-| pr-review | Orchestriert Pull-Request-Reviews durch parallele spezialisierte Agenten, die den Diff analysieren und Ergebnisse aggregieren. | `skills/workflow/pr-review/SKILL.md` |
-| tdd | Test-Driven-Development-Workflow im RED-GREEN-REFACTOR-Zyklus: test-architect → Implementierung → code-simplifier. | `skills/workflow/tdd/SKILL.md` |
-| deep-research | Strukturierter Research-Workflow (Frage → Quellen → Analyse → Synthese → Dokumentation) fuer technische Entscheidungen. | `skills/workflow/deep-research/SKILL.md` |
-| ralph-loop | Autonomer Arbeitsmodus — Claude arbeitet selbststaendig an einer Aufgabe weiter, bis sie abgeschlossen oder das Iterationslimit erreicht ist. | `skills/workflow/ralph-loop/SKILL.md` |
-| ralph-loop-prompt-builder | Hilft beim Erstellen effektiver Prompts fuer das Ralph-Loop-System durch Klaerungsfragen und strukturierte Ausgabe. | `skills/workflow/ralph-loop-prompt-builder/SKILL.md` |
+| Name | Description | Path |
+|------|------------|------|
+| plan-review | Reviews implementation plans for completeness, architecture fit, risks, and requirement coverage using parallel specialized agents. | `skills/workflow/plan-review/SKILL.md` |
+| session-verify | Validates all changes at session end for bugs, security vulnerabilities, dead code, and documentation gaps. | `skills/workflow/session-verify/SKILL.md` |
+| pr-review | Orchestrates pull request reviews through parallel specialized agents that analyze the diff and aggregate results. | `skills/workflow/pr-review/SKILL.md` |
+| tdd | Test-driven development workflow in the RED-GREEN-REFACTOR cycle: test-architect → implementation → code-simplifier. | `skills/workflow/tdd/SKILL.md` |
+| deep-research | Structured research workflow (question → sources → analysis → synthesis → documentation) for technical decisions. | `skills/workflow/deep-research/SKILL.md` |
+| ralph-loop | Autonomous work mode — Claude continues working independently on a task until it's completed or the iteration limit is reached. | `skills/workflow/ralph-loop/SKILL.md` |
+| ralph-loop-prompt-builder | Helps create effective prompts for the Ralph Loop system through clarification questions and structured output. | `skills/workflow/ralph-loop-prompt-builder/SKILL.md` |
 
 ### Patterns (8)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| di-container | Implementierung von Dependency-Injection-Containern mit Python Protocols fuer entkoppelte, testbare Anwendungen. | `skills/patterns/di-container/SKILL.md` |
-| protocol-design | Korrekter Einsatz von Python `typing.Protocol` fuer strukturelles Subtyping und Interface-Design zwischen Modulen. | `skills/patterns/protocol-design/SKILL.md` |
-| strategy-registry | Strategy-Pattern mit Registry-basiertem Dispatch fuer erweiterbare Systeme wie Plugin-Systeme oder Dateityp-Handler. | `skills/patterns/strategy-registry/SKILL.md` |
-| error-handling | Exception-Handling ueber Anwendungsschichten hinweg: Mapping, Retry, Severity und Logging. | `skills/patterns/error-handling/SKILL.md` |
-| resilience-patterns | Retry mit Backoff, Circuit Breaker, Timeout und Graceful Degradation fuer externe Abhaengigkeiten. | `skills/patterns/resilience-patterns/SKILL.md` |
-| testing-patterns | pytest-Patterns, Fixtures, Mocking, Parametrize und Property-Based Testing fuer Python-Projekte. | `skills/patterns/testing-patterns/SKILL.md` |
-| api-design | REST-API-Design mit FastAPI: Routing, Response-Modelle, Error Handling und Dependencies. | `skills/patterns/api-design/SKILL.md` |
-| systematic-debugging | Strukturierte 4-Phasen-Debugging-Methodik: Reproduzieren → Isolieren → Root-Cause → Fixen und Absichern. | `skills/patterns/systematic-debugging/SKILL.md` |
+| Name | Description | Path |
+|------|------------|------|
+| di-container | Implementation of dependency injection containers with Python Protocols for decoupled, testable applications. | `skills/patterns/di-container/SKILL.md` |
+| protocol-design | Correct use of Python `typing.Protocol` for structural subtyping and interface design between modules. | `skills/patterns/protocol-design/SKILL.md` |
+| strategy-registry | Strategy pattern with registry-based dispatch for extensible systems like plugin systems or file type handlers. | `skills/patterns/strategy-registry/SKILL.md` |
+| error-handling | Exception handling across application layers: mapping, retry, severity, and logging. | `skills/patterns/error-handling/SKILL.md` |
+| resilience-patterns | Retry with backoff, circuit breaker, timeout, and graceful degradation for external dependencies. | `skills/patterns/resilience-patterns/SKILL.md` |
+| testing-patterns | pytest patterns, fixtures, mocking, parametrize, and property-based testing for Python projects. | `skills/patterns/testing-patterns/SKILL.md` |
+| api-design | REST API design with FastAPI: routing, response models, error handling, and dependencies. | `skills/patterns/api-design/SKILL.md` |
+| systematic-debugging | Structured 4-phase debugging methodology: reproduce → isolate → root-cause → fix and defend. | `skills/patterns/systematic-debugging/SKILL.md` |
 
 ---
 
@@ -113,36 +113,36 @@ Nach dem Kopieren kannst du den Skill in `.claude/skills/` beliebig anpassen:
 
 ### Review (4)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| python-reviewer | Prueft Python-Code auf Sicherheitsluecken, Typsicherheit und Best Practices. | `agents/review/python-reviewer.md` |
-| logging-reviewer | Prueft Python-Code auf Logging-Best-Practices, fehlende Logs, falsche Log-Levels und Offenlegung sensibler Daten. | `agents/review/logging-reviewer.md` |
-| security-reviewer | Prueft Python-Code auf Sicherheitsluecken nach OWASP-Top-10 — Input-Validierung, Injection, Path Traversal, Secrets und Auth. | `agents/review/security-reviewer.md` |
-| privacy-auditor | Auditiert Code auf Offline-Konformitaet und Datenschutz — findet externe API-Aufrufe, Telemetrie und Cloud-Zugriffe. | `agents/review/privacy-auditor.md` |
+| Name | Description | Path |
+|------|------------|------|
+| python-reviewer | Reviews Python code for security vulnerabilities, type safety, and best practices. | `agents/review/python-reviewer.md` |
+| logging-reviewer | Reviews Python code for logging best practices, missing logs, incorrect log levels, and sensitive data exposure. | `agents/review/logging-reviewer.md` |
+| security-reviewer | Reviews Python code for security vulnerabilities following OWASP Top 10 — input validation, injection, path traversal, secrets, and auth. | `agents/review/security-reviewer.md` |
+| privacy-auditor | Audits code for offline compliance and privacy — finds external API calls, telemetry, and cloud access. | `agents/review/privacy-auditor.md` |
 
 ### Analyze (5)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| performance-analyzer | Analysiert Python-Code auf Performance-Probleme: N+1-Queries, Memory-Leaks, blockierendes I/O, O(n²)-Komplexitaet. | `agents/analyze/performance-analyzer.md` |
-| scalability-analyzer | Analysiert Code auf Skalierungsprobleme: fehlendes Caching, Connection-Pooling, zustandsbehaftetes Design, horizontale Skalierung. | `agents/analyze/scalability-analyzer.md` |
-| dead-code-detector | Erkennt toten, unerreichbaren und verwaisten Code — ungenutzte Funktionen, Klassen, Imports und Variablen. | `agents/analyze/dead-code-detector.md` |
-| dependency-auditor | Auditiert Python-Abhaengigkeiten auf CVEs, veraltete Versionen und Lizenzprobleme. | `agents/analyze/dependency-auditor.md` |
-| architecture-analyzer | Analysiert, ob Implementierungsplaene zur bestehenden Codebase-Architektur passen — Modulstruktur, Import-Konventionen, Integrationspunkte. | `agents/analyze/architecture-analyzer.md` |
+| Name | Description | Path |
+|------|------------|------|
+| performance-analyzer | Analyzes Python code for performance issues: N+1 queries, memory leaks, blocking I/O, O(n²) complexity. | `agents/analyze/performance-analyzer.md` |
+| scalability-analyzer | Analyzes code for scaling issues: missing caching, connection pooling, stateful design, horizontal scaling. | `agents/analyze/scalability-analyzer.md` |
+| dead-code-detector | Detects dead, unreachable, and orphaned code — unused functions, classes, imports, and variables. | `agents/analyze/dead-code-detector.md` |
+| dependency-auditor | Audits Python dependencies for CVEs, outdated versions, and license issues. | `agents/analyze/dependency-auditor.md` |
+| architecture-analyzer | Analyzes whether implementation plans fit the existing codebase architecture — module structure, import conventions, integration points. | `agents/analyze/architecture-analyzer.md` |
 
 ### Plan (3)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| plan-completeness | Prueft Implementierungsplaene auf Vollstaendigkeit: alle Schritte definiert, Abhaengigkeiten klar, Randfaelle abgedeckt. | `agents/plan/plan-completeness.md` |
-| risk-assessor | Bewertet Implementierungsrisiken: Breaking Changes, Sicherheitsbedenken, Komplexitaet und Machbarkeit. | `agents/plan/risk-assessor.md` |
-| requirements-verifier | Verifiziert, dass die Implementierung mit Benutzeranforderungen uebereinstimmt — identifiziert Luecken und Randfaelle. | `agents/plan/requirements-verifier.md` |
+| Name | Description | Path |
+|------|------------|------|
+| plan-completeness | Checks implementation plans for completeness: all steps defined, dependencies clear, edge cases covered. | `agents/plan/plan-completeness.md` |
+| risk-assessor | Assesses implementation risks: breaking changes, security concerns, complexity, and feasibility. | `agents/plan/risk-assessor.md` |
+| requirements-verifier | Verifies that implementation matches user requirements — identifies gaps and edge cases. | `agents/plan/requirements-verifier.md` |
 
 ### Build (4)
 
-| Name | Beschreibung | Pfad |
-|------|-------------|------|
-| code-simplifier | Vereinfacht und verfeinert Code hinsichtlich Klarheit, Konsistenz und Wartbarkeit bei voller Funktionserhaltung. | `agents/build/code-simplifier.md` |
-| test-architect | Erstellt pytest-Tests und prueft bestehende Testsuiten auf Qualitaet und Abdeckung. | `agents/build/test-architect.md` |
-| warmgold-frontend-builder | Baut UI-Komponenten mit dem warmgold-Designsystem: warme Goldakzente, warme Grautoene, iOS-inspiriert. | `agents/build/warmgold-frontend-builder.md` |
-| migration-writer | Generiert Datenbank- und Schema-Migrationsskripte nach Alembic-Patterns mit Sicherheitspruefungen gegen Datenverlust. | `agents/build/migration-writer.md` |
+| Name | Description | Path |
+|------|------------|------|
+| code-simplifier | Simplifies and refines code for clarity, consistency, and maintainability while preserving full functionality. | `agents/build/code-simplifier.md` |
+| test-architect | Creates pytest tests and reviews existing test suites for quality and coverage. | `agents/build/test-architect.md` |
+| warmgold-frontend-builder | Builds UI components with the warmgold design system: warm gold accents, warm grays, iOS-inspired. | `agents/build/warmgold-frontend-builder.md` |
+| migration-writer | Generates database and schema migration scripts following Alembic patterns with safety checks against data loss. | `agents/build/migration-writer.md` |

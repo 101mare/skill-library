@@ -4,7 +4,7 @@ description: |
   Reviews implementation plans before coding begins. Checks completeness, architecture fit,
   risks, and requirement alignment. Uses specialized agents in parallel for thorough analysis.
   Proactively asks clarifying questions when uncertainties are found.
-  Use when: reviewing plans, before implementation, user asks "ist der Plan gut?",
+  Use when: reviewing plans, before implementation, user asks "is the plan good?",
   "review my plan", "check this approach", "before I start coding".
 ---
 
@@ -61,46 +61,46 @@ ls -la .claude/plans/ 2>/dev/null || echo "No plans directory"
 
 ```
 Use AskUserQuestion:
-Question: "Welchen Plan soll ich reviewen?"
+Question: "Which plan should I review?"
 Options:
-  - "Den zuletzt erstellten Plan"
-  - "Plan aus .claude/plans/"
-  - "Ich beschreibe den Plan kurz"
-  - "Abbrechen"
+  - "The most recently created plan"
+  - "Plan from .claude/plans/"
+  - "I'll describe the plan briefly"
+  - "Cancel"
 ```
 
 ## Step 2: Clarify Context and Requirements
 
-**WICHTIG**: Proaktiv nachfragen um den Kontext zu verstehen.
+**IMPORTANT**: Proactively ask questions to understand the context.
 
-### Pflicht-Fragen
+### Required Questions
 
 ```
 Use AskUserQuestion:
-Question: "Was ist das Ziel dieses Plans? Was soll erreicht werden?"
+Question: "What is the goal of this plan? What should it achieve?"
 Options:
-  - "Neues Feature implementieren"
-  - "Bug fixen"
+  - "Implement new feature"
+  - "Fix a bug"
   - "Refactoring"
-  - "Performance verbessern"
+  - "Improve performance"
 ```
 
-### Kontext-Fragen (bei Bedarf)
+### Context Questions (as needed)
 
-Stelle weitere Fragen wenn:
-- Das Ziel unklar ist
-- Anforderungen implizit sind
-- Constraints nicht genannt wurden
-- Edge Cases nicht erwaehnt wurden
+Ask further questions when:
+- The goal is unclear
+- Requirements are implicit
+- Constraints have not been mentioned
+- Edge cases have not been addressed
 
 ```
 Use AskUserQuestion:
-Question: "Gibt es spezielle Anforderungen oder Constraints?"
+Question: "Are there specific requirements or constraints?"
 Options:
-  - "Muss abwaertskompatibel sein"
-  - "Performance-kritisch"
-  - "Sicherheitsrelevant"
-  - "Keine besonderen Constraints"
+  - "Must be backward compatible"
+  - "Performance-critical"
+  - "Security-relevant"
+  - "No special constraints"
 ```
 
 ## Step 3: Run Parallel Reviews
@@ -111,10 +111,10 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
 
 | Review Role | Agent File to Load | Focus | Key Questions |
 |-------------|-------------------|-------|---------------|
-| Completeness Checker | `python-reviewer.md` | Vollstaendigkeit + Code Quality | Alle Schritte? Abhaengigkeiten? Tests? Types? |
-| Architecture Analyzer | `python-reviewer.md` | Architektur-Fit | Passt zu Patterns? Module richtig? DI? |
-| Risk Assessor | `performance-analyzer.md` | Risiken + Performance | Breaking Changes? Security? Komplexitaet? N+1? |
-| Requirements Verifier | (no agent file needed) | Anforderungen | Erfuellt Plan die Ziele? |
+| Completeness Checker | `python-reviewer.md` | Completeness + Code Quality | All steps? Dependencies? Tests? Types? |
+| Architecture Analyzer | `python-reviewer.md` | Architecture Fit | Matches patterns? Correct modules? DI? |
+| Risk Assessor | `performance-analyzer.md` | Risks + Performance | Breaking Changes? Security? Complexity? N+1? |
+| Requirements Verifier | (no agent file needed) | Requirements | Does the plan meet the goals? |
 
 ### Execution Steps
 
@@ -243,14 +243,14 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
 
 ## Step 4: Aggregate Results and Clarify
 
-### Sammle Ergebnisse
+### Collect Results
 
-Nach Abschluss aller Reviews, erstelle Uebersicht:
+After all reviews are complete, create an overview:
 
 ```markdown
-## Plan Review Ergebnisse
+## Plan Review Results
 
-### Uebersicht
+### Overview
 
 | Agent | Status | Findings |
 |-------|--------|----------|
@@ -260,64 +260,64 @@ Nach Abschluss aller Reviews, erstelle Uebersicht:
 | Requirements | pass/warn/fail | X issues |
 ```
 
-### Kategorisiere Findings
+### Categorize Findings
 
 ```markdown
-### BLOCKER (Muss vor Implementierung geloest werden)
-1. [Finding + Quelle]
-2. [Finding + Quelle]
+### BLOCKER (Must be resolved before implementation)
+1. [Finding + Source]
+2. [Finding + Source]
 
-### GAPS (Luecken im Plan)
+### GAPS (Missing elements in the plan)
 1. [Missing element]
 2. [Incomplete step]
 
-### DEVIATIONS (Abweichungen von Standards)
-1. [Pattern nicht eingehalten]
-2. [Convention nicht befolgt]
+### DEVIATIONS (Deviations from standards)
+1. [Pattern not followed]
+2. [Convention not adhered to]
 
-### RISKS (Identifizierte Risiken)
+### RISKS (Identified risks)
 1. [Risk + Severity]
 2. [Risk + Severity]
 
-### POSITIV
-1. [Was gut ist am Plan]
+### POSITIVES
+1. [What is good about the plan]
 ```
 
-### Proaktive Klaerung bei Unsicherheiten
+### Proactive Clarification on Uncertainties
 
-**WICHTIG**: Bei gefundenen Unsicherheiten AKTIV nachfragen:
-
-```
-Use AskUserQuestion:
-Question: "Der Plan erwaehnt 'verbesserte Fehlerbehandlung' - was genau ist gemeint?"
-Options:
-  - "Retry-Logik hinzufuegen"
-  - "Bessere Fehlermeldungen"
-  - "Logging erweitern"
-  - "Alles davon"
-```
+**IMPORTANT**: Actively ask questions when uncertainties are found:
 
 ```
 Use AskUserQuestion:
-Question: "Step 3 hat keine Test-Strategie - sollen Tests hinzugefuegt werden?"
+Question: "The plan mentions 'improved error handling' - what exactly is meant?"
 Options:
-  - "Ja, Unit Tests"
-  - "Ja, Unit + Integration Tests"
-  - "Nein, spaeter"
-  - "Teste ich manuell"
+  - "Add retry logic"
+  - "Better error messages"
+  - "Extend logging"
+  - "All of the above"
 ```
-
-### Verifizierungs-Fragen
-
-Bei kritischen Punkten den User einbeziehen:
 
 ```
 Use AskUserQuestion:
-Question: "Das Risk Assessment zeigt potentielle Breaking Changes. Ist Abwaertskompatibilitaet wichtig?"
+Question: "Step 3 has no test strategy - should tests be added?"
 Options:
-  - "Ja, kritisch"
-  - "Waere gut, aber nicht kritisch"
-  - "Nein, kann brechen"
+  - "Yes, unit tests"
+  - "Yes, unit + integration tests"
+  - "No, later"
+  - "I'll test manually"
+```
+
+### Verification Questions
+
+Involve the user on critical points:
+
+```
+Use AskUserQuestion:
+Question: "The risk assessment shows potential breaking changes. Is backward compatibility important?"
+Options:
+  - "Yes, critical"
+  - "Would be nice, but not critical"
+  - "No, it can break"
 ```
 
 ## Step 5: Present Verdict
@@ -327,91 +327,91 @@ Options:
 ```markdown
 ## Plan Review Verdict
 
-### Ampel-Status
+### Traffic Light Status
 
-| Kategorie | Status | Grund |
-|-----------|--------|-------|
-| Vollstaendigkeit | GREEN/YELLOW/RED | [Kurze Begruendung] |
-| Architektur-Fit | GREEN/YELLOW/RED | [Kurze Begruendung] |
-| Risiko-Level | GREEN/YELLOW/RED | [Kurze Begruendung] |
-| Requirements | GREEN/YELLOW/RED | [Kurze Begruendung] |
+| Category | Status | Reason |
+|----------|--------|--------|
+| Completeness | GREEN/YELLOW/RED | [Brief justification] |
+| Architecture Fit | GREEN/YELLOW/RED | [Brief justification] |
+| Risk Level | GREEN/YELLOW/RED | [Brief justification] |
+| Requirements | GREEN/YELLOW/RED | [Brief justification] |
 
-### Gesamt-Bewertung
+### Overall Assessment
 
-GREEN **PLAN APPROVED** - Kann implementiert werden
-YELLOW **PLAN NEEDS WORK** - Punkte klaeren vor Implementierung
-RED **PLAN BLOCKED** - Kritische Issues muessen geloest werden
+GREEN **PLAN APPROVED** - Ready for implementation
+YELLOW **PLAN NEEDS WORK** - Clarify points before implementation
+RED **PLAN BLOCKED** - Critical issues must be resolved
 ```
 
-### Empfehlungen
+### Recommendations
 
 ```markdown
-### Empfohlene Aenderungen am Plan
+### Recommended Changes to the Plan
 
-1. **[Prioritaet 1]**: [Konkrete Aenderung]
-2. **[Prioritaet 2]**: [Konkrete Aenderung]
-3. **[Prioritaet 3]**: [Konkrete Aenderung]
+1. **[Priority 1]**: [Specific change]
+2. **[Priority 2]**: [Specific change]
+3. **[Priority 3]**: [Specific change]
 
-### Fragen zum Klaeren
+### Questions to Clarify
 
-1. [Offene Frage 1]
-2. [Offene Frage 2]
+1. [Open question 1]
+2. [Open question 2]
 ```
 
-### User-Entscheidung
+### User Decision
 
 ```
 Use AskUserQuestion:
-Question: "Wie moechtest du fortfahren?"
+Question: "How would you like to proceed?"
 Options:
-  - "Plan anpassen und nochmal reviewen"
-  - "Trotzdem implementieren (Risiken akzeptiert)"
-  - "Mehr Details zu einem Finding"
-  - "Review abbrechen"
+  - "Adjust the plan and review again"
+  - "Implement anyway (risks accepted)"
+  - "More details on a finding"
+  - "Cancel review"
 ```
 
-## Proaktive Fragen - Checkliste
+## Proactive Questions - Checklist
 
-Der Skill soll **proaktiv** AskUserQuestion nutzen fuer:
+The skill should **proactively** use AskUserQuestion for:
 
-### Bei Unklarheiten im Plan
-- [ ] Ambige Formulierungen ("verbessern", "optimieren", "aufraeumen")
-- [ ] Fehlende Details (welche Datei? welche Methode?)
-- [ ] Unklare Reihenfolge der Schritte
+### When the plan is unclear
+- [ ] Ambiguous wording ("improve", "optimize", "clean up")
+- [ ] Missing details (which file? which method?)
+- [ ] Unclear step ordering
 
-### Bei Risiko-Findings
-- [ ] Breaking Changes - Ist das akzeptabel?
-- [ ] Security-Bedenken - Wie wichtig ist das?
-- [ ] Performance-Impact - Akzeptable Latenz?
+### When risk findings arise
+- [ ] Breaking changes - Is that acceptable?
+- [ ] Security concerns - How important is this?
+- [ ] Performance impact - Acceptable latency?
 
-### Bei Architektur-Abweichungen
-- [ ] Absichtliche Abweichung oder Versehen?
-- [ ] Soll das ein neues Pattern werden?
+### When architecture deviations are found
+- [ ] Intentional deviation or oversight?
+- [ ] Should this become a new pattern?
 
-### Zur Verifizierung
-- [ ] Stimmen die extrahierten Requirements?
-- [ ] Wurden alle Anforderungen erfasst?
-- [ ] Gibt es implizite Anforderungen?
+### For verification
+- [ ] Are the extracted requirements correct?
+- [ ] Were all requirements captured?
+- [ ] Are there implicit requirements?
 
 ## Triggers
 
-Aktiviert bei:
+Activates on:
 - `/plan-review`
 - "review plan", "check plan", "validate plan"
-- "plan pruefen", "ist der Plan gut?", "Plan ueberpruefen"
+- "check the plan", "is the plan good?", "review the plan"
 - "review implementation plan", "check my approach"
-- "before I start coding", "bevor ich anfange"
-- "ist das ein guter Ansatz?", "macht das Sinn?"
+- "before I start coding", "before I begin"
+- "is this a good approach?", "does this make sense?"
 
-## Wichtige Hinweise
+## Important Notes
 
 - **Agent loading**: ALWAYS read `.claude/agents/*.md` files and inject their prompts into `explore` Task agents
-- **Parallelisierung**: Alle 4 Agents gleichzeitig starten (ein Message, mehrere Task-Calls)
-- **Sprache matchen**: Deutsch wenn User Deutsch spricht
-- **Proaktiv fragen**: Bei JEDER Unsicherheit AskUserQuestion nutzen
-- **Konkret sein**: Findings mit File:Line wo moeglich
-- **Prioritaeten**: Blocker > Gaps > Deviations > Risks > Positives
-- **Konstruktiv**: Nicht nur Probleme nennen, auch Loesungen vorschlagen
+- **Parallelization**: Start all 4 agents simultaneously (one message, multiple Task calls)
+- **Match language**: Use the language the user speaks
+- **Ask proactively**: Use AskUserQuestion for EVERY uncertainty
+- **Be specific**: Provide findings with File:Line where possible
+- **Priorities**: Blocker > Gaps > Deviations > Risks > Positives
+- **Be constructive**: Don't just name problems, also suggest solutions
 - **Additional agents**: If the plan involves frontend changes, also read `warmgold-frontend-builder.md`. If it involves new dependencies, also read `dependency-auditor.md`. Spawn additional Task agents as needed.
 - **Project-agnostic**: This skill works for any project. Read the project's CLAUDE.md to understand its specific architecture, patterns, and constraints before running reviews.
 - **Research first**: If the plan involves unfamiliar technology or open technical decisions, use the `deep-research` skill first to gather evidence before reviewing.

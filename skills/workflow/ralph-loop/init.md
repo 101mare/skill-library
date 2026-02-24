@@ -143,9 +143,9 @@ Replace `<MAX>` with the parsed max value and `<TASK DESCRIPTION>` with the actu
 ## Step 3: Confirm to User
 
 Tell the user:
-- Ralph Loop gestartet
+- Ralph Loop started
 - Max iterations: N
-- Abbrechen: `.claude/ralph-loop.local.md` loeschen oder Escape/Ctrl+C
+- Cancel: delete `.claude/ralph-loop.local.md` or press Escape/Ctrl+C
 
 ## Step 4: Work on the Task
 
@@ -180,22 +180,22 @@ Both are optional but recommended.
 Tell the user:
 
 ```
-Ralph Loop installiert.
+Ralph Loop installed.
 
-Dateien:
+Files:
   .claude/hooks/ralph-loop-stop.sh    (Stop Hook)
-  .claude/settings.local.json         (Hook-Konfiguration)
-  .claude/skills/ralph-loop/SKILL.md  (Skill-Datei)
+  .claude/settings.local.json         (Hook configuration)
+  .claude/skills/ralph-loop/SKILL.md  (Skill file)
 
-Naechster Schritt: Claude Code neustarten (Hooks werden beim Start geladen).
+Next step: Restart Claude Code (hooks are loaded at session start).
 
-Nutzung:
-  /ralph-loop <Aufgabe>
-  /ralph-loop max=20 <Aufgabe>
+Usage:
+  /ralph-loop <task>
+  /ralph-loop max=20 <task>
 
-Abbrechen:
+Cancel:
   rm .claude/ralph-loop.local.md
-  oder Escape / Ctrl+C
+  or press Escape/Ctrl+C
 ```
 
 ## Step 6: Remind About Restart

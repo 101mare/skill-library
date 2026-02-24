@@ -5,7 +5,7 @@
 - **Read first, write second**: Always read existing code before modifying. Understand patterns before proposing changes.
 - **Follow existing conventions**: If the project uses `snake_case`, don't introduce `camelCase`. If it uses `dataclasses`, don't switch to `attrs`. Match what's there.
 - **Plan non-trivial work**: Enter plan mode for tasks with 3+ steps or architectural decisions. Write a clear plan before touching code. If something goes sideways mid-implementation, STOP and re-plan — don't keep pushing a broken approach.
-- **Ask, don't assume**: Bei Unklarheiten IMMER nachfragen. Lieber einmal zu viel fragen als falsch implementieren. Prefer one round of 4 good questions over 4 rounds of 1 question.
+- **Ask, don't assume**: When in doubt, ALWAYS ask. Better to ask once too many than to implement incorrectly. Prefer one round of 4 good questions over 4 rounds of 1 question.
 
 ## While Writing Code
 

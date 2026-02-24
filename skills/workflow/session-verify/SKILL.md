@@ -4,7 +4,7 @@ description: |
   End-of-session verification skill that validates all changes made during a coding session.
   Checks for bugs, security vulnerabilities, dead code, efficiency issues, and documentation gaps.
   Use when: finishing a task, before committing, user says "verify", "check my changes",
-  "review session", "sind wir fertig?", "alles korrekt?", or at end of coding sessions.
+  "review session", "are we done?", "everything correct?", or at end of coding sessions.
   Orchestrates specialized review agents and ensures documentation is updated.
 ---
 
@@ -74,12 +74,12 @@ First, understand what was supposed to be accomplished:
 
 ```
 Use AskUserQuestion:
-Question: "Was war die ursprüngliche Aufgabe/Anforderung für diese Session?"
+Question: "What was the original task/requirement for this session?"
 Options:
   - "Bug fix" → Ask: which bug?
-  - "Neues Feature" → Ask: what feature?
+  - "New feature" → Ask: what feature?
   - "Refactoring" → Ask: what was refactored?
-  - "Andere" → Free text input
+  - "Other" → Free text input
 ```
 
 Follow-up questions to clarify:
@@ -224,13 +224,13 @@ Summarize findings clearly:
 ```markdown
 ## Verification Results
 
-### Anforderung
+### Requirement
 [Original requirement restated]
 
-### Erfüllt?
+### Fulfilled?
 Yes / Partially / No
 
-### Review-Ergebnisse
+### Review Results
 
 **Passed**
 - Security: No vulnerabilities found
@@ -302,11 +302,11 @@ For minor fixes, abbreviated flow:
 
 Activates on:
 - `/session-verify`
-- "verify", "verification", "prüfen"
+- "verify", "verification", "check"
 - "check changes", "review session"
-- "sind wir fertig?", "alles korrekt?"
-- "final check", "abschließende Prüfung"
-- "session beenden", "wrap up"
+- "are we done?", "everything correct?"
+- "final check", "final review"
+- "end session", "wrap up"
 
 ## Important Notes
 
