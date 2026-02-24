@@ -1,8 +1,8 @@
 # Skill Library
 
-Teach Claude Code how to build like a senior engineer. A collection of 27 skills, 16 agents, and battle-tested rules that give Claude reusable knowledge about architecture patterns, development workflows, and code quality.
+Teach Claude Code how to build like a senior engineer. A collection of 27 skills, 5 agents, and battle-tested rules that give Claude reusable knowledge about architecture patterns, development workflows, and code quality.
 
-**[CATALOG.md](docs/CATALOG.md)** — Browse all 27 skills and 16 agents with descriptions and file paths. Your starting point for picking what to install.
+**[CATALOG.md](docs/CATALOG.md)** — Browse all 27 skills and 5 agents with descriptions and file paths. Your starting point for picking what to install.
 
 **[ARTICLE.md](docs/ARTICLE.md)** — The full deep dive: Why this library exists, how rules/skills/agents work together, how to give agents a "soul," and lessons learned building it.
 
@@ -13,7 +13,7 @@ Teach Claude Code how to build like a senior engineer. A collection of 27 skills
 Tell Claude which skill, agent, or rule you want. That's it.
 
 ```
-Kopiere den Skill aus ~/skill-library/skills/workflow/tdd/SKILL.md in mein Projekt
+Copy the skill from ~/skill-library/skills/workflow/tdd/SKILL.md into my project
 ```
 
 Claude reads the file, copies it to your project's `.claude/skills/` (or `.claude/agents/`), and activates it automatically. Browse the full list in [CATALOG.md](docs/CATALOG.md).

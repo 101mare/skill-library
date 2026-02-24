@@ -37,28 +37,24 @@ Categorize changed files:
 
 | File Pattern | Category | Relevant Agent |
 |-------------|----------|----------------|
-| `*.py` (src/) | Python code | python-reviewer |
+| `*.py` (src/) | Python code | reviewer |
 | `*.py` (tests/) | Tests | test-architect |
-| `requirements*.txt`, `pyproject.toml` | Dependencies | dependency-auditor |
+| `requirements*.txt`, `pyproject.toml` | Dependencies | analyzer |
 | `Dockerfile`, `docker-compose*` | Infrastructure | (manual review) |
 | `*.md` | Documentation | (manual review) |
-| `*.html`, `*.css`, `*.js` | Frontend | warmgold-frontend-builder |
+| `*.html`, `*.css`, `*.js` | Frontend | (manual review) |
 
 ## Step 3: Select Agents
 
 Based on changed file categories, select agents:
 
 ### Always Run (for code changes)
-- **python-reviewer** -- Security, types, best practices
+- **reviewer** -- Security, types, logging, privacy, best practices
 
 ### Conditional
 | Condition | Agent |
 |-----------|-------|
-| New dependencies added | dependency-auditor |
-| Performance-sensitive code | performance-analyzer |
-| Logging changes | logging-reviewer |
-| External calls / network code | privacy-auditor |
-| Frontend changes | warmgold-frontend-builder |
+| New dependencies / performance-sensitive code / architecture changes | analyzer |
 | Tests added/modified | test-architect |
 
 ## Step 4: Parallel Reviews
@@ -69,17 +65,17 @@ Read the relevant `.claude/agents/*.md` files, then spawn explore agents in para
 
 ```
 # Step 1: Read agent files (parallel)
-Read(".claude/agents/python-reviewer.md")
-Read(".claude/agents/dependency-auditor.md")
-# + any situational agents
+Read(".claude/agents/reviewer.md")
+Read(".claude/agents/analyzer.md")
+# + any situational agents (test-architect.md)
 
 # Step 2: Spawn agents in parallel (single message, multiple Task calls)
 Task(
   subagent_type="explore",
-  prompt="""You are acting as the python-reviewer agent.
+  prompt="""You are acting as the reviewer agent.
 
   <agent-instructions>
-  [content from python-reviewer.md]
+  [content from reviewer.md]
   </agent-instructions>
 
   Review this PR diff:
@@ -91,7 +87,7 @@ Task(
   PR Title: [title]
   PR Description: [description]
 
-  Focus on: security, types, best practices, bugs, logic errors.
+  Focus on: security, types, logging, privacy, best practices, bugs, logic errors.
   Return findings by severity: CRITICAL > HIGH > MEDIUM > LOW.
   Reference specific file paths and line numbers from the diff.
   """

@@ -1,30 +1,8 @@
----
-name: requirements-verifier
-description: |
-  Verifies that implementation matches user requirements and specifications.
-  Compares what was requested with what was built, identifies gaps and edge cases.
-  Use at end of implementation, during code review, or when user asks "ist das richtig?".
-  Recognizes: "requirements-verifier", "verify requirements", "does this match spec",
-  "is this what I wanted?", "does this meet the requirement?", "check implementation"
-tools: Read, Grep, Glob
-model: sonnet
-color: green
----
+# Requirements Verification
 
-You are a **Requirements Verifier**. Compare what was requested with what was built.
+### Verification Process
 
-Report findings by status:
-- **FULFILLED**: Requirement clearly implemented
-- **PARTIAL**: Requirement partially addressed
-- **MISSING**: Requirement not implemented
-- **EXCEEDED**: Implementation goes beyond requirements (may be good or bad)
-- **UNCLEAR**: Requirement ambiguous, needs clarification
-
----
-
-## Verification Process
-
-### Step 1: Extract Requirements
+#### Step 1: Extract Requirements
 
 From the user's request, identify:
 
@@ -51,7 +29,7 @@ From the user's request, identify:
 - Must work with existing Z
 ```
 
-### Step 2: Map to Implementation
+#### Step 2: Map to Implementation
 
 For each requirement, find the implementing code:
 
@@ -62,7 +40,7 @@ For each requirement, find the implementing code:
 | "Handle timeout" | Not found | - | MISSING |
 ```
 
-### Step 3: Verify Behavior
+#### Step 3: Verify Behavior
 
 For each mapped implementation:
 
@@ -71,11 +49,9 @@ For each mapped implementation:
 3. **Verify integration** - Is it connected properly?
 4. **Test coverage** - Are there tests?
 
----
+### Verification Checklist
 
-## Verification Checklist
-
-### Functional Completeness
+#### Functional Completeness
 
 ```markdown
 For each requirement:
@@ -85,7 +61,7 @@ For each requirement:
 - [ ] Error cases handled appropriately
 ```
 
-### Edge Case Coverage
+#### Edge Case Coverage
 
 ```markdown
 Common edge cases to verify:
@@ -99,7 +75,7 @@ Common edge cases to verify:
 - [ ] File not found (if applicable)
 ```
 
-### Integration Points
+#### Integration Points
 
 ```markdown
 - [ ] New code integrates with existing system
@@ -108,7 +84,7 @@ Common edge cases to verify:
 - [ ] Dependencies added to requirements.txt
 ```
 
-### Implicit Requirements
+#### Implicit Requirements
 
 Requirements users often don't state but expect:
 
@@ -121,11 +97,9 @@ Requirements users often don't state but expect:
 - [ ] No security vulnerabilities introduced
 ```
 
----
+### Common Verification Patterns
 
-## Common Verification Patterns
-
-### Feature Implementation
+#### Feature Implementation
 
 **User said:** "Add a feature to export data as CSV"
 
@@ -141,7 +115,7 @@ Requirements users often don't state but expect:
 | Called from main flow | `main.py` imports | ✓ Line 12 |
 ```
 
-### Bug Fix
+#### Bug Fix
 
 **User said:** "Fix the bug where timeout causes crash"
 
@@ -156,7 +130,7 @@ Requirements users often don't state but expect:
 | Other timeouts checked | Similar patterns fixed | ? VERIFY |
 ```
 
-### Refactoring
+#### Refactoring
 
 **User said:** "Refactor the validation logic into a separate module"
 
@@ -172,7 +146,7 @@ Requirements users often don't state but expect:
 | No circular imports | Clean import graph | ✓ |
 ```
 
-### Configuration Change
+#### Configuration Change
 
 **User said:** "Add a config option for retry count"
 
@@ -187,11 +161,9 @@ Requirements users often don't state but expect:
 | Validated | `ge=0` constraint | ✗ MISSING |
 ```
 
----
+### Gap Analysis
 
-## Gap Analysis
-
-### Finding MISSING Requirements
+#### Finding MISSING Requirements
 
 ```markdown
 ## Missing Implementation
@@ -202,7 +174,7 @@ Requirements users often don't state but expect:
 | "Log all operations" | Logger calls | Only errors logged |
 ```
 
-### Finding PARTIAL Implementation
+#### Finding PARTIAL Implementation
 
 ```markdown
 ## Partial Implementation
@@ -213,7 +185,7 @@ Requirements users often don't state but expect:
 | "Support multiple formats" | CSV works | JSON, XML not done |
 ```
 
-### Finding EXCEEDED Scope
+#### Finding EXCEEDED Scope
 
 ```markdown
 ## Scope Exceeded (Verify Intent)
@@ -224,9 +196,7 @@ Requirements users often don't state but expect:
 | Created abstract base | Only one impl needed | Premature abstraction |
 ```
 
----
-
-## Output Format
+### Requirements Verification Output Format
 
 ```markdown
 ## Requirements Verification Report
@@ -243,23 +213,23 @@ Requirements users often don't state but expect:
 
 ### Verification Results
 
-#### ✅ FULFILLED
+#### FULFILLED
 | # | Requirement | Implementation | Location |
 |---|-------------|----------------|----------|
 | 1 | Add retry logic | `retry_with_backoff()` | utils.py:45-67 |
 | 2 | Log failures | `logger.error()` calls | service.py:89,102 |
 
-#### ⚠️ PARTIAL
+#### PARTIAL
 | # | Requirement | Implemented | Missing |
 |---|-------------|-------------|---------|
 | 3 | Validate inputs | Email checked | Phone not validated |
 
-#### ❌ MISSING
+#### MISSING
 | # | Requirement | Expected | Notes |
 |---|-------------|----------|-------|
 | 4 | Config option | `timeout` field | Not in config.py |
 
-#### ❓ UNCLEAR
+#### UNCLEAR
 | # | Requirement | Question |
 |---|-------------|----------|
 | 5 | "Make it faster" | What's the target latency? |
@@ -291,9 +261,7 @@ Requirements users often don't state but expect:
 **Overall: NEEDS WORK** - Address missing and partial items before completion.
 ```
 
----
-
-## Questions to Ask User
+### Questions to Ask User
 
 When requirements are unclear, ask specific questions:
 
@@ -314,13 +282,3 @@ Use AskUserQuestion for:
 ```
 
 ---
-
-## Project Adaptation
-
-Before analysis, read the project's `CLAUDE.md` and `.claude/memory.md` (if they exist) to understand:
-- Module structure and boundaries
-- Design patterns and conventions in use
-- Known patterns to preserve (registries, Protocol classes, `__all__` exports)
-- Test conventions and security requirements
-
-Adapt your analysis to the project's actual patterns rather than assuming defaults.

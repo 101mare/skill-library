@@ -205,13 +205,13 @@ When the prompt topic aligns with available specialized tools, include instructi
 Use the ui-architect-pro or frontend-warmgold-builder agent for UI implementation.
 
 [If the task involves code review:]
-Use the appropriate reviewer agent (python-backend-reviewer, frontend-warmgold-reviewer, logging-reviewer).
+Use the reviewer agent for code quality, security, logging, and privacy review.
 
 [If the task involves testing:]
 Use the test-architect agent to create or review tests.
 
-[If the task involves performance:]
-Use the performance-analyzer agent to identify bottlenecks.
+[If the task involves performance or architecture analysis:]
+Use the analyzer agent to identify bottlenecks, architecture issues, and dependency health.
 
 [General pattern:]
 Before implementing, check if a specialized skill or agent is available for this task type and use it.

@@ -1,23 +1,8 @@
----
-name: dependency-auditor
-description: "Audits Python dependencies for CVEs, outdated versions, and license issues.\\nUse before releases, after adding packages, or for security audits.\\nRecognizes: \"dependency-auditor\", \"dependency auditor\", \"are my packages secure?\",\\n\"any vulnerabilities?\", \"outdated dependencies?\", \"check requirements.txt\", \"license issues?\"\\n"
-tools: Read, Grep, Glob, Bash
-model: inherit
-color: orange
----
+# Dependency Health
 
-You are a **Dependency Auditor**. Analyze project dependencies and report issues by severity:
+### Audit Commands
 
-- **CRITICAL**: Known CVEs, actively exploited vulnerabilities
-- **HIGH**: Security advisories, major version behind, problematic licenses
-- **MEDIUM**: Minor versions behind, deprecated packages
-- **LOW**: Unpinned versions, unused dependencies
-
----
-
-## Audit Commands
-
-### Security Vulnerability Scan
+#### Security Vulnerability Scan
 
 ```bash
 # Install pip-audit if needed
@@ -33,7 +18,7 @@ pip-audit -r requirements.txt
 pip-audit --format json
 ```
 
-### Outdated Packages
+#### Outdated Packages
 
 ```bash
 # List outdated packages
@@ -43,7 +28,7 @@ pip list --outdated
 pip list --outdated --format json
 ```
 
-### Dependency Tree
+#### Dependency Tree
 
 ```bash
 # Install pipdeptree
@@ -59,7 +44,7 @@ pipdeptree --reverse
 pipdeptree --warn fail
 ```
 
-### License Check
+#### License Check
 
 ```bash
 # Install pip-licenses
@@ -72,11 +57,9 @@ pip-licenses
 pip-licenses --fail-on="GPL;AGPL"
 ```
 
----
+### Manual Checks
 
-## Manual Checks
-
-### Version Pinning Analysis
+#### Version Pinning Analysis
 
 | Pattern | Risk | Recommendation |
 |---------|------|----------------|
@@ -98,7 +81,7 @@ requests>=2.28.0,<3.0.0
 requests
 ```
 
-### Unused Dependencies
+#### Unused Dependencies
 
 Check if imported anywhere:
 ```bash
@@ -106,7 +89,7 @@ Check if imported anywhere:
 # If no imports found, likely unused
 ```
 
-### Dev vs Production
+#### Dev vs Production
 
 ```python
 # Should be in requirements-dev.txt, not requirements.txt
@@ -117,11 +100,9 @@ black
 pre-commit
 ```
 
----
+### Known Problematic Packages
 
-## Known Problematic Packages
-
-### Security Concerns
+#### Security Concerns
 
 | Package | Issue | Alternative |
 |---------|-------|-------------|
@@ -131,7 +112,7 @@ pre-commit
 | `urllib3` < 2.0 | Security fixes | Update |
 | `cryptography` < 41.0 | OpenSSL vulnerabilities | Update |
 
-### Deprecated/Abandoned
+#### Deprecated/Abandoned
 
 | Package | Status | Alternative |
 |---------|--------|-------------|
@@ -140,7 +121,7 @@ pre-commit
 | `fabric` 1.x | Deprecated | `fabric` 3.x |
 | `pipenv` | Slow updates | `poetry`, `pip-tools` |
 
-### License Concerns
+#### License Concerns
 
 | License | Risk | Common Packages |
 |---------|------|-----------------|
@@ -149,11 +130,9 @@ pre-commit
 | SSPL | Restrictive | MongoDB |
 | BSL | Time-limited | Some HashiCorp tools |
 
----
+### Dependency File Analysis
 
-## Dependency File Analysis
-
-### requirements.txt Best Practices
+#### requirements.txt Best Practices
 
 ```txt
 # GOOD: Pinned with comments
@@ -168,7 +147,7 @@ pydantic==2.5.0   # Data validation
 requests==2.31.0 --hash=sha256:...
 ```
 
-### pyproject.toml Best Practices
+#### pyproject.toml Best Practices
 
 ```toml
 [project]
@@ -184,12 +163,10 @@ dev = [
 ]
 ```
 
----
-
-## Transitive Dependency Risks
+### Transitive Dependency Risks
 
 Watch for:
-1. **Deep chains**: A → B → C → D (vulnerability in D affects all)
+1. **Deep chains**: A -> B -> C -> D (vulnerability in D affects all)
 2. **Multiple versions**: Different packages requiring different versions
 3. **Abandoned transitives**: Popular package depending on unmaintained one
 
@@ -198,56 +175,7 @@ Watch for:
 pipdeptree --reverse --packages vulnerable-package
 ```
 
----
-
-## Review Output Format
-
-```markdown
-## Dependency Audit: [project]
-
-### CRITICAL - Security Vulnerabilities
-| Package | Version | CVE | Severity | Fixed In |
-|---------|---------|-----|----------|----------|
-| pillow | 9.0.0 | CVE-2023-... | Critical | 10.0.0 |
-
-### HIGH - Outdated (Major Version Behind)
-| Package | Current | Latest | Risk |
-|---------|---------|--------|------|
-| pydantic | 1.10.0 | 2.5.0 | Breaking changes |
-
-### MEDIUM - Minor Updates Available
-| Package | Current | Latest |
-|---------|---------|--------|
-| requests | 2.28.0 | 2.31.0 |
-
-### LOW - Recommendations
-- [ ] Pin version: `package` → `package==x.y.z`
-- [ ] Move to dev: `pytest` should be in requirements-dev.txt
-- [ ] Possibly unused: `package-name` (no imports found)
-
-### License Summary
-| License | Count | Packages |
-|---------|-------|----------|
-| MIT | 15 | requests, ... |
-| Apache-2.0 | 8 | ... |
-| GPL-3.0 | 1 | ⚠️ package-name |
-
-### Summary
-- Total packages: X
-- Vulnerabilities: X critical, Y high
-- Outdated: X major, Y minor
-- License issues: [None/List]
-- Overall: [PASS/NEEDS ATTENTION/FAIL]
-
-### Recommended Actions
-1. `pip install --upgrade package1 package2`
-2. Add to requirements-dev.txt: ...
-3. Review GPL dependency: ...
-```
-
----
-
-## Audit Process
+### Audit Process
 
 1. **Read dependency files**: requirements.txt, pyproject.toml, setup.py
 2. **Run pip-audit**: Check for known vulnerabilities

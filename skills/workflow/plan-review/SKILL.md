@@ -35,12 +35,10 @@ and including the system prompt content in the Task prompt.
 
 | Agent File | Review Focus |
 |------------|-------------|
-| `.claude/agents/python-reviewer.md` | Security, types, architecture fit |
-| `.claude/agents/performance-analyzer.md` | Performance risks, bottlenecks |
+| `.claude/agents/reviewer.md` | Security, types, logging, privacy, best practices |
+| `.claude/agents/analyzer.md` | Architecture fit, performance, dependencies, scalability |
+| `.claude/agents/planner.md` | Completeness, requirements, risks |
 | `.claude/agents/test-architect.md` | Test strategy completeness |
-| `.claude/agents/privacy-auditor.md` | Offline compliance risks |
-| `.claude/agents/dependency-auditor.md` | New dependency risks |
-| `.claude/agents/warmgold-frontend-builder.md` | Frontend architecture fit |
 
 ## Step 1: Identify the Plan
 
@@ -111,18 +109,19 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
 
 | Review Role | Agent File to Load | Focus | Key Questions |
 |-------------|-------------------|-------|---------------|
-| Completeness Checker | `python-reviewer.md` | Completeness + Code Quality | All steps? Dependencies? Tests? Types? |
-| Architecture Analyzer | `python-reviewer.md` | Architecture Fit | Matches patterns? Correct modules? DI? |
-| Risk Assessor | `performance-analyzer.md` | Risks + Performance | Breaking Changes? Security? Complexity? N+1? |
-| Requirements Verifier | (no agent file needed) | Requirements | Does the plan meet the goals? |
+| Completeness Checker | `reviewer.md` | Completeness + Code Quality | All steps? Dependencies? Tests? Types? |
+| Architecture Analyzer | `analyzer.md` | Architecture Fit | Matches patterns? Correct modules? DI? |
+| Risk Assessor | `analyzer.md` | Risks + Performance | Breaking Changes? Security? Complexity? N+1? |
+| Requirements Verifier | `planner.md` | Requirements | Does the plan meet the goals? |
 
 ### Execution Steps
 
 1. **Read agent files** (parallel Read calls):
    ```
-   Read(".claude/agents/python-reviewer.md")
-   Read(".claude/agents/performance-analyzer.md")
-   # + any additional agents based on plan content (e.g., frontend changes -> warmgold-frontend-builder.md)
+   Read(".claude/agents/reviewer.md")
+   Read(".claude/agents/analyzer.md")
+   Read(".claude/agents/planner.md")
+   # + any additional agents based on plan content
    ```
 
 2. **Spawn 4 Task agents in parallel** (single message, multiple Task calls):
@@ -131,10 +130,10 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
    # Agent 1: Completeness Checker
    Task(
      subagent_type="explore",
-     prompt="""You are a Plan Completeness Checker with Python backend expertise.
+     prompt="""You are a Plan Completeness Checker with code review expertise.
 
      <agent-expertise>
-     [content from python-reviewer.md after frontmatter]
+     [content from reviewer.md after frontmatter]
      </agent-expertise>
 
      Review this implementation plan for COMPLETENESS:
@@ -160,10 +159,10 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
    # Agent 2: Architecture Fit Analyzer
    Task(
      subagent_type="explore",
-     prompt="""You are an Architecture Fit Analyzer with Python backend expertise.
+     prompt="""You are an Architecture Fit Analyzer with codebase analysis expertise.
 
      <agent-expertise>
-     [content from python-reviewer.md after frontmatter]
+     [content from analyzer.md after frontmatter]
      </agent-expertise>
 
      Review this implementation plan for ARCHITECTURE FIT:
@@ -188,10 +187,10 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
    # Agent 3: Risk Assessor
    Task(
      subagent_type="explore",
-     prompt="""You are an Implementation Risk Assessor with performance analysis expertise.
+     prompt="""You are an Implementation Risk Assessor with analysis expertise.
 
      <agent-expertise>
-     [content from performance-analyzer.md after frontmatter]
+     [content from analyzer.md after frontmatter]
      </agent-expertise>
 
      Review this implementation plan for RISKS:
@@ -213,10 +212,14 @@ First **read the relevant agent .md files**, then spawn `explore` agents **in pa
      """
    )
 
-   # Agent 4: Requirements Verifier (no agent file needed - uses general knowledge)
+   # Agent 4: Requirements Verifier
    Task(
      subagent_type="explore",
-     prompt="""You are a Requirements Verifier for an implementation plan.
+     prompt="""You are a Requirements Verifier with planning expertise.
+
+     <agent-expertise>
+     [content from planner.md after frontmatter]
+     </agent-expertise>
 
      Review this plan against the stated requirements:
 
@@ -412,6 +415,6 @@ Activates on:
 - **Be specific**: Provide findings with File:Line where possible
 - **Priorities**: Blocker > Gaps > Deviations > Risks > Positives
 - **Be constructive**: Don't just name problems, also suggest solutions
-- **Additional agents**: If the plan involves frontend changes, also read `warmgold-frontend-builder.md`. If it involves new dependencies, also read `dependency-auditor.md`. Spawn additional Task agents as needed.
+- **Additional agents**: The `analyzer` agent covers dependency and architecture analysis. Spawn additional Task agents as needed.
 - **Project-agnostic**: This skill works for any project. Read the project's CLAUDE.md to understand its specific architecture, patterns, and constraints before running reviews.
 - **Research first**: If the plan involves unfamiliar technology or open technical decisions, use the `deep-research` skill first to gather evidence before reviewing.
