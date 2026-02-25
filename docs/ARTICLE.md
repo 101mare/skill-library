@@ -131,6 +131,7 @@ Alternatively, clone the library once and reference it locally:
 git clone https://github.com/101mare/skill-library.git ~/skill-library
 ```
 
+> [!IMPORTANT]
 > **Key takeaway:** Separate universal behavior, callable knowledge, and delegated work — then your CLAUDE.md only needs what's project-specific.
 
 The three layers are defined. Let's look at each one — starting with the foundation.
@@ -167,6 +168,7 @@ Why exactly these four? Coding Conventions prevent stylistic drift. Agent Behavi
 
 These four files form the foundation for every new project from now on.
 
+> [!IMPORTANT]
 > **Key takeaway:** Four files, four domains, zero overlap — coding standards, agent behavior, security, and self-improvement form the unchanging foundation.
 
 Rules set the baseline. But the real power comes from the interplay of the other two layers.
@@ -307,6 +309,7 @@ The **Frontend** phase deserves a closer look. Two skills work together here: `f
 
 Skills for building, agents for reviewing. That's no coincidence — it reflects how the two mechanisms work.
 
+> [!IMPORTANT]
 > **Key takeaway:** Skills load knowledge into the conversation. Agents run in isolation. Mixing them up is the most common architectural mistake.
 
 So much for what skills and agents *are*. The next question: what makes an agent actually *good*?
@@ -365,6 +368,7 @@ The last point deserves its own attention. Every agent reads the project setup b
 
 This makes generic agents project-aware. The security reviewer doesn't just know what's insecure — it knows what counts as secure in *your* project.
 
+> [!IMPORTANT]
 > **Key takeaway:** Replace generic labels with experiential identities. Devote 30-40% of the prompt to what the agent refuses to do.
 
 Well-designed agents are already powerful on their own. But orchestrating multiple agents together — that's where things get really interesting.
@@ -396,6 +400,7 @@ That sounds like a lot. In practice, it's a `/verify` at the end of the session 
 > [!WARNING]
 > Use multi-agent workflows wisely and not as spam on every small save. Each invoked agent opens its own context window — that burns through tokens extremely fast!
 
+> [!IMPORTANT]
 > **Key takeaway:** Skills control, agents work — workflow skills read agent files and orchestrate multiple specialists in parallel.
 
 ---
@@ -416,6 +421,7 @@ The strongest use case: tasks where parallel exploration provides real value. Co
 > [!NOTE]
 > **Reference:** [Claude Code Agent Teams Documentation](https://code.claude.com/docs/en/agent-teams)
 
+> [!IMPORTANT]
 > **Key takeaway:** Use Agent Teams for parallel exploration with real value. For everything else, stick with subagents — teams cost significantly more tokens.
 
 Agent Teams solve parallel collaboration. But what about tasks that need autonomous *iteration*?
@@ -482,6 +488,7 @@ No plugin needed. Three files are enough:
 
 The complete implementation with installation guide (`init.md`), prompt template (`prompt-template.md`), and interactive prompt builder is at `skills/workflow/ralph-loop/`. Installation: Just tell your agent *"Read `skills/workflow/ralph-loop/init.md` and set this up in my project"* — it handles the rest.
 
+> [!IMPORTANT]
 > **Key takeaway:** Autonomous iteration works for clearly defined tasks with verifiable results. The quality of the prompt determines the quality of the loop.
 
 The Ralph Loop closes the automation gap. But with all these tools, one practical question remains: how much should you actually install?
@@ -531,6 +538,7 @@ The logic: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Build + 
 
 The rest is specialization. The library is a toolkit, not a package. Copy what you need, not what you might someday need.
 
+> [!IMPORTANT]
 > **Key takeaway:** Five skills cover the entire development cycle. Install what you need, not what you might someday need — every header costs tokens on every call.
 
 ---

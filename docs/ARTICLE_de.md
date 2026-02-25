@@ -131,6 +131,7 @@ Alternativ kannst du die Library einmal klonen und dann lokal referenzieren:
 git clone https://github.com/101mare/skill-library.git ~/skill-library
 ```
 
+> [!IMPORTANT]
 > **Kernaussage:** Trenne universelles Verhalten, abrufbares Wissen und delegierte Arbeit — dann braucht deine CLAUDE.md nur noch das Projektspezifische.
 
 Die drei Ebenen sind definiert. Schauen wir uns jede einzelne an — angefangen beim Fundament.
@@ -167,6 +168,7 @@ Warum genau diese vier? Coding Conventions verhindern stilistischen Drift. Agent
 
 Diese vier Dateien bilden ab sofort das Fundament für jedes neue Projekt.
 
+> [!IMPORTANT]
 > **Kernaussage:** Vier Dateien, vier Domains, null Überschneidungen — Coding-Standards, Agent-Verhalten, Security und Self-Improvement bilden das unveränderliche Fundament.
 
 Rules setzen die Baseline. Aber die eigentliche Stärke kommt aus dem Zusammenspiel der anderen beiden Ebenen.
@@ -307,6 +309,7 @@ Die **Frontend**-Phase verdient einen genaueren Blick. Zwei Skills arbeiten hier
 
 Skills beim Bauen, Agents beim Prüfen. Das ist kein Zufall — es spiegelt wider, wie die zwei Mechanismen funktionieren.
 
+> [!IMPORTANT]
 > **Kernaussage:** Skills laden Wissen in die Konversation. Agents laufen in Isolation. Sie zu vermischen ist der häufigste Architektur-Fehler.
 
 So viel dazu, was Skills und Agents *sind*. Die nächste Frage: Was macht einen Agent tatsächlich *gut*?
@@ -365,6 +368,7 @@ Der letzte Punkt verdient eigene Aufmerksamkeit. Jeder Agent liest vor der Analy
 
 Das macht generische Agents projekt-aware. Der Security-Reviewer weiß nicht nur, was unsicher ist — er weiß, was in *deinem* Projekt als sicher gilt.
 
+> [!IMPORTANT]
 > **Kernaussage:** Ersetze generische Labels durch Experiential Identities. Verwende 30-40% des Prompts darauf, was der Agent ablehnt.
 
 Gut designte Agents sind allein schon mächtig. Aber mehrere Agents zusammen zu orchestrieren — da wird es richtig interessant.
@@ -396,6 +400,7 @@ Das klingt nach viel. In der Praxis ist es ein `/verify` am Ende der Session und
 > [!WARNING]
 > Nutze Multi-Agent-Workflows sinnvoll und nicht als Spam bei jedem kleinen Speichern. Jeder aufgerufene Agent öffnet ein eigenes Kontextfenster — das verbraucht extrem schnell viele Tokens!
 
+> [!IMPORTANT]
 > **Kernaussage:** Skills steuern, Agents arbeiten — Workflow-Skills lesen Agent-Dateien und orchestrieren mehrere Spezialisten parallel.
 
 ---
@@ -416,6 +421,7 @@ Der stärkste Anwendungsfall: Aufgaben, bei denen parallele Erkundung echten Meh
 > [!NOTE]
 > **Referenz:** [Claude Code Agent Teams Dokumentation](https://code.claude.com/docs/en/agent-teams)
 
+> [!IMPORTANT]
 > **Kernaussage:** Nutze Agent Teams für parallele Erkundung mit echtem Mehrwert. Für alles andere bleib bei Subagents — Teams kosten signifikant mehr Token.
 
 Agent Teams lösen parallele Zusammenarbeit. Aber was ist mit Aufgaben, die autonome *Iteration* brauchen?
@@ -482,6 +488,7 @@ Kein Plugin nötig. Drei Dateien reichen:
 
 Die komplette Implementierung mit Installationsanleitung (`init.md`), Prompt-Template (`prompt-template.md`) und interaktivem Prompt-Builder liegt unter `skills/workflow/ralph-loop/`. Installation: Sag deinem Agenten einfach *"Lies `skills/workflow/ralph-loop/init.md` und richte das in meinem Projekt ein"* — er erledigt den Rest.
 
+> [!IMPORTANT]
 > **Kernaussage:** Autonome Iteration funktioniert bei klar definierten Aufgaben mit prüfbarem Ergebnis. Die Qualität des Prompts bestimmt die Qualität des Loops.
 
 Der Ralph Loop schließt die Automatisierungslücke. Aber bei all diesen Tools bleibt eine praktische Frage: Wie viel sollte man tatsächlich installieren?
@@ -531,6 +538,7 @@ Die Logik: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Bauen + 
 
 Der Rest ist Spezialisierung. Die Library ist ein Baukasten, kein Paket. Kopiere was du brauchst, nicht was du vielleicht irgendwann brauchen könntest.
 
+> [!IMPORTANT]
 > **Kernaussage:** Fünf Skills decken den gesamten Entwicklungszyklus ab. Installiere was du brauchst, nicht was du vielleicht irgendwann brauchst — jeder Header kostet Token bei jedem Call.
 
 ---
