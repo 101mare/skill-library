@@ -242,6 +242,9 @@ Das Frontmatter braucht nur zwei Felder:
 
 Wichtig: Die Skill-Header (`name` + `description`) werden Claude **immer** im Prompt mitgegeben — so weiß er bei jedem Task, welche Skills verfügbar sind und wann er sie laden soll. Der vollständige Inhalt der SKILL.md wird erst geladen, wenn der Skill relevant wird.
 
+> [!TIP]
+> Du willst, dass Claude Skills für dich baut? Der `skill-builder` Meta-Skill lehrt Claude das SKILL.md-Format, Frontmatter-Konventionen und Best Practices — so kannst du einfach sagen "erstelle einen Skill für X" und bekommst ein sauber strukturiertes Ergebnis.
+
 ### Wie Skill Loading tatsächlich funktioniert
 
 Das Matching ist rein prompt-basiert — kein Embedding-Lookup, keine Magie. Claude liest alle installierten Skill-Beschreibungen und entscheidet selbst, ob ein Skill relevant ist. Das passiert **proaktiv**: Du musst nicht `/skill-name` tippen. Wenn du schreibst "warum schlägt dieser Test fehl?", matcht Claude das gegen die Trigger-Phrasen in `systematic-debugging` und lädt den Skill selbstständig. Oder du fängst an über API-Endpunkte zu reden und Claude lädt `api-design` ohne danach gefragt worden zu sein.

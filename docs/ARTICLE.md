@@ -242,6 +242,9 @@ The frontmatter needs only two fields:
 
 Important: The skill headers (`name` + `description`) are **always** included in Claude's prompt — this is how it knows at every task which skills are available and when to load them. The full SKILL.md content is only loaded when the skill becomes relevant.
 
+> [!TIP]
+> Want Claude to build skills for you? The `skill-builder` meta-skill teaches Claude the SKILL.md format, frontmatter conventions, and best practices — so you can say "create a skill for X" and get a well-structured result.
+
 ### How Skill Loading Actually Works
 
 The matching is purely prompt-based — no embedding lookup, no magic. Claude reads all installed skill descriptions and decides itself whether a skill is relevant. This happens **proactively**: you don't need to type `/skill-name`. If you write "why does this test fail?", Claude matches that against the trigger phrases in `systematic-debugging` and loads the skill on its own. Or you start talking about API endpoints and Claude loads `api-design` without being asked.
