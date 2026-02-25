@@ -2,10 +2,10 @@
 
 # Skill Library
 
-28 skills, 5 agents, 4 rules — copy what you need, skip the rest.
+27 skills, 5 agents, 4 rules — copy what you need, skip the rest.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills: 28](https://img.shields.io/badge/Skills-28-blue.svg)](docs/CATALOG.md)
+[![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG.md)
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
