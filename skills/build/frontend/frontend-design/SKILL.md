@@ -5,11 +5,15 @@ description: |
   Generates creative, polished code that avoids generic AI aesthetics.
   Use when building web components, pages, artifacts, posters, or applications.
   Recognizes: "frontend-design", "build a page", "create UI", "web component",
-  "design this interface", "make it look good", "avoid AI slop", "HTML/CSS/JS app"
+  "design this interface", "make it look good", "avoid AI slop", "HTML/CSS/JS app",
+  "style this", "frontend component", "how should this look?", "design tokens",
+  "add a card/button/modal", "CSS variables"
 license: Apache 2.0. Based on Anthropic's frontend-design skill. See NOTICE.md for attribution.
 ---
 
 This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+
+> **Composition**: This skill provides design principles and creative direction. When no specific design system is requested, use the `warmgold-frontend` design system for tokens, colors, and components. If you create your own design system skill to replace warmgold, update the reference here accordingly — this skill is intentionally universal and should always point to your active design system.
 
 ## Design Direction
 
