@@ -3,9 +3,8 @@ name: warmgold-frontend
 description: |
   Design system and component patterns for warm, iOS-inspired vanilla frontends.
   Use when building UI components, pages, or styling with HTML/CSS/JS.
-  Recognizes: "warmgold", "design tokens", "frontend component", "build a page",
-  "style this", "create UI", "add a card/button/modal", "warm gold colors",
-  "how should this look?", "frontend design", "CSS variables"
+  Recognizes: "warmgold", "warmgold design", "warm gold colors", "warm gold style",
+  "stone palette", "iOS-style UI", "warm gray", "gold accent"
 ---
 
 # Warmgold Design System
@@ -18,6 +17,10 @@ Warm, iOS-inspired UI built with vanilla HTML, CSS Custom Properties, and semant
 - **iOS-inspired**: Generous radii, subtle shadows, system fonts, segmented controls
 - **Restraint**: Max 0.05 opacity on shadows, accent color for emphasis only
 - **Accessible**: WCAG AA contrast, keyboard navigation, reduced motion support
+
+## Composition
+
+This design system provides concrete tokens and components. For broader design principles (typography choices, anti-AI-slop patterns, layout creativity), it composes naturally with the `frontend-design` skill. When both are loaded: use warmgold tokens for implementation, use frontend-design principles for creative direction.
 
 ## Core Tokens
 
@@ -89,11 +92,29 @@ Warm, iOS-inspired UI built with vanilla HTML, CSS Custom Properties, and semant
 
 ## Dark Mode
 
-Override the light tokens. Never add new custom properties — redefine existing ones:
+Override the light tokens. Never add new custom properties — redefine existing ones.
+
+Two modes: automatic (OS preference) and manual (user toggle via `data-theme` attribute).
 
 ```css
+/* Manual toggle (takes priority when set) */
+[data-theme="dark"] {
+    --color-bg-app: #1c1917;
+    --color-bg-card: #292524;
+    --color-bg-sidebar: #1c1917;
+    --color-text-heading: #fafaf9;
+    --color-text-body: #d6d3d1;
+    --color-text-muted: #a8a29e;
+    --color-border: #44403c;
+    --color-border-light: #292524;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* Auto fallback (only when no data-theme is set) */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme]) {
         --color-bg-app: #1c1917;
         --color-bg-card: #292524;
         --color-bg-sidebar: #1c1917;
@@ -145,7 +166,14 @@ Override the light tokens. Never add new custom properties — redefine existing
     margin: 0 auto;
 }
 
-/* Stack on mobile */
+/* Tablet: icon-only sidebar */
+@media (max-width: 1024px) {
+    .app-layout { grid-template-columns: 60px 1fr; }
+    .sidebar { padding: var(--space-3); }
+    .sidebar .nav-text { display: none; }
+}
+
+/* Mobile: stack, no sidebar */
 @media (max-width: 768px) {
     .app-layout { grid-template-columns: 1fr; }
     .sidebar { display: none; }
@@ -276,7 +304,7 @@ frontend/
 
 - [ ] All colors via CSS Custom Properties (no hardcoded values)
 - [ ] Warm color palette (gold accent, stone grays)
-- [ ] Dark mode works via `prefers-color-scheme`
+- [ ] Dark mode works via `prefers-color-scheme` (auto) or `data-theme` attribute (manual toggle)
 - [ ] `<html lang>` set, semantic tags used
 - [ ] `:focus-visible` on all interactive elements
 - [ ] Touch targets >= 44x44px

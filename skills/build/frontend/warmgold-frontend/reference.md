@@ -60,8 +60,8 @@ Extended component implementations and patterns. See SKILL.md for core tokens an
 }
 
 .btn-danger {
-    background: #e5e5e5;
-    color: #737373;
+    background: var(--color-border);
+    color: var(--color-text-muted);
 }
 .btn-danger:hover {
     background: var(--color-error-bg);
@@ -384,7 +384,7 @@ function createToastContainer() {
 
 .toast-error {
     background: var(--color-error-bg);
-    color: #991B1B;
+    color: var(--color-error);
 }
 .toast-error .toast-icon { color: var(--color-error); }
 ```
@@ -610,3 +610,73 @@ modal.querySelectorAll('[data-action]').forEach(btn => {
     color: var(--color-border);
 }
 ```
+
+## Theme Toggle (Optional Dark Mode Switch)
+
+Manual dark/light toggle with OS preference as default. Uses `data-theme` attribute on `<html>`.
+
+```html
+<div class="theme-toggle" role="radiogroup" aria-label="Theme">
+    <button role="radio" aria-checked="false" class="segment" data-theme-value="light">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+    </button>
+    <button role="radio" aria-checked="false" class="segment" data-theme-value="auto">
+        Auto
+    </button>
+    <button role="radio" aria-checked="true" class="segment active" data-theme-value="dark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M13.5 8.5a5.5 5.5 0 0 1-7-7 5.5 5.5 0 1 0 7 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+</div>
+```
+
+Uses the same segmented control styles. The toggle reuses `.segment` and `.segment.active`.
+
+```javascript
+function initThemeToggle() {
+    const toggle = document.querySelector('.theme-toggle');
+    if (!toggle) return;
+
+    // Restore saved preference (or default to 'auto')
+    const saved = localStorage.getItem('theme') || 'auto';
+    applyTheme(saved);
+    updateToggleUI(toggle, saved);
+
+    toggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-theme-value]');
+        if (!btn) return;
+        const value = btn.dataset.themeValue;
+        localStorage.setItem('theme', value);
+        applyTheme(value);
+        updateToggleUI(toggle, value);
+    });
+}
+
+function applyTheme(preference) {
+    if (preference === 'auto') {
+        document.documentElement.removeAttribute('data-theme');
+    } else {
+        document.documentElement.setAttribute('data-theme', preference);
+    }
+}
+
+function updateToggleUI(toggle, active) {
+    toggle.querySelectorAll('[data-theme-value]').forEach(btn => {
+        const isActive = btn.dataset.themeValue === active;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-checked', isActive);
+    });
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', initThemeToggle);
+```
+
+**How it works:**
+- `auto` (default): Removes `data-theme`, CSS falls back to `@media (prefers-color-scheme: dark)` on `:root:not([data-theme])`
+- `light` / `dark`: Sets `data-theme` attribute, CSS `[data-theme="dark"]` selector takes over
+- Preference persisted in `localStorage('theme')`

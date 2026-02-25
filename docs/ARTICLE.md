@@ -195,9 +195,6 @@ Four skill categories:
 
 **build/** (9 Skills) — Split into `frontend/` and `backend/`. Frontend: Frontend Design, Warmgold Design System. Backend: Config (Pydantic + YAML + Env-Vars), Logging, Exceptions, Docker, CI/CD (GitHub Actions), Prompts, Project Structure.
 
-> [!TIP]
-> The two frontend skills deliberately solve different problems: `frontend-design` (based on [Impeccable](https://impeccable.style)) = Design quality. "Make it visually good, avoid AI slop." Generic principles for any project. `warmgold-frontend` = A specific design system. Concrete tokens, colors, components. Both skills compose naturally, without explicit dependency.
-
 **workflow/** (7 Skills) — Orchestration of multi-agent workflows: Plan Review before implementation, Session Verification after work, PR Review for pull requests, TDD (RED-GREEN-REFACTOR cycle), Deep Research (structured research before technical decisions), Ralph Loop (autonomous iteration loop via hooks), and Ralph Loop Prompt Builder (interactive prompt builder for it).
 
 **patterns/** (8 Skills) — Reusable architecture patterns: DI Container, Protocol Design, Strategy + Registry, Error Handling, Resilience Patterns (Retry, Circuit Breaker, Timeout), Testing Patterns (pytest + Hypothesis), API Design (FastAPI), Systematic Debugging (4-phase methodology).
@@ -302,6 +299,11 @@ The library maps skills and agents to development phases:
 | **Test** | tdd, testing-patterns | test-architect |
 | **Debug** | systematic-debugging | -- |
 | **Analyze** | -- | analyzer |
+
+The **Frontend** phase deserves a closer look. Two skills work together here: `frontend-design` teaches universal design principles — typography, color theory, spatial rhythm, and how to avoid generic AI aesthetics. It's the skill that ensures visual quality regardless of which design system you use. `warmgold-frontend` is my preferred design system: a warm, iOS-inspired token set with gold accents and stone grays, complete with component patterns, dark mode, and accessibility built in. It's an opinionated choice — and that's the point. If you prefer a different aesthetic, create your own design system skill and swap it in. The `frontend-design` skill has a composition reference that points to the active design system; update that reference to your own skill, and the two will compose just as naturally.
+
+> [!TIP]
+> The two frontend skills deliberately solve different problems: `frontend-design` (based on [Impeccable](https://impeccable.style)) = Design quality. "Make it visually good, avoid AI slop." Generic principles for any project. `warmgold-frontend` = A specific design system. Concrete tokens, colors, components. Both skills compose naturally, without explicit dependency.
 
 Skills for building, agents for reviewing. That's no coincidence — it reflects how the two mechanisms work.
 
