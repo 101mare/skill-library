@@ -14,7 +14,6 @@
 - **No over-engineering**: Don't add features, abstractions, or configurability that wasn't requested. Three similar lines are better than a premature helper.
 - **No unnecessary comments**: Code should be self-explanatory. Only comment WHY, never WHAT. Don't add docstrings to code you didn't change.
 - **No backwards-compatibility hacks**: No unused `_vars`, no `# removed` comments, no re-exports of deleted functions. Delete means delete.
-- **No new dependencies** without asking first.
 
 ## After Writing Code
 
