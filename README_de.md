@@ -9,6 +9,8 @@
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG_de.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
+> **Wichtige Docs:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+>
 > English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
 
 ## Schnellstart
@@ -106,7 +108,5 @@ Deckt Architektur, Commands, Import-Konventionen, Key Patterns und Konfiguration
 - **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Der vollständige Deep Dive: Warum drei Schichten statt einer großen CLAUDE.md, wie man Agents eine "Seele" gibt (gestützt auf NAACL 2024 Forschung), Context-Budget-Management und die Lessons Learned beim Bau von 27 Skills. Wenn du das *Denken* hinter dieser Library verstehen willst, fang hier an.
 
 ---
-
-**Wichtige Docs:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
 **English version:** [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
