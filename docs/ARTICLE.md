@@ -500,6 +500,8 @@ As described above: Skill headers (`name` + `description`) are included in Claud
 
 But it comes at a cost: every installed skill costs tokens just through its header — on every single API call. 27 skills with 3-4 lines of description each are ~100 lines of system prompt that you permanently carry around. Those are tokens that you're missing for the actual work. On top of that come rules, CLAUDE.md, agent definitions, and the conversation context. The context window is finite.
 
+This isn't just a hunch — it's backed by research. The [IFScale benchmark](https://arxiv.org/abs/2507.11538) (2025) shows that instruction-following accuracy degrades measurably starting at ~100-150 instructions, with models increasingly *omitting* rules rather than getting them wrong (30:1 omission-to-error ratio at high density). [Context Rot](https://research.trychroma.com/context-rot) (Chroma Research) demonstrates that performance degradation is universal across all models as input length grows — even when relevant information is perfectly retrievable. Most striking: [research presented at EMNLP 2025](https://arxiv.org/abs/2510.05381) found that context length *alone* causes 14-85% performance loss, even with perfect retrieval. The effective context window is much smaller than the nominal one. Progressive disclosure — loading only what's needed, when it's needed — is the answer.
+
 ### The Five That Cover the Entire Cycle
 
 If I had to limit myself:

@@ -500,6 +500,8 @@ Wie oben beschrieben: Skill-Header (`name` + `description`) werden Claude bei je
 
 Aber es hat einen Preis: Jeder installierte Skill kostet Token allein durch seinen Header — bei jedem einzelnen API-Call. 27 Skills mit je 3-4 Zeilen Description sind ~100 Zeilen System-Prompt, die du permanent mitschleppst. Das sind Token, die dir für die eigentliche Arbeit fehlen. Dazu kommen Rules, CLAUDE.md, Agent-Definitionen und der Conversation-Kontext. Das Context Window ist endlich.
 
+Das ist keine Vermutung — es ist wissenschaftlich belegt. Der [IFScale-Benchmark](https://arxiv.org/abs/2507.11538) (2025) zeigt, dass die Instruction-Following-Accuracy ab ~100-150 Instruktionen messbar sinkt, wobei Modelle zunehmend Regeln *auslassen* statt sie falsch zu befolgen (30:1 Auslassungs-zu-Fehler-Verhältnis bei hoher Dichte). [Context Rot](https://research.trychroma.com/context-rot) (Chroma Research) belegt, dass Performance-Degradation bei wachsendem Input universell über alle Modelle auftritt — selbst wenn relevante Informationen perfekt auffindbar sind. Am eindrücklichsten: [Auf der EMNLP 2025 vorgestellte Forschung](https://arxiv.org/abs/2510.05381) fand, dass Context-Länge *allein* 14-85% Performance-Verlust verursacht, selbst bei perfektem Retrieval. Das effektive Kontextfenster ist deutlich kleiner als das nominale. Progressive Disclosure — nur laden was gebraucht wird, wenn es gebraucht wird — ist die Antwort.
+
 ### Die fünf, die den gesamten Zyklus abdecken
 
 Wenn ich mich beschränken müsste:
