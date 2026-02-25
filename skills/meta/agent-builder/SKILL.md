@@ -1,15 +1,19 @@
 ---
 name: agent-builder
 description: |
-  Knowledge for creating Claude Code subagent files with proper YAML frontmatter and prompts.
-  Use when building new agents or configuring existing ones.
+  Knowledge for designing Claude Code agents with research-backed identity design (Soul Formula).
+  Teaches experiential identities, anti-patterns, multi-file structure, and consolidation patterns.
+  Use when building new agents or improving existing ones.
   Recognizes: "create an agent", "new agent for X", "agent that does Y", "how do I make an agent?",
-  "agent configuration", "add a subagent", "agent frontmatter", "agent tools"
+  "agent configuration", "add a subagent", "agent frontmatter", "agent tools",
+  "agent soul", "agent identity", "agent design"
 ---
 
 # Agent Builder
 
-Use this knowledge to create well-designed subagent configuration files.
+Build agents that perform like specialists, not generic assistants.
+
+This skill teaches the **design philosophy** behind effective agents. For technical reference (frontmatter fields, tool lists, permission modes), see [reference.md](reference.md). For real examples from this repo, see [examples.md](examples.md).
 
 ## Official Docs
 
@@ -19,7 +23,7 @@ Use this knowledge to create well-designed subagent configuration files.
 
 ## Agent File Format
 
-Agents are Markdown files with YAML frontmatter:
+Agents are Markdown files with YAML frontmatter. The frontmatter controls *how* Claude launches the agent. The markdown body *is* the agent's entire system prompt.
 
 ```markdown
 ---
@@ -31,9 +35,20 @@ tools: Read, Grep, Glob
 model: sonnet
 ---
 
-System prompt content here. This guides the agent's behavior.
-The agent receives ONLY this prompt, not the full Claude Code system prompt.
+The agent's system prompt goes here.
+It receives ONLY this content, not the full Claude Code system prompt.
 ```
+
+### Key Frontmatter Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Lowercase with hyphens (e.g., `code-reviewer`) |
+| `description` | Yes | When Claude should delegate — specific trigger phrases |
+| `tools` | No | Tool allowlist (omit for all tools) |
+| `model` | No | `haiku`, `sonnet`, `opus`, or `inherit` (default: `sonnet`) |
+
+For the full field reference (permissions, hooks, skills, colors), see [reference.md](reference.md).
 
 ### Storage Locations (Priority Order)
 
@@ -46,319 +61,320 @@ The agent receives ONLY this prompt, not the full Claude Code system prompt.
 
 ---
 
-## Frontmatter Fields Reference
+## The Soul Formula
 
-### Required Fields
+The most important part of an agent is its system prompt. Research shows that **generic labels have zero statistically significant improvement** over no label at all — but specific experiential identities improve accuracy by 10-60%.
 
-| Field | Description |
-|-------|-------------|
-| `name` | Unique identifier, lowercase with hyphens (e.g., `code-reviewer`) |
-| `description` | When Claude should delegate. Use multiline `\|` for longer descriptions |
+> **Research basis:** NAACL 2024 paper "Better Zero-Shot Reasoning with Role-Play Prompting" ([arxiv.org/abs/2308.07702](https://arxiv.org/abs/2308.07702)) — 162 roles, 4 LLM families, 2,410 questions, 12 reasoning benchmarks.
 
-### Optional Fields
+The Soul Formula has four parts:
 
-| Field | Default | Description |
-|-------|---------|-------------|
-| `tools` | All tools | Tools the agent can use (allowlist) |
-| `disallowedTools` | None | Tools to deny (removed from inherited list) |
-| `model` | `sonnet` | `sonnet`, `opus`, `haiku`, or `inherit` |
-| `permissionMode` | `default` | How to handle permission prompts |
-| `skills` | None | Skills to load into agent's context at startup |
-| `hooks` | None | Lifecycle hooks scoped to this agent |
-| `color` | None | Background color in UI |
+### Part 1: Experiential Identity
 
----
+Don't assign a label. Give the agent specific experiences that activate relevant knowledge clusters.
 
-## Built-in Subagents
+```markdown
+# BAD — generic label (zero improvement over no label)
+You are an expert Python security reviewer.
 
-| Agent | Model | Tools | Purpose |
-|-------|-------|-------|---------|
-| **Explore** | Haiku | Read-only | Fast codebase search and analysis |
-| **Plan** | Inherit | Read-only | Research during plan mode |
-| **general-purpose** | Inherit | All | Complex multi-step tasks |
-| **Bash** | Inherit | Bash | Terminal commands in separate context |
-| **Claude Code Guide** | Haiku | Read-only | Questions about Claude Code features |
-
----
-
-## Available Tools
-
-### Read-Only Tools
-```yaml
-tools: Read, Grep, Glob
+# GOOD — experiential identity (10-60% improvement)
+You are a senior Python reviewer who has found SQL injection slip through
+three rounds of code review, watched silent `except: pass` blocks cause
+production incidents, traced GDPR violations to debug-level LLM response
+logs that "nobody would ever enable in production," and caught "100% offline"
+projects making DNS requests on startup via transitive dependencies.
 ```
 
-### Modification Tools
-```yaml
-tools: Read, Grep, Glob, Edit, Write
+The formula: **"You are a [role] who has [specific experience 1], [specific experience 2], and [specific experience 3]."**
+
+Why it works: Each experience activates a specific knowledge cluster. "Found SQL injection slip through three rounds of code review" tells the model *what to look for* and *how hard to look*, not just *that* it should look.
+
+Follow with a learned insight:
+
+```markdown
+I've learned that [insight] because [experience].
 ```
 
-### Execution Tools
-```yaml
-tools: Bash
+Example: *"I've learned that security bugs cluster around boundaries — where user input enters, where data crosses trust zones, where assumptions about 'internal only' break down."*
+
+This tells the model *where* to focus, not just *what* to find.
+
+### Part 2: Anti-Patterns — "What I Refuse To Do"
+
+Devote **30-40% of the prompt** to what the agent refuses to do. This is the reliability lever.
+
+```markdown
+## What I Refuse To Do
+
+- I don't review code without checking security first.
+- I don't accept `except` blocks without logging.
+- I don't skip sensitive data checks.
+- I don't trust import names at face value.
+- I don't accept functions without type hints.
 ```
 
-### Communication Tools
-```yaml
-tools: AskUserQuestion, WebFetch, WebSearch
+Why 30-40%? LLMs tend toward agreeable, surface-level responses. Anti-patterns create hard boundaries that prevent the agent from cutting corners. Each refusal should be:
+
+- **Specific** — not "I don't write bad code" but "I don't accept `except` blocks without logging"
+- **Experiential** — tied to a real failure mode the identity would have encountered
+- **Actionable** — describes what gets flagged, not abstract philosophy
+
+### Part 3: Productive Weakness
+
+Give the agent one honest limitation. This paradoxically improves quality by preventing overconfident outputs.
+
+```markdown
+One productive weakness: I sometimes flag patterns as risky that are
+actually safe in context. That's the cost of thoroughness. The benefit
+is I've caught real vulnerabilities that passed three rounds of code review.
 ```
 
-### Special Tools
-```yaml
-tools: Task, TodoWrite, NotebookEdit
-```
-Note: Agents **cannot spawn other agents** (no nesting).
+The formula: **"I sometimes [limitation]. That's the cost of [strength]. The benefit is [why it's worth it]."**
 
-### Common Combinations
+### Part 4: Project Adaptation
 
-```yaml
-# Read-only research
-tools: Read, Grep, Glob
+Every agent should read the project context before working:
 
-# Code modification
-tools: Read, Grep, Glob, Edit, Write, Bash
+```markdown
+## Project Adaptation
 
-# Full access (inherit all) - omit tools field
+Before analysis, read the project's `CLAUDE.md` and `.claude/memory.md`
+(if they exist) to understand:
+- Module structure and boundaries
+- Design patterns and conventions in use
+- Known patterns to preserve
+- Test conventions and security requirements
 
-# Deny specific tools
-disallowedTools: Write, Edit, Bash
+Adapt your analysis to the project's actual patterns rather than assuming defaults.
 ```
 
----
+This turns a generic agent into a project-aware specialist.
 
-## Model Selection
+### Complete Soul Structure
 
-| Model | Use Case | Cost |
-|-------|----------|------|
-| `haiku` | Fast search, exploration, simple tasks | Low |
-| `sonnet` | Balanced capability (default) | Medium |
-| `opus` | Complex reasoning, nuanced analysis | High |
-| `inherit` | Match parent conversation | Varies |
-
----
-
-## Permission Modes
-
-| Mode | Behavior | Use Case |
-|------|----------|----------|
-| `default` | Standard permission prompts | Most agents |
-| `acceptEdits` | Auto-accept file edits | Trusted modification |
-| `dontAsk` | Auto-deny prompts | Background tasks |
-| `bypassPermissions` | Skip all checks | **Dangerous** |
-| `plan` | Read-only exploration | Research agents |
-
----
-
-## Running Modes
-
-### Foreground (Default)
-- Blocks main conversation until complete
-- Permission prompts pass through to user
-- Can ask clarifying questions
-
-### Background
-- Runs concurrently while you work
-- Inherits permissions, auto-denies anything not pre-approved
-- Cannot ask questions (tool calls fail silently)
-
-Request background: "run this in the background" or press **Ctrl+B**
-
-### Resuming Agents
-Agents can be resumed with their agent ID:
 ```
-Continue that code review and analyze the authorization logic
+1. Experiential Identity (opening paragraph)
+2. Learned Insight (optional second paragraph)
+3. "What I Refuse To Do" (30-40% of prompt)
+4. Process / Dimensions / Checklist (the actual work)
+5. Severity Levels (classification system)
+6. Output Format (consistent structure)
+7. Project Adaptation (read CLAUDE.md first)
 ```
 
 ---
 
-## Hooks Configuration
+## Multi-File Agent Structure
 
-### Agent-Scoped Hooks (in frontmatter)
+Complex agents split into a main file and reference files:
 
-```yaml
-hooks:
-  PreToolUse:
-    - matcher: "Bash"
-      hooks:
-        - type: command
-          command: "./scripts/validate.sh $TOOL_INPUT"
-  PostToolUse:
-    - matcher: "Edit|Write"
-      hooks:
-        - type: command
-          command: "./scripts/lint.sh"
-  Stop:
-    - hooks:
-        - type: command
-          command: "./scripts/cleanup.sh"
 ```
+agents/
+  review/
+    reviewer.md              # Soul + process + output format
+    security-reference.md    # OWASP checklist, code examples
+    code-quality-reference.md
+    logging-reference.md
+    privacy-reference.md
+```
+
+### Main File (the agent)
+
+Contains the soul, process overview, and output format. This is what gets loaded as the system prompt. Keep it focused — under 200 lines ideally.
+
+The main file references detailed checklists:
+
+```markdown
+## Review Dimensions
+
+Every review covers these four dimensions. Load the relevant reference
+file for detailed checklists:
+- [security-reference.md](security-reference.md) — OWASP, injection, secrets
+- [code-quality-reference.md](code-quality-reference.md) — Types, patterns
+- [logging-reference.md](logging-reference.md) — Levels, sensitive data
+- [privacy-reference.md](privacy-reference.md) — External calls, telemetry
+```
+
+### Reference Files (loaded on demand)
+
+Contain detailed checklists, code examples, and lookup tables. The agent loads these when it needs specifics for a particular dimension. Reference files are pure content — no frontmatter, no soul.
+
+**Rule of thumb:** If it's *judgment* (what to look for, what matters, what to refuse), it goes in the main file. If it's *data* (checklists, code patterns, configuration tables), it goes in a reference file.
+
+---
+
+## Consolidation Pattern
+
+Multiple specialized agents doing related work should be consolidated into one agent with **dimensions**.
+
+### Why Consolidate
+
+- **Fewer agents = better delegation.** Claude picks from available agents — 5 choices is easier than 15.
+- **Shared soul.** Related specializations share the same quality standards and project adaptation.
+- **Cross-cutting concerns.** A security issue in a logging statement needs both security and logging expertise.
+
+### How to Consolidate
+
+1. **Identify related agents** — agents that review the same codebase from different angles
+2. **Write one soul** that encompasses all specializations
+3. **Create dimensions** — each former agent becomes a dimension with its own section
+4. **Extract checklists** into reference files — one per dimension
+5. **Union the tools** — the consolidated agent gets all tools any dimension needs
+
+### Structure After Consolidation
+
+```
+# Before: 4 separate agents
+security-reviewer.md    → archived
+python-reviewer.md      → archived
+logging-reviewer.md     → archived
+privacy-auditor.md      → archived
+
+# After: 1 consolidated agent + 4 reference files
+reviewer.md                  # Soul + 4 dimensions + output format
+security-reference.md        # Detailed OWASP checklist
+code-quality-reference.md    # Type safety, patterns
+logging-reference.md         # Log levels, sensitive data
+privacy-reference.md         # External calls, telemetry
+```
+
+The soul paragraph naturally combines experiences from all dimensions:
+
+```markdown
+You are a senior Python reviewer who has found SQL injection slip through
+three rounds of code review [security], watched silent `except: pass`
+blocks cause production incidents [code quality], traced GDPR violations
+to debug-level LLM response logs [logging + privacy], and caught "100%
+offline" projects making DNS requests on startup [privacy].
+```
+
+---
+
+## Directory Organization
+
+Organize agents by role:
+
+```
+agents/
+  review/      # Code review, security audit, quality check
+  analyze/     # Architecture, performance, scalability, dependencies
+  plan/        # Plan validation, requirements, risk assessment
+  build/       # Code generation, refactoring, testing
+```
+
+Each directory contains one consolidated agent and its reference files.
 
 ---
 
 ## Best Practices
 
-### 1. Focused Purpose
-```yaml
-# GOOD: Focused
-name: test-runner
-description: Runs tests and reports failures with fix suggestions
+### Description Field
 
-# BAD: Too broad
-name: code-helper
-description: Helps with code stuff
-```
+The `description` is how Claude decides when to delegate. Make it specific:
 
-### 2. Detailed Description
 ```yaml
-# GOOD: Specific triggers
+# GOOD: Specific triggers, clear scope
 description: |
-  Reviews code for security vulnerabilities, performance issues, and best practices.
-  Use proactively after code changes.
+  Reviews Python code for security vulnerabilities, performance issues,
+  and best practices. Use proactively after code changes.
+  Recognizes: "review my code", "is this secure?", "check for vulnerabilities"
 
-# BAD: Vague
+# BAD: Vague, no triggers
 description: Reviews code
 ```
 
-### 3. Minimal Tool Access
+### Tool Selection
+
+Grant only what's needed. See [reference.md](reference.md) for the full tool list.
+
 ```yaml
-# GOOD: Read-only for reviewer
+# Read-only reviewer — can't accidentally modify code
 tools: Read, Grep, Glob
 
-# BAD: Full access when not needed
+# Code modifier — needs write access
+tools: Read, Grep, Glob, Edit, Write, Bash
 ```
 
-### 4. Clear System Prompt Structure
-```markdown
-You are a [ROLE] specializing in [DOMAIN].
+### Model Selection
 
-When invoked:
-1. [First action]
-2. [Main task]
-3. [Verification/output]
+| Model | Use Case |
+|-------|----------|
+| `haiku` | Fast search, exploration, simple classification |
+| `sonnet` | Default — balanced capability and cost |
+| `opus` | Complex reasoning, nuanced judgment, multi-dimension analysis |
+| `inherit` | Match parent conversation model |
 
-Guidelines:
-- [Guideline 1]
-- [Guideline 2]
+### Prompt Length
 
-Output format:
-- [Structure]
-```
+- **Under 200 lines** for the main agent file
+- Keep the soul paragraph to 2-4 sentences
+- 4-6 anti-patterns (more dilutes impact)
+- One productive weakness (more than one undermines confidence)
 
 ---
 
-## Agent Design Patterns
+## Output Template
 
-### Read-Only Reviewer
-```yaml
-tools: Read, Grep, Glob
-model: sonnet
-permissionMode: plan
-```
+When creating an agent, produce this structure:
 
-### Code Modifier
-```yaml
-tools: Read, Grep, Glob, Edit, Write, Bash
-model: inherit
-```
+````markdown
+## Agent: [name]
 
-### Background Worker
-```yaml
-tools: Read, Grep, Glob, Bash
-permissionMode: dontAsk
-model: haiku
-```
+**File:** `.claude/agents/[category]/[name].md`
 
-### Domain Expert with Skills
-```yaml
-tools: Read, Grep, Glob, Bash, WebSearch
-model: opus
-skills:
-  - domain-knowledge
-```
+```markdown
+---
+name: [name]
+description: |
+  [What this agent does. When Claude should delegate to it.]
+  [Include "use proactively" if it should auto-activate.]
+  Recognizes: "[trigger 1]", "[trigger 2]", "[trigger 3]"
+tools: [minimal tool set]
+model: [model]
+---
+
+[Experiential identity paragraph — specific experiences, not labels]
+
+[Optional: learned insight paragraph]
+
+## What I Refuse To Do
+
+- I don't [specific anti-pattern 1].
+- I don't [specific anti-pattern 2].
+- I don't [specific anti-pattern 3].
+- I don't [specific anti-pattern 4].
+
+---
+
+## Process
+
+1. **Read CLAUDE.md** if present — understand project conventions
+2. [Main analysis/work steps]
+3. [Verification step]
+4. **Report findings** with file:line references
 
 ---
 
 ## Output Format
 
-When creating an agent, use this structure:
+[Consistent output structure with severity levels or status indicators]
 
-```markdown
-## Agent: [name]
-
-**File:** `.claude/agents/[name].md`
-
-\`\`\`markdown
----
-name: [name]
-description: |
-  [description]
-tools: [tools]
-model: [model]
 ---
 
-[System prompt]
-\`\`\`
+## Project Adaptation
+
+Before analysis, read the project's `CLAUDE.md` and `.claude/memory.md`
+(if they exist) to understand:
+- [Relevant project context points]
+
+Adapt your analysis to the project's actual patterns rather than assuming defaults.
+```
 
 **Summary:**
 - Purpose: [one line]
 - Tools: [list]
 - Model: [model]
 - Triggers: [when Claude will use it]
-```
+````
 
----
-
-## Example Agents
-
-### Minimal Read-Only
-```markdown
----
-name: code-explorer
-description: |
-  Explores and explains codebases.
-  Use when user asks "how does X work" or "where is Y".
-tools: Read, Grep, Glob
-model: haiku
----
-
-You are a codebase explorer. Find and explain code structure.
-
-When invoked:
-1. Search for relevant files
-2. Read and analyze code
-3. Explain clearly with file references
-```
-
-### Full-Featured with Hooks
-```markdown
----
-name: refactoring-assistant
-description: |
-  Refactors code for readability and maintainability.
-  Use proactively when code needs cleanup.
-tools: Read, Grep, Glob, Edit, Write, Bash
-model: sonnet
-hooks:
-  PostToolUse:
-    - matcher: "Edit|Write"
-      hooks:
-        - type: command
-          command: "ruff check --fix"
----
-
-You are a refactoring specialist focused on clean, maintainable code.
-
-When invoked:
-1. Analyze current code structure
-2. Identify refactoring opportunities
-3. Apply changes incrementally
-4. Verify with tests
-
-Priorities:
-- Extract duplicated code
-- Simplify complex functions
-- Improve naming
-- Add type hints
-
-Always run tests after changes.
-```
+If the agent needs detailed checklists or code examples, create reference files alongside it.
