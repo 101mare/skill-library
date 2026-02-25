@@ -1,11 +1,13 @@
 ---
 name: ralph-loop-prompt-builder
 description: |
-  Helps build effective prompts for the Ralph Loop autonomous work system.
+  Builds effective prompts for the Ralph Loop autonomous work system.
   Asks clarifying questions about the task, then generates a structured prompt
   with clear requirements, verification steps, and completion criteria.
-  Usage: /ralph-loop-prompt-builder
-  Triggers: "ralph prompt", "build ralph prompt", "help me write a ralph loop prompt"
+  Use this BEFORE starting a ralph-loop — it creates the prompt, not the loop itself.
+  Recognizes: "ralph-loop-prompt-builder", "ralph prompt", "build ralph prompt",
+  "prepare a ralph loop task", "help me write a ralph loop prompt",
+  "structure this for ralph-loop"
 ---
 
 # Ralph Loop Prompt Builder

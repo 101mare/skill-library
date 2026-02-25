@@ -4,9 +4,10 @@ description: |
   Implements Python logging infrastructure following best practices.
   Creates logger configurations, adds logging to functions, sets up file rotation.
   Use when adding logging to code, setting up logging configuration, or improving
-  existing logging. Triggers: "add logging", "setup logging", "configure logger",
-  "logging infrastructure", "structured logging", "log rotation"
-allowed-tools: Read, Grep, Glob, Edit, Write
+  existing logging.
+  Recognizes: "logging", "logger", "log setup", "add logging", "setup logging",
+  "configure logger", "logging infrastructure", "structured logging", "log rotation",
+  "log levels", "file handler", "why no logs?"
 ---
 
 # Logging Builder

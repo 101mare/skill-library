@@ -5,7 +5,8 @@ description: |
   logging, exceptions, testing, and CI/CD basics.
   Use when creating new Python projects or restructuring existing ones to production patterns.
   Recognizes: "project-scaffold", "new Python project", "production-ready setup",
-  "project structure", "scaffold project", "how should I structure this?", "pyproject.toml setup"
+  "scaffold project", "project layout", "directory structure for Python",
+  "pyproject.toml setup", "start a new project", "project boilerplate"
 ---
 
 # Project Scaffold
