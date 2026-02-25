@@ -58,7 +58,7 @@ Always-loaded behavioral rules that shape Claude's behavior across all tasks. Co
 
 ---
 
-## Skills (27)
+## Skills (28)
 
 ### Meta (3)
 
@@ -87,7 +87,7 @@ Always-loaded behavioral rules that shape Claude's behavior across all tasks. Co
 | frontend-design | Creates distinctive, production-ready frontend interfaces with high design quality that avoid generic AI aesthetics. | [skills/build/frontend/frontend-design/SKILL.md](../skills/build/frontend/frontend-design/SKILL.md) |
 | warmgold-frontend | Warm, iOS-inspired design system with component patterns for vanilla HTML/CSS/JS frontends. | [skills/build/frontend/warmgold-frontend/SKILL.md](../skills/build/frontend/warmgold-frontend/SKILL.md) |
 
-### Workflow (7)
+### Workflow (8)
 
 | Name | Description | Path |
 |------|------------|------|
@@ -96,6 +96,7 @@ Always-loaded behavioral rules that shape Claude's behavior across all tasks. Co
 | pr-review | Orchestrates pull request reviews through parallel specialized agents that analyze the diff and aggregate results. | [skills/workflow/pr-review/SKILL.md](../skills/workflow/pr-review/SKILL.md) |
 | tdd | Test-driven development workflow in the RED-GREEN-REFACTOR cycle: test-architect → implementation → code-simplifier. | [skills/workflow/tdd/SKILL.md](../skills/workflow/tdd/SKILL.md) |
 | deep-research | Structured research workflow (question → sources → analysis → synthesis → documentation) for technical decisions. | [skills/workflow/deep-research/SKILL.md](../skills/workflow/deep-research/SKILL.md) |
+| repo-analysis | Scans a repository for inconsistencies, anti-patterns, and optimization opportunities using parallel agents for structure, code patterns, dependencies, and documentation. | [skills/workflow/repo-analysis/SKILL.md](../skills/workflow/repo-analysis/SKILL.md) |
 | ralph-loop | Autonomous work mode — Claude continues working independently on a task until it's completed or the iteration limit is reached. | [skills/workflow/ralph-loop/SKILL.md](../skills/workflow/ralph-loop/SKILL.md) |
 | ralph-loop-prompt-builder | Helps create effective prompts for the Ralph Loop system through clarification questions and structured output. | [skills/workflow/ralph-loop-prompt-builder/SKILL.md](../skills/workflow/ralph-loop-prompt-builder/SKILL.md) |
 

@@ -58,7 +58,7 @@ Immer geladene Verhaltensregeln, die Claudes Verhalten bei allen Aufgaben präge
 
 ---
 
-## Skills (27)
+## Skills (28)
 
 ### Meta (3)
 
@@ -87,7 +87,7 @@ Immer geladene Verhaltensregeln, die Claudes Verhalten bei allen Aufgaben präge
 | frontend-design | Erstellt markante, produktionsreife Frontend-Interfaces mit hoher Designqualität, die generische KI-Ästhetik vermeiden. | [skills/build/frontend/frontend-design/SKILL.md](../skills/build/frontend/frontend-design/SKILL.md) |
 | warmgold-frontend | Warmes, iOS-inspiriertes Design-System mit Component-Patterns für Vanilla-HTML/CSS/JS-Frontends. | [skills/build/frontend/warmgold-frontend/SKILL.md](../skills/build/frontend/warmgold-frontend/SKILL.md) |
 
-### Workflow (7)
+### Workflow (8)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
@@ -96,6 +96,7 @@ Immer geladene Verhaltensregeln, die Claudes Verhalten bei allen Aufgaben präge
 | pr-review | Orchestriert Pull-Request-Reviews durch parallele spezialisierte Agenten, die den Diff analysieren und Ergebnisse aggregieren. | [skills/workflow/pr-review/SKILL.md](../skills/workflow/pr-review/SKILL.md) |
 | tdd | Test-Driven-Development-Workflow im RED-GREEN-REFACTOR-Zyklus: test-architect → Implementierung → code-simplifier. | [skills/workflow/tdd/SKILL.md](../skills/workflow/tdd/SKILL.md) |
 | deep-research | Strukturierter Research-Workflow (Frage → Quellen → Analyse → Synthese → Dokumentation) für technische Entscheidungen. | [skills/workflow/deep-research/SKILL.md](../skills/workflow/deep-research/SKILL.md) |
+| repo-analysis | Scannt ein Repository auf Inkonsistenzen, Anti-Patterns und Optimierungsmöglichkeiten mittels paralleler Agenten für Struktur, Code-Patterns, Dependencies und Dokumentation. | [skills/workflow/repo-analysis/SKILL.md](../skills/workflow/repo-analysis/SKILL.md) |
 | ralph-loop | Autonomer Arbeitsmodus — Claude arbeitet selbstständig an einer Aufgabe weiter, bis sie abgeschlossen oder das Iterationslimit erreicht ist. | [skills/workflow/ralph-loop/SKILL.md](../skills/workflow/ralph-loop/SKILL.md) |
 | ralph-loop-prompt-builder | Hilft beim Erstellen effektiver Prompts für das Ralph-Loop-System durch Klärungsfragen und strukturierte Ausgabe. | [skills/workflow/ralph-loop-prompt-builder/SKILL.md](../skills/workflow/ralph-loop-prompt-builder/SKILL.md) |
 
