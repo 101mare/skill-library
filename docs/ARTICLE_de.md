@@ -203,6 +203,14 @@ Das Frontmatter braucht nur zwei Felder:
 
 Wichtig: Die Skill-Header (`name` + `description`) werden Claude **immer** im Prompt mitgegeben — so weiß er bei jedem Task, welche Skills verfügbar sind und wann er sie laden soll. Der vollständige Inhalt der SKILL.md wird erst geladen, wenn der Skill relevant wird.
 
+### Wie Skill Loading tatsächlich funktioniert
+
+Das Matching ist rein prompt-basiert — kein Embedding-Lookup, keine Magie. Claude liest alle installierten Skill-Beschreibungen und entscheidet selbst, ob ein Skill relevant ist. Das passiert **proaktiv**: Du musst nicht `/skill-name` tippen. Wenn du schreibst "warum schlägt dieser Test fehl?", matcht Claude das gegen die Trigger-Phrasen in `systematic-debugging` und lädt den Skill selbstständig. Oder du fängst an über API-Endpunkte zu reden und Claude lädt `api-design` ohne danach gefragt worden zu sein.
+
+Wenn Claude einen Skill lädt, liest er die `SKILL.md` per Read-Tool — das ist **sichtbar** in der Konversation. Es ist kein stiller Hintergrundprozess; du siehst den Tool-Call passieren.
+
+Die Schwäche: Das Matching ist nur so gut wie die Beschreibungen. Wenn Trigger-Phrasen zu generisch sind, lädt Claude den falschen Skill oder gar keinen. Wenn sie zu spezifisch sind, erkennt Claude den Kontext nicht. Bei ambigen Situationen, wo mehrere Skills matchen könnten, ist es Glückssache welchen Claude wählt. Deshalb steckt diese Library erheblichen Aufwand in spezifische, vielfältige Trigger-Phrasen im `description`-Feld jedes Skills.
+
 Der Meta-Skill `skill-builder` in dieser Library nutzt genau diese Best Practices, um Claude beizubringen, neue Skills nach den richtigen Conventions zu erstellen.
 
 ### Schrittweise Informationsfreigabe (Progressive Disclosure)
