@@ -30,6 +30,8 @@ Ich habe mir irgendwann die Frage gestellt: Was wäre, wenn ich die generischen 
 
 Das Ergebnis ist eine Skill-Library mit 4 Rules, 27 Skills, 5 Agents und einem CLAUDE.md Template. Es hat verändert, wie jedes meiner Projekte mit Claude arbeitet. Nicht weil die einzelnen Teile so besonders wären, sondern weil die Trennung von Regeln, Wissen und Expertise stimmt.
 
+![Chaos vs Struktur](images/chaos-vs-structure.png)
+
 ---
 
 ## Drei Ebenen, ein Repo
@@ -147,6 +149,8 @@ Warum genau diese vier? Coding Conventions verhindern stilistischen Drift. Agent
 
 Diese vier Dateien bilden ab sofort das Fundament für jedes neue Projekt.
 
+![Die vier Rules](images/four-rules.png)
+
 ---
 
 ## Skills lehren, Agents handeln
@@ -158,6 +162,8 @@ Das ist die Unterscheidung, die den größten Unterschied macht.
 (Kurzer Exkurs: "Scaffolding" bezeichnet das automatische Hochziehen eines Projekt-Grundgerüsts, z.B. das Generieren der initialen Ordnerstruktur, Config-Dateien und Basis-Klassen, bevor der eigentliche Code geschrieben wird).
 
 **Agents** sind isolierte Subprozesse. Sie bekommen einen Auftrag, eigene Tools und null Kontext vom Eltern-Prozess. Das ist wie einen Spezialisten beauftragen — er bringt eigene Expertise mit, sieht aber nur, was du ihm explizit gibst.
+
+![Skills lehren, Agents handeln](images/skills-teach-agents-act.png)
 
 Vier Skill-Kategorien:
 
@@ -244,6 +250,8 @@ SKILL.md Dateien über 500 Zeilen werden nur teilweise verarbeitet. Die Lösung:
 
 Mehr dazu im Blog-Post: [Equipping agents for the real world with Agent Skills](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills)
 
+![Progressive Disclosure](images/progressive-disclosure-bundling.webp)
+
 ### Lifecycle Mapping
 
 Die Library ordnet Skills und Agents den Entwicklungsphasen zu:
@@ -273,6 +281,8 @@ Die Forschung dazu ist mittlerweile ziemlich klar. Das NAACL 2024 Paper "Better 
 Wie auch der Researcher @tolibear_ auf Twitter ([Post](https://x.com/tolibear_/status/2024155081281560700)) treffend analysiert hat: Der wichtigste Hebel ist die "Seele" des Agenten. Ein generisches Label aktiviert nur breite, flache Assoziationen. Was funktioniert, sind sogenannte *Experiential Identities* — spezifische Erfahrungen, Überzeugungen und Arbeitsweisen statt starrer Labels.
 
 Das hat grundlegend verändert, wie ich Agent-Dateien schreibe. Schauen wir uns die Security-Dimension des `reviewer.md` an.
+
+![Flat Role vs Soul](images/flat-role-vs-soul.png)
 
 ### Soul (Identity)
 
@@ -326,6 +336,10 @@ Die interessanteste Kategorie sind Workflow Skills. Sie orchestrieren mehrere Ag
 
 Das Pattern dahinter: Workflow-Skills lesen die Agent-Dateien und füttern die Task-Aufrufe mit genau dieser Expertise als Kontext. Skills steuern, Agents arbeiten. Und weil Claude Code mehrere Task-Aufrufe parallel senden kann, laufen alle vier Reviews gleichzeitig.
 
+![Workflow Skills](images/workflow-skills-orchestrator.png)
+
+![Orchestrator-Workers Pattern](images/orchestrator-workers-pattern.png)
+
 `session-verify` nutzt das gleiche Pattern am Ende einer Session. Der Workflow: Zuerst klären, was die ursprüngliche Aufgabe war. Dann identifizieren, was sich geändert hat — über Git Diff wenn verfügbar, sonst über Conversation Context. Dann Review-Agents spawnen (mindestens Reviewer und Code-Simplifier, situativ Analyzer für Performance und Architektur). Dann prüfen, ob die Anforderung erfüllt ist. Dann fragen, ob die Dokumentation aktualisiert werden soll.
 
 Das klingt nach viel. In der Praxis ist es ein `/verify` am Ende der Session und zwei Minuten warten. Die Alternative — manuell durch alle geänderten Dateien gehen und hoffen, dass man nichts übersieht — dauert länger und ist weniger gründlich.
@@ -338,7 +352,7 @@ Das klingt nach viel. In der Praxis ist es ein `/verify` am Ende der Session und
 
 Seit kurzem gibt es in Claude Code ein neues Feature: Agent Teams. Wo Subagents isolierte Arbeiter sind, die ihr Ergebnis zurück an den Auftraggeber liefern, sind Agent Teams vollständige Sessions, die untereinander kommunizieren — mit geteilter Task-Liste, direkten Nachrichten und einem Team Lead, der koordiniert.
 
-![Subagents vs Agent Teams](images/subagents-vs-agent-teams-dark.png)
+![Subagents vs Agent Teams](images/subagents-vs-agent-teams.png)
 
 Der stärkste Anwendungsfall: Aufgaben, bei denen parallele Erkundung echten Mehrwert bringt. Code Reviews mit drei verschiedenen Fokus-Linsen gleichzeitig. Debugging mit konkurrierenden Hypothesen, bei denen Teammates aktiv versuchen die Theorien der anderen zu widerlegen.
 
@@ -352,7 +366,11 @@ Der stärkste Anwendungsfall: Aufgaben, bei denen parallele Erkundung echten Meh
 
 Manchmal reicht ein einzelner Durchlauf nicht. Du willst Claude eine Aufgabe geben und weggehen — Tests schreiben, ein Refactoring durchziehen, Linting-Fehler fixen. Claude soll iterieren, bis es fertig ist.
 
-Genau das macht der **Ralph Loop**. Benannt nach Ralph Wiggum aus den Simpsons — der trotz Rückschlägen einfach weitermacht. Die ursprüngliche Technik stammt von Geoffrey Huntley: Eine Bash-Schleife, die einen AI-Agenten immer wieder den gleichen Prompt füttert, bis die Aufgabe erledigt ist. Anthropic hat daraus ein offizielles Plugin gebaut, das seit einem Security-Patch kaputt ist. Die DIY-Variante mit Hooks funktioniert zuverlässiger.
+Genau das macht der **Ralph Loop**. Benannt nach Ralph Wiggum aus den Simpsons — der trotz Rückschlägen einfach weitermacht.
+
+![Ralph Loop](images/ralph-loop-spiral.png)
+
+Die ursprüngliche Technik stammt von Geoffrey Huntley: Eine Bash-Schleife, die einen AI-Agenten immer wieder den gleichen Prompt füttert, bis die Aufgabe erledigt ist. Anthropic hat daraus ein offizielles Plugin gebaut, das seit einem Security-Patch kaputt ist. Die DIY-Variante mit Hooks funktioniert zuverlässiger.
 
 ```
 User: /ralph-loop max=15 Schreibe Tests für validators.py
@@ -405,6 +423,8 @@ Die komplette Implementierung mit Installationsanleitung (`init.md`), Prompt-Tem
 ## Context Management: 27 Skills, aber bitte nicht alle gleichzeitig
 
 Die Library hat 27 Skills. Heißt das, du lädst alle 27 in jedes Projekt? Nein. Und hier ist es wichtig zu verstehen, warum.
+
+![Context Management](images/context-management.png)
 
 Wie oben beschrieben: Skill-Header (`name` + `description`) werden Claude bei jedem Prompt mitgegeben. Das ist der Mechanismus, mit dem Claude weiß, welche Skills verfügbar sind. Aber es hat einen Preis: Jeder installierte Skill kostet Token allein durch seinen Header — bei jedem einzelnen API-Call. 27 Skills mit je 3-4 Zeilen Description sind ~100 Zeilen System-Prompt, die du permanent mitschleppst. Das sind Token, die dir für die eigentliche Arbeit fehlen. Dazu kommen Rules, CLAUDE.md, Agent-Definitionen und der Conversation-Kontext. Das Context Window ist endlich.
 
