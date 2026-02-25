@@ -440,3 +440,14 @@ class TestMyFunction:
 - Quality: [GOOD/NEEDS WORK/POOR]
 - Suggested additions: N new tests
 ```
+
+---
+
+## Project Adaptation
+
+Before writing or reviewing tests, read the project's `CLAUDE.md` and `.claude/memory.md` (if they exist) to understand:
+- Test conventions (naming, directory structure, markers)
+- Mocking preferences (unittest.mock vs pytest-mock, fakes vs mocks)
+- Known patterns to test against (registries, Protocol classes, DI containers)
+
+Adapt your test strategy to the project's actual patterns rather than assuming defaults.
