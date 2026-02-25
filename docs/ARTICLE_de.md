@@ -146,13 +146,17 @@ Die drei Ebenen sind definiert. Schauen wir uns jede einzelne an — angefangen 
 
 Vier Rules, vier Domains, keine Überschneidungen.
 
-**`coding-conventions.md`** definiert, wie Code aussehen soll: DRY, Types, Error Handling, Testing. Der wichtigste Satz darin:
+### `coding-conventions.md` — Wie Code aussehen soll
+
+DRY, Types, Error Handling, Testing. Der wichtigste Satz darin:
 
 > DRY applies to knowledge, not code. If two functions have identical lines but represent different domain concepts, they are NOT duplicates. Forcing them into one abstraction creates coupling that makes future changes harder.
 
-Das ist keine Haarspalterei. Ohne diese Unterscheidung produziert Claude Abstraktionen, die zwei Zeilen Code sparen und ein paar Monate später mehr verwirren statt zu helfen.
+Ohne diese Unterscheidung produziert Claude Abstraktionen, die zwei Zeilen Code sparen und ein paar Monate später mehr verwirren statt zu helfen.
 
-**`agent-behavior.md`** definiert, wie Claude arbeiten soll: Read first, Scope Discipline, minimale Änderungen. Die Highlights:
+### `agent-behavior.md` — Wie Claude arbeiten soll
+
+Read first, Scope Discipline, minimale Änderungen.
 
 > Read first, write second: Always read existing code before modifying. Understand patterns before proposing changes.
 
@@ -160,9 +164,15 @@ Das ist keine Haarspalterei. Ohne diese Unterscheidung produziert Claude Abstrak
 
 > Ask, don't assume: When in doubt, ALWAYS ask. Better to ask once too many than to implement incorrectly.
 
-**`security.md`** definiert die Basics, die nie verhandelbar sind: Input Validation, PII-freies Logging, Secrets in Environment-Variablen, keine neuen Dependencies ohne Rückfrage.
+### `security.md` — Was nie verhandelbar ist
 
-**`self-improvement.md`** schließt den Feedback-Loop: Nach jeder Korrektur das Pattern in `.claude/memory.md` capturen — nicht die einzelne Korrektur, sondern das generelle Prinzip dahinter. Am Session-Start die Lessons reviewen. Wenn der gleiche Fehler zweimal passiert, war die Lesson nicht spezifisch genug.
+Input Validation, PII-freies Logging, Secrets in Environment-Variablen, keine neuen Dependencies ohne Rückfrage.
+
+### `self-improvement.md` — Der Feedback-Loop
+
+Nach jeder Korrektur das Pattern in `.claude/memory.md` capturen — nicht die einzelne Korrektur, sondern das generelle Prinzip dahinter. Am Session-Start die Lessons reviewen. Wenn der gleiche Fehler zweimal passiert, war die Lesson nicht spezifisch genug.
+
+---
 
 Warum genau diese vier? Coding Conventions verhindern stilistischen Drift. Agent Behavior verhindert Scope Creep — das häufigste Problem bei AI-generiertem Code. Security verhindert die Bugs, die am schwersten zu finden sind. Self-Improvement sorgt dafür, dass Claude aus Korrekturen lernt statt sie zu wiederholen.
 
