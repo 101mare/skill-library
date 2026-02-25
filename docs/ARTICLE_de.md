@@ -30,7 +30,7 @@
 
 <p align="center"><img src="images/chaos-vs-structure.png" width="50%" alt="Chaos vs Struktur"></p>
 
-*Fünf Projekte, fünf divergierende Configs — das Problem, das diese Library löst.*
+<p align="center"><em>Fünf Projekte, fünf divergierende Configs — das Problem, das diese Library löst.</em></p>
 
 Du kennst das. Du startest ein neues Projekt und legst als Erstes eine frische CLAUDE.md Konfigurationsdatei an. Um Zeit zu sparen, kopierst du deine Standard-Regeln aus einem alten Projekt herüber: "Never log PII", "Type hints mandatory". Das Problem: Du passt die Regeln im Laufe der Zeit in den verschiedenen Projekten isoliert an. Drei Monate später hast du fünf Projekte mit fünf völlig unterschiedlichen Versionen deiner "Standard-Regeln" – und ein absolutes Chaos.
 
@@ -141,7 +141,7 @@ Die drei Ebenen sind definiert. Schauen wir uns jede einzelne an — angefangen 
 
 <p align="center"><img src="images/four-rules.png" width="50%" alt="Die vier Rules"></p>
 
-*Vier Rules, vier Domains: Conventions, Behavior, Security, Self-Improvement.*
+<p align="center"><em>Vier Rules, vier Domains: Conventions, Behavior, Security, Self-Improvement.</em></p>
 
 Vier Rules, vier Domains, keine Überschneidungen.
 
@@ -177,7 +177,7 @@ Rules setzen die Baseline. Aber die eigentliche Stärke kommt aus dem Zusammensp
 
 <p align="center"><img src="images/skills-teach-agents-act.png" width="50%" alt="Skills lehren, Agents handeln"></p>
 
-*Skills laden Wissen in den aktuellen Kontext. Agents laufen in isolierten Subprozessen.*
+<p align="center"><em>Skills laden Wissen in den aktuellen Kontext. Agents laufen in isolierten Subprozessen.</em></p>
 
 Das ist die Unterscheidung, die den größten Unterschied macht.
 
@@ -254,7 +254,7 @@ Der Meta-Skill `skill-builder` in dieser Library nutzt genau diese Best Practice
 
 <p align="left"><img src="images/progressive-disclosure-bundling.webp" width="50%" alt="Progressive Disclosure"></p>
 
-*Header sind immer sichtbar, Details werden bei Bedarf geladen.*
+<p align="center"><em>Header sind immer sichtbar, Details werden bei Bedarf geladen.</em></p>
 
 Skills können über eine einzelne SKILL.md hinauswachsen. Wenn der Kontext zu groß wird oder nur in bestimmten Szenarien relevant ist, kann ein Skill zusätzliche Dateien im Skill-Ordner bündeln und per Name aus der SKILL.md referenzieren. Claude navigiert und liest diese Dateien nur bei Bedarf. Die drei Ebenen funktionieren wie verschachtelte Container:
 
@@ -276,7 +276,7 @@ Skills können über eine einzelne SKILL.md hinauswachsen. Wenn der Kontext zu g
 └─────────────────────────────────────────────────────┘
 ```
 
-*Die drei Ebenen funktionieren wie verschachtelte Container — Header sind immer sichtbar, Details werden schrittweise geladen.*
+<p align="center"><em>Die drei Ebenen funktionieren wie verschachtelte Container — Header sind immer sichtbar, Details werden schrittweise geladen.</em></p>
 
 Wie ein gut organisiertes Handbuch: Inhaltsverzeichnis zuerst, dann spezifische Kapitel, dann der detaillierte Anhang. Da Agents mit Dateisystem-Zugriff nicht den gesamten Skill ins Context Window laden müssen, ist die Menge an Kontext, die ein Skill bündeln kann, praktisch unbegrenzt.
 
@@ -311,7 +311,7 @@ Skills beim Bauen, Agents beim Prüfen. Das ist kein Zufall — es spiegelt wide
 
 So viel dazu, was Skills und Agents *sind*. Die nächste Frage: Was macht einen Agent tatsächlich *gut*?
 
-*Bis hierher: Drei-Ebenen-Architektur, vier Rules, 27 Skills und ihre Zuordnung zu Entwicklungsphasen. Ab hier: wie man effektive Agents schreibt, Workflows orchestriert und Context-Budgets verwaltet.*
+<p align="center"><em>Bis hierher: Drei-Ebenen-Architektur, vier Rules, 27 Skills und ihre Zuordnung zu Entwicklungsphasen. Ab hier: wie man effektive Agents schreibt, Workflows orchestriert und Context-Budgets verwaltet.</em></p>
 
 ---
 
@@ -319,7 +319,7 @@ So viel dazu, was Skills und Agents *sind*. Die nächste Frage: Was macht einen 
 
 <p align="center"><img src="images/flat-role-vs-soul.png" width="50%" alt="Flat Role vs Soul"></p>
 
-*Generische Labels vs. Experiential Identities: der forschungsgestützte Unterschied.*
+<p align="center"><em>Generische Labels vs. Experiential Identities: der forschungsgestützte Unterschied.</em></p>
 
 Wenn wir Agents bauen, greifen wir instinktiv zu einfachen Zuweisungen. Als ich die ersten Agents gebaut habe, sahen die System-Prompts so aus: "You are an expert Python security reviewer." Das Ergebnis war okay. Nicht schlecht, aber auch nicht besser als ohne Label. Warum reicht das nicht?
 
@@ -375,7 +375,7 @@ Gut designte Agents sind allein schon mächtig. Aber mehrere Agents zusammen zu 
 
 <p align="center"><img src="images/workflow-skills-orchestrator.png" width="50%" alt="Workflow Skills"></p>
 
-*Workflow-Skills orchestrieren mehrere Agents parallel.*
+<p align="center"><em>Workflow-Skills orchestrieren mehrere Agents parallel.</em></p>
 
 Die interessanteste Kategorie sind Workflow Skills. Sie orchestrieren mehrere Agents.
 
@@ -404,7 +404,7 @@ Das klingt nach viel. In der Praxis ist es ein `/verify` am Ende der Session und
 
 <p align="center"><img src="images/subagents-vs-agent-teams.png" width="50%" alt="Subagents vs Agent Teams"></p>
 
-*Subagents liefern Ergebnisse zurück. Agent Teams kommunizieren untereinander.*
+<p align="center"><em>Subagents liefern Ergebnisse zurück. Agent Teams kommunizieren untereinander.</em></p>
 
 Seit kurzem gibt es in Claude Code ein neues Feature: Agent Teams. Wo Subagents isolierte Arbeiter sind, die ihr Ergebnis zurück an den Auftraggeber liefern, sind Agent Teams vollständige Sessions, die untereinander kommunizieren — mit geteilter Task-Liste, direkten Nachrichten und einem Team Lead, der koordiniert.
 
@@ -426,7 +426,7 @@ Agent Teams lösen parallele Zusammenarbeit. Aber was ist mit Aufgaben, die auto
 
 <p align="center"><img src="images/ralph-loop-spiral.png" width="50%" alt="Ralph Loop"></p>
 
-*Autonome Iteration bis die Aufgabe erledigt ist.*
+<p align="center"><em>Autonome Iteration bis die Aufgabe erledigt ist.</em></p>
 
 Manchmal reicht ein einzelner Durchlauf nicht. Du willst Claude eine Aufgabe geben und weggehen — Tests schreiben, ein Refactoring durchziehen, Linting-Fehler fixen. Claude soll iterieren, bis es fertig ist.
 
@@ -492,7 +492,7 @@ Der Ralph Loop schließt die Automatisierungslücke. Aber bei all diesen Tools b
 
 <p align="center"><img src="images/context-management.png" width="50%" alt="Context Management"></p>
 
-*Jeder installierte Skill kostet Token bei jedem API-Call — wähle weise.*
+<p align="center"><em>Jeder installierte Skill kostet Token bei jedem API-Call — wähle weise.</em></p>
 
 Die Library hat 27 Skills. Heißt das, du lädst alle 27 in jedes Projekt? Nein. Und hier ist es wichtig zu verstehen, warum.
 
