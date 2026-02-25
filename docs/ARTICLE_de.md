@@ -2,21 +2,6 @@
 
 > **Hinweis:** Dieses Repo enthält Anthropics Implementierung von Skills für Claude. Für Informationen zum Agent Skills Standard, siehe [agentskills.io](https://agentskills.io).
 
-## Inhaltsverzeichnis
-
-1. [Chaos](#chaos)
-2. [Drei Ebenen, ein Repo](#drei-ebenen-ein-repo)
-3. [Rules: Was Claude immer wissen muss](#rules-was-claude-immer-wissen-muss)
-4. [Skills lehren, Agents handeln](#skills-lehren-agents-handeln)
-5. [Gib dem Agenten keine platte Rolle, gib ihm eine "Seele"](#gib-dem-agenten-keine-platte-rolle-gib-ihm-eine-seele)
-6. [Workflow Skills: Skills die Agents steuern](#workflow-skills-skills-die-agents-steuern)
-7. [Agent Teams: Wenn Subagents nicht reichen](#agent-teams-wenn-subagents-nicht-reichen)
-8. [Advanced: Ralph Loop — Autonome Arbeitsschleifen](#advanced-ralph-loop--autonome-arbeitsschleifen)
-9. [Context Management: 27 Skills, aber bitte nicht alle gleichzeitig](#context-management-27-skills-aber-bitte-nicht-alle-gleichzeitig)
-10. [Wie man es nutzt](#wie-man-es-nutzt)
-11. [Codex nicht vergessen](#codex-nicht-vergessen)
-12. [Was ich anfangs falsch gemacht habe](#was-ich-anfangs-falsch-gemacht-habe)
-13. [Closing](#closing)
 
 ## Chaos
 
@@ -222,7 +207,7 @@ Der Meta-Skill `skill-builder` in dieser Library nutzt genau diese Best Practice
 
 ### Schrittweise Informationsfreigabe (Progressive Disclosure)
 
-<p align="center"><img src="images/progressive-disclosure-bundling.webp" width="50%" alt="Progressive Disclosure"></p>
+<p align="left"><img src="images/progressive-disclosure-bundling.webp" width="50%" alt="Progressive Disclosure"></p>
 
 Skills können über eine einzelne SKILL.md hinauswachsen. Wenn der Kontext zu groß wird oder nur in bestimmten Szenarien relevant ist, kann ein Skill zusätzliche Dateien im Skill-Ordner bündeln und per Name aus der SKILL.md referenzieren. Claude navigiert und liest diese Dateien nur bei Bedarf.
 
@@ -430,23 +415,27 @@ Wie oben beschrieben: Skill-Header (`name` + `description`) werden Claude bei je
 
 Wenn ich mich beschränken müsste:
 
-1. **skill-builder** — Der eine Skill, der alle anderen ersetzt. Wenn du nur einen hast, baust du dir den Rest selbst.
-2. **plan-review** — Der wirkungsvollste Workflow. Vier parallele Review-Agents, Ampel-Verdict, fängt Fehler ab *bevor* Code existiert. Rework vermeiden > Rework fixen.
+1. **prompt-builder** — Stellt klärende Fragen zu deinem Ziel und formt daraus einen strukturierten Prompt — ob für einen Plan, die direkte Umsetzung oder jede andere Aufgabe.
+2. **plan-review** — Der wirkungsvollste Workflow. Vier parallele Review-Agents prüfen Architektur-Fit, Conventions, Risiken und Requirements. Ampel-Verdict *bevor* Code existiert. Rework vermeiden > Rework fixen.
 3. **tdd** — Echter Workflow mit Agent-Orchestrierung. Erzwingt, dass Tests Verhalten definieren statt Code zu bestätigen.
 4. **systematic-debugging** — Wenn etwas kaputt ist, verhindert die 4-Phasen-Methodik Shotgun-Debugging.
-5. **strategy-registry** — Das Pattern, das am häufigsten vorkommt. Jede Erweiterung, jeder Handler, jeder Dispatcher.
+5. **session-verify** — End-of-Session Review: Security, Code-Qualität, Architektur, saubere Imports, keine liegengebliebenen TODOs. Nichts geht ungeprüft raus.
 
-Die Logik: **Planen** (plan-review) → **Bauen** (strategy-registry) → **Testen** (tdd) → **Debuggen** (systematic-debugging) → **Erweitern** (skill-builder). Der gesamte Entwicklungszyklus, fünf Skills.
+Die Logik: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Bauen + Testen** (tdd) → **Debuggen** (systematic-debugging) → **Verifizieren** (session-verify). Der gesamte Entwicklungszyklus, fünf Skills.
+
+> **Hinweis:** Das ist ein defensiver, tokenintensiver Ansatz — plan-review und session-verify spawnen jeweils mehrere Agents. Wer schnell und günstig arbeiten will: tdd + systematic-debugging allein decken die Kernarbeit ab.
 
 ### Was bewusst fehlt
 
 **project-scaffold, docker-builder, ci-cd-builder, config-builder** — Nutzt du einmal pro Projekt. Wertvoll beim Setup, danach nie wieder.
 
-**session-verify, pr-review** — Nützlich, aber plan-review deckt den kritischsten Review-Zeitpunkt ab: vor der Arbeit, nicht danach.
+**skill-builder, agent-builder** — Meta-Skills zum Bauen neuer Skills und Agents. Mächtig für Power-User, aber nicht das was man täglich braucht.
 
 **deep-research** — Gut, aber Claude kann auch ohne Skill recherchieren. Der Skill macht es strukturierter, ist aber nicht essentiell.
 
 **frontend-design** — Nur relevant wenn du Frontend baust.
+
+**strategy-registry** — Das am häufigsten vorkommende Pattern, aber eben ein spezifisches Pattern — nicht universell nötig.
 
 Der Rest ist Spezialisierung. Die Library ist ein Baukasten, kein Paket. Kopiere was du brauchst, nicht was du vielleicht irgendwann brauchen könntest.
 

@@ -2,21 +2,6 @@
 
 > **Note:** This repo contains Anthropic's implementation of Skills for Claude. For information about the Agent Skills Standard, see [agentskills.io](https://agentskills.io).
 
-## Table of Contents
-
-1. [Chaos](#chaos)
-2. [Three Layers, One Repo](#three-layers-one-repo)
-3. [Rules: What Claude Always Needs to Know](#rules-what-claude-always-needs-to-know)
-4. [Skills Teach, Agents Act](#skills-teach-agents-act)
-5. [Don't Give the Agent a Flat Role, Give It a "Soul"](#dont-give-the-agent-a-flat-role-give-it-a-soul)
-6. [Workflow Skills: Skills That Control Agents](#workflow-skills-skills-that-control-agents)
-7. [Agent Teams: When Subagents Aren't Enough](#agent-teams-when-subagents-arent-enough)
-8. [Advanced: Ralph Loop — Autonomous Work Loops](#advanced-ralph-loop--autonomous-work-loops)
-9. [Context Management: 27 Skills, But Please Not All at Once](#context-management-27-skills-but-please-not-all-at-once)
-10. [How to Use It](#how-to-use-it)
-11. [Don't Forget Codex](#dont-forget-codex)
-12. [What I Got Wrong at First](#what-i-got-wrong-at-first)
-13. [Closing](#closing)
 
 ## Chaos
 
@@ -222,7 +207,7 @@ The meta-skill `skill-builder` in this library uses exactly these best practices
 
 ### Progressive Disclosure
 
-<p align="center"><img src="images/progressive-disclosure-bundling.webp" width="50%" alt="Progressive Disclosure"></p>
+<p align="left"><img src="images/progressive-disclosure-bundling.webp" width="50%" alt="Progressive Disclosure"></p>
 
 Skills can grow beyond a single SKILL.md. When the context gets too large or is only relevant in certain scenarios, a skill can bundle additional files in its folder and reference them by name from the SKILL.md. Claude navigates and reads these files only when needed.
 
@@ -430,23 +415,27 @@ As described above: Skill headers (`name` + `description`) are included in Claud
 
 If I had to limit myself:
 
-1. **skill-builder** — The one skill that replaces all others. If you only have one, you build the rest yourself.
-2. **plan-review** — The most impactful workflow. Four parallel review agents, traffic light verdict, catches errors *before* code exists. Avoiding rework > fixing rework.
+1. **prompt-builder** — Asks clarifying questions about your goal, then turns vague requests into structured prompts — whether for a plan, direct implementation, or any other task.
+2. **plan-review** — The most impactful workflow. Four parallel review agents check architecture fit, conventions, risks, and requirements. Traffic light verdict *before* code exists. Avoiding rework > fixing rework.
 3. **tdd** — Real workflow with agent orchestration. Enforces that tests define behavior instead of confirming code.
 4. **systematic-debugging** — When something is broken, the 4-phase methodology prevents shotgun debugging.
-5. **strategy-registry** — The pattern that comes up most frequently. Every extension, every handler, every dispatcher.
+5. **session-verify** — End-of-session review: security, code quality, architecture, clean imports, no leftover TODOs. Nothing ships unchecked.
 
-The logic: **Plan** (plan-review) → **Build** (strategy-registry) → **Test** (tdd) → **Debug** (systematic-debugging) → **Extend** (skill-builder). The entire development cycle, five skills.
+The logic: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Build + Test** (tdd) → **Debug** (systematic-debugging) → **Verify** (session-verify). The entire development cycle, five skills.
+
+> **Note:** This is a defensive, token-intensive setup — plan-review and session-verify both spawn multiple agents. If you want to move fast and cheap, tdd + systematic-debugging alone cover the core work.
 
 ### What's Deliberately Missing
 
 **project-scaffold, docker-builder, ci-cd-builder, config-builder** — You use these once per project. Valuable during setup, never again after that.
 
-**session-verify, pr-review** — Useful, but plan-review covers the most critical review point: before the work, not after.
+**skill-builder, agent-builder** — Meta-skills for building new skills and agents. Powerful for power users, but not what you need day-to-day.
 
 **deep-research** — Good, but Claude can research without a skill too. The skill makes it more structured, but it's not essential.
 
 **frontend-design** — Only relevant if you're building frontend.
+
+**strategy-registry** — The most frequently occurring pattern, but still a specific pattern — not universally needed.
 
 The rest is specialization. The library is a toolkit, not a package. Copy what you need, not what you might someday need.
 

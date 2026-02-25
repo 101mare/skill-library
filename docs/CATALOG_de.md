@@ -34,14 +34,6 @@ Kopiere den Agent aus ~/Schreibtisch/skill-library/agents/review/reviewer.md in 
 ```
 → Claude kopiert die Datei nach `.claude/agents/reviewer.md`
 
-**Mehrere auf einmal:**
-```
-Kopiere folgende Skills in mein Projekt:
-- ~/Schreibtisch/skill-library/skills/workflow/tdd/SKILL.md
-- ~/Schreibtisch/skill-library/skills/patterns/testing-patterns/SKILL.md
-- ~/Schreibtisch/skill-library/agents/build/test-architect.md
-```
-
 ### Anpassen nach der Installation
 
 Nach dem Kopieren kannst du den Skill in `.claude/skills/` beliebig anpassen:
@@ -128,23 +120,23 @@ Immer geladene Verhaltensregeln, die Claudes Verhalten bei allen Aufgaben präge
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
-| reviewer | Prueft Python-Code auf Sicherheit (OWASP), Typsicherheit, Logging, Datenschutz/Offline-Konformitaet und Best Practices. Konsolidiert python-reviewer, security-reviewer, logging-reviewer und privacy-auditor. | [agents/review/reviewer.md](../agents/review/reviewer.md) |
+| reviewer | Prüft Python-Code auf Sicherheit (OWASP), Typsicherheit, Logging, Datenschutz/Offline-Konformität und Best Practices. Konsolidiert python-reviewer, security-reviewer, logging-reviewer und privacy-auditor. | [agents/review/reviewer.md](../agents/review/reviewer.md) |
 
 ### Analyze (1)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
-| analyzer | Analysiert Codebasen auf Architektur-Passung, Performance, Skalierbarkeit, toten Code und Abhaengigkeits-Gesundheit. Konsolidiert architecture-analyzer, performance-analyzer, scalability-analyzer, dead-code-detector und dependency-auditor. | [agents/analyze/analyzer.md](../agents/analyze/analyzer.md) |
+| analyzer | Analysiert Codebasen auf Architektur-Passung, Performance, Skalierbarkeit, toten Code und Abhängigkeits-Gesundheit. Konsolidiert architecture-analyzer, performance-analyzer, scalability-analyzer, dead-code-detector und dependency-auditor. | [agents/analyze/analyzer.md](../agents/analyze/analyzer.md) |
 
 ### Plan (1)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
-| planner | Validiert Implementierungsplaene auf Vollstaendigkeit, Anforderungsabdeckung und Risiken. Konsolidiert plan-completeness, requirements-verifier und risk-assessor. | [agents/plan/planner.md](../agents/plan/planner.md) |
+| planner | Validiert Implementierungspläne auf Vollständigkeit, Anforderungsabdeckung und Risiken. Konsolidiert plan-completeness, requirements-verifier und risk-assessor. | [agents/plan/planner.md](../agents/plan/planner.md) |
 
 ### Build (2)
 
 | Name | Beschreibung | Pfad |
 |------|-------------|------|
 | code-simplifier | Vereinfacht und verfeinert Code hinsichtlich Klarheit, Konsistenz und Wartbarkeit bei voller Funktionserhaltung. | [agents/build/code-simplifier.md](../agents/build/code-simplifier.md) |
-| test-architect | Erstellt pytest-Tests und prueft bestehende Testsuiten auf Qualitaet und Abdeckung. | [agents/build/test-architect.md](../agents/build/test-architect.md) |
+| test-architect | Erstellt pytest-Tests und prüft bestehende Testsuiten auf Qualität und Abdeckung. | [agents/build/test-architect.md](../agents/build/test-architect.md) |
