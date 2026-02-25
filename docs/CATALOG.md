@@ -10,7 +10,7 @@ Installation couldn't be simpler — you don't need to configure anything manual
 
 ### How It Works
 
-1. Choose a skill or agent from the catalog below
+1. Choose a skill, rule or agent from the catalog below
 2. Copy the file path
 3. Tell Claude:
 
@@ -33,14 +33,6 @@ Copy the skill from ~/Schreibtisch/skill-library/skills/patterns/testing-pattern
 Copy the agent from ~/Schreibtisch/skill-library/agents/review/reviewer.md into my project
 ```
 → Claude copies the file to `.claude/agents/reviewer.md`
-
-**Multiple at once:**
-```
-Copy the following skills into my project:
-- ~/Schreibtisch/skill-library/skills/workflow/tdd/SKILL.md
-- ~/Schreibtisch/skill-library/skills/patterns/testing-patterns/SKILL.md
-- ~/Schreibtisch/skill-library/agents/build/test-architect.md
-```
 
 ### Customizing After Installation
 
