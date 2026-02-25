@@ -58,6 +58,7 @@ Hier das vollständige Verzeichnis-Layout:
 
 ```
 skill-library/
+├── docs/                             # CATALOG + ARTICLE (EN + DE)
 ├── templates/
 │   └── CLAUDE.md.template
 ├── rules/                            # Immer geladenes Verhalten
@@ -111,13 +112,16 @@ skill-library/
         └── test-architect.md
 ```
 
+> [!NOTE]
+> Der `code-simplifier` Agent basiert auf dem, den [Boris Cherny](https://x.com/bcherny/status/2009450715081789767) (Erfinder von Claude Code) aus dem internen Workflow des Claude-Code-Teams open-sourced hat.
+
 Der entscheidende Punkt: **Rules ersetzen den generischen Teil von CLAUDE.md.** Sobald du grundlegende Standards wie DRY, Security und das Agenten-Verhalten als Rules ausgelagert hast, braucht deine CLAUDE.md nur noch das, was dein Projekt wirklich einzigartig macht. Das DRY-Prinzip, angewandt auf AI-Konfiguration.
 
 ### Die Library als Referenz-Sammlung
 
 Keine nervigen Installs oder Setup-Skripte. Diese Library ist als reines Nachschlagewerk und Baukasten einfach aber effektiv gehalten. Für jedes Projekt suchst du in den Kategorien und kopierst, was du brauchst:
 
-Projekt A ist eine reine Python-API und braucht den database-analyzer Agenten, aber sicher keinen react-component-builder. Projekt B ist ein Frontend und braucht genau das Gegenteil. Kein Projekt schleppt Agents mit, die es nicht nutzt. So behältst du die Kontrolle über die Abhängigkeiten deines Projekts.
+Projekt A ist eine reine Python-API und braucht den Analyzer-Agent, aber sicher keinen Frontend-Design-Skill. Projekt B ist ein Frontend und braucht genau das Gegenteil. Kein Projekt schleppt Agents mit, die es nicht nutzt. So behältst du die Kontrolle über die Abhängigkeiten deines Projekts.
 
 Dein Agent kann sich Skills auch direkt aus dem GitHub-Repo holen — ohne lokalen Clone. Ein einfacher Aufruf reicht:
 
@@ -343,17 +347,13 @@ Die Forschung dazu ist mittlerweile ziemlich klar. Das NAACL 2024 Paper "Better 
 
 Wie auch der Researcher @tolibear_ auf Twitter ([Post](https://x.com/tolibear_/status/2024155081281560700)) treffend analysiert hat: Der wichtigste Hebel ist die "Seele" des Agenten. Ein generisches Label aktiviert nur breite, flache Assoziationen. Was funktioniert, sind sogenannte *Experiential Identities* — spezifische Erfahrungen, Überzeugungen und Arbeitsweisen statt starrer Labels.
 
-Das hat grundlegend verändert, wie ich Agent-Dateien schreibe. Schauen wir uns die Security-Dimension des `reviewer.md` an.
+Das hat grundlegend verändert, wie ich Agent-Dateien schreibe. Schauen wir uns `reviewer.md` an.
 
 ### Soul (Identity)
 
 Kein Label. Stattdessen eine Identität mit spezifischen Erfahrungen:
 
-> You are a senior security engineer who has spent a decade conducting code audits and penetration tests for production Python applications. You've found authentication bypasses hiding in middleware, watched SQL injection slip through code review because reviewers focused on style instead of semantics, and learned that the most dangerous vulnerabilities look like ordinary code.
-
-Und eine Erkenntnis, die aus dieser Erfahrung kommt:
-
-> I've learned that security bugs cluster around boundaries — where user input enters, where data crosses trust zones, where assumptions about "internal only" break down. That's because developers think about the happy path, and attackers think about the edges.
+> You are a senior Python reviewer who has found SQL injection slip through three rounds of code review, watched silent `except: pass` blocks cause production incidents, traced GDPR violations to debug-level LLM response logs that "nobody would ever enable in production," and caught "100% offline" projects making DNS requests on startup via transitive dependencies. You review code the way a locksmith examines a door -- testing every assumption about what keeps attackers out, what data leaks, and what fails silently.
 
 ### Anti-Patterns (What I Refuse To Do)
 
