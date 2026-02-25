@@ -9,13 +9,33 @@
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG_de.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
-> **Wichtige Docs:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+> **Docs:** [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 >
 > English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
 
+## Das Problem
+
+CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jedes Projekt kopiert. Agents mit dem Label "You are an expert" zeigen [keine messbare Verbesserung](https://arxiv.org/abs/2308.07702) gegenüber gar keinem Label.
+
+Diese Library löst das mit drei Schichten — **Rules** (immer geladen) → **Skills** (on demand) → **Agents** (isolierte Subprozesse) — jede mit klarer Aufgabe, nichts vermischt sich. Die vollständige Herleitung steht in [ARTICLE_de.md](docs/ARTICLE_de.md).
+
+## Hier starten — Die fünf Kern-Skills
+
+Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
+
+1. **prompt-builder** — Stellt klärende Fragen und formt vage Anfragen in strukturierte Prompts.
+2. **plan-review** — Vier parallele Agents prüfen Architektur, Conventions, Risiken und Requirements. Ampel-Verdict *vor* dem Code.
+3. **tdd** — Echtes RED-GREEN-REFACTOR mit Agent-Orchestrierung. Tests definieren Verhalten, nicht bestätigen Code.
+4. **systematic-debugging** — Reproduzieren → Isolieren → Root-Cause → Fix+Absichern.
+5. **session-verify** — End-of-Session Review: Security, Code-Qualität, Architektur, saubere Imports, keine TODOs.
+
+**Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren** — der gesamte Zyklus.
+
+> **Hinweis:** plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
+
 ## Schnellstart
 
-Schau in **[CATALOG_de.md](docs/CATALOG_de.md)** was es gibt, such dir raus was du brauchst, und sag Claude er soll es installieren. Drei Wege:
+Schau in **[CATALOG_de.md](docs/CATALOG_de.md)**, such dir raus was du brauchst, sag Claude er soll es installieren:
 
 **Von GitHub** (kein Clone nötig):
 ```
@@ -27,40 +47,20 @@ Kopiere den Skill aus https://github.com/101mare/skill-library/tree/main/skills/
 Kopiere den Skill aus ~/skill-library/skills/workflow/tdd/SKILL.md in mein Projekt
 ```
 
-**Global** (Symlink nach `~/.claude/` — in allen Projekten verfügbar, Updates via `git pull` gelten überall):
+**Global** (Symlink — überall verfügbar, Updates via `git pull`):
 ```bash
 ln -s ~/skill-library/skills/workflow/tdd ~/.claude/skills/tdd
 ```
 
-Claude liest die Datei, kopiert sie in dein Projekt unter `.claude/skills/` (oder `.claude/agents/`) und aktiviert sie automatisch. Die vollständige Liste findest du in **[CATALOG_de.md](docs/CATALOG_de.md)**.
+Claude liest die Datei, kopiert sie nach `.claude/skills/` (oder `.claude/agents/`) und aktiviert sie automatisch.
 
-## Warum es das gibt
-
-CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jedes Projekt kopiert. Agents mit generischen Labels wie "You are an expert" zeigen [keine messbare Verbesserung](https://arxiv.org/abs/2308.07702) gegenüber gar keinem Label.
-
-Diese Library löst das mit **drei Schichten**: Rules (immer geladen, prägen Verhalten) → Skills (on demand geladen, vermitteln Workflows) → Agents (isolierte Subprozesse, erledigen delegierte Arbeit). Jede Schicht hat eine klare Aufgabe, und nichts vermischt sich. Die vollständige Herleitung — inklusive der Forschung hinter dem Agent-Design — steht in **[ARTICLE_de.md](docs/ARTICLE_de.md)**.
-
-## Hier starten — Die fünf Kern-Skills
-
-Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
-
-1. **prompt-builder** — Stellt klärende Fragen zu deinem Ziel und formt daraus einen strukturierten Prompt — ob für einen Plan, die direkte Umsetzung oder jede andere Aufgabe.
-2. **plan-review** — Vier parallele Review-Agents prüfen Architektur-Fit, Conventions, Risiken und Requirements. Ampel-Verdict *vor* dem Code.
-3. **tdd** — Echtes RED-GREEN-REFACTOR mit Agent-Orchestrierung. Tests definieren Verhalten, nicht bestätigen Code.
-4. **systematic-debugging** — 4-Phasen-Methodik: Reproduzieren → Isolieren → Root-Cause → Fix+Absichern.
-5. **session-verify** — End-of-Session Review: Security, Code-Qualität, Architektur, saubere Imports, keine liegengebliebenen TODOs. Nichts geht ungeprüft raus.
-
-Die Logik: **Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren**. Der gesamte Zyklus, fünf Skills.
-
-> **Hinweis:** Das ist ein defensiver, tokenintensiver Ansatz — plan-review und session-verify spawnen jeweils mehrere Agents. Wer schnell und günstig arbeiten will: tdd + systematic-debugging allein decken die Kernarbeit ab.
-
-## Was drin steckt
+## Wie es funktioniert
 
 ```
 skill-library/
 ├── docs/                       # CATALOG + ARTICLE (EN + DE)
 ├── templates/
-│   └── CLAUDE.md.template      # Generische CLAUDE.md für neue Projekte
+│   └── CLAUDE.md.template      # Produktionsreife CLAUDE.md für neue Projekte
 ├── rules/                      # Immer geladene Verhaltensregeln
 ├── skills/
 │   ├── meta/                   # Skills, Agents und Teams bauen
@@ -76,36 +76,27 @@ skill-library/
     └── build/                  # Code-Generierung & Modifikation
 ```
 
-**Skills** vermitteln Claude spezialisiertes Wissen — TDD-Zyklen, Debugging-Methodik, API-Design, DI-Container. Sie aktivieren sich automatisch, wenn Claude den richtigen Kontext erkennt.
+**Rules** setzen globales Verhalten — Coding Conventions, Scope-Disziplin, Security-Defaults. Immer geladen, prägen jede Interaktion.
 
-**Agents** sind isolierte Subprozesse, die Claude für bestimmte Aufgaben startet — Code Review, Dead-Code-Erkennung, Tests schreiben. Sie erhalten keinen Parent-Kontext und liefern ein Ergebnis.
+**Skills** vermitteln Claude spezialisierte Workflows — TDD-Zyklen, Debugging-Methodik, API-Design. Header immer sichtbar; vollständiger Inhalt lädt on demand.
 
-**Rules** setzen globales Verhalten: Coding Conventions, Scope-Disziplin, Security-Defaults, Selbstverbesserung durch Korrekturen.
+**Agents** sind isolierte Subprozesse für spezifische Aufgaben — Code Review, Dead-Code-Erkennung, Tests schreiben. Kein Parent-Kontext rein, Ergebnis raus.
 
-Wichtiger Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skill wie `plan-review` startet 4 Agents parallel und aggregiert deren Ergebnisse zu einem einzigen Verdict.
+Der zentrale Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skill wie `plan-review` startet 4 Agents parallel und aggregiert deren Verdicts.
 
-## Kernkonzepte
+## Design-Prinzipien
 
-**Drei Schichten** — Rules (immer geladen) → Skills (on demand) → Agents (delegiert). Rules prägen jede Interaktion. Skills aktivieren sich bei Bedarf. Agents laufen als isolierte Subprozesse mit eigenen Tools und eigenem Kontext.
+**Agent Soul** — Generische Labels ("You are an expert") haben keinen signifikanten Effekt ([NAACL 2024](https://arxiv.org/abs/2308.07702)). Was funktioniert: spezifische Identität, Anti-Patterns, produktive Schwächen. Jeder Agent in dieser Library baut auf dieser Forschung auf.
 
-**Agent Soul** — Generische Labels ("You are an expert") haben keinen statistisch signifikanten Effekt ([NAACL 2024](https://arxiv.org/abs/2308.07702)). Was funktioniert: spezifische Identität, Anti-Patterns zum Vermeiden, produktive Schwächen. Jede Agent-Datei in dieser Library baut auf dieser Forschung auf.
+**Progressive Disclosure** — Skill-Header laden, damit Claude weiß was verfügbar ist. Vollständige `SKILL.md` lädt on demand. Detaillierte `reference.md`-Dateien laden nur bei Bedarf. Context-Budget bleibt knapp.
 
-**Progressive Disclosure** — Skill-Header (Name + Beschreibung) sind immer geladen, damit Claude weiß, was verfügbar ist. Die vollständige `SKILL.md` lädt on demand. Detaillierte `reference.md`-Dateien laden nur bei Bedarf. Das hält das Context-Budget knapp.
-
-## Context-Kosten
-
-Jeder installierte Skill kostet Token durch seine Header-Beschreibung — bei jedem API-Call. 27 Skills mit je 3-4 Zeilen sind ~100 Zeilen permanenter System-Prompt. Installiere selektiv: Die fünf Kern-Skills oben decken die meisten Bedürfnisse ab. Füge Spezialisten hinzu, wenn dein Projekt sie braucht.
-
-## CLAUDE.md Template
-
-Ein produktionsreifes CLAUDE.md-Template findest du unter `templates/CLAUDE.md.template`.
-
-Deckt Architektur, Commands, Import-Konventionen, Key Patterns und Konfiguration ab. Generische Regeln (DRY, Agent-Verhalten, Security) leben in `rules/` und müssen hier nicht wiederholt werden.
+**Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. 27 Skills ≈ 100 Zeilen permanenter System-Prompt. Selektiv installieren.
 
 ## Weiterführend
 
 - **[CATALOG_de.md](docs/CATALOG_de.md)** — Vollständiger Katalog aller Skills und Agents
-- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Der vollständige Deep Dive: Warum drei Schichten statt einer großen CLAUDE.md, wie man Agents eine "Seele" gibt (gestützt auf NAACL 2024 Forschung), Context-Budget-Management und die Lessons Learned beim Bau von 27 Skills. Wenn du das *Denken* hinter dieser Library verstehen willst, fang hier an.
+- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned beim Bau von 27 Skills
+- **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Produktionsreife CLAUDE.md für neue Projekte
 
 ---
 
