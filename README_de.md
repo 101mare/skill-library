@@ -13,7 +13,7 @@
 
 ## Schnellstart
 
-Sag Claude, welchen Skill, Agent oder Rule du willst. Drei Wege zur Installation:
+Schau in **[CATALOG_de.md](docs/CATALOG_de.md)** was es gibt, such dir raus was du brauchst, und sag Claude er soll es installieren. Drei Wege:
 
 **Von GitHub** (kein Clone nötig):
 ```
@@ -106,5 +106,7 @@ Deckt Architektur, Commands, Import-Konventionen, Key Patterns und Konfiguration
 - **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Der vollständige Deep Dive: Warum drei Schichten statt einer großen CLAUDE.md, wie man Agents eine "Seele" gibt (gestützt auf NAACL 2024 Forschung), Context-Budget-Management und die Lessons Learned beim Bau von 27 Skills. Wenn du das *Denken* hinter dieser Library verstehen willst, fang hier an.
 
 ---
+
+**Wichtige Docs:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
 **English version:** [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
