@@ -1,6 +1,6 @@
 # Architecture Over Chaos: A Modern Skill Library for Claude Code & Co
 
-> [README](../README.md) | [CATALOG](CATALOG.md) | **ARTICLE**
+> [README](../README.md) | [CATALOG](CATALOG.md) | [SKILLS-EXPLAINED](SKILLS-EXPLAINED.md) | **ARTICLE**
 
 > [!NOTE]
 > This repo contains Anthropic's implementation of Skills for Claude. For information about the Agent Skills Standard, see [agentskills.io](https://agentskills.io).
@@ -219,6 +219,9 @@ Four skill categories:
 
 ### The SKILL.md Format
 
+> [!NOTE]
+> For a conceptual introduction to *why* skills work — progressive disclosure, file system structure, and bundled resources — see [SKILLS-EXPLAINED.md](SKILLS-EXPLAINED.md). This section covers the *practical how*.
+
 Skills are folders with instructions, scripts, and resources that Claude loads dynamically to perform better on specialized tasks. Skills teach Claude to accomplish certain tasks repeatably — whether it's creating documents according to your company's brand guidelines, analyzing data with your organization's specific workflows, or automating personal tasks.
 
 Further reading:
@@ -277,31 +280,11 @@ The meta-skill `skill-builder` in this library uses exactly these best practices
 
 <p align="center"><em>Headers are always visible, details are loaded on demand.</em></p>
 
-Skills can grow beyond a single SKILL.md. When the context gets too large or is only relevant in certain scenarios, a skill can bundle additional files in its folder and reference them by name from the SKILL.md. Claude navigates and reads these files only when needed. The three levels work like nested containers:
+Skills can grow beyond a single SKILL.md. A skill can bundle additional files in its folder — `reference.md`, `examples.md`, `anti-patterns.md` — and reference them by name from the SKILL.md. Claude navigates and reads these files only when needed.
 
-```
-┌─────────────────────────────────────────────────────┐
-│  Level 1: Skill Headers (always loaded)              │
-│  name + description → Claude knows what's available  │
-│                                                      │
-│  ┌───────────────────────────────────────────────┐   │
-│  │  Level 2: SKILL.md (loaded on demand)         │   │
-│  │  Core instructions, triggers, examples        │   │
-│  │                                               │   │
-│  │  ┌───────────────────────────────────────┐    │   │
-│  │  │  Level 3+: Additional files           │    │   │
-│  │  │  reference.md, forms.md, examples.md  │    │   │
-│  │  │  (only read when truly needed)        │    │   │
-│  │  └───────────────────────────────────────┘    │   │
-│  └───────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────┘
-```
+For the full conceptual explanation of progressive disclosure — the three-level model, the library analogy, and why context windows make this essential — see [SKILLS-EXPLAINED.md](SKILLS-EXPLAINED.md#progressive-disclosure).
 
-<p align="center"><em>The three levels work like nested containers — headers are always visible, details are loaded progressively.</em></p>
-
-Like a well-organized manual: table of contents first, then specific chapters, then the detailed appendix. Since agents with filesystem access don't need to load the entire skill into the context window, the amount of context a skill can bundle is practically unlimited.
-
-SKILL.md files over 500 lines will only be partially processed. The solution: keep SKILL.md compact, details live in separate files like `reference.md`.
+**The practical rule:** SKILL.md files over 500 lines will only be partially processed. Keep SKILL.md compact; details live in separate files like `reference.md`.
 
 More on this in the blog post: [Equipping agents for the real world with Agent Skills](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills)
 

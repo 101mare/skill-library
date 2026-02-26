@@ -9,9 +9,9 @@
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
-> **Docs:** [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
+> **Docs:** [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
 >
-> Deutsche Version: [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+> Deutsche Version: [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
 ## The Problem
 
@@ -134,9 +134,10 @@ The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 ## Further Reading
 
 - **[CATALOG.md](docs/CATALOG.md)** — Full catalog of all skills and agents
+- **[SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md)** — Why skills work: progressive disclosure, file system structure, and bundled resources
 - **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons from building 27 skills
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Production-ready CLAUDE.md for new projects
 
 ---
 
-**Deutsche Version:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+**Deutsche Version:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)

@@ -1,6 +1,6 @@
 # Skill Library — Catalog
 
-> [README](../README.md) | **CATALOG** | [ARTICLE](ARTICLE.md)
+> [README](../README.md) | **CATALOG** | [SKILLS-EXPLAINED](SKILLS-EXPLAINED.md) | [ARTICLE](ARTICLE.md)
 
 > [!TIP]
 > To install any skill or agent below, see [Quickstart](../README.md#quickstart) in the README.
