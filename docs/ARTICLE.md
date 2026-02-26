@@ -1,5 +1,7 @@
 # Architecture Over Chaos: A Modern Skill Library for Claude Code & Co
 
+> [README](../README.md) | [CATALOG](CATALOG.md) | **ARTICLE**
+
 > [!NOTE]
 > This repo contains Anthropic's implementation of Skills for Claude. For information about the Agent Skills Standard, see [agentskills.io](https://agentskills.io).
 
