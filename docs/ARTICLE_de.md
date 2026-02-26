@@ -1,6 +1,6 @@
 # Architektur statt Chaos: Eine moderne Skill-Library für Claude Code & co
 
-> [README](../README_de.md) | [KATALOG](CATALOG_de.md) | **ARTICLE**
+> [README](../README_de.md) | [KATALOG](CATALOG_de.md) | [SKILLS-EXPLAINED](SKILLS-EXPLAINED_de.md) | **ARTICLE**
 
 > [!NOTE]
 > Dieses Repo enthält Anthropics Implementierung von Skills für Claude. Für Informationen zum Agent Skills Standard, siehe [agentskills.io](https://agentskills.io).
@@ -219,6 +219,9 @@ Vier Skill-Kategorien:
 
 ### Das SKILL.md Format
 
+> [!NOTE]
+> Für eine konzeptionelle Einführung, *warum* Skills funktionieren — Progressive Disclosure, Dateisystem-Struktur und gebündelte Ressourcen — siehe [SKILLS-EXPLAINED_de.md](SKILLS-EXPLAINED_de.md). Dieser Abschnitt behandelt das *praktische Wie*.
+
 Skills sind Ordner mit Instruktionen, Skripten und Ressourcen, die Claude dynamisch lädt, um bei spezialisierten Aufgaben besser zu arbeiten. Skills lehren Claude, bestimmte Aufgaben wiederholbar zu erledigen — sei es Dokumente nach den Markenrichtlinien deines Unternehmens zu erstellen, Daten mit den spezifischen Workflows deiner Organisation zu analysieren oder persönliche Aufgaben zu automatisieren.
 
 Weiterführende Informationen:
@@ -277,31 +280,11 @@ Der Meta-Skill `skill-builder` in dieser Library nutzt genau diese Best Practice
 
 <p align="center"><em>Header sind immer sichtbar, Details werden bei Bedarf geladen.</em></p>
 
-Skills können über eine einzelne SKILL.md hinauswachsen. Wenn der Kontext zu groß wird oder nur in bestimmten Szenarien relevant ist, kann ein Skill zusätzliche Dateien im Skill-Ordner bündeln und per Name aus der SKILL.md referenzieren. Claude navigiert und liest diese Dateien nur bei Bedarf. Die drei Ebenen funktionieren wie verschachtelte Container:
+Skills können über eine einzelne SKILL.md hinauswachsen. Ein Skill kann zusätzliche Dateien im Ordner bündeln — `reference.md`, `examples.md`, `anti-patterns.md` — und per Name aus der SKILL.md referenzieren. Claude navigiert und liest diese Dateien nur bei Bedarf.
 
-```
-┌─────────────────────────────────────────────────────┐
-│  Level 1: Skill Headers (immer geladen)             │
-│  name + description → Claude weiß was verfügbar ist │
-│                                                     │
-│  ┌───────────────────────────────────────────────┐  │
-│  │  Level 2: SKILL.md (bei Bedarf geladen)       │  │
-│  │  Core-Instruktionen, Trigger, Beispiele       │  │
-│  │                                               │  │
-│  │  ┌───────────────────────────────────────┐    │  │
-│  │  │  Level 3+: Zusatzdateien              │    │  │
-│  │  │  reference.md, forms.md, examples.md  │    │  │
-│  │  │  (nur gelesen wenn wirklich nötig)    │    │  │
-│  │  └───────────────────────────────────────┘    │  │
-│  └───────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────┘
-```
+Die vollständige konzeptionelle Erklärung von Progressive Disclosure — das Drei-Ebenen-Modell, die Bibliotheks-Analogie und warum Context Windows das notwendig machen — findest du in [SKILLS-EXPLAINED_de.md](SKILLS-EXPLAINED_de.md#progressive-disclosure).
 
-<p align="center"><em>Die drei Ebenen funktionieren wie verschachtelte Container — Header sind immer sichtbar, Details werden schrittweise geladen.</em></p>
-
-Wie ein gut organisiertes Handbuch: Inhaltsverzeichnis zuerst, dann spezifische Kapitel, dann der detaillierte Anhang. Da Agents mit Dateisystem-Zugriff nicht den gesamten Skill ins Context Window laden müssen, ist die Menge an Kontext, die ein Skill bündeln kann, praktisch unbegrenzt.
-
-SKILL.md Dateien über 500 Zeilen werden nur teilweise verarbeitet. Die Lösung: SKILL.md bleibt kompakt, Details leben in separaten Dateien wie `reference.md`.
+**Die praktische Regel:** SKILL.md-Dateien über 500 Zeilen werden nur teilweise verarbeitet. SKILL.md bleibt kompakt; Details leben in separaten Dateien wie `reference.md`.
 
 Mehr dazu im Blog-Post: [Equipping agents for the real world with Agent Skills](https://claude.com/blog/equipping-agents-for-the-real-world-with-agent-skills)
 

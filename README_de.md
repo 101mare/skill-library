@@ -9,9 +9,9 @@
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG_de.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
-> **Docs:** [CATALOG_de.md](docs/CATALOG_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+> **Docs:** [CATALOG_de.md](docs/CATALOG_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 >
-> English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
+> English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
 
 ## Das Problem
 
@@ -134,9 +134,10 @@ Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 ## Weiterführend
 
 - **[CATALOG_de.md](docs/CATALOG_de.md)** — Vollständiger Katalog aller Skills und Agents
+- **[SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md)** — Warum Skills funktionieren: Progressive Disclosure, Dateisystem-Struktur und gebündelte Ressourcen
 - **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned beim Bau von 27 Skills
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Produktionsreife CLAUDE.md für neue Projekte
 
 ---
 
-**English version:** [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [ARTICLE.md](docs/ARTICLE.md)
+**English version:** [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
