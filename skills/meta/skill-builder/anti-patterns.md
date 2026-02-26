@@ -54,7 +54,9 @@ from pypdf import PdfReader
 
 ## Checklist for Effective Skills
 
+### Structure & Content
 - [ ] Description is specific with trigger keywords
+- [ ] Description includes negative boundaries (what the skill does NOT handle)
 - [ ] Description written in third person
 - [ ] SKILL.md under 500 lines
 - [ ] Details in separate files (progressive disclosure)
@@ -68,3 +70,14 @@ from pypdf import PdfReader
 - [ ] No Windows-style paths
 - [ ] Required packages documented
 - [ ] MCP tools use fully qualified names
+
+### Verification Gate
+- [ ] Skill includes a verification/quality check section before delivery
+- [ ] Verification defines what "baseline output" looks like for this domain
+- [ ] Verification checks for differentiation — output must differ from what a default Claude would produce
+- [ ] Anti-patterns or banned patterns are listed explicitly (not vaguely)
+
+### Content Placement (Recency Bias)
+- [ ] Critical constraints appear at START of SKILL.md (right after frontmatter)
+- [ ] Verification gate appears at END of SKILL.md (freshest in memory during final pass)
+- [ ] Reference files have explicit loading triggers ("read X before Phase Y") not vague ones ("check if relevant")
