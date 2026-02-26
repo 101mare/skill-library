@@ -2,7 +2,7 @@
 
 # Skill Library
 
-27 skills, 5 agents, 4 rules — copy what you need, skip the rest.
+27 skills, 5 agents, 4 rules — plug into Claude Code, skip the prompt engineering.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG.md)
@@ -19,19 +19,43 @@ CLAUDE.md files grow into 500-line monsters. The same rules get copy-pasted acro
 
 This library fixes that with three layers — **Rules** (always loaded) → **Skills** (on demand) → **Agents** (isolated subprocesses) — each with a clear job and nothing bleeding across. The full rationale is in [ARTICLE.md](docs/ARTICLE.md).
 
+<details>
+<summary><strong>Before / After</strong></summary>
+
+**Before** — one CLAUDE.md doing everything:
+```
+# CLAUDE.md (500+ lines)
+You are an expert Python developer...
+Always use type hints...
+When reviewing code, check for...
+For TDD, follow these steps...
+[... 490 more lines ...]
+```
+
+**After** — three layers, each with a clear job:
+```
+rules/security.md          → always loaded (8 lines)
+skills/workflow/tdd/        → loads on demand when needed
+agents/review/reviewer.md  → isolated subprocess, zero bleed
+```
+</details>
+
 ## Start Here — The Core Five
 
 If you only install five skills, these cover the entire development cycle:
 
-1. **prompt-builder** — Asks clarifying questions, then turns vague requests into structured prompts.
-2. **plan-review** — Four parallel agents check architecture, conventions, risks, and requirements. Traffic light verdict *before* code exists.
-3. **tdd** — Real RED-GREEN-REFACTOR with agent orchestration. Tests define behavior, not confirm code.
-4. **systematic-debugging** — Reproduce → Isolate → Root-Cause → Fix+Defend.
-5. **session-verify** — End-of-session review: security, code quality, architecture, clean imports, no leftover TODOs.
+| Skill | What it does | Phase |
+|-------|-------------|-------|
+| **prompt-builder** | Turns vague requests into structured prompts | Prompt |
+| **plan-review** | 4 parallel agents check arch, conventions, risks, reqs | Plan |
+| **tdd** | RED-GREEN-REFACTOR with agent orchestration | Build + Test |
+| **systematic-debugging** | Reproduce → Isolate → Root-Cause → Fix | Debug |
+| **session-verify** | End-of-session security + quality review | Verify |
 
 **Prompt** → **Plan** → **Build + Test** → **Debug** → **Verify** — the entire cycle.
 
-> **Note:** plan-review and session-verify are token-intensive (multiple agents each). For speed: tdd + systematic-debugging alone cover the core work.
+> [!TIP]
+> plan-review and session-verify are token-intensive (multiple agents each). For speed: tdd + systematic-debugging alone cover the core work.
 
 ## Quickstart
 
@@ -53,6 +77,12 @@ ln -s ~/skill-library/skills/workflow/tdd ~/.claude/skills/tdd
 ```
 
 Claude reads the file, copies it to `.claude/skills/` (or `.claude/agents/`), and activates it automatically.
+
+Then tell Claude:
+
+> Use the tdd skill to add a user registration endpoint
+
+Claude reads the skill, runs RED-GREEN-REFACTOR, and ships tested code — no manual prompting needed.
 
 ## How It Works
 
@@ -84,13 +114,22 @@ skill-library/
 
 The key difference: Skills instruct, Agents work. A workflow skill like `plan-review` spawns 4 agents in parallel and aggregates their verdicts.
 
-## Design Principles
+<details>
+<summary><strong>Design Principles</strong></summary>
 
 **Agent Soul** — Generic labels ("You are an expert") have zero significant effect ([NAACL 2024](https://arxiv.org/abs/2308.07702)). What works: specific identity, anti-patterns to avoid, productive weaknesses. Every agent in this library is built on that research.
 
 **Progressive Disclosure** — Skill headers load so Claude knows what's available. Full `SKILL.md` loads on demand. Detailed `reference.md` files load only when needed. Context budget stays tight.
 
 **Context Costs** — Every installed skill costs tokens through its header — on every API call. 27 skills ≈ 100 lines of permanent system prompt. Install selectively.
+
+</details>
+
+## Contributing
+
+Found a bug? Have an idea for a new skill? [Open an issue](https://github.com/101mare/skill-library/issues) or submit a PR.
+
+The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder), [team-builder](skills/meta/team-builder)) show how to create skills and agents that follow the library's patterns.
 
 ## Further Reading
 

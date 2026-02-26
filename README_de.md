@@ -2,7 +2,7 @@
 
 # Skill Library
 
-27 Skills, 5 Agents, 4 Rules — kopiere was du brauchst, lass den Rest.
+27 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG_de.md)
@@ -19,19 +19,43 @@ CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jed
 
 Diese Library löst das mit drei Schichten — **Rules** (immer geladen) → **Skills** (on demand) → **Agents** (isolierte Subprozesse) — jede mit klarer Aufgabe, nichts vermischt sich. Die vollständige Herleitung steht in [ARTICLE_de.md](docs/ARTICLE_de.md).
 
+<details>
+<summary><strong>Vorher / Nachher</strong></summary>
+
+**Vorher** — eine CLAUDE.md für alles:
+```
+# CLAUDE.md (500+ Zeilen)
+You are an expert Python developer...
+Always use type hints...
+When reviewing code, check for...
+For TDD, follow these steps...
+[... 490 weitere Zeilen ...]
+```
+
+**Nachher** — drei Schichten, jede mit klarer Aufgabe:
+```
+rules/security.md          → immer geladen (8 Zeilen)
+skills/workflow/tdd/        → lädt on demand bei Bedarf
+agents/review/reviewer.md  → isolierter Subprozess, kein Bleed
+```
+</details>
+
 ## Hier starten — Die fünf Kern-Skills
 
 Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
 
-1. **prompt-builder** — Stellt klärende Fragen und formt vage Anfragen in strukturierte Prompts.
-2. **plan-review** — Vier parallele Agents prüfen Architektur, Conventions, Risiken und Requirements. Ampel-Verdict *vor* dem Code.
-3. **tdd** — Echtes RED-GREEN-REFACTOR mit Agent-Orchestrierung. Tests definieren Verhalten, nicht bestätigen Code.
-4. **systematic-debugging** — Reproduzieren → Isolieren → Root-Cause → Fix+Absichern.
-5. **session-verify** — End-of-Session Review: Security, Code-Qualität, Architektur, saubere Imports, keine TODOs.
+| Skill | Was er tut | Phase |
+|-------|-----------|-------|
+| **prompt-builder** | Formt vage Anfragen in strukturierte Prompts | Prompt |
+| **plan-review** | 4 parallele Agents prüfen Arch, Conventions, Risiken, Reqs | Plan |
+| **tdd** | RED-GREEN-REFACTOR mit Agent-Orchestrierung | Bauen + Testen |
+| **systematic-debugging** | Reproduzieren → Isolieren → Root-Cause → Fix | Debug |
+| **session-verify** | End-of-Session Security- + Qualitäts-Review | Verify |
 
 **Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren** — der gesamte Zyklus.
 
-> **Hinweis:** plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
+> [!TIP]
+> plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
 
 ## Schnellstart
 
@@ -53,6 +77,12 @@ ln -s ~/skill-library/skills/workflow/tdd ~/.claude/skills/tdd
 ```
 
 Claude liest die Datei, kopiert sie nach `.claude/skills/` (oder `.claude/agents/`) und aktiviert sie automatisch.
+
+Dann sag Claude:
+
+> Nutze den tdd Skill um einen User-Registration-Endpoint hinzuzufügen
+
+Claude liest den Skill, führt RED-GREEN-REFACTOR durch und liefert getesteten Code — kein manuelles Prompting nötig.
 
 ## Wie es funktioniert
 
@@ -84,13 +114,22 @@ skill-library/
 
 Der zentrale Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skill wie `plan-review` startet 4 Agents parallel und aggregiert deren Verdicts.
 
-## Design-Prinzipien
+<details>
+<summary><strong>Design-Prinzipien</strong></summary>
 
 **Agent Soul** — Generische Labels ("You are an expert") haben keinen signifikanten Effekt ([NAACL 2024](https://arxiv.org/abs/2308.07702)). Was funktioniert: spezifische Identität, Anti-Patterns, produktive Schwächen. Jeder Agent in dieser Library baut auf dieser Forschung auf.
 
 **Progressive Disclosure** — Skill-Header laden, damit Claude weiß was verfügbar ist. Vollständige `SKILL.md` lädt on demand. Detaillierte `reference.md`-Dateien laden nur bei Bedarf. Context-Budget bleibt knapp.
 
 **Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. 27 Skills ≈ 100 Zeilen permanenter System-Prompt. Selektiv installieren.
+
+</details>
+
+## Mitwirken
+
+Bug gefunden? Idee für einen neuen Skill? [Issue öffnen](https://github.com/101mare/skill-library/issues) oder PR einreichen.
+
+Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder), [team-builder](skills/meta/team-builder)) zeigen wie man Skills und Agents baut, die den Patterns der Library folgen.
 
 ## Weiterführend
 
