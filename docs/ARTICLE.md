@@ -23,7 +23,7 @@
 6. [Workflow Skills](#workflow-skills-skills-that-control-agents) — Skills that orchestrate agents
 7. [Agent Teams](#agent-teams-when-subagents-arent-enough) — When subagents aren't enough
 8. [Ralph Loop](#advanced-ralph-loop--autonomous-work-loops) — Autonomous iteration loops
-9. [Context Management](#context-management-27-skills-but-please-not-all-at-once) — Which skills to actually install
+9. [Context Management](#context-management-28-skills-but-please-not-all-at-once) — Which skills to actually install
 10. [How to Use It](#how-to-use-it) — Workflow for adopting the library
 11. [What I Got Wrong](#what-i-got-wrong-at-first) — Lessons from building this
 12. [Closing](#closing)

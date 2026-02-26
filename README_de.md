@@ -2,10 +2,10 @@
 
 # Skill Library
 
-27 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
+28 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG_de.md)
+[![Skills: 28](https://img.shields.io/badge/Skills-28-blue.svg)](docs/CATALOG_de.md)
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG_de.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
@@ -56,6 +56,7 @@ Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyk
 
 > [!TIP]
 > plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
+> Für kleinere Tasks, die keine Multi-Agent-Planung brauchen: **[careful-mode](skills/workflow/careful-mode/SKILL.md)** — ein strukturierter 6-Phasen-Workflow ohne Agent-Overhead.
 
 ## Schnellstart
 
@@ -121,7 +122,7 @@ Der zentrale Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skil
 
 **Progressive Disclosure** — Skill-Header laden, damit Claude weiß was verfügbar ist. Vollständige `SKILL.md` lädt on demand. Detaillierte `reference.md`-Dateien laden nur bei Bedarf. Context-Budget bleibt knapp.
 
-**Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. 27 Skills ≈ 100 Zeilen permanenter System-Prompt. Selektiv installieren.
+**Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. 28 Skills ≈ 100 Zeilen permanenter System-Prompt. Selektiv installieren.
 
 </details>
 
@@ -135,7 +136,7 @@ Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 
 - **[CATALOG_de.md](docs/CATALOG_de.md)** — Vollständiger Katalog aller Skills und Agents
 - **[SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md)** — Warum Skills funktionieren: Progressive Disclosure, Dateisystem-Struktur und gebündelte Ressourcen
-- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned beim Bau von 27 Skills
+- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned beim Bau von 28 Skills
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Produktionsreife CLAUDE.md für neue Projekte
 
 ---

@@ -32,7 +32,7 @@ Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyk
 
 ---
 
-## Skills (27)
+## Skills (28)
 
 *Laden on demand — vermitteln Claude spezialisierte Workflows.*
 
@@ -63,7 +63,7 @@ Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyk
 | [frontend-design](../skills/build/frontend/frontend-design/SKILL.md) | Erstellt markante, produktionsreife Frontend-Interfaces mit hoher Designqualität, die generische KI-Ästhetik vermeiden. |
 | [warmgold-frontend](../skills/build/frontend/warmgold-frontend/SKILL.md) | Warmes, iOS-inspiriertes Design-System mit Component-Patterns für Vanilla-HTML/CSS/JS-Frontends. |
 
-### Workflow (7)
+### Workflow (8)
 
 | Name | Beschreibung |
 |------|-------------|
@@ -74,6 +74,7 @@ Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyk
 | [deep-research](../skills/workflow/deep-research/SKILL.md) | Strukturierter Research-Workflow (Frage → Quellen → Analyse → Synthese → Dokumentation) für technische Entscheidungen. |
 | [ralph-loop](../skills/workflow/ralph-loop/SKILL.md) | Autonomer Arbeitsmodus — Claude arbeitet selbstständig an einer Aufgabe weiter, bis sie abgeschlossen oder das Iterationslimit erreicht ist. |
 | [ralph-loop-prompt-builder](../skills/workflow/ralph-loop-prompt-builder/SKILL.md) | Hilft beim Erstellen effektiver Prompts für das Ralph-Loop-System durch Klärungsfragen und strukturierte Ausgabe. |
+| [careful-mode](../skills/workflow/careful-mode/SKILL.md) | Strukturierter 6-Phasen-Arbeitsmodus (Verstehen → Planen → Pre-Mortem → Ausführen → Verifizieren → Liefern) für Tasks, die Qualität ohne Multi-Agent-Overhead brauchen. |
 
 ### Patterns (8)
 

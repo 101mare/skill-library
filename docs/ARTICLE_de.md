@@ -8,7 +8,7 @@
 ### TL;DR
 
 - **Drei Ebenen statt einer Datei** — Rules (immer geladen) + Skills (bei Bedarf) + Agents (isolierte Subprozesse)
-- **27 Skills, 5 Agents, 4 Rules** — ein Baukasten, kein Framework. Pro Projekt kopieren, was man braucht
+- **28 Skills, 5 Agents, 4 Rules** — ein Baukasten, kein Framework. Pro Projekt kopieren, was man braucht
 - **Agent-"Seelen" schlagen platte Labels** — Forschung zeigt: Experiential Identities verbessern die Accuracy um 10-60%
 - **Skills lehren, Agents handeln** — Skills laden Wissen in den aktuellen Kontext, Agents laufen in Isolation
 - **Weniger ist mehr** — gehe bedacht damit um, welche Skills und Agents du installierst. Jeder Header kostet Token bei jedem Call
@@ -23,7 +23,7 @@
 6. [Workflow Skills](#workflow-skills-skills-die-agents-steuern) — Skills die Agents orchestrieren
 7. [Agent Teams](#agent-teams-wenn-subagents-nicht-reichen) — Wenn Subagents nicht reichen
 8. [Ralph Loop](#advanced-ralph-loop--autonome-arbeitsschleifen) — Autonome Iterationsschleifen
-9. [Context Management](#context-management-27-skills-aber-bitte-nicht-alle-gleichzeitig) — Welche Skills man tatsächlich installieren sollte
+9. [Context Management](#context-management-28-skills-aber-bitte-nicht-alle-gleichzeitig) — Welche Skills man tatsächlich installieren sollte
 10. [Wie man es nutzt](#wie-man-es-nutzt) — Workflow für die Übernahme der Library
 11. [Was ich falsch gemacht habe](#was-ich-anfangs-falsch-gemacht-habe) — Lessons aus dem Aufbau
 12. [Closing](#closing)
@@ -42,7 +42,7 @@ Oder: Du hast Skills und Agents im gleichen Ordner, behandelst sie gleich, und w
 
 Ich habe mir irgendwann die Frage gestellt: Was wäre, wenn ich die generischen Teile meiner Claude-Code-Konfiguration einmal richtig aufbaue und dann in jedes Projekt mitnehme? Nicht als monolithisches Framework, sondern als Baukasten — universelle Regeln, abrufbares Wissen und delegierte Expertise sauber getrennt.
 
-Das Ergebnis ist eine Skill-Library mit 4 Rules, 27 Skills, 5 Agents und einem CLAUDE.md Template. Es hat verändert, wie jedes meiner Projekte mit Claude arbeitet. Nicht weil die einzelnen Teile so besonders wären, sondern weil die Trennung von Regeln, Wissen und Expertise stimmt.
+Das Ergebnis ist eine Skill-Library mit 4 Rules, 28 Skills, 5 Agents und einem CLAUDE.md Template. Es hat verändert, wie jedes meiner Projekte mit Claude arbeitet. Nicht weil die einzelnen Teile so besonders wären, sondern weil die Trennung von Regeln, Wissen und Expertise stimmt.
 
 ---
 
@@ -52,7 +52,7 @@ Die Library trennt drei Concerns, die in den meisten Setups vermischt werden:
 
 **Rules** sind universelles Verhalten. Sie sind immer geladen, in jedem Projekt, bei jedem Prompt. Vier Dateien: Coding Conventions, Agent Behavior, Security, Self-Improvement.
 
-**Skills** sind abrufbares Wissen. Sie werden geladen, wenn sie relevant sind — wie ein Handbuch aufschlagen. 27 Skills in vier Kategorien.
+**Skills** sind abrufbares Wissen. Sie werden geladen, wenn sie relevant sind — wie ein Handbuch aufschlagen. 28 Skills in vier Kategorien.
 
 **Agents** sind delegierte Expertise mit eigenem Scope. Sie laufen als isolierte Subprozesse, bekommen null Kontext vom Parent-Process und liefern ein Ergebnis zurück. 5 Agents in vier Kategorien.
 
@@ -316,7 +316,7 @@ Skills beim Bauen, Agents beim Prüfen. Das ist kein Zufall — es spiegelt wide
 
 So viel dazu, was Skills und Agents *sind*. Die nächste Frage: Was macht einen Agent tatsächlich *gut*?
 
-<p align="center"><em>Bis hierher: Drei-Ebenen-Architektur, vier Rules, 27 Skills und ihre Zuordnung zu Entwicklungsphasen. Ab hier: wie man effektive Agents schreibt, Workflows orchestriert und Context-Budgets verwaltet.</em></p>
+<p align="center"><em>Bis hierher: Drei-Ebenen-Architektur, vier Rules, 28 Skills und ihre Zuordnung zu Entwicklungsphasen. Ab hier: wie man effektive Agents schreibt, Workflows orchestriert und Context-Budgets verwaltet.</em></p>
 
 ---
 
@@ -493,17 +493,17 @@ Der Ralph Loop schließt die Automatisierungslücke. Aber bei all diesen Tools b
 
 ---
 
-## Context Management: 27 Skills, aber bitte nicht alle gleichzeitig
+## Context Management: 28 Skills, aber bitte nicht alle gleichzeitig
 
 <p align="center"><img src="images/context-management.png" width="50%" alt="Context Management"></p>
 
 <p align="center"><em>Jeder installierte Skill kostet Token bei jedem API-Call — wähle weise.</em></p>
 
-Die Library hat 27 Skills. Heißt das, du lädst alle 27 in jedes Projekt? Nein. Und hier ist es wichtig zu verstehen, warum.
+Die Library hat 28 Skills. Heißt das, du lädst alle 28 in jedes Projekt? Nein. Und hier ist es wichtig zu verstehen, warum.
 
 Wie oben beschrieben: Skill-Header (`name` + `description`) werden Claude bei jedem Prompt mitgegeben. Das ist der Mechanismus, mit dem Claude weiß, welche Skills verfügbar sind.
 
-Aber es hat einen Preis: Jeder installierte Skill kostet Token allein durch seinen Header — bei jedem einzelnen API-Call. 27 Skills mit je 3-4 Zeilen Description sind ~100 Zeilen System-Prompt, die du permanent mitschleppst. Das sind Token, die dir für die eigentliche Arbeit fehlen. Dazu kommen Rules, CLAUDE.md, Agent-Definitionen und der Conversation-Kontext. Das Context Window ist endlich.
+Aber es hat einen Preis: Jeder installierte Skill kostet Token allein durch seinen Header — bei jedem einzelnen API-Call. 28 Skills mit je 3-4 Zeilen Description sind ~100 Zeilen System-Prompt, die du permanent mitschleppst. Das sind Token, die dir für die eigentliche Arbeit fehlen. Dazu kommen Rules, CLAUDE.md, Agent-Definitionen und der Conversation-Kontext. Das Context Window ist endlich.
 
 Das ist keine Vermutung — es ist wissenschaftlich belegt. Der [IFScale-Benchmark](https://arxiv.org/abs/2507.11538) (2025) zeigt, dass die Instruction-Following-Accuracy ab ~100-150 Instruktionen messbar sinkt, wobei Modelle zunehmend Regeln *auslassen* statt sie falsch zu befolgen (30:1 Auslassungs-zu-Fehler-Verhältnis bei hoher Dichte). [Context Rot](https://research.trychroma.com/context-rot) (Chroma Research) belegt, dass Performance-Degradation bei wachsendem Input universell über alle Modelle auftritt — selbst wenn relevante Informationen perfekt auffindbar sind. Am eindrücklichsten: [Auf der EMNLP 2025 vorgestellte Forschung](https://arxiv.org/abs/2510.05381) fand, dass Context-Länge *allein* 14-85% Performance-Verlust verursacht, selbst bei perfektem Retrieval. Das effektive Kontextfenster ist deutlich kleiner als das nominale. Progressive Disclosure — nur laden was gebraucht wird, wenn es gebraucht wird — ist die Antwort.
 
@@ -521,6 +521,10 @@ Die Logik: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Bauen + 
 
 > [!IMPORTANT]
 > Das ist ein defensiver, tokenintensiver Ansatz — plan-review und session-verify spawnen jeweils mehrere Agents. Wer schnell und günstig arbeiten will: tdd + systematic-debugging allein decken die Kernarbeit ab.
+
+### Wenn die fünf Kern-Skills zu viel sind: careful-mode
+
+Nicht jeder Task braucht vier parallele Review-Agents. Ein Bug-Fix, ein kleines Feature, ein Refactoring — die profitieren von Struktur, aber nicht von der vollen Zeremonie. **careful-mode** füllt diese Lücke: ein 6-Phasen-Workflow (Verstehen → Planen → Pre-Mortem → Ausführen → Verifizieren → Liefern), der komplett im Hauptkontext läuft, ohne Agent-Overhead. Er skaliert automatisch — triviale Tasks komprimieren Phase 1-3 in einen Satz, komplexe Tasks bekommen die volle Behandlung. Man kann ihn sich als strukturierten Mittelweg zwischen rohem Prompting und den fünf Kern-Skills vorstellen.
 
 ### Was bewusst fehlt
 
