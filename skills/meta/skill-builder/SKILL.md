@@ -122,6 +122,22 @@ Concrete input/output examples.
    - What: The capabilities
    - When: Trigger conditions/keywords
 
+4. **Define negative boundaries — what the skill does NOT handle**
+   ```yaml
+   # GOOD: Clear boundaries prevent false triggers
+   description: |
+     Designs REST API endpoints with FastAPI, including routing,
+     models, and error responses. Recognizes: "API endpoint",
+     "FastAPI route", "REST design".
+     Does NOT handle: GraphQL, WebSocket connections, or
+     database migration logic.
+
+   # BAD: No boundaries — fires on anything API-related
+   description: Helps with API development
+   ```
+
+   Why this matters: Without negative boundaries, skills activate on adjacent-but-wrong requests. A skill for "API design" shouldn't fire when someone asks about database migrations just because both involve backend work. Explicit exclusions help Claude route to the right skill and stay silent when none applies.
+
 ---
 
 ## allowed-tools Configuration
@@ -203,7 +219,43 @@ with pdfplumber.open("file.pdf") as pdf:
 ```
 ```
 
-### 2. Progressive Disclosure
+### 2. Content Placement (Recency Bias)
+
+LLMs pay strongest attention to the **beginning** and **end** of their context. The middle gets weakest attention. Use this:
+
+```markdown
+---
+name: my-skill
+description: ...
+---
+
+# Skill Name
+
+## Critical Constraints          ← START: non-negotiable rules here
+- Never do X
+- Always enforce Y
+
+## Workflow                      ← MIDDLE: main instructions
+Step 1: ...
+Step 2: ...
+
+## Verification                  ← END: quality gate here (freshest in memory)
+Before delivering, check:
+1. Baseline test
+2. Differentiation check
+```
+
+For **reference files**, use explicit loading triggers in SKILL.md:
+
+```markdown
+# GOOD: Specific trigger — gets followed
+Read anti-patterns.md before delivering final output.
+
+# BAD: Vague trigger — gets skipped under context pressure
+Check anti-patterns.md if relevant.
+```
+
+### 3. Progressive Disclosure
 
 Keep SKILL.md **under 500 lines**. Put detailed content in separate files.
 
@@ -219,7 +271,7 @@ Keep SKILL.md **under 500 lines**. Put detailed content in separate files.
 
 Claude loads additional files **only when needed** - no context penalty.
 
-### 3. One Level Deep References
+### 4. One Level Deep References
 
 ```markdown
 # BAD: Too deep (Claude may partially read)
@@ -231,7 +283,7 @@ SKILL.md → examples.md
 SKILL.md → forms.md
 ```
 
-### 4. Table of Contents for Long Files
+### 5. Table of Contents for Long Files
 
 For reference files >100 lines, add TOC at top:
 
@@ -249,7 +301,7 @@ For reference files >100 lines, add TOC at top:
 ...
 ```
 
-### 5. Use Gerund Naming
+### 6. Use Gerund Naming
 
 ```yaml
 # GOOD
@@ -263,7 +315,7 @@ name: utils
 name: pdf  # Too vague
 ```
 
-### 6. Provide Templates
+### 7. Provide Templates
 
 ```markdown
 ## Report structure
@@ -285,7 +337,7 @@ Use this template:
 ```
 ```
 
-### 7. Include Examples
+### 8. Include Examples
 
 ```markdown
 ## Commit message format
@@ -300,7 +352,7 @@ Add login endpoint and token validation middleware
 ```
 ```
 
-### 8. Implement Feedback Loops
+### 9. Implement Feedback Loops
 
 ```markdown
 ## Document editing process
@@ -472,6 +524,57 @@ allowed-tools: [if restricted]
 - Purpose: [one line]
 - Triggers: [when Claude will use it]
 - Tools: [restrictions if any]
+```
+
+---
+
+## Verification Gate
+
+Every skill should include a built-in quality check that catches baseline output — generic results the AI would produce without the skill loaded.
+
+### Why
+
+Without a verification gate, skills produce "better-formatted slop": output that looks structured but hasn't actually shifted the AI's reasoning. The gate forces a re-evaluation before delivery.
+
+### How to Add One
+
+Add a final section to your skill's workflow:
+
+```markdown
+## Verification
+
+Before delivering, check:
+1. **Baseline test**: Would a default Claude without this skill produce something structurally similar? If yes, the skill didn't activate properly — redo the core step.
+2. **Differentiation check**: Point to the specific elements that ONLY exist because this skill was loaded (a specific framework applied, a domain constraint enforced, an unusual angle taken).
+3. **Anti-pattern scan**: Does the output contain any patterns from the banned list? If yes, fix before delivering.
+```
+
+### Verification Levels
+
+Match the gate's strictness to the skill's purpose:
+
+| Skill Type | Verification Level | Example Check |
+|------------|-------------------|---------------|
+| **Workflow** (tdd, plan-review) | Structural — did each phase produce a visible artifact? | "Phase 2 must output a failing test before Phase 3 begins" |
+| **Pattern** (api-design, testing) | Conformance — does output follow the prescribed pattern? | "Every endpoint must have error responses defined" |
+| **Build** (scaffold, config) | Completeness — are all required pieces present? | "Config must include env-var overrides and validation" |
+| **Meta** (skill-builder, agent-builder) | Recursive — does the built artifact itself contain a verification gate? | "Generated skill must include a Verification section" |
+
+### Example: Verification Gate for a Copy-Writing Skill
+
+```markdown
+## Verification
+
+Before delivering:
+1. Run output against banned-words list (see anti-patterns.md) — zero matches required
+2. Compare structure to "generic version" defined below — must differ in at least 2 structural choices
+3. If output reads like a LinkedIn post (hook → 3 bullets → CTA), it failed — restructure
+
+### Generic version (what to avoid)
+- Opens with a question or bold claim
+- Three-item bullet list in the middle
+- Ends with "ready to get started?" CTA
+- Uses words: compelling, leverage, unlock, game-changer
 ```
 
 ---
