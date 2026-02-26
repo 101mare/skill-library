@@ -1,5 +1,7 @@
 # Architektur statt Chaos: Eine moderne Skill-Library für Claude Code & co
 
+> [README](../README_de.md) | [KATALOG](CATALOG_de.md) | **ARTICLE**
+
 > [!NOTE]
 > Dieses Repo enthält Anthropics Implementierung von Skills für Claude. Für Informationen zum Agent Skills Standard, siehe [agentskills.io](https://agentskills.io).
 
