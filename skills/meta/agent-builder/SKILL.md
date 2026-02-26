@@ -150,16 +150,111 @@ Adapt your analysis to the project's actual patterns rather than assuming defaul
 
 This turns a generic agent into a project-aware specialist.
 
+### Part 5: Cognitive Profile (Optional)
+
+The Soul defines *who* the agent is. The Cognitive Profile defines *how* it thinks — the mental frameworks it applies when making judgment calls.
+
+Not every agent needs one. A code-simplifier that follows clear rules doesn't need decision frameworks. But agents that exercise **judgment under ambiguity** — reviewers, analyzers, planners — benefit significantly from explicit thinking patterns.
+
+A Cognitive Profile has five components:
+
+#### Decision Frameworks
+
+The mental models the agent applies to classify situations. These are the "if-then" heuristics that guide judgment.
+
+```markdown
+## Decision Frameworks
+
+- **Trust Boundary Test:** "Who controls this value?" → If not our code → validate
+- **Blast Radius Test:** "If this fails, what else breaks?" → Multiple callers → add safeguards
+- **Reversibility Test:** "Can we undo this?" → No → require explicit confirmation
+```
+
+#### Prioritization Logic
+
+What the agent cares about first, second, third. This prevents the agent from spending tokens on style issues when security holes are open.
+
+```markdown
+## Prioritization
+
+Security → Data Integrity → Code Quality → Style
+(Never comment on formatting when there's an unvalidated input path.)
+```
+
+#### Red Flags — Patterns That Always Get Flagged
+
+Concrete code patterns that trigger immediate attention, regardless of context. These are non-negotiable.
+
+```markdown
+## Red Flags
+
+These patterns ALWAYS get flagged, no exceptions:
+- `except: pass` or `except Exception: pass` without re-raise
+- `shell=True` in subprocess calls
+- `pickle.loads()` on user-controlled data
+- String formatting in SQL queries
+- `chmod 777` or world-writable permissions
+```
+
+#### Question Sequences
+
+The ordered questions the agent asks itself when examining code. This structures the agent's thinking process and ensures consistent depth.
+
+```markdown
+## For Every File I Review, I Ask:
+
+1. What enters from outside? (user input, env vars, file reads, API responses)
+2. Where does data cross trust boundaries? (internal → external, user → system)
+3. What assumptions does this code make about its inputs?
+4. What happens when those assumptions are wrong?
+```
+
+#### Strategic Ignorance
+
+What the agent **deliberately deprioritizes** in favor of higher-value work. This prevents scope dilution.
+
+```markdown
+## What I Deliberately Ignore (When Higher Issues Exist)
+
+- Code style and formatting (when security issues are open)
+- Performance micro-optimizations (when correctness is in question)
+- Naming conventions (when architectural problems exist)
+```
+
+#### When to Use a Cognitive Profile
+
+| Agent Type | Needs Cognitive Profile? | Why |
+|------------|------------------------|-----|
+| Reviewer | **Yes** | Exercises judgment on severity, prioritizes across dimensions |
+| Analyzer | **Yes** | Must decide what matters, classify risks, weigh trade-offs |
+| Planner | **Yes** | Must assess completeness, identify gaps, evaluate risk |
+| Code Simplifier | **No** | Follows clear rules: simpler = better, don't change behavior |
+| Test Architect | **Maybe** | Benefits from prioritization logic for test coverage |
+
+#### Placement in the Agent File
+
+The Cognitive Profile goes **after** the Anti-Patterns and **before** the Process section:
+
+```
+1. Experiential Identity (opening paragraph)
+2. "What I Refuse To Do" (anti-patterns)
+3. Cognitive Profile (decision frameworks, priorities, red flags)  ← here
+4. Process / Dimensions / Checklist
+5. Output Format
+6. Project Adaptation
+```
+
 ### Complete Soul Structure
 
 ```
 1. Experiential Identity (opening paragraph)
 2. Learned Insight (optional second paragraph)
 3. "What I Refuse To Do" (30-40% of prompt)
-4. Process / Dimensions / Checklist (the actual work)
-5. Severity Levels (classification system)
-6. Output Format (consistent structure)
-7. Project Adaptation (read CLAUDE.md first)
+4. Cognitive Profile (optional — decision frameworks, priorities, red flags)
+5. Process / Dimensions / Checklist (the actual work)
+6. Severity Levels (classification system)
+7. Output Format (consistent structure)
+8. Project Adaptation (read CLAUDE.md first)
 ```
 
 ---
