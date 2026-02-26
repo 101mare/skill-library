@@ -8,7 +8,7 @@
 ### TL;DR
 
 - **Three layers instead of one file** — Rules (always loaded) + Skills (on demand) + Agents (isolated subprocesses)
-- **27 Skills, 5 Agents, 4 Rules** — a toolkit, not a framework. Copy what you need per project
+- **28 Skills, 5 Agents, 4 Rules** — a toolkit, not a framework. Copy what you need per project
 - **Agent "Souls" beat flat labels** — research shows experiential identities improve accuracy by 10-60%
 - **Skills teach, Agents act** — Skills load knowledge into the current context, Agents run in isolation
 - **Less is more** — be deliberate about which skills and agents you install. Every header costs tokens on every call
@@ -42,7 +42,7 @@ Or: You put skills and agents in the same folder, treat them the same way, and w
 
 At some point I asked myself: What if I built the generic parts of my Claude Code configuration properly once and carried them into every project? Not as a monolithic framework, but as a toolkit — universal rules, callable knowledge, and delegated expertise, cleanly separated.
 
-The result is a skill library with 4 rules, 27 skills, 5 agents, and a CLAUDE.md template. It has changed how every one of my projects works with Claude. Not because the individual pieces are so special, but because the separation of rules, knowledge, and expertise is right.
+The result is a skill library with 4 rules, 28 skills, 5 agents, and a CLAUDE.md template. It has changed how every one of my projects works with Claude. Not because the individual pieces are so special, but because the separation of rules, knowledge, and expertise is right.
 
 ---
 
@@ -52,7 +52,7 @@ The library separates three concerns that are mixed together in most setups:
 
 **Rules** are universal behavior. They are always loaded, in every project, on every prompt. Four files: Coding Conventions, Agent Behavior, Security, Self-Improvement.
 
-**Skills** are callable knowledge. They are loaded when they're relevant — like opening a manual. 27 skills in four categories.
+**Skills** are callable knowledge. They are loaded when they're relevant — like opening a manual. 28 skills in four categories.
 
 **Agents** are delegated expertise with their own scope. They run as isolated subprocesses, receive zero context from the parent process, and return a result. 5 agents in four categories.
 
@@ -316,7 +316,7 @@ Skills for building, agents for reviewing. That's no coincidence — it reflects
 
 So much for what skills and agents *are*. The next question: what makes an agent actually *good*?
 
-<p align="center"><em>So far: three-layer architecture, four rules, 27 skills and their mapping to development phases. From here: how to write effective agents, orchestrate workflows, and manage context budgets.</em></p>
+<p align="center"><em>So far: three-layer architecture, four rules, 28 skills and their mapping to development phases. From here: how to write effective agents, orchestrate workflows, and manage context budgets.</em></p>
 
 ---
 
@@ -493,17 +493,17 @@ The Ralph Loop closes the automation gap. But with all these tools, one practica
 
 ---
 
-## Context Management: 27 Skills, But Please Not All at Once
+## Context Management: 28 Skills, But Please Not All at Once
 
 <p align="center"><img src="images/context-management.png" width="50%" alt="Context Management"></p>
 
 <p align="center"><em>Every installed skill costs tokens on every API call — choose wisely.</em></p>
 
-The library has 27 skills. Does that mean you load all 27 into every project? No. And here it's important to understand why.
+The library has 28 skills. Does that mean you load all 28 into every project? No. And here it's important to understand why.
 
 As described above: Skill headers (`name` + `description`) are included in Claude's prompt on every call. This is the mechanism by which Claude knows which skills are available.
 
-But it comes at a cost: every installed skill costs tokens just through its header — on every single API call. 27 skills with 3-4 lines of description each are ~100 lines of system prompt that you permanently carry around. Those are tokens that you're missing for the actual work. On top of that come rules, CLAUDE.md, agent definitions, and the conversation context. The context window is finite.
+But it comes at a cost: every installed skill costs tokens just through its header — on every single API call. 28 skills with 3-4 lines of description each are ~100 lines of system prompt that you permanently carry around. Those are tokens that you're missing for the actual work. On top of that come rules, CLAUDE.md, agent definitions, and the conversation context. The context window is finite.
 
 This isn't just a hunch — it's backed by research. The [IFScale benchmark](https://arxiv.org/abs/2507.11538) (2025) shows that instruction-following accuracy degrades measurably starting at ~100-150 instructions, with models increasingly *omitting* rules rather than getting them wrong (30:1 omission-to-error ratio at high density). [Context Rot](https://research.trychroma.com/context-rot) (Chroma Research) demonstrates that performance degradation is universal across all models as input length grows — even when relevant information is perfectly retrievable. Most striking: [research presented at EMNLP 2025](https://arxiv.org/abs/2510.05381) found that context length *alone* causes 14-85% performance loss, even with perfect retrieval. The effective context window is much smaller than the nominal one. Progressive disclosure — loading only what's needed, when it's needed — is the answer.
 
@@ -521,6 +521,10 @@ The logic: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Build + 
 
 > [!IMPORTANT]
 > This is a defensive, token-intensive setup — plan-review and session-verify both spawn multiple agents. If you want to move fast and cheap, tdd + systematic-debugging alone cover the core work.
+
+### When the Core Five Are Too Much: careful-mode
+
+Not every task needs four parallel review agents. A bug fix, a small feature, a refactor — these benefit from structure, but not from the full ceremony. **careful-mode** fills that gap: a 6-phase workflow (Understand → Plan → Pre-Mortem → Execute → Verify → Deliver) that runs entirely in the main context with zero agent overhead. It scales automatically — trivial tasks compress phases 1-3 into a single sentence, complex tasks get the full treatment. Think of it as the structured middle ground between raw prompting and the Core Five.
 
 ### What's Deliberately Missing
 

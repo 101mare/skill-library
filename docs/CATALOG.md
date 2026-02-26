@@ -32,7 +32,7 @@ If you only install five skills, these cover the entire development cycle:
 
 ---
 
-## Skills (27)
+## Skills (28)
 
 *Load on demand — teach Claude specialized workflows.*
 
@@ -63,7 +63,7 @@ If you only install five skills, these cover the entire development cycle:
 | [frontend-design](../skills/build/frontend/frontend-design/SKILL.md) | Creates distinctive, production-ready frontend interfaces with high design quality that avoid generic AI aesthetics. |
 | [warmgold-frontend](../skills/build/frontend/warmgold-frontend/SKILL.md) | Warm, iOS-inspired design system with component patterns for vanilla HTML/CSS/JS frontends. |
 
-### Workflow (7)
+### Workflow (8)
 
 | Name | Description |
 |------|------------|
@@ -74,6 +74,7 @@ If you only install five skills, these cover the entire development cycle:
 | [deep-research](../skills/workflow/deep-research/SKILL.md) | Structured research workflow (question → sources → analysis → synthesis → documentation) for technical decisions. |
 | [ralph-loop](../skills/workflow/ralph-loop/SKILL.md) | Autonomous work mode — Claude continues working independently on a task until it's completed or the iteration limit is reached. |
 | [ralph-loop-prompt-builder](../skills/workflow/ralph-loop-prompt-builder/SKILL.md) | Helps create effective prompts for the Ralph Loop system through clarification questions and structured output. |
+| [careful-mode](../skills/workflow/careful-mode/SKILL.md) | Structured 6-phase work mode (Understand → Plan → Pre-Mortem → Execute → Verify → Deliver) for tasks that need quality without multi-agent overhead. |
 
 ### Patterns (8)
 

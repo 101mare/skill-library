@@ -2,10 +2,10 @@
 
 # Skill Library
 
-27 skills, 5 agents, 4 rules — plug into Claude Code, skip the prompt engineering.
+28 skills, 5 agents, 4 rules — plug into Claude Code, skip the prompt engineering.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG.md)
+[![Skills: 28](https://img.shields.io/badge/Skills-28-blue.svg)](docs/CATALOG.md)
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
@@ -56,6 +56,7 @@ If you only install five skills, these cover the entire development cycle:
 
 > [!TIP]
 > plan-review and session-verify are token-intensive (multiple agents each). For speed: tdd + systematic-debugging alone cover the core work.
+> For smaller tasks that don't need multi-agent planning, try **[careful-mode](skills/workflow/careful-mode/SKILL.md)** — a structured 6-phase workflow with zero agent overhead.
 
 ## Quickstart
 
@@ -121,7 +122,7 @@ The key difference: Skills instruct, Agents work. A workflow skill like `plan-re
 
 **Progressive Disclosure** — Skill headers load so Claude knows what's available. Full `SKILL.md` loads on demand. Detailed `reference.md` files load only when needed. Context budget stays tight.
 
-**Context Costs** — Every installed skill costs tokens through its header — on every API call. 27 skills ≈ 100 lines of permanent system prompt. Install selectively.
+**Context Costs** — Every installed skill costs tokens through its header — on every API call. 28 skills ≈ 100 lines of permanent system prompt. Install selectively.
 
 </details>
 
@@ -135,7 +136,7 @@ The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 
 - **[CATALOG.md](docs/CATALOG.md)** — Full catalog of all skills and agents
 - **[SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md)** — Why skills work: progressive disclosure, file system structure, and bundled resources
-- **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons from building 27 skills
+- **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons from building 28 skills
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Production-ready CLAUDE.md for new projects
 
 ---
