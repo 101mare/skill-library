@@ -366,8 +366,14 @@ The last point deserves its own attention. Every agent reads the project setup b
 
 This makes generic agents project-aware. The security reviewer doesn't just know what's insecure — it knows what counts as secure in *your* project.
 
+### Beyond Identity: Cognitive Profiles
+
+The Soul defines *who* the agent is. But for agents that exercise judgment — reviewers, analyzers, planners — there's a second lever: *how* the agent thinks. Cognitive Profiles are optional decision frameworks that structure the agent's reasoning: prioritization logic ("Security → Data Integrity → Style"), red flags that always get flagged (`except: pass`, `shell=True`), and question sequences the agent asks itself at every code boundary ("Who controls this value? → Not our code → validate.").
+
+Not every agent needs one. A code-simplifier with clear rules doesn't benefit from decision frameworks. But agents that weigh trade-offs under ambiguity do — a reviewer with explicit prioritization won't bury a SQL injection finding under ten style nits. The `agent-builder` meta-skill teaches the full methodology with concrete examples.
+
 > [!IMPORTANT]
-> **Key takeaway:** Replace generic labels with experiential identities. Devote 30-40% of the prompt to what the agent refuses to do.
+> **Key takeaway:** Replace generic labels with experiential identities. Devote 30-40% of the prompt to what the agent refuses to do. For judgment-heavy agents, add a Cognitive Profile to structure *how* they think, not just *who* they are.
 
 Well-designed agents are already powerful on their own. But orchestrating multiple agents together — that's where things get really interesting.
 
