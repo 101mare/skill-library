@@ -19,27 +19,6 @@ CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jed
 
 Diese Library löst das mit drei Schichten — **Rules** (immer geladen) → **Skills** (on demand) → **Agents** (isolierte Subprozesse) — jede mit klarer Aufgabe, nichts vermischt sich. Die vollständige Herleitung steht in [ARTICLE_de.md](docs/ARTICLE_de.md).
 
-<details>
-<summary><strong>Vorher / Nachher</strong></summary>
-
-**Vorher** — eine CLAUDE.md für alles:
-```
-# CLAUDE.md (500+ Zeilen)
-You are an expert Python developer...
-Always use type hints...
-When reviewing code, check for...
-For TDD, follow these steps...
-[... 490 weitere Zeilen ...]
-```
-
-**Nachher** — drei Schichten, jede mit klarer Aufgabe:
-```
-rules/security.md          → immer geladen (8 Zeilen)
-skills/workflow/tdd/        → lädt on demand bei Bedarf
-agents/review/reviewer.md  → isolierter Subprozess, kein Bleed
-```
-</details>
-
 ## Hier starten — Die fünf Kern-Skills
 
 Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
