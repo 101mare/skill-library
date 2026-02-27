@@ -19,27 +19,6 @@ CLAUDE.md files grow into 500-line monsters. The same rules get copy-pasted acro
 
 This library fixes that with three layers — **Rules** (always loaded) → **Skills** (on demand) → **Agents** (isolated subprocesses) — each with a clear job and nothing bleeding across. The full rationale is in [ARTICLE.md](docs/ARTICLE.md).
 
-<details>
-<summary><strong>Before / After</strong></summary>
-
-**Before** — one CLAUDE.md doing everything:
-```
-# CLAUDE.md (500+ lines)
-You are an expert Python developer...
-Always use type hints...
-When reviewing code, check for...
-For TDD, follow these steps...
-[... 490 more lines ...]
-```
-
-**After** — three layers, each with a clear job:
-```
-rules/security.md          → always loaded (8 lines)
-skills/workflow/tdd/        → loads on demand when needed
-agents/review/reviewer.md  → isolated subprocess, zero bleed
-```
-</details>
-
 ## Start Here — The Core Five
 
 If you only install five skills, these cover the entire development cycle:

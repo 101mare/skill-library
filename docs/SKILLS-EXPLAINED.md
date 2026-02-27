@@ -105,19 +105,46 @@ In the same way that you organize your own desktop by project or purpose, the st
 
 ```
 skills/
-├── meta/           # Skills about building skills
 ├── build/
-│   ├── frontend/   # Design & components
-│   └── backend/    # Infrastructure
-├── workflow/       # Multi-agent orchestration
-└── patterns/       # Reusable architecture
+│   ├── backend/                 # Scaffolding & infrastructure
+│   │   ├── ci-cd-builder/
+│   │   ├── config-builder/
+│   │   ├── docker-builder/
+│   │   ├── exception-builder/
+│   │   ├── logging-builder/
+│   │   ├── project-scaffold/
+│   │   └── prompt-builder/
+│   └── frontend/                # Design & components
+│       ├── frontend-design/
+│       └── warmgold-frontend/
+├── meta/                        # Building skills, agents & teams
+│   ├── agent-builder/
+│   ├── skill-builder/
+│   └── team-builder/
+├── patterns/                    # Reusable architecture patterns
+│   ├── api-design/
+│   ├── di-container/
+│   ├── error-handling/
+│   ├── protocol-design/
+│   ├── resilience-patterns/
+│   ├── strategy-registry/
+│   ├── systematic-debugging/
+│   └── testing-patterns/
+└── workflow/                    # Multi-agent workflows
+    ├── deep-research/
+    ├── plan-review/
+    ├── pr-review/
+    ├── ralph-loop/
+    ├── ralph-loop-prompt-builder/
+    ├── session-verify/
+    └── tdd/
 ```
 
 This also introduces **modularity**. A skill becomes a packaged unit of workflow that can be reused, shared, versioned, or composed with other skills. Rather than copy-pasting slightly different versions of the same prompt into every project, you can treat workflows as modules that move between projects and team members.
 
 For the practical details of the SKILL.md format — YAML frontmatter, trigger matching, and how to create your own skills — see the [SKILL.md Format](ARTICLE.md#the-skillmd-format) section in ARTICLE.md.
 
-The [Agent Skills Standard](https://agentskills.io) takes this further — skills written in this format work across 30+ tools including Claude Code, OpenAI Codex, Cursor, Gemini CLI, and VS Code.
+The [Agent Skills Standard](https://agentskills.io) takes this further — skills written in this format work across 30+ tools including Claude Code, OpenAI Codex, Cursor, Gemini CLI, and VS Code. All 27 skills in this library follow the standard.
 
 ### Access to Additional Resources
 

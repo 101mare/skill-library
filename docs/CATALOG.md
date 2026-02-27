@@ -5,20 +5,6 @@
 > [!TIP]
 > To install any skill or agent below, see [Quickstart](../README.md#quickstart) in the README.
 
-## Recommended: The Core Five
-
-If you only install five skills, these cover the entire development cycle:
-
-| Skill | What it does | Phase |
-|-------|-------------|-------|
-| [prompt-builder](../skills/build/backend/prompt-builder/SKILL.md) | Turns vague requests into structured prompts | Prompt |
-| [plan-review](../skills/workflow/plan-review/SKILL.md) | 4 parallel agents check arch, conventions, risks, reqs | Plan |
-| [tdd](../skills/workflow/tdd/SKILL.md) | RED-GREEN-REFACTOR with agent orchestration | Build + Test |
-| [systematic-debugging](../skills/patterns/systematic-debugging/SKILL.md) | Reproduce → Isolate → Root-Cause → Fix | Debug |
-| [session-verify](../skills/workflow/session-verify/SKILL.md) | End-of-session security + quality review | Verify |
-
----
-
 ## Rules (4)
 
 *Always loaded — shape every interaction.*

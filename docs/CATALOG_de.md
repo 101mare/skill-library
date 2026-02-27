@@ -5,20 +5,6 @@
 > [!TIP]
 > Um einen Skill oder Agent zu installieren, siehe [Schnellstart](../README_de.md#schnellstart) in der README.
 
-## Empfohlen: Die fünf Kern-Skills
-
-Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
-
-| Skill | Was er tut | Phase |
-|-------|-----------|-------|
-| [prompt-builder](../skills/build/backend/prompt-builder/SKILL.md) | Formt vage Anfragen in strukturierte Prompts | Prompt |
-| [plan-review](../skills/workflow/plan-review/SKILL.md) | 4 parallele Agents prüfen Arch, Conventions, Risiken, Reqs | Plan |
-| [tdd](../skills/workflow/tdd/SKILL.md) | RED-GREEN-REFACTOR mit Agent-Orchestrierung | Bauen + Testen |
-| [systematic-debugging](../skills/patterns/systematic-debugging/SKILL.md) | Reproduzieren → Isolieren → Root-Cause → Fix | Debug |
-| [session-verify](../skills/workflow/session-verify/SKILL.md) | End-of-Session Security- + Qualitäts-Review | Verify |
-
----
-
 ## Rules (4)
 
 *Immer geladen — prägen jede Interaktion.*
