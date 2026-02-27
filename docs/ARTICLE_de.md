@@ -3,7 +3,7 @@
 > [README](../README_de.md) | [KATALOG](CATALOG_de.md) | [SKILLS-EXPLAINED](SKILLS-EXPLAINED_de.md) | **ARTICLE**
 
 > [!NOTE]
-> Dieses Repo enthält Anthropics Implementierung von Skills für Claude. Für Informationen zum Agent Skills Standard, siehe [agentskills.io](https://agentskills.io).
+> Dieses Repo enthält Anthropics Implementierung von Skills für Claude. Alle Skills folgen dem offenen [Agent Skills Standard](https://agentskills.io).
 
 ### TL;DR
 
