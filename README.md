@@ -19,23 +19,6 @@ CLAUDE.md files grow into 500-line monsters. The same rules get copy-pasted acro
 
 This library fixes that with three layers — **Rules** (always loaded) → **Skills** (on demand) → **Agents** (isolated subprocesses) — each with a clear job and nothing bleeding across. The full rationale is in [ARTICLE.md](docs/ARTICLE.md).
 
-## Start Here — The Core Five
-
-If you only install five skills, these cover the entire development cycle:
-
-| Skill | What it does | Phase |
-|-------|-------------|-------|
-| **prompt-builder** | Turns vague requests into structured prompts | Prompt |
-| **plan-review** | 4 parallel agents check arch, conventions, risks, reqs | Plan |
-| **tdd** | RED-GREEN-REFACTOR with agent orchestration | Build + Test |
-| **systematic-debugging** | Reproduce → Isolate → Root-Cause → Fix | Debug |
-| **session-verify** | End-of-session security + quality review | Verify |
-
-**Prompt** → **Plan** → **Build + Test** → **Debug** → **Verify** — the entire cycle.
-
-> [!TIP]
-> plan-review and session-verify are token-intensive (multiple agents each). For speed: tdd + systematic-debugging alone cover the core work.
-
 ## Quickstart
 
 Browse **[CATALOG.md](docs/CATALOG.md)**, pick what you need, tell Claude to install it:
@@ -62,6 +45,23 @@ Then tell Claude:
 > Use the tdd skill to add a user registration endpoint
 
 Claude reads the skill, runs RED-GREEN-REFACTOR, and ships tested code — no manual prompting needed.
+
+## Start Here — The Core Five
+
+If you only install five skills, these cover the entire development cycle:
+
+| Skill | What it does | Phase |
+|-------|-------------|-------|
+| **prompt-builder** | Turns vague requests into structured prompts | Prompt |
+| **plan-review** | 4 parallel agents check arch, conventions, risks, reqs | Plan |
+| **tdd** | RED-GREEN-REFACTOR with agent orchestration | Build + Test |
+| **systematic-debugging** | Reproduce → Isolate → Root-Cause → Fix | Debug |
+| **session-verify** | End-of-session security + quality review | Verify |
+
+**Prompt** → **Plan** → **Build + Test** → **Debug** → **Verify** — the entire cycle.
+
+> [!TIP]
+> plan-review and session-verify are token-intensive (multiple agents each). For speed: tdd + systematic-debugging alone cover the core work.
 
 ## How It Works
 
