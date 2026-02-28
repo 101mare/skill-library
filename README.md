@@ -40,6 +40,14 @@ ln -s ~/skill-library/skills/workflow/tdd ~/.claude/skills/tdd
 
 Claude reads the file, copies it to `.claude/skills/` (or `.claude/agents/`), and activates it automatically.
 
+### Installing Rules
+
+Rules are always loaded and must be added manually — copy them into `~/.claude/rules/` (global) or `.claude/rules/` (per project):
+
+```bash
+cp ~/skill-library/rules/*.md ~/.claude/rules/
+```
+
 Then tell Claude:
 
 > Use the tdd skill to add a user registration endpoint
