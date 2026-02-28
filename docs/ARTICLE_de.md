@@ -30,7 +30,7 @@
 
 ## Chaos
 
-<p align="center"><img src="images/chaos-vs-structure.png" width="50%" alt="Chaos vs Struktur"></p>
+<p align="center"><img src="images/chaos-vs-structure.webp" width="50%" alt="Chaos vs Struktur"></p>
 
 <p align="center"><em>Fünf Projekte, fünf divergierende Configs — das Problem, das diese Library löst.</em></p>
 
@@ -146,7 +146,7 @@ Die drei Ebenen sind definiert. Schauen wir uns jede einzelne an — angefangen 
 
 ## Rules: Was Claude immer wissen muss
 
-<p align="center"><img src="images/four-rules.png" width="50%" alt="Die vier Rules"></p>
+<p align="center"><img src="images/four-rules.webp" width="50%" alt="Die vier Rules"></p>
 
 <p align="center"><em>Vier Rules, vier Domains: Conventions, Behavior, Security, Self-Improvement.</em></p>
 
@@ -193,7 +193,7 @@ Rules setzen die Baseline. Aber die eigentliche Stärke kommt aus dem Zusammensp
 
 ## Skills lehren, Agents handeln
 
-<p align="center"><img src="images/skills-teach-agents-act.png" width="50%" alt="Skills lehren, Agents handeln"></p>
+<p align="center"><img src="images/skills-teach-agents-act.webp" width="50%" alt="Skills lehren, Agents handeln"></p>
 
 <p align="center"><em>Skills laden Wissen in den aktuellen Kontext. Agents laufen in isolierten Subprozessen.</em></p>
 
@@ -322,7 +322,7 @@ So viel dazu, was Skills und Agents *sind*. Die nächste Frage: Was macht einen 
 
 ## Gib dem Agenten keine platte Rolle, gib ihm eine "Seele"
 
-<p align="center"><img src="images/flat-role-vs-soul.png" width="50%" alt="Flat Role vs Soul"></p>
+<p align="center"><img src="images/flat-role-vs-soul.webp" width="50%" alt="Flat Role vs Soul"></p>
 
 <p align="center"><em>Generische Labels vs. Experiential Identities: der forschungsgestützte Unterschied.</em></p>
 
@@ -375,7 +375,7 @@ Gut designte Agents sind allein schon mächtig. Aber mehrere Agents zusammen zu 
 
 ## Workflow Skills: Skills die Agents steuern
 
-<p align="center"><img src="images/workflow-skills-orchestrator.png" width="50%" alt="Workflow Skills"></p>
+<p align="center"><img src="images/workflow-skills-orchestrator.webp" width="50%" alt="Workflow Skills"></p>
 
 <p align="center"><em>Workflow-Skills orchestrieren mehrere Agents parallel.</em></p>
 
@@ -405,7 +405,7 @@ Das klingt nach viel. In der Praxis ist es ein `/verify` am Ende der Session und
 
 ## Agent Teams: Wenn Subagents nicht reichen
 
-<p align="center"><img src="images/subagents-vs-agent-teams.png" width="50%" alt="Subagents vs Agent Teams"></p>
+<p align="center"><img src="images/subagents-vs-agent-teams.webp" width="50%" alt="Subagents vs Agent Teams"></p>
 
 <p align="center"><em>Subagents liefern Ergebnisse zurück. Agent Teams kommunizieren untereinander.</em></p>
 
@@ -428,7 +428,7 @@ Agent Teams lösen parallele Zusammenarbeit. Aber was ist mit Aufgaben, die auto
 
 ## Advanced: Ralph Loop — Autonome Arbeitsschleifen
 
-<p align="center"><img src="images/ralph-loop-spiral.png" width="50%" alt="Ralph Loop"></p>
+<p align="center"><img src="images/ralph-loop-spiral.webp" width="50%" alt="Ralph Loop"></p>
 
 <p align="center"><em>Autonome Iteration bis die Aufgabe erledigt ist.</em></p>
 
@@ -495,7 +495,7 @@ Der Ralph Loop schließt die Automatisierungslücke. Aber bei all diesen Tools b
 
 ## Context Management: All diese Skills, aber bitte nicht alle gleichzeitig
 
-<p align="center"><img src="images/context-management.png" width="50%" alt="Context Management"></p>
+<p align="center"><img src="images/context-management.webp" width="50%" alt="Context Management"></p>
 
 <p align="center"><em>Jeder installierte Skill kostet Token bei jedem API-Call — wähle weise.</em></p>
 
