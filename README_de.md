@@ -67,6 +67,9 @@ Claude liest den Skill, führt RED-GREEN-REFACTOR durch und liefert getesteten C
 
 ```
 skill-library/
+├── custom/                     # Deine projektspezifischen Skills & Agents
+│   ├── skills/                 #   Fork it, füg deine hier hinzu
+│   └── agents/                 #   Upstream-Updates fassen das nicht an
 ├── docs/                       # CATALOG + ARTICLE (EN + DE)
 ├── templates/
 │   └── CLAUDE.md.template      # Produktionsreife CLAUDE.md für neue Projekte
@@ -103,6 +106,16 @@ Der zentrale Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skil
 **Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. 27 Skills ≈ 100 Zeilen permanenter System-Prompt. Selektiv installieren.
 
 </details>
+
+## Eigene Skills & Agents
+
+Fork dieses Repo und füge deine eigenen Skills in `custom/skills/` und Agents in `custom/agents/` hinzu. Dieser Ordner gehört dir — Upstream-Updates fassen ihn nicht an, `git pull` läuft ohne Merge-Konflikte.
+
+```
+Kopiere den Skill aus ~/skill-library/custom/skills/mein-skill/SKILL.md in mein Projekt
+```
+
+Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder)) können gut strukturierte Custom-Skills für dich generieren. Details in [custom/README.md](custom/README.md).
 
 ## Mitwirken
 
