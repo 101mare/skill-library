@@ -40,6 +40,34 @@ ln -s ~/skill-library/skills/workflow/tdd ~/.claude/skills/tdd
 
 Claude liest die Datei, kopiert sie nach `.claude/skills/` (oder `.claude/agents/`) und aktiviert sie automatisch.
 
+### Rules installieren
+
+Rules müssen manuell hinzugefügt werden — Claude Code lädt sie aus `~/.claude/rules/` (global) oder `.claude/rules/` (pro Projekt). Die Library liefert 4 Rules, die den generischen Teil deiner CLAUDE.md ersetzen.
+
+**Global** (Symlink — gilt für alle Projekte, Updates via `git pull`):
+```bash
+# Alle 4 Rules auf einmal verlinken
+for rule in ~/skill-library/rules/*.md; do
+  ln -s "$rule" ~/.claude/rules/"$(basename "$rule")"
+done
+```
+
+**Pro Projekt** (in ein bestimmtes Projekt kopieren):
+```bash
+cp ~/skill-library/rules/*.md mein-projekt/.claude/rules/
+```
+
+**Selektiv** (nur ausgewählte Rules):
+```bash
+ln -s ~/skill-library/rules/security.md ~/.claude/rules/security.md
+ln -s ~/skill-library/rules/coding-conventions.md ~/.claude/rules/coding-conventions.md
+```
+
+Die 4 verfügbaren Rules: **agent-behavior** (Scope-Disziplin, minimale Änderungen), **coding-conventions** (DRY, Naming, Testing), **security** (Input-Validierung, Secrets, PII), **self-improvement** (aus Korrekturen lernen). Details in [CATALOG.md](docs/CATALOG.md).
+
+> [!NOTE]
+> Skills und Agents werden on demand geladen, aber Rules sind **immer geladen** — bei jedem Prompt. Das ist gewollt: sie setzen die Baseline für jede Interaktion.
+
 Dann sag Claude:
 
 > Nutze den tdd Skill um einen User-Registration-Endpoint hinzuzufügen
