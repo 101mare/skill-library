@@ -42,15 +42,11 @@ Claude reads the file, copies it to `.claude/skills/` (or `.claude/agents/`), an
 
 ### Installing Rules
 
-Rules are always loaded and must be added manually. Symlink them globally so every project gets them:
+Rules are always loaded and must be added manually — copy them into `~/.claude/rules/` (global) or `.claude/rules/` (per project):
 
 ```bash
-for rule in ~/skill-library/rules/*.md; do
-  ln -s "$rule" ~/.claude/rules/"$(basename "$rule")"
-done
+cp ~/skill-library/rules/*.md ~/.claude/rules/
 ```
-
-Or copy into a single project: `cp ~/skill-library/rules/*.md my-project/.claude/rules/`
 
 Then tell Claude:
 
