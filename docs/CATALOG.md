@@ -16,7 +16,7 @@
 | [agent-behavior](../rules/agent-behavior.md) | Read-first workflow, scope discipline, minimal changes, subagent strategy, and bug fixing approach. |
 | [coding-conventions](../rules/coding-conventions.md) | DRY principles, naming & imports, error handling, function design, type hints, and testing conventions. |
 | [security](../rules/security.md) | Input validation, PII protection in logs, secrets management, and dependency policies. |
-| [self-improvement](../rules/self-improvement.md) | Learn from corrections, capture patterns in memory, and iterate on lessons. |
+| [self-improvement](../rules/self-improvement.md) | Learn from corrections, capture patterns in memory, iterate on lessons. |
 
 ---
 
