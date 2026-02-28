@@ -1,6 +1,6 @@
 # Architektur statt Chaos: Eine moderne Skill-Library für Claude Code & co
 
-> [README](../README_de.md) | [KATALOG](CATALOG_de.md) | [SKILLS-EXPLAINED](SKILLS-EXPLAINED_de.md) | **ARTICLE**
+> [README](../README_de.md) | [KATALOG](CATALOG.md) | [SKILLS-EXPLAINED](SKILLS-EXPLAINED_de.md) | **ARTICLE**
 
 > [!NOTE]
 > Dieses Repo enthält Anthropics Implementierung von Skills für Claude. Alle Skills folgen dem offenen [Agent Skills Standard](https://agentskills.io).
@@ -8,7 +8,7 @@
 ### TL;DR
 
 - **Drei Ebenen statt einer Datei** — Rules (immer geladen) + Skills (bei Bedarf) + Agents (isolierte Subprozesse)
-- **Skills, Agents, Rules** — ein Baukasten, kein Framework. Pro Projekt kopieren, was man braucht (siehe [KATALOG](CATALOG_de.md) für aktuelle Zahlen)
+- **Skills, Agents, Rules** — ein Baukasten, kein Framework. Pro Projekt kopieren, was man braucht (siehe [KATALOG](CATALOG.md) für aktuelle Zahlen)
 - **Agent-"Seelen" schlagen platte Labels** — Forschung zeigt: Experiential Identities verbessern die Accuracy um 10-60%
 - **Skills lehren, Agents handeln** — Skills laden Wissen in den aktuellen Kontext, Agents laufen in Isolation
 - **Weniger ist mehr** — gehe bedacht damit um, welche Skills und Agents du installierst. Jeder Header kostet Token bei jedem Call

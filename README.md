@@ -11,7 +11,7 @@
 
 > **Docs:** [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
 >
-> Deutsche Version: [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+> Deutsche Version: [README_de.md](README_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
 ## The Problem
 
@@ -132,4 +132,4 @@ The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 
 ---
 
-**Deutsche Version:** [README_de.md](README_de.md) | [CATALOG_de.md](docs/CATALOG_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+**Deutsche Version:** [README_de.md](README_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)

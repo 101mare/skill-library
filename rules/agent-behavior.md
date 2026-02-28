@@ -1,3 +1,8 @@
+---
+name: agent-behavior
+description: Read-first workflow, scope discipline, minimal changes, subagent strategy, and bug fixing approach.
+---
+
 # Agent Behavior
 
 ## Before Writing Code
