@@ -14,7 +14,23 @@ custom/
         └── AGENT.md
 ```
 
-## Adding a Custom Skill
+## Creating Custom Skills & Agents
+
+The fastest way to create well-structured skills and agents is with the meta skills from this library:
+
+```
+Use the skill-builder skill to create a custom skill for [your use case]
+```
+
+```
+Use the agent-builder skill to create a custom agent for [your use case]
+```
+
+These generate skills/agents that follow the library's conventions automatically. See [skill-builder](../skills/meta/skill-builder) and [agent-builder](../skills/meta/agent-builder) for details.
+
+## Manual Setup
+
+### Adding a Skill
 
 1. Create a folder in `custom/skills/`:
 
@@ -44,12 +60,10 @@ Your workflow steps here...
 Copy the skill from ~/skill-library/custom/skills/deploy-staging/SKILL.md into my project
 ```
 
-## Adding a Custom Agent
+### Adding an Agent
 
 Same pattern — create a folder in `custom/agents/` with an `AGENT.md`.
 
 ## Tips
 
-- Use the **[skill-builder](../skills/meta/skill-builder)** skill to generate well-structured skills
-- Use the **[agent-builder](../skills/meta/agent-builder)** skill to generate agents that follow the library's patterns
 - Keep project-specific logic here, reusable patterns in a PR to upstream
