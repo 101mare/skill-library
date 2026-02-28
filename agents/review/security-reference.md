@@ -228,4 +228,132 @@ async with asyncio.timeout(30):
 result = await client.fetch(url)
 ```
 
+### A06: Vulnerable and Outdated Components
+
+```python
+# CHECK: Dependencies scanned for known vulnerabilities
+# CHECK: Lock files with hashes (pip-compile, poetry.lock)
+# CHECK: No typosquatted package names (e.g. "requets" instead of "requests")
+
+# Audit commands:
+# pip audit
+# safety check
+# pip-compile --generate-hashes
+```
+
+### A10: Server-Side Request Forgery (SSRF)
+
+```python
+import urllib.parse
+import ipaddress
+import socket
+
+# BAD: User controls URL directly
+url = request.args.get("url")
+response = requests.get(url)  # SSRF!
+
+# GOOD: Whitelist + private IP blocking
+ALLOWED_HOSTS = {"api.internal.com", "cdn.example.com"}
+
+def safe_request(url: str) -> requests.Response:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.hostname not in ALLOWED_HOSTS:
+        raise ValueError(f"Host not allowed: {parsed.hostname}")
+    ip = socket.gethostbyname(parsed.hostname)
+    if ipaddress.ip_address(ip).is_private:
+        raise ValueError("Private IP not allowed")
+    return requests.get(url, allow_redirects=False)
+```
+
+### Dangerous Builtins
+
+```python
+# BAD: RCE via eval/exec with external input
+result = eval(user_input)
+exec(user_code)
+compile(user_input, "<string>", "exec")
+
+# BAD: assert stripped in production (python -O)
+assert user.is_admin, "Unauthorized"  # Bypassed with -O!
+
+# GOOD: Explicit check
+if not user.is_admin:
+    raise PermissionError("Unauthorized")
+
+# BAD: Predictable tokens
+import random
+token = random.randint(0, 999999)
+
+# GOOD: Cryptographically secure
+import secrets
+token = secrets.token_urlsafe(32)
+```
+
+### Timing-Safe Comparison
+
+```python
+import hmac
+
+# BAD: Timing side-channel leaks token length/content
+if token == expected_token:
+    grant_access()
+
+# GOOD: Constant-time comparison
+if hmac.compare_digest(token.encode(), expected_token.encode()):
+    grant_access()
+```
+
+### Archive/Decompression Safety
+
+```python
+import zipfile
+
+# BAD: Zip bomb + path traversal
+with zipfile.ZipFile(user_file) as zf:
+    zf.extractall(target)  # Unchecked!
+
+# GOOD: Validate sizes and paths before extraction
+MAX_EXTRACT_SIZE = 100 * 1024 * 1024  # 100MB
+
+def safe_extract(archive_path: Path, target: Path) -> None:
+    with zipfile.ZipFile(archive_path) as zf:
+        total = sum(f.file_size for f in zf.infolist())
+        if total > MAX_EXTRACT_SIZE:
+            raise ValueError(f"Archive too large: {total} bytes")
+        for info in zf.infolist():
+            extracted = (target / info.filename).resolve()
+            if not extracted.is_relative_to(target.resolve()):
+                raise ValueError(f"Path traversal: {info.filename}")
+        zf.extractall(target)
+```
+
+### XML External Entity (XXE)
+
+```python
+# BAD: xml.etree allows XXE with external input
+import xml.etree.ElementTree as ET
+tree = ET.parse(user_uploaded_file)  # XXE risk!
+
+# GOOD: defusedxml blocks XXE
+import defusedxml.ElementTree as ET
+tree = ET.parse(user_uploaded_file)
+```
+
+### Temporary File Safety
+
+```python
+import tempfile
+
+# BAD: Manual tmp path — race condition + symlink attack
+tmp_path = "/tmp/myapp_" + filename
+with open(tmp_path, "w") as f:
+    f.write(data)
+
+# GOOD: Atomic creation, unique name, auto-cleanup
+with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=True) as f:
+    f.write(data)
+    f.flush()
+    process(f.name)
+```
+
 ---
