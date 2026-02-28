@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/images/skill-library.png" width="80%" alt="Skill Library"></p>
+<p align="center"><img src="docs/images/skill-library.webp" width="80%" alt="Skill Library"></p>
 
 # Skill Library
 
