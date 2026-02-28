@@ -15,26 +15,9 @@
 
 ## Das Problem
 
-CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jedes Projekt kopiert. Agents mit dem Label "You are an expert" zeigen [keine messbare Verbesserung](https://arxiv.org/abs/2308.07702) gegenüber gar keinem Label.
+CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jedes Projekt kopiert. Agents mit dem Label "You are an expert" performen kaum besser als ohne Label — aber [spezifische Experiential Identities verbessern die Accuracy um 10-60%](https://arxiv.org/abs/2308.07702).
 
 Diese Library löst das mit drei Schichten — **Rules** (immer geladen) → **Skills** (on demand) → **Agents** (isolierte Subprozesse) — jede mit klarer Aufgabe, nichts vermischt sich. Die vollständige Herleitung steht in [ARTICLE_de.md](docs/ARTICLE_de.md).
-
-## Hier starten — Die fünf Kern-Skills
-
-Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
-
-| Skill | Was er tut | Phase |
-|-------|-----------|-------|
-| **prompt-builder** | Formt vage Anfragen in strukturierte Prompts | Prompt |
-| **plan-review** | 4 parallele Agents prüfen Arch, Conventions, Risiken, Reqs | Plan |
-| **tdd** | RED-GREEN-REFACTOR mit Agent-Orchestrierung | Bauen + Testen |
-| **systematic-debugging** | Reproduzieren → Isolieren → Root-Cause → Fix | Debug |
-| **session-verify** | End-of-Session Security- + Qualitäts-Review | Verify |
-
-**Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren** — der gesamte Zyklus.
-
-> [!TIP]
-> plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
 
 ## Schnellstart
 
@@ -62,6 +45,23 @@ Dann sag Claude:
 > Nutze den tdd Skill um einen User-Registration-Endpoint hinzuzufügen
 
 Claude liest den Skill, führt RED-GREEN-REFACTOR durch und liefert getesteten Code — kein manuelles Prompting nötig.
+
+## Hier starten — Die fünf Kern-Skills
+
+Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
+
+| Skill | Was er tut | Phase |
+|-------|-----------|-------|
+| **prompt-builder** | Formt vage Anfragen in strukturierte Prompts | Prompt |
+| **plan-review** | 4 parallele Agents prüfen Arch, Conventions, Risiken, Reqs | Plan |
+| **tdd** | RED-GREEN-REFACTOR mit Agent-Orchestrierung | Bauen + Testen |
+| **systematic-debugging** | Reproduzieren → Isolieren → Root-Cause → Fix | Debug |
+| **session-verify** | End-of-Session Security- + Qualitäts-Review | Verify |
+
+**Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren** — der gesamte Zyklus.
+
+> [!TIP]
+> plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
 
 ## Wie es funktioniert
 
@@ -99,7 +99,7 @@ Der zentrale Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skil
 <details>
 <summary><strong>Design-Prinzipien</strong></summary>
 
-**Agent Soul** — Generische Labels ("You are an expert") haben keinen signifikanten Effekt ([NAACL 2024](https://arxiv.org/abs/2308.07702)). Was funktioniert: spezifische Identität, Anti-Patterns, produktive Schwächen. Jeder Agent in dieser Library baut auf dieser Forschung auf.
+**Agent Soul** — Generische Labels ("You are an expert") bewegen kaum etwas, aber spezifische Experiential Identities verbessern die Accuracy um 10-60% ([NAACL 2024](https://arxiv.org/abs/2308.07702)). Was funktioniert: eine "Seele" mit konkreten Erfahrungen, Anti-Patterns und produktiven Schwächen. Jeder Agent in dieser Library baut auf dieser Forschung auf.
 
 **Progressive Disclosure** — Skill-Header laden, damit Claude weiß was verfügbar ist. Vollständige `SKILL.md` lädt on demand. Detaillierte `reference.md`-Dateien laden nur bei Bedarf. Context-Budget bleibt knapp.
 
