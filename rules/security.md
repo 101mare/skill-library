@@ -42,3 +42,26 @@
 - Prefer stdlib over third-party when the stdlib solution is reasonable
 - Run `pip audit` or `safety check` before releases to detect known vulnerabilities
 - Verify package names carefully — typosquatting is a real supply chain attack vector
+
+## Quick Reference — Critical Patterns
+
+```python
+# PATH TRAVERSAL
+resolved = (base / user_input).resolve()
+if not resolved.is_relative_to(base.resolve()):
+    raise ValueError("Path traversal")
+
+# SQL INJECTION — always parameterize
+cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+
+# COMMAND INJECTION — list args, no shell
+subprocess.run(["convert", user_file, "out.png"], check=True)
+
+# SECRETS — cryptographically secure
+token = secrets.token_urlsafe(32)                  # NOT random.randint()
+if hmac.compare_digest(token, expected):            # NOT ==
+
+# DESERIALIZATION — safe formats only
+data = json.loads(user_data)                        # NOT pickle.loads()
+data = yaml.safe_load(content)                      # NOT yaml.load()
+```
