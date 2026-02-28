@@ -144,7 +144,7 @@ This also introduces **modularity**. A skill becomes a packaged unit of workflow
 
 For the practical details of the SKILL.md format — YAML frontmatter, trigger matching, and how to create your own skills — see the [SKILL.md Format](ARTICLE.md#the-skillmd-format) section in ARTICLE.md.
 
-The [Agent Skills Standard](https://agentskills.io) takes this further — skills written in this format work across 30+ tools including Claude Code, OpenAI Codex, Cursor, Gemini CLI, and VS Code. All 27 skills in this library follow the standard.
+The [Agent Skills Standard](https://agentskills.io) takes this further — skills written in this format work across 30+ tools including Claude Code, OpenAI Codex, Cursor, Gemini CLI, and VS Code. All skills in this library follow the standard.
 
 ### Access to Additional Resources
 
