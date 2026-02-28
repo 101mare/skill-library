@@ -87,3 +87,9 @@
 | [planner](../agents/plan/planner.md) | Plan | Validates implementation plans for completeness, requirements coverage, and risks. Consolidates plan-completeness, requirements-verifier, and risk-assessor. |
 | [code-simplifier](../agents/build/code-simplifier.md) | Build | Simplifies and refines code for clarity, consistency, and maintainability while preserving full functionality. |
 | [test-architect](../agents/build/test-architect.md) | Build | Creates pytest tests and reviews existing test suites for quality and coverage. |
+
+---
+
+## Custom
+
+*Your project-specific skills and agents — not tracked by upstream. See [custom/README.md](../custom/README.md) to get started.*
