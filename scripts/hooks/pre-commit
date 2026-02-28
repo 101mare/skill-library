@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Pre-commit hook: regenerate CATALOG.md when skill/agent/rule files change.
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+# Check if any staged files are in directories that affect the catalog
+if git diff --cached --name-only | grep -qE '^(skills/|agents/|rules/|custom/)'; then
+    python3 "$REPO_ROOT/scripts/generate-catalog.py"
+    git add "$REPO_ROOT/docs/CATALOG.md"
+fi
