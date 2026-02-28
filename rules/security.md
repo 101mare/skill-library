@@ -1,3 +1,8 @@
+---
+name: security
+description: Input validation, PII protection in logs, secrets management, and dependency policies.
+---
+
 # Security & Privacy
 
 ## Input Validation
