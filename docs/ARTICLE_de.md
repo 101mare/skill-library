@@ -117,7 +117,7 @@ skill-library/
 > [!NOTE]
 > Der `code-simplifier` Agent basiert auf dem, den [Boris Cherny](https://x.com/bcherny/status/2009450715081789767) (Erfinder von Claude Code) aus dem internen Workflow des Claude-Code-Teams open-sourced hat.
 
-Der entscheidende Punkt: **Rules ersetzen den generischen Teil von CLAUDE.md.** Sobald du grundlegende Standards wie DRY, Security und das Agenten-Verhalten als Rules ausgelagert hast, braucht deine CLAUDE.md nur noch das, was dein Projekt wirklich einzigartig macht. Das DRY-Prinzip, angewandt auf AI-Konfiguration.
+Der entscheidende Punkt: **Rules ersetzen den generischen Teil von CLAUDE.md.** Sobald du grundlegende Standards wie DRY, Security und das Agenten-Verhalten als Rules ausgelagert hast, braucht deine CLAUDE.md nur noch das, was dein Projekt wirklich einzigartig macht. Das DRY-Prinzip, angewandt auf AI-Konfiguration. Eine detaillierte Aufschlüsselung, wie globale Configs, lokale Configs und dieses Repository zusammenhängen, findest du in [GLOBAL-VS-LOCAL_de.md](GLOBAL-VS-LOCAL_de.md).
 
 ### Die Library als Referenz-Sammlung
 
@@ -542,6 +542,9 @@ Der Rest ist Spezialisierung. Die Library ist ein Baukasten, kein Paket. Kopiere
 ---
 
 ## Wie man es nutzt
+
+> [!TIP]
+> Unsicher, ob global oder pro Projekt installieren? [GLOBAL-VS-LOCAL_de.md](GLOBAL-VS-LOCAL_de.md) hat eine Entscheidungsmatrix und empfohlene Setups für Solo-Devs, Teams und Organisationen.
 
 Die Library ist ein Nachschlagewerk. So sieht der Workflow aus:
 
