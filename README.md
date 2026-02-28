@@ -117,6 +117,18 @@ Copy the skill from ~/skill-library/custom/skills/my-skill/SKILL.md into my proj
 
 The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder)) can generate well-structured custom skills for you. See [custom/README.md](custom/README.md) for details.
 
+## Development
+
+After cloning, install the git hooks once:
+
+```
+bash scripts/install-hooks.sh
+```
+
+The pre-commit hook auto-regenerates `docs/CATALOG.md` whenever you change files under `skills/`, `agents/`, `rules/`, or `custom/`. The updated catalog is staged into your commit automatically — no manual step needed.
+
+To regenerate manually: `python3 scripts/generate-catalog.py`
+
 ## Contributing
 
 Found a bug? Have an idea for a new skill? [Open an issue](https://github.com/101mare/skill-library/issues) or submit a PR.
