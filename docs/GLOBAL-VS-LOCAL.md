@@ -97,6 +97,24 @@ A Git repository containing curated, documented, versioned content that you copy
 
 CLAUDE.md is special — it's not just "one file at one location." Claude Code supports CLAUDE.md files at **multiple levels simultaneously**, and they all get loaded. Here's how it actually works:
 
+### The Two-File Mental Model
+
+Before diving into the full hierarchy, understand the fundamental split:
+
+**Global file (`~/.claude/CLAUDE.md`): Who the agent IS.**
+
+Identity and how to work with you. Core decision-making principles. What the agent won't do. How it learns and evolves.
+
+**Project file (`/your-project/CLAUDE.md`): What the agent DOES here.**
+
+Core execution philosophy for this project. Autonomy levels — what it can do without asking. Key paths — where things live. Pointers to reference docs (loaded on demand).
+
+The most common mistake is putting everything in one place. Identity leaks into project specifics. Commands get mixed with philosophy. The agent gets confused about what is a rule versus what is context.
+
+Separation solves this. Global = constant. Project = contextual.
+
+But there's a second mistake that takes longer to see: treating both files as encyclopedias instead of routing layers. A CLAUDE.md shouldn't try to contain everything — it should point to the right rules, skills, and subdirectory CLAUDE.md files that hold the actual detail. Keep both files lean; let the three-layer architecture carry the weight.
+
 ### Where CLAUDE.md Can Exist
 
 | Level | Location | When loaded | Scope |

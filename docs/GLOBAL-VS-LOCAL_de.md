@@ -97,6 +97,24 @@ Ein Git-Repository mit kuratiertem, dokumentiertem, versioniertem Content, den d
 
 CLAUDE.md ist besonders — es ist nicht einfach "eine Datei an einem Ort." Claude Code unterstützt CLAUDE.md-Dateien auf **mehreren Ebenen gleichzeitig**, und sie werden alle geladen. So funktioniert es tatsächlich:
 
+### Das Zwei-Dateien-Denkmodell
+
+Bevor wir in die vollständige Hierarchie eintauchen, das fundamentale Prinzip:
+
+**Globale Datei (`~/.claude/CLAUDE.md`): Who the agent IS.**
+
+Identität und wie man mit dir arbeitet. Grundlegende Entscheidungsprinzipien. Was der Agent nicht tun wird. Wie er lernt und sich weiterentwickelt.
+
+**Projektdatei (`/dein-projekt/CLAUDE.md`): What the agent DOES here.**
+
+Kern-Ausführungsphilosophie für dieses Projekt. Autonomie-Level — was er ohne Nachfrage tun darf. Key Paths — wo Dinge liegen. Verweise auf Referenzdokumente (bei Bedarf geladen).
+
+Der häufigste Fehler ist, alles an einem Ort unterzubringen. Identität sickert in Projektspezifika. Commands vermischen sich mit Philosophie. Der Agent verwechselt, was eine Regel ist und was Kontext.
+
+Trennung löst das. Global = konstant. Projekt = kontextual.
+
+Aber es gibt einen zweiten Fehler, der länger braucht, um sichtbar zu werden: beide Dateien als Enzyklopädien zu behandeln statt als Routing-Layer. Eine CLAUDE.md sollte nicht versuchen, alles zu enthalten — sie sollte auf die richtigen Rules, Skills und Unterverzeichnis-CLAUDE.md-Dateien verweisen, die das eigentliche Detail halten. Halte beide Dateien schlank; lass die Drei-Schichten-Architektur die Last tragen.
+
 ### Wo CLAUDE.md existieren kann
 
 | Ebene | Ort | Wann geladen | Geltungsbereich |
