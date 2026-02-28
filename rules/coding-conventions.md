@@ -1,3 +1,8 @@
+---
+name: coding-conventions
+description: DRY principles, naming & imports, error handling, function design, type hints, and testing conventions.
+---
+
 # Coding Conventions
 
 ## DRY (Don't Repeat Yourself)

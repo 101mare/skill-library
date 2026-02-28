@@ -1,3 +1,8 @@
+---
+name: self-improvement
+description: Learn from corrections, capture patterns in memory, iterate on lessons.
+---
+
 # Self-Improvement
 
 Activate when: user corrects a mistake, or says "remember this", "lesson learned", "never do that again".

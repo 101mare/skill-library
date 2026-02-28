@@ -1,6 +1,6 @@
 # Skills, erklärt: Warum Ordner mit Markdown-Dateien so effektiv sind
 
-> [README](../README_de.md) | [KATALOG](CATALOG_de.md) | **SKILLS-EXPLAINED** | [ARTICLE](ARTICLE_de.md)
+> [README](../README_de.md) | [KATALOG](CATALOG.md) | **SKILLS-EXPLAINED** | [ARTICLE](ARTICLE_de.md)
 
 > [!NOTE]
 > Dieser Artikel erklärt die konzeptionellen Grundlagen von Skills — warum
