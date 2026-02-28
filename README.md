@@ -103,7 +103,7 @@ The key difference: Skills instruct, Agents work. A workflow skill like `plan-re
 
 **Progressive Disclosure** — Skill headers load so Claude knows what's available. Full `SKILL.md` loads on demand. Detailed `reference.md` files load only when needed. Context budget stays tight.
 
-**Context Costs** — Every installed skill costs tokens through its header — on every API call. 27 skills ≈ 100 lines of permanent system prompt. Install selectively.
+**Context Costs** — Every installed skill costs tokens through its header — on every API call. Install selectively.
 
 </details>
 
@@ -127,7 +127,7 @@ The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 
 - **[CATALOG.md](docs/CATALOG.md)** — Full catalog of all skills and agents
 - **[SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md)** — Why skills work: progressive disclosure, file system structure, and bundled resources
-- **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons from building 27 skills
+- **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons learned
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Production-ready CLAUDE.md for new projects
 
 ---
