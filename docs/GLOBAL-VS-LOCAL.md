@@ -13,10 +13,11 @@
 
 1. [The Three Locations](#the-three-locations) — Global, Local, and this Repository
 2. [What Goes Where](#what-goes-where) — Recommendations for each type of content
-3. [How They Interact](#how-they-interact) — Override, shadow, and merge behavior
-4. [Where This Repository Fits](#where-this-repository-fits) — Source of truth, not runtime target
-5. [Honest Assessment](#honest-assessment-when-you-need-this-repo-and-when-you-dont) — When you need this repo and when you don't
-6. [Recommended Setup](#recommended-setup) — Three tiers from minimal to full
+3. [CLAUDE.md: The Full Hierarchy](#claudemd-the-full-hierarchy) — Multiple levels, scoped authority, loading order
+4. [How They Interact](#how-they-interact) — Override, shadow, and merge behavior
+5. [Where This Repository Fits](#where-this-repository-fits) — Source of truth, not runtime target
+6. [Honest Assessment](#honest-assessment-when-you-need-this-repo-and-when-you-dont) — When you need this repo and when you don't
+7. [Recommended Setup](#recommended-setup) — Three tiers from minimal to full
 
 ---
 
@@ -89,6 +90,75 @@ A Git repository containing curated, documented, versioned content that you copy
 
 > [!TIP]
 > **The litmus test:** If you'd copy-paste it into a new project unchanged, it belongs in global. If you'd customize it for the new project, it belongs in local. If you'd version-control and share it, it belongs in this repo.
+
+---
+
+## CLAUDE.md: The Full Hierarchy
+
+CLAUDE.md is special — it's not just "one file at one location." Claude Code supports CLAUDE.md files at **multiple levels simultaneously**, and they all get loaded. Here's how it actually works:
+
+### Where CLAUDE.md Can Exist
+
+| Level | Location | When loaded | Scope |
+|-------|----------|------------|-------|
+| **Global** | `~/.claude/CLAUDE.md` | At startup | All projects on this machine |
+| **Project root** | `./CLAUDE.md` or `./.claude/CLAUDE.md` | At startup, fully | This project |
+| **Subdirectory** | `./src/CLAUDE.md`, `./packages/api/CLAUDE.md` | On-demand | That directory only |
+| **Local (private)** | `./CLAUDE.local.md` | At startup | This project, not committed to git |
+
+### Subdirectory CLAUDE.md: Scoped Authority
+
+This is the part most people miss: **you can place a CLAUDE.md in any subdirectory, and it has authority over that subtree.** Claude loads it on-demand — not at startup, but when it accesses files in that directory.
+
+```
+my-project/
+├── CLAUDE.md                    ← Project-wide (loaded at startup)
+├── src/
+│   ├── api/
+│   │   └── CLAUDE.md            ← Only loaded when Claude works in src/api/
+│   └── workers/
+│       └── CLAUDE.md            ← Only loaded when Claude works in src/workers/
+└── packages/
+    └── billing/
+        └── CLAUDE.md            ← Only loaded when Claude works in packages/billing/
+```
+
+**Why this matters:** You can scope instructions to the code they apply to. The billing module's CLAUDE.md can describe its schema quirks without polluting the global prompt. The API directory's CLAUDE.md can list its endpoint conventions. These only cost tokens when Claude actually works in those directories.
+
+### Loading Order and Priority
+
+Claude Code discovers CLAUDE.md files by recursing upward from the current working directory to the project root. More specific (deeper) instructions take precedence over general ones:
+
+```
+Priority (highest to lowest):
+  1. Managed policy         (organization-wide, if configured)
+  2. ~/.claude/CLAUDE.md    (global user)
+  3. ./CLAUDE.md            (project root)
+  4. ./CLAUDE.local.md      (private, not in git)
+  5. Subdirectory CLAUDE.md (on-demand, scoped to subtree)
+```
+
+When instructions conflict, the **more specific file wins.** A subdirectory CLAUDE.md saying "use tabs" overrides a project root CLAUDE.md saying "use spaces" — but only for files in that subdirectory.
+
+### CLAUDE.md vs. CLAUDE.local.md
+
+| | `CLAUDE.md` | `CLAUDE.local.md` |
+|---|---|---|
+| **Committed to git** | Yes (shared with team) | No (gitignored, private) |
+| **Use for** | Team standards, architecture, conventions | Personal preferences, local paths, API keys references |
+| **Example** | "Use PostgreSQL, not MySQL" | "My local DB runs on port 5433" |
+
+### Practical Implications for This Library
+
+The library's `rules/` directory maps to `~/.claude/rules/` (global) — these are always loaded. But if you need project-scoped behavior, CLAUDE.md at the right level is more appropriate than a rule file:
+
+- **Universal standards** → Global rules (`~/.claude/rules/*.md`)
+- **Project-wide context** → Project root `CLAUDE.md`
+- **Module-specific knowledge** → Subdirectory `CLAUDE.md`
+- **Personal preferences** → `CLAUDE.local.md`
+
+> [!TIP]
+> Subdirectory CLAUDE.md files are a powerful alternative to project-specific skills. If the knowledge only matters for one directory, a CLAUDE.md there is simpler and more focused than a skill — and it costs zero tokens when Claude isn't working in that directory.
 
 ---
 

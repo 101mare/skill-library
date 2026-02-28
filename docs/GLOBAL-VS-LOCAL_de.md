@@ -13,10 +13,11 @@
 
 1. [Die drei Orte](#die-drei-orte) — Global, Lokal und dieses Repository
 2. [Was gehört wohin](#was-gehört-wohin) — Empfehlungen für jeden Content-Typ
-3. [Wie sie zusammenspielen](#wie-sie-zusammenspielen) — Override-, Shadow- und Merge-Verhalten
-4. [Wo dieses Repository hingehört](#wo-dieses-repository-hingehört) — Source of Truth, nicht Runtime-Ziel
-5. [Ehrliche Einschätzung](#ehrliche-einschätzung-wann-du-dieses-repo-brauchst-und-wann-nicht) — Wann du dieses Repo brauchst und wann nicht
-6. [Empfohlenes Setup](#empfohlenes-setup) — Drei Stufen von minimal bis voll
+3. [CLAUDE.md: Die vollständige Hierarchie](#claudemd-die-vollständige-hierarchie) — Mehrere Ebenen, Autorität pro Verzeichnis, Ladereihenfolge
+4. [Wie sie zusammenspielen](#wie-sie-zusammenspielen) — Override-, Shadow- und Merge-Verhalten
+5. [Wo dieses Repository hingehört](#wo-dieses-repository-hingehört) — Source of Truth, nicht Runtime-Ziel
+6. [Ehrliche Einschätzung](#ehrliche-einschätzung-wann-du-dieses-repo-brauchst-und-wann-nicht) — Wann du dieses Repo brauchst und wann nicht
+7. [Empfohlenes Setup](#empfohlenes-setup) — Drei Stufen von minimal bis voll
 
 ---
 
@@ -89,6 +90,75 @@ Ein Git-Repository mit kuratiertem, dokumentiertem, versioniertem Content, den d
 
 > [!TIP]
 > **Der Lackmustest:** Wenn du es unverändert in ein neues Projekt kopieren würdest, gehört es nach global. Wenn du es für das neue Projekt anpassen würdest, gehört es nach lokal. Wenn du es versionieren und teilen willst, gehört es in dieses Repo.
+
+---
+
+## CLAUDE.md: Die vollständige Hierarchie
+
+CLAUDE.md ist besonders — es ist nicht einfach "eine Datei an einem Ort." Claude Code unterstützt CLAUDE.md-Dateien auf **mehreren Ebenen gleichzeitig**, und sie werden alle geladen. So funktioniert es tatsächlich:
+
+### Wo CLAUDE.md existieren kann
+
+| Ebene | Ort | Wann geladen | Geltungsbereich |
+|-------|-----|-------------|-----------------|
+| **Global** | `~/.claude/CLAUDE.md` | Beim Start | Alle Projekte auf dieser Maschine |
+| **Projekt-Root** | `./CLAUDE.md` oder `./.claude/CLAUDE.md` | Beim Start, vollständig | Dieses Projekt |
+| **Unterverzeichnis** | `./src/CLAUDE.md`, `./packages/api/CLAUDE.md` | Bei Bedarf | Nur dieses Verzeichnis |
+| **Lokal (privat)** | `./CLAUDE.local.md` | Beim Start | Dieses Projekt, nicht in Git committet |
+
+### Unterverzeichnis-CLAUDE.md: Autorität über den Teilbaum
+
+Das ist der Teil, den die meisten übersehen: **Du kannst eine CLAUDE.md in jedes Unterverzeichnis legen, und sie hat Autorität über diesen Teilbaum.** Claude lädt sie bei Bedarf — nicht beim Start, sondern wenn es auf Dateien in diesem Verzeichnis zugreift.
+
+```
+mein-projekt/
+├── CLAUDE.md                    ← Projektweit (beim Start geladen)
+├── src/
+│   ├── api/
+│   │   └── CLAUDE.md            ← Nur geladen wenn Claude in src/api/ arbeitet
+│   └── workers/
+│       └── CLAUDE.md            ← Nur geladen wenn Claude in src/workers/ arbeitet
+└── packages/
+    └── billing/
+        └── CLAUDE.md            ← Nur geladen wenn Claude in packages/billing/ arbeitet
+```
+
+**Warum das wichtig ist:** Du kannst Anweisungen auf den Code eingrenzen, für den sie gelten. Die CLAUDE.md des Billing-Moduls kann dessen Schema-Eigenheiten beschreiben, ohne den globalen Prompt zu belasten. Die CLAUDE.md des API-Verzeichnisses kann dessen Endpoint-Konventionen auflisten. Diese kosten nur Token, wenn Claude tatsächlich in diesen Verzeichnissen arbeitet.
+
+### Ladereihenfolge und Priorität
+
+Claude Code entdeckt CLAUDE.md-Dateien, indem es vom aktuellen Arbeitsverzeichnis aufwärts zum Projekt-Root sucht. Spezifischere (tiefere) Anweisungen haben Vorrang vor allgemeinen:
+
+```
+Priorität (höchste zuerst):
+  1. Managed Policy          (organisationsweit, falls konfiguriert)
+  2. ~/.claude/CLAUDE.md     (global/User)
+  3. ./CLAUDE.md             (Projekt-Root)
+  4. ./CLAUDE.local.md       (privat, nicht in Git)
+  5. Unterverzeichnis-CLAUDE.md (bei Bedarf, auf Teilbaum begrenzt)
+```
+
+Bei widersprüchlichen Anweisungen gewinnt die **spezifischere Datei.** Eine Unterverzeichnis-CLAUDE.md, die "verwende Tabs" sagt, überschreibt eine Projekt-Root-CLAUDE.md, die "verwende Spaces" sagt — aber nur für Dateien in diesem Unterverzeichnis.
+
+### CLAUDE.md vs. CLAUDE.local.md
+
+| | `CLAUDE.md` | `CLAUDE.local.md` |
+|---|---|---|
+| **In Git committet** | Ja (mit Team geteilt) | Nein (gitignored, privat) |
+| **Verwende für** | Team-Standards, Architektur, Konventionen | Persönliche Präferenzen, lokale Pfade, API-Key-Referenzen |
+| **Beispiel** | "Verwende PostgreSQL, nicht MySQL" | "Meine lokale DB läuft auf Port 5433" |
+
+### Praktische Implikationen für diese Library
+
+Das `rules/`-Verzeichnis der Library mapped auf `~/.claude/rules/` (global) — diese werden immer geladen. Aber wenn du projektbezogenes Verhalten brauchst, ist eine CLAUDE.md auf der richtigen Ebene angemessener als eine Rule-Datei:
+
+- **Universelle Standards** → Globale Rules (`~/.claude/rules/*.md`)
+- **Projektweiter Kontext** → Projekt-Root `CLAUDE.md`
+- **Modulspezifisches Wissen** → Unterverzeichnis-`CLAUDE.md`
+- **Persönliche Präferenzen** → `CLAUDE.local.md`
+
+> [!TIP]
+> Unterverzeichnis-CLAUDE.md-Dateien sind eine starke Alternative zu projektspezifischen Skills. Wenn das Wissen nur für ein Verzeichnis relevant ist, ist eine CLAUDE.md dort einfacher und fokussierter als ein Skill — und sie kostet null Token, wenn Claude nicht in diesem Verzeichnis arbeitet.
 
 ---
 
