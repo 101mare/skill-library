@@ -14,9 +14,11 @@ Lightweight alternative to the broken `ralph-wiggum` plugin. Uses a Stop hook + 
 
 ### 1. Copy hook script
 
+From the repo root:
+
 ```bash
 mkdir -p .claude/hooks
-cp hooks/ralph-loop-stop.sh .claude/hooks/
+cp skills/workflow/ralph-loop/hooks/ralph-loop-stop.sh .claude/hooks/
 chmod +x .claude/hooks/ralph-loop-stop.sh
 ```
 
@@ -46,9 +48,11 @@ If the file already has content, merge the `hooks` key alongside existing keys.
 
 ### 3. Copy skill
 
+From the repo root:
+
 ```bash
-cp -r . .claude/skills/ralph-loop/
-# (or just copy SKILL.md into your skills directory)
+mkdir -p .claude/skills/ralph-loop
+cp skills/workflow/ralph-loop/SKILL.md .claude/skills/ralph-loop/
 ```
 
 ### 4. Restart Claude Code
@@ -67,6 +71,10 @@ Hooks are loaded at session start. Restart to pick up the new Stop hook.
 - Delete `.claude/ralph-loop.local.md`
 - Or press Escape / Ctrl+C
 
+## Companion Skill
+
+The **[ralph-loop-prompt-builder](../ralph-loop-prompt-builder)** helps create effective prompts for the Ralph Loop. It asks clarifying questions about the task and generates a structured prompt with clear requirements, verification steps, and completion criteria.
+
 ## Dependencies
 
 - `jq` (for JSON output in the stop hook)
@@ -78,5 +86,7 @@ ralph-loop/
 ├── SKILL.md                    # Skill file (copy to .claude/skills/ralph-loop/)
 ├── hooks/
 │   └── ralph-loop-stop.sh      # Stop hook (copy to .claude/hooks/)
+├── init.md                     # Installation guide for Claude
+├── prompt-template.md          # Prompt template for structured tasks
 └── README.md                   # This file
 ```

@@ -15,7 +15,7 @@
 
 ## The Problem
 
-CLAUDE.md files grow into 500-line monsters. The same rules get copy-pasted across projects. Agents labeled "You are an expert" show [no measurable improvement](https://arxiv.org/abs/2308.07702) over no label at all.
+CLAUDE.md files grow into 500-line monsters. The same rules get copy-pasted across projects. Agents labeled "You are an expert" barely outperform no label at all — but [specific experiential identities improve accuracy by 10-60%](https://arxiv.org/abs/2308.07702).
 
 This library fixes that with three layers — **Rules** (always loaded) → **Skills** (on demand) → **Agents** (isolated subprocesses) — each with a clear job and nothing bleeding across. The full rationale is in [ARTICLE.md](docs/ARTICLE.md).
 
@@ -99,11 +99,11 @@ The key difference: Skills instruct, Agents work. A workflow skill like `plan-re
 <details>
 <summary><strong>Design Principles</strong></summary>
 
-**Agent Soul** — Generic labels ("You are an expert") have zero significant effect ([NAACL 2024](https://arxiv.org/abs/2308.07702)). What works: specific identity, anti-patterns to avoid, productive weaknesses. Every agent in this library is built on that research.
+**Agent Soul** — Generic labels ("You are an expert") barely move the needle, but specific experiential identities improve accuracy by 10-60% ([NAACL 2024](https://arxiv.org/abs/2308.07702)). What works: a "soul" with concrete experiences, anti-patterns to avoid, and productive weaknesses. Every agent in this library is built on that research.
 
 **Progressive Disclosure** — Skill headers load so Claude knows what's available. Full `SKILL.md` loads on demand. Detailed `reference.md` files load only when needed. Context budget stays tight.
 
-**Context Costs** — Every installed skill costs tokens through its header — on every API call. 27 skills ≈ 100 lines of permanent system prompt. Install selectively.
+**Context Costs** — Every installed skill costs tokens through its header — on every API call. Install selectively.
 
 </details>
 
@@ -127,7 +127,7 @@ The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 
 - **[CATALOG.md](docs/CATALOG.md)** — Full catalog of all skills and agents
 - **[SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md)** — Why skills work: progressive disclosure, file system structure, and bundled resources
-- **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons from building 27 skills
+- **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons learned
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Production-ready CLAUDE.md for new projects
 
 ---

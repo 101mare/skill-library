@@ -10,8 +10,8 @@ custom/
 │   └── my-skill/
 │       └── SKILL.md
 └── agents/          # Your custom agents
-    └── my-agent/
-        └── AGENT.md
+    └── db-reviewer/
+        └── db-reviewer.md
 ```
 
 ## Creating Custom Skills & Agents
@@ -66,10 +66,10 @@ Copy the skill from ~/skill-library/custom/skills/deploy-staging/SKILL.md into m
 
 ```
 custom/agents/db-reviewer/
-└── AGENT.md
+└── db-reviewer.md
 ```
 
-2. Use the standard AGENT.md format:
+2. Use the standard agent format (see [agents/](../agents/) for examples):
 
 ```markdown
 ---
@@ -86,7 +86,7 @@ Your agent definition here...
 3. Copy it into your project:
 
 ```
-Copy the agent from ~/skill-library/custom/agents/db-reviewer/AGENT.md into my project
+Copy the agent from ~/skill-library/custom/agents/db-reviewer/db-reviewer.md into my project
 ```
 
 ## Tips
