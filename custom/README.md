@@ -62,7 +62,32 @@ Copy the skill from ~/skill-library/custom/skills/deploy-staging/SKILL.md into m
 
 ### Adding an Agent
 
-Same pattern — create a folder in `custom/agents/` with an `AGENT.md`.
+1. Create a folder in `custom/agents/`:
+
+```
+custom/agents/db-reviewer/
+└── AGENT.md
+```
+
+2. Use the standard AGENT.md format:
+
+```markdown
+---
+name: db-reviewer
+description: |
+  Reviews database migrations for safety, performance and rollback support.
+---
+
+# DB Reviewer
+
+Your agent definition here...
+```
+
+3. Copy it into your project:
+
+```
+Copy the agent from ~/skill-library/custom/agents/db-reviewer/AGENT.md into my project
+```
 
 ## Tips
 
