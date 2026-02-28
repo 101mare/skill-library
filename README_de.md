@@ -103,7 +103,7 @@ Der zentrale Unterschied: Skills instruieren, Agents arbeiten. Ein Workflow-Skil
 
 **Progressive Disclosure** — Skill-Header laden, damit Claude weiß was verfügbar ist. Vollständige `SKILL.md` lädt on demand. Detaillierte `reference.md`-Dateien laden nur bei Bedarf. Context-Budget bleibt knapp.
 
-**Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. 27 Skills ≈ 100 Zeilen permanenter System-Prompt. Selektiv installieren.
+**Context-Kosten** — Jeder installierte Skill kostet Token durch seinen Header — bei jedem API-Call. Selektiv installieren.
 
 </details>
 
@@ -127,7 +127,7 @@ Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 
 - **[CATALOG_de.md](docs/CATALOG_de.md)** — Vollständiger Katalog aller Skills und Agents
 - **[SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md)** — Warum Skills funktionieren: Progressive Disclosure, Dateisystem-Struktur und gebündelte Ressourcen
-- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned beim Bau von 27 Skills
+- **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Produktionsreife CLAUDE.md für neue Projekte
 
 ---
