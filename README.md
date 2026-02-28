@@ -9,7 +9,7 @@
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
-> **Docs:** [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
+> **Docs:** [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md) | [GLOBAL-VS-LOCAL.md](docs/GLOBAL-VS-LOCAL.md)
 >
 > Deutsche Version: [README_de.md](README_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
@@ -148,6 +148,7 @@ The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 - **[CATALOG.md](docs/CATALOG.md)** — Full catalog of all skills and agents
 - **[SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md)** — Why skills work: progressive disclosure, file system structure, and bundled resources
 - **[ARTICLE.md](docs/ARTICLE.md)** — Deep dive: three layers vs. one big CLAUDE.md, agent "soul" design, context budgets, and lessons learned
+- **[GLOBAL-VS-LOCAL.md](docs/GLOBAL-VS-LOCAL.md)** — Global vs. local configs: where your configuration lives, when you need this repo, and when you don't
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Production-ready CLAUDE.md for new projects
 
 ---

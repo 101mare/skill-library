@@ -9,7 +9,7 @@
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
-> **Docs:** [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
+> **Docs:** [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md) | [GLOBAL-VS-LOCAL_de.md](docs/GLOBAL-VS-LOCAL_de.md)
 >
 > English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
 
@@ -136,6 +136,7 @@ Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](ski
 - **[CATALOG.md](docs/CATALOG.md)** — Vollständiger Katalog aller Skills und Agents
 - **[SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md)** — Warum Skills funktionieren: Progressive Disclosure, Dateisystem-Struktur und gebündelte Ressourcen
 - **[ARTICLE_de.md](docs/ARTICLE_de.md)** — Deep Dive: Drei Schichten statt einer großen CLAUDE.md, Agent-"Soul"-Design, Context-Budgets und Lessons Learned
+- **[GLOBAL-VS-LOCAL_de.md](docs/GLOBAL-VS-LOCAL_de.md)** — Global vs. Lokal: Wo deine Konfiguration lebt, wann du dieses Repo brauchst und wann nicht
 - **[templates/CLAUDE.md.template](templates/CLAUDE.md.template)** — Produktionsreife CLAUDE.md für neue Projekte
 
 ---

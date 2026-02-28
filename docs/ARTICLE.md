@@ -117,7 +117,7 @@ skill-library/
 > [!NOTE]
 > The `code-simplifier` agent is based on the one [Boris Cherny](https://x.com/bcherny/status/2009450715081789767) (creator of Claude Code) open-sourced from the Claude Code team's internal workflow.
 
-The crucial point: **Rules replace the generic part of CLAUDE.md.** Once you've extracted fundamental standards like DRY, security, and agent behavior into rules, your CLAUDE.md only needs what truly makes your project unique. The DRY principle, applied to AI configuration.
+The crucial point: **Rules replace the generic part of CLAUDE.md.** Once you've extracted fundamental standards like DRY, security, and agent behavior into rules, your CLAUDE.md only needs what truly makes your project unique. The DRY principle, applied to AI configuration. For a detailed breakdown of how global configs, local configs, and this repository relate to each other, see [GLOBAL-VS-LOCAL.md](GLOBAL-VS-LOCAL.md).
 
 ### The Library as a Reference Collection
 
@@ -548,6 +548,9 @@ The rest is specialization. The library is a toolkit, not a package. Copy what y
 ---
 
 ## How to Use It
+
+> [!TIP]
+> Not sure whether to install globally or per project? [GLOBAL-VS-LOCAL.md](GLOBAL-VS-LOCAL.md) has a decision matrix and recommended setups for solo devs, teams, and organizations.
 
 The library is a reference. Here's what the workflow looks like:
 
