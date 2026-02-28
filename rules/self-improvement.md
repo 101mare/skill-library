@@ -1,6 +1,6 @@
 ---
 name: self-improvement
-description: Learn from corrections, capture patterns in memory, and iterate on lessons.
+description: Learn from corrections, capture patterns in memory, iterate on lessons.
 ---
 
 # Self-Improvement
