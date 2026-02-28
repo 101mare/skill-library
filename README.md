@@ -67,6 +67,9 @@ If you only install five skills, these cover the entire development cycle:
 
 ```
 skill-library/
+├── custom/                     # Your project-specific skills & agents
+│   ├── skills/                 #   Fork it, add yours here
+│   └── agents/                 #   Upstream updates won't touch this
 ├── docs/                       # CATALOG + ARTICLE (EN + DE)
 ├── templates/
 │   └── CLAUDE.md.template      # Production-ready CLAUDE.md for new projects
@@ -103,6 +106,16 @@ The key difference: Skills instruct, Agents work. A workflow skill like `plan-re
 **Context Costs** — Every installed skill costs tokens through its header — on every API call. 27 skills ≈ 100 lines of permanent system prompt. Install selectively.
 
 </details>
+
+## Custom Skills & Agents
+
+Fork this repo and add your own skills to `custom/skills/` and agents to `custom/agents/`. This folder is yours — upstream updates won't touch it, so you can `git pull` without merge conflicts.
+
+```
+Copy the skill from ~/skill-library/custom/skills/my-skill/SKILL.md into my project
+```
+
+The meta skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder)) can generate well-structured custom skills for you. See [custom/README.md](custom/README.md) for details.
 
 ## Contributing
 
