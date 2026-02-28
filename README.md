@@ -42,31 +42,15 @@ Claude reads the file, copies it to `.claude/skills/` (or `.claude/agents/`), an
 
 ### Installing Rules
 
-Rules must be added manually — Claude Code loads them from `~/.claude/rules/` (global) or `.claude/rules/` (per project). The library ships 4 rules that replace the generic part of your CLAUDE.md.
+Rules are always loaded and must be added manually. Symlink them globally so every project gets them:
 
-**Global** (symlink — applies to all projects, updates via `git pull`):
 ```bash
-# Symlink all 4 rules at once
 for rule in ~/skill-library/rules/*.md; do
   ln -s "$rule" ~/.claude/rules/"$(basename "$rule")"
 done
 ```
 
-**Per project** (copy into a specific project):
-```bash
-cp ~/skill-library/rules/*.md my-project/.claude/rules/
-```
-
-**Selective** (only pick what you need):
-```bash
-ln -s ~/skill-library/rules/security.md ~/.claude/rules/security.md
-ln -s ~/skill-library/rules/coding-conventions.md ~/.claude/rules/coding-conventions.md
-```
-
-The 4 available rules: **agent-behavior** (scope discipline, minimal changes), **coding-conventions** (DRY, naming, testing), **security** (input validation, secrets, PII), **self-improvement** (learn from corrections). See [CATALOG.md](docs/CATALOG.md) for details.
-
-> [!NOTE]
-> Skills and agents are loaded on demand, but rules are **always loaded** on every prompt. This is intentional — they set the baseline for every interaction.
+Or copy into a single project: `cp ~/skill-library/rules/*.md my-project/.claude/rules/`
 
 Then tell Claude:
 
