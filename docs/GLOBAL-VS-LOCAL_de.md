@@ -46,6 +46,7 @@ Claude Code liest:
 
 - **Rules:** Global wird zuerst geladen, lokal danach. Gleicher Dateiname → lokal ersetzt global. Verschiedene Dateinamen koexistieren.
 - **Skills:** Lokal wird zuerst geprüft, dann global. Erster Treffer gewinnt — sie verschmelzen nicht.
+- **CLAUDE.md:** Wird geladen, indem der Verzeichnisbaum nach oben durchlaufen wird — wenn du Claude in `foo/bar/` startest, lädt es sowohl `foo/bar/CLAUDE.md` als auch `foo/CLAUDE.md`. CLAUDE.md-Dateien in Unterverzeichnissen werden bei Bedarf geladen, wenn Claude dort Dateien liest. ([Docs](https://code.claude.com/docs/en/memory#how-claudemd-files-load))
 
 ### Settings: Zusammengeführt, Lokal überschreibt Schlüssel
 
