@@ -46,7 +46,7 @@ Claude Code reads:
 
 - **Rules:** Global loaded first, local after. Same filename → local replaces global. Different filenames coexist.
 - **Skills:** Local checked first, then global. First match wins — they don't merge.
-- **CLAUDE.md:** Loaded by walking up the directory tree — if you run Claude in `foo/bar/`, it loads both `foo/bar/CLAUDE.md` and `foo/CLAUDE.md`. CLAUDE.md files in subdirectories load on demand when Claude reads files there. ([docs](https://code.claude.com/docs/en/memory#how-claudemd-files-load))
+- **CLAUDE.md:** Parent directories load at launch (walking upward from cwd), subdirectories load on demand when Claude reads files there. Target under 200 lines per file — split with `@imports` or `.claude/rules/` if larger. ([docs](https://code.claude.com/docs/en/memory#how-claudemd-files-load))
 
 ### Settings: Merged, Local Overwrites Keys
 
