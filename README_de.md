@@ -20,7 +20,7 @@
 
 CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jedes Projekt kopiert. Agents mit dem Label "You are an expert" performen kaum besser als ohne Label — aber [spezifische Experiential Identities verbessern die Accuracy um 10-60%](https://arxiv.org/abs/2308.07702).
 
-Diese Library löst das mit drei Schichten — **Rules** (immer geladen) → **Skills** (on demand) → **Agents** (isolierte Subprozesse) — jede mit klarer Aufgabe, nichts vermischt sich. Die vollständige Herleitung steht in [ARTICLE_de.md](docs/ARTICLE_de.md).
+Diese Library löst das mit drei Schichten — Rules, Skills, Agents — jede mit klarer Aufgabe, nichts vermischt sich. Die vollständige Herleitung steht in [ARTICLE_de.md](docs/ARTICLE_de.md).
 
 ## Schnellstart
 
@@ -101,7 +101,7 @@ skill-library/
 
 **Rules** setzen globales Verhalten — Coding Conventions, Scope-Disziplin, Security-Defaults. Immer geladen, prägen jede Interaktion.
 
-**Skills** vermitteln Claude spezialisierte Workflows — TDD-Zyklen, Debugging-Methodik, API-Design. Header immer sichtbar; vollständiger Inhalt lädt on demand.
+**Skills** vermitteln Claude spezialisierte Workflows — TDD-Zyklen, Debugging-Methodik, API-Design.
 
 **Agents** sind isolierte Subprozesse für spezifische Aufgaben — Code Review, Dead-Code-Erkennung, Tests schreiben. Kein Parent-Kontext rein, Ergebnis raus.
 
@@ -126,13 +126,13 @@ Fork dieses Repo und füge deine eigenen Skills in `custom/skills/` und Agents i
 Kopiere den Skill aus ~/skill-library/custom/skills/mein-skill/SKILL.md in mein Projekt
 ```
 
-Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder)) können gut strukturierte Custom-Skills für dich generieren. Details in [custom/README.md](custom/README.md).
+Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder), [team-builder](skills/meta/team-builder)) können gut strukturierte Custom-Skills für dich generieren. Details in [custom/README.md](custom/README.md).
 
 ## Mitwirken
 
 Bug gefunden? Idee für einen neuen Skill? [Issue öffnen](https://github.com/101mare/skill-library/issues) oder PR einreichen.
 
-Die Meta-Skills ([skill-builder](skills/meta/skill-builder), [agent-builder](skills/meta/agent-builder), [team-builder](skills/meta/team-builder)) zeigen wie man Skills und Agents baut, die den Patterns der Library folgen.
+Siehe [custom/README.md](custom/README.md) für eigene Erweiterungen.
 
 ## Weiterführend
 
