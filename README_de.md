@@ -13,6 +13,9 @@
 >
 > English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
 
+> [!NOTE]
+> Alles in diesem Repo basiert auf [offizieller Claude Code Dokumentation](https://code.claude.com/docs/en/memory) und [publizierter Forschung](https://arxiv.org/abs/2308.07702). Kein Raten, keine cargo-culted Prompts.
+
 ## Das Problem
 
 CLAUDE.md-Dateien wachsen zu 500-Zeilen-Monstern. Dieselben Regeln werden in jedes Projekt kopiert. Agents mit dem Label "You are an expert" performen kaum besser als ohne Label — aber [spezifische Experiential Identities verbessern die Accuracy um 10-60%](https://arxiv.org/abs/2308.07702).

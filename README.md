@@ -13,6 +13,9 @@
 >
 > Deutsche Version: [README_de.md](README_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
+> [!NOTE]
+> Everything in this repo is grounded in [official Claude Code documentation](https://code.claude.com/docs/en/memory) and [published research](https://arxiv.org/abs/2308.07702). No guesswork, no cargo-culted prompts.
+
 ## The Problem
 
 CLAUDE.md files grow into 500-line monsters. The same rules get copy-pasted across projects. Agents labeled "You are an expert" barely outperform no label at all — but [specific experiential identities improve accuracy by 10-60%](https://arxiv.org/abs/2308.07702).
