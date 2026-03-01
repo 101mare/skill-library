@@ -14,7 +14,7 @@
 > Deutsche Version: [README_de.md](README_de.md) | [SKILLS-EXPLAINED_de.md](docs/SKILLS-EXPLAINED_de.md) | [ARTICLE_de.md](docs/ARTICLE_de.md)
 
 > [!NOTE]
-> Everything in this repo is grounded in [official Claude Code documentation](https://code.claude.com/docs/en/memory) and [published research](https://arxiv.org/abs/2308.07702). No guesswork, no cargo-culted prompts.
+> Everything in this repo is grounded in [official Claude Code documentation](https://code.claude.com/docs/en/memory) and published research. No guesswork, no cargo-culted prompts.
 
 ## The Problem
 
