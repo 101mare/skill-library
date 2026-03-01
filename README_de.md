@@ -14,7 +14,7 @@
 > English version: [README.md](README.md) | [CATALOG.md](docs/CATALOG.md) | [SKILLS-EXPLAINED.md](docs/SKILLS-EXPLAINED.md) | [ARTICLE.md](docs/ARTICLE.md)
 
 > [!NOTE]
-> Alles in diesem Repo basiert auf [offizieller Claude Code Dokumentation](https://code.claude.com/docs/en/memory) und publizierter Forschung. Kein Raten, keine cargo-culted Prompts.
+> Alles in diesem Repo basiert auf [offizieller Claude Code Dokumentation](https://code.claude.com/docs/en/memory) und publizierter Forschung.
 
 ## Das Problem
 
