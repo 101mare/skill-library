@@ -17,43 +17,21 @@
 
 ## The Problem with "Saved Prompts"
 
-You spent 45 minutes perfecting a prompt for code reviews. It finally catches edge cases, enforces your team's conventions, and outputs results in the right format. Two weeks later, your colleague asks for it — but you've already tweaked your version twice. They paste their copy into a notes app, add their own rules, remove some of yours. Within a month, three conflicting versions exist and nobody knows which one is "right."
+You spend 45 minutes perfecting a prompt for code reviews. Two weeks later, your colleague copies it, tweaks it, and within a month three conflicting versions exist. That's **drift** — saved prompts evolve independently and silently diverge.
 
-This is the first failure mode: **drift.** Saved prompts evolve independently and silently diverge.
+Then there's **vagueness.** Even the "right" version probably opens with "You are an expert code reviewer." But [research on role-play prompting](https://arxiv.org/abs/2308.07702) (NAACL 2024) found that generic labels produce zero statistically significant improvement. Specific, experiential instructions improved accuracy by 10–60%. The model needs that specificity — but pasting dense blocks of context every time is inefficient and error-prone.
 
-The second failure mode is **vagueness.** Even the "right" version of that prompt probably opens with something like "You are an expert code reviewer." Sounds reasonable — but [research on role-play prompting](https://arxiv.org/abs/2308.07702) (NAACL 2024) found that generic labels like this produce zero statistically significant improvement over no label at all. What *does* work are specific, experiential instructions — and those improved accuracy by 10–60% across 12 reasoning benchmarks. The model needs that specificity, but pasting dense blocks of context every time is inefficient and error-prone.
-
-**A skill solves both problems at once.** Instead of a drifting text snippet, you place instructions into a dedicated folder (using a `SKILL.md` file) alongside templates and scripts. One canonical source, version-controlled and shareable. "Use the `tdd` skill to add an endpoint" replaces a paragraph of manual instructions. A one-off attempt becomes a repeatable workflow.
-
-Here's what that shift looks like in practice:
-
-```text
-  SAVED PROMPT                        SKILL FOLDER
-  ─────────────                       ─────────────
-  "You are an expert code             tdd/
-   reviewer. Always check              ├── SKILL.md          (core instructions)
-   for SQL injection,                  ├── reference.md      (detailed checklists)
-   ensure type hints..."               ├── anti-patterns.md  (what to avoid)
-                                       └── examples/         (real-world samples)
-  ┌──────────────────┐
-  │  A flat string.  │                ┌──────────────────────────────────┐
-  │  No structure.   │                │  A folder. Version-controlled.   │
-  │  No versioning.  │                │  Modular. Composable. Shareable. │
-  │  No resources.   │                │  Bundled with scripts & context. │
-  └──────────────────┘                └──────────────────────────────────┘
-```
+**A skill solves both.** You place instructions into a folder (`SKILL.md`) alongside templates and scripts — one canonical source, version-controlled and shareable. "Use the `tdd` skill" replaces a paragraph of manual instructions.
 
 ---
 
 ## The Three Pillars of a Skill
 
-What turns a folder of Markdown files into something fundamentally better than a saved prompt? Three things.
-
 ### 1. Progressive Disclosure
 
-A saved prompt forces the model to read everything at once — every rule, every edge case — regardless of relevance. [Research shows](https://arxiv.org/abs/2510.05381) that context length alone degrades LLM performance by 14–85%, even when all relevant information is perfectly retrievable. More context isn't free; it actively hurts.
+A saved prompt forces the model to read everything at once. But [research shows](https://arxiv.org/abs/2510.05381) that context length alone degrades LLM performance by 14–85%, even with perfect retrieval. More context isn't free; it actively hurts.
 
-A skill solves this by revealing information in layers:
+Skills reveal information in layers instead:
 
 ```text
 ┌─────────────────────────────────────────────────────┐
@@ -77,15 +55,11 @@ The context window stays clean. Details surface only when they matter.
 
 ### 2. File System Structure
 
-A saved prompt is a flat string. A skill lives in a folder — and that folder structure itself conveys meaning, the same way a well-organized package tells you what's inside before you open it. (See the full directory tree in [CATALOG.md](CATALOG.md)).
-
-This introduces **modularity**. A skill is a self-contained unit that can be version-controlled, shared, and composed with others. All skills in this library follow the [Agent Skills Standard](https://agentskills.io), ensuring they work seamlessly across 30+ tools, including Claude Code, Cursor, and VS Code.
+A saved prompt is a flat string. A skill lives in a folder — and that structure conveys meaning, like a well-organized package that tells you what's inside before you open it. This introduces **modularity**: version-controlled, shareable, composable. All skills in this library follow the [Agent Skills Standard](https://agentskills.io), working across 30+ tools including Claude Code, Cursor, and VS Code. (See the full directory tree in [CATALOG.md](CATALOG.md)).
 
 ### 3. Bundled Resources
 
-A saved prompt is limited to the text you paste. A skill can bundle appendices, evaluation rubrics, or even executable tooling.
-
-Consider the `ralph-loop` skill — an autonomous iteration loop that keeps Claude working until a task is done:
+A saved prompt is limited to text. A skill can bundle appendices, rubrics, or executable tooling. Consider the `ralph-loop` skill:
 
 | File | Purpose |
 |------|---------|
@@ -94,29 +68,25 @@ Consider the `ralph-loop` skill — an autonomous iteration loop that keeps Clau
 | `prompt-template.md` | Template that the agent fills in for each task |
 | `hooks/ralph-loop-stop.sh` | Bash hook script — the actual automation engine |
 
-This is the difference between telling someone "here are instructions for running tests" and handing them a test runner that validates their work.
+The difference between handing someone instructions and handing them a working tool.
 
 ---
 
 ## Why This Matters for Teams
 
-For individuals, skills save time. For teams, they scale expertise.
-
-Much of what makes a senior developer valuable is "tacit knowledge" — knowing which assumptions to test, what to verify before deploying, and what "good enough" actually looks like. This knowledge usually lives in people's heads and transfers slowly, if at all.
+For individuals, skills save time. For teams, they scale expertise — specifically the "tacit knowledge" that lives in senior developers' heads and transfers slowly, if at all.
 
 This library's `reviewer.md` agent demonstrates the alternative. Its prompt isn't "You are a security expert." It carries specific, hard-won experiences:
 
 > *"…found SQL injection slip through three rounds of code review, watched silent `except: pass` blocks cause production incidents, traced GDPR violations to debug-level LLM response logs…"*
 
-Packaged as a skill, a junior developer running `/review` on their first pull request instantly applies the same battle-tested patterns that took a senior dev years to accumulate. When the team discovers a new anti-pattern, you update the skill once — not twenty personal notes across twenty developers.
+A junior developer running `/review` on their first PR instantly applies battle-tested patterns that took a senior dev years to accumulate. When the team discovers a new anti-pattern, you update the skill once — not twenty personal notes across twenty developers.
 
 ---
 
 ## In Practice
 
-Skills don't magically expand what an LLM can do. They make its output predictable and consistent. If you find yourself repeating the same prompting process more than three times, that repetition is a signal: it's time to turn it into a skill.
-
-Remember the code review prompt from the beginning? The one that drifted into three conflicting versions? As a skill, it would live in one folder, evolve in one place, and work the same way for everyone.
+Skills don't expand what an LLM can do — they make its output predictable. If you find yourself repeating the same prompting process more than three times, it's time to turn it into a skill. One folder, one source of truth, no more drift.
 
 > [!TIP]
 > Want to create your own? The `skill-builder` meta-skill teaches your agent the SKILL.md format, frontmatter conventions, and best practices. Just ask: "Create a skill for [Task]" to get a perfectly structured starting point.
