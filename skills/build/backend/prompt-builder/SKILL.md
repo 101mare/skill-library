@@ -202,7 +202,7 @@ When the prompt topic aligns with available specialized tools, include instructi
 <instructions>
 ...
 [If the task involves frontend/UI work:]
-Use the ui-architect-pro or frontend-warmgold-builder agent for UI implementation.
+Use the warmgold-frontend skill for UI implementation.
 
 [If the task involves code review:]
 Use the reviewer agent for code quality, security, logging, and privacy review.
