@@ -86,6 +86,7 @@ skill-library/
 │   │       ├── ci-cd-builder/
 │   │       └── project-scaffold/
 │   ├── workflow/                     # Multi-Agent Workflows
+│   │   ├── brainstorm/
 │   │   ├── plan-review/
 │   │   ├── session-verify/
 │   │   ├── pr-review/
@@ -213,7 +214,7 @@ Four skill categories:
 
 **build/** (9 Skills) — Split into `frontend/` and `backend/`. Frontend: Frontend Design, Warmgold Design System. Backend: Config (Pydantic + YAML + Env-Vars), Logging, Exceptions, Docker, CI/CD (GitHub Actions), Prompts, Project Structure.
 
-**workflow/** (7 Skills) — Orchestration of multi-agent workflows: Plan Review before implementation, Session Verification after work, PR Review for pull requests, TDD (RED-GREEN-REFACTOR cycle), Deep Research (structured research before technical decisions), Ralph Loop (autonomous iteration loop via hooks), and Ralph Loop Prompt Builder (interactive prompt builder for it).
+**workflow/** (8 Skills) — Orchestration of multi-agent workflows: Brainstorm (divergent-then-convergent ideation), Plan Review before implementation, Session Verification after work, PR Review for pull requests, TDD (RED-GREEN-REFACTOR cycle), Deep Research (structured research before technical decisions), Ralph Loop (autonomous iteration loop via hooks), and Ralph Loop Prompt Builder (interactive prompt builder for it).
 
 **patterns/** (8 Skills) — Reusable architecture patterns: DI Container, Protocol Design, Strategy + Registry, Error Handling, Resilience Patterns (Retry, Circuit Breaker, Timeout), Testing Patterns (pytest + Hypothesis), API Design (FastAPI), Systematic Debugging (4-phase methodology).
 
@@ -294,6 +295,7 @@ The library maps skills and agents to development phases:
 
 | Phase | Skills | Agents |
 |---|---|---|
+| **Ideate** | brainstorm | -- |
 | **Research** | deep-research | -- |
 | **Plan** | plan-review | planner |
 | **Scaffold** | project-scaffold, config-builder, exception-builder, docker-builder, ci-cd-builder | -- |
@@ -513,17 +515,18 @@ But it comes at a cost: every installed skill costs tokens just through its head
 
 This isn't just a hunch — it's backed by research. The [IFScale benchmark](https://arxiv.org/abs/2507.11538) (2025) shows that instruction-following accuracy degrades measurably starting at ~100-150 instructions, with models increasingly *omitting* rules rather than getting them wrong (30:1 omission-to-error ratio at high density). [Context Rot](https://research.trychroma.com/context-rot) (Chroma Research) demonstrates that performance degradation is universal across all models as input length grows — even when relevant information is perfectly retrievable. Most striking: [research presented at EMNLP 2025](https://arxiv.org/abs/2510.05381) found that context length *alone* causes 14-85% performance loss, even with perfect retrieval. The effective context window is much smaller than the nominal one. Progressive disclosure — loading only what's needed, when it's needed — is the answer.
 
-### The Five That Cover the Entire Cycle
+### The Six That Cover the Entire Cycle
 
 If I had to limit myself:
 
-1. **prompt-builder** — Asks clarifying questions about your goal, then turns vague requests into structured prompts — whether for a plan, direct implementation, or any other task.
-2. **plan-review** — The most impactful workflow. Four parallel review agents check architecture fit, conventions, risks, and requirements. Traffic light verdict *before* code exists. Avoiding rework > fixing rework.
-3. **tdd** — Real workflow with agent orchestration. Enforces that tests define behavior instead of confirming code.
-4. **systematic-debugging** — When something is broken, the 4-phase methodology prevents shotgun debugging.
-5. **session-verify** — End-of-session review: security, code quality, architecture, clean imports, no leftover TODOs. Nothing ships unchecked.
+1. **brainstorm** — Structured ideation before anything else. Divergent-then-convergent thinking with research-validated techniques (Reverse Brainstorming, SCAMPER, Perspective Shifts, Analogies). Produces evaluated alternatives, not just the first idea.
+2. **prompt-builder** — Asks clarifying questions about your goal, then turns vague requests into structured prompts — whether for a plan, direct implementation, or any other task.
+3. **plan-review** — The most impactful workflow. Four parallel review agents check architecture fit, conventions, risks, and requirements. Traffic light verdict *before* code exists. Avoiding rework > fixing rework.
+4. **tdd** — Real workflow with agent orchestration. Enforces that tests define behavior instead of confirming code.
+5. **systematic-debugging** — When something is broken, the 4-phase methodology prevents shotgun debugging.
+6. **session-verify** — End-of-session review: security, code quality, architecture, clean imports, no leftover TODOs. Nothing ships unchecked.
 
-The logic: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Build + Test** (tdd) → **Debug** (systematic-debugging) → **Verify** (session-verify). The entire development cycle, five skills.
+The logic: **Ideate** (brainstorm) → **Prompt** (prompt-builder) → **Plan** (plan-review) → **Build + Test** (tdd) → **Debug** (systematic-debugging) → **Verify** (session-verify). The entire development cycle, six skills.
 
 > [!IMPORTANT]
 > This is a defensive, token-intensive setup — plan-review and session-verify both spawn multiple agents. If you want to move fast and cheap, tdd + systematic-debugging alone cover the core work.
@@ -543,7 +546,7 @@ The logic: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Build + 
 The rest is specialization. The library is a toolkit, not a package. Copy what you need, not what you might someday need.
 
 > [!IMPORTANT]
-> **Key takeaway:** Five skills cover the entire development cycle. Install what you need, not what you might someday need — every header costs tokens on every call.
+> **Key takeaway:** Six skills cover the entire development cycle. Install what you need, not what you might someday need — every header costs tokens on every call.
 
 ---
 

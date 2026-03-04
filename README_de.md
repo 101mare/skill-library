@@ -2,10 +2,10 @@
 
 # Skill Library
 
-27 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
+28 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG.md)
+[![Skills: 28](https://img.shields.io/badge/Skills-28-blue.svg)](docs/CATALOG.md)
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
@@ -57,19 +57,20 @@ Dann sag Claude:
 
 Claude liest den Skill, führt RED-GREEN-REFACTOR durch und liefert getesteten Code — kein manuelles Prompting nötig.
 
-## Hier starten — Die fünf Kern-Skills
+## Hier starten — Die sechs Kern-Skills
 
-Wenn du nur fünf Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
+Wenn du nur sechs Skills installierst, decken diese den gesamten Entwicklungszyklus ab:
 
 | Skill | Was er tut | Phase |
 |-------|-----------|-------|
+| **brainstorm** | Divergent→konvergente Ideation mit forschungsgestützten Techniken | Ideation |
 | **prompt-builder** | Formt vage Anfragen in strukturierte Prompts | Prompt |
 | **plan-review** | 4 parallele Agents prüfen Arch, Conventions, Risiken, Reqs | Plan |
 | **tdd** | RED-GREEN-REFACTOR mit Agent-Orchestrierung | Bauen + Testen |
 | **systematic-debugging** | Reproduzieren → Isolieren → Root-Cause → Fix | Debug |
 | **session-verify** | End-of-Session Security- + Qualitäts-Review | Verify |
 
-**Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren** — der gesamte Zyklus.
+**Ideation** → **Prompt** → **Plan** → **Bauen + Testen** → **Debuggen** → **Verifizieren** — der gesamte Zyklus.
 
 > [!TIP]
 > plan-review und session-verify sind tokenintensiv (jeweils mehrere Agents). Für Speed: tdd + systematic-debugging allein decken die Kernarbeit.
