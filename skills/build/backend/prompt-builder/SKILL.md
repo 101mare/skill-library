@@ -33,7 +33,11 @@ Present questions clearly and group related ones together.
 - What should the AI accomplish?
 - Is this a single task or multi-step workflow?
 
-**2. Context**
+**2. Identity & Context (Soul Formula)**
+- Does this prompt need a specialist role? If yes:
+  - What specific experiences should the role have? (not "expert in X" but "has done Y, seen Z fail")
+  - What mistakes has this specialist learned from? What hard lessons define their approach?
+  - What does this specialist refuse to do? (anti-patterns, shortcuts they reject)
 - What is the background/situation?
 - Who is the target audience?
 - What domain knowledge is relevant?
@@ -107,24 +111,47 @@ After gathering information, before generating the prompt:
    - Alternative approaches to consider
    - Edge cases that should be addressed
 
-3. **Recommend best practices**
+3. **Evaluate Soul quality** (for prompts with a role)
+   - Is the identity experiential or just a flat label? Suggest specific experiences if flat
+   - Are anti-patterns specific and actionable? ("I don't accept X" not "I don't do bad things")
+   - Would a productive weakness improve output quality?
+   - Does each experience map to a concrete behavior?
+
+4. **Recommend best practices**
    - Would examples improve consistency?
    - Should chain-of-thought reasoning be included?
    - Would structured output tags help parsing?
 
-4. **Get user confirmation (use AskUserQuestion)**
+5. **Get user confirmation (use AskUserQuestion)**
    - Present suggestions as text, then use `AskUserQuestion` for approval
    - Example: After listing suggestions, ask "Which improvements should I include?" with multiSelect: true
    - Only proceed to generation after confirmation
 
 ### Phase 3: Structured Prompt Generation
 
-Generate the final prompt using this XML structure:
+Generate the final prompt using this XML structure. The `<system>` section uses the **Soul Formula** — research shows generic labels ("You are an expert in X") have zero improvement, while experiential identities improve accuracy by 10-60% (NAACL 2024).
 
 ```xml
 <system>
-[Role definition: expertise, personality, perspective]
-[Key behaviors and communication style]
+[Soul — Experiential Identity, NOT a flat role label]
+
+Structure:
+1. "You are a [role] who has [specific experience 1], [specific experience 2],
+   and [specific experience 3]."
+   → Each experience activates a specific knowledge cluster
+   → End with a metaphor that captures the approach (optional)
+
+2. "I've learned that [insight] because [experience]."
+   → Tells the model WHERE to focus, not just WHAT to find
+
+3. "What I Refuse To Do:" (devote 30-40% of prompt to this)
+   - "I don't [specific anti-pattern 1]."
+   - "I don't [specific anti-pattern 2]."
+   → Each refusal: specific, experiential, actionable
+   → Prevents the model from cutting corners
+
+4. "I sometimes [limitation]. That's the cost of [strength].
+   The benefit is [concrete outcome]." (optional productive weakness)
 </system>
 
 <context>
@@ -159,6 +186,20 @@ Generate the final prompt using this XML structure:
 
 **Note:** Not all sections are required for every prompt. Omit sections that aren't relevant.
 
+#### Soul Formula — Quick Reference
+
+| Part | Formula | Purpose |
+|------|---------|---------|
+| Identity | "You are a [role] who has [experience 1], [experience 2]..." | Activates specific knowledge clusters |
+| Learned Insight | "I've learned that [insight] because [experience]." | Directs focus |
+| Anti-Patterns | "I don't [specific refusal]." (30-40% of `<system>`) | Creates reliability boundaries |
+| Productive Weakness | "I sometimes [limitation]. That's the cost of [strength]." | Prevents overconfidence |
+
+**When to apply the full Soul Formula:**
+- Prompts for **specialist roles** (reviewers, analysts, advisors) — always use full Soul
+- Prompts for **simple transformations** (formatter, converter) — identity + 2-3 anti-patterns suffice
+- Prompts with **no role** (pure task instructions) — Soul is optional, but anti-patterns still help
+
 ## Anthropic Best Practices Checklist
 
 Apply these principles from Claude 4/Opus documentation:
@@ -168,6 +209,12 @@ Apply these principles from Claude 4/Opus documentation:
 - [ ] Place long context/documents BEFORE instructions
 - [ ] Use consistent tag names throughout
 - [ ] Number instructions for complex tasks
+
+### Identity (Soul Formula)
+- [ ] Use experiential identity, not flat labels ("expert in X" → zero improvement)
+- [ ] Each experience maps to a specific behavior the model should exhibit
+- [ ] Anti-patterns are specific, experiential, and actionable (30-40% of `<system>`)
+- [ ] Productive weakness included for specialist roles (prevents overconfidence)
 
 ### Instruction Quality
 - [ ] Be specific and explicit about desired behavior
