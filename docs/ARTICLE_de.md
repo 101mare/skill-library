@@ -173,7 +173,7 @@ Read first, Scope Discipline, minimale Änderungen.
 
 ### `security.md` — Was nie verhandelbar ist
 
-Input Validation, PII-freies Logging, Secrets in Environment-Variablen, keine neuen Dependencies ohne Rückfrage.
+Die Security-Rules orientieren sich an den [OWASP Top 10](https://owasp.org/Top10/) — dem Industriestandard-Ranking der kritischsten Sicherheitsrisiken in Webanwendungen, gepflegt vom Open Worldwide Application Security Project. Sie decken alle 10 OWASP-Kategorien ab: Input Validation, Authentication & Sessions, PII-freies Logging, Secrets-Management, Dependency-Kontrolle, sichere Deserialisierung, SSRF-Prävention und mehr.
 
 ### `self-improvement.md` — Der Feedback-Loop
 

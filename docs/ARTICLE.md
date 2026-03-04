@@ -173,7 +173,7 @@ Read first, Scope Discipline, minimal changes.
 
 ### `security.md` — What's Never Negotiable
 
-Input Validation, PII-free Logging, Secrets in environment variables, no new dependencies without asking first.
+The security rules are oriented towards the [OWASP Top 10](https://owasp.org/Top10/) — the industry-standard ranking of the most critical security risks in web applications, maintained by the Open Worldwide Application Security Project. They cover all 10 OWASP categories: Input Validation, Authentication & Sessions, PII-free Logging, Secrets management, Dependency control, safe deserialization, SSRF prevention, and more.
 
 ### `self-improvement.md` — The Feedback Loop
 

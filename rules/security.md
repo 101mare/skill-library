@@ -1,6 +1,6 @@
 ---
 name: security
-description: Input validation, PII protection in logs, secrets management, and dependency policies.
+description: Input validation, authentication & sessions, PII protection in logs, secrets management, and dependency policies.
 ---
 
 # Security & Privacy
@@ -25,6 +25,16 @@ description: Input validation, PII protection in logs, secrets management, and d
 - Validate/whitelist URLs before HTTP requests with user-controlled input (SSRF)
 - No unbounded regex repetition (`(a+)+`) with user input (ReDoS)
 - No `extractall()` on untrusted archives without size/path checks (zip bombs, path traversal)
+
+## Authentication & Sessions
+
+- Hash passwords with `bcrypt` (rounds=12+) or `argon2id` — NEVER `hashlib.md5()`, `hashlib.sha1()`, or unsalted `hashlib.sha256()`
+- Generic auth errors only: "Invalid credentials" — never reveal whether username or password was wrong (user enumeration)
+- Session cookies: always set `HttpOnly`, `Secure`, and `SameSite=Strict`
+- Invalidate sessions on logout, idle timeout, and absolute timeout — regenerate session ID after login
+- Rate-limit authentication endpoints (e.g. 5 attempts/min per IP) — progressive backoff or lockout after repeated failures
+- No default credentials in shipped code — force password change on first login for seeded accounts
+- Password reset tokens: `secrets.token_urlsafe()`, expire after max 1 hour, single-use
 
 ## Logging & PII
 
@@ -69,4 +79,9 @@ if hmac.compare_digest(token, expected):            # NOT ==
 # DESERIALIZATION — safe formats only
 data = json.loads(user_data)                        # NOT pickle.loads()
 data = yaml.safe_load(content)                      # NOT yaml.load()
+
+# PASSWORD HASHING — adaptive, salted
+import bcrypt
+hashed = bcrypt.hashpw(pw.encode(), bcrypt.gensalt(rounds=12))  # NOT hashlib.md5()
+bcrypt.checkpw(pw.encode(), hashed)                              # NOT ==
 ```
