@@ -86,6 +86,7 @@ skill-library/
 │   │       ├── ci-cd-builder/
 │   │       └── project-scaffold/
 │   ├── workflow/                     # Multi-Agent Workflows
+│   │   ├── brainstorm/
 │   │   ├── plan-review/
 │   │   ├── session-verify/
 │   │   ├── pr-review/
@@ -213,7 +214,7 @@ Vier Skill-Kategorien:
 
 **build/** (9 Skills) — Unterteilt in `frontend/` und `backend/`. Frontend: Frontend Design, Warmgold Design System. Backend: Config (Pydantic + YAML + Env-Vars), Logging, Exceptions, Docker, CI/CD (GitHub Actions), Prompts, Projektstruktur.
 
-**workflow/** (7 Skills) — Orchestrierung von Multi-Agent Workflows: Plan Review vor der Implementierung, Session Verification nach der Arbeit, PR Review für Pull Requests, TDD (RED-GREEN-REFACTOR Zyklus), Deep Research (strukturierte Recherche vor technischen Entscheidungen), Ralph Loop (autonome Iterationsschleife via Hooks) und Ralph Loop Prompt Builder (interaktiver Prompt-Builder dafür).
+**workflow/** (8 Skills) — Orchestrierung von Multi-Agent Workflows: Brainstorm (divergent-dann-konvergente Ideation), Plan Review vor der Implementierung, Session Verification nach der Arbeit, PR Review für Pull Requests, TDD (RED-GREEN-REFACTOR Zyklus), Deep Research (strukturierte Recherche vor technischen Entscheidungen), Ralph Loop (autonome Iterationsschleife via Hooks) und Ralph Loop Prompt Builder (interaktiver Prompt-Builder dafür).
 
 **patterns/** (8 Skills) — Wiederverwendbare Architektur-Patterns: DI Container, Protocol Design, Strategy + Registry, Error Handling, Resilience Patterns (Retry, Circuit Breaker, Timeout), Testing Patterns (pytest + Hypothesis), API Design (FastAPI), Systematic Debugging (4-Phasen-Methodik).
 
@@ -294,6 +295,7 @@ Die Library ordnet Skills und Agents den Entwicklungsphasen zu:
 
 | Phase | Skills | Agents |
 |---|---|---|
+| **Ideate** | brainstorm | -- |
 | **Research** | deep-research | -- |
 | **Plan** | plan-review | planner |
 | **Scaffold** | project-scaffold, config-builder, exception-builder, docker-builder, ci-cd-builder | -- |
@@ -507,17 +509,18 @@ Aber es hat einen Preis: Jeder installierte Skill kostet Token allein durch sein
 
 Das ist keine Vermutung — es ist wissenschaftlich belegt. Der [IFScale-Benchmark](https://arxiv.org/abs/2507.11538) (2025) zeigt, dass die Instruction-Following-Accuracy ab ~100-150 Instruktionen messbar sinkt, wobei Modelle zunehmend Regeln *auslassen* statt sie falsch zu befolgen (30:1 Auslassungs-zu-Fehler-Verhältnis bei hoher Dichte). [Context Rot](https://research.trychroma.com/context-rot) (Chroma Research) belegt, dass Performance-Degradation bei wachsendem Input universell über alle Modelle auftritt — selbst wenn relevante Informationen perfekt auffindbar sind. Am eindrücklichsten: [Auf der EMNLP 2025 vorgestellte Forschung](https://arxiv.org/abs/2510.05381) fand, dass Context-Länge *allein* 14-85% Performance-Verlust verursacht, selbst bei perfektem Retrieval. Das effektive Kontextfenster ist deutlich kleiner als das nominale. Progressive Disclosure — nur laden was gebraucht wird, wenn es gebraucht wird — ist die Antwort.
 
-### Die fünf, die den gesamten Zyklus abdecken
+### Die sechs, die den gesamten Zyklus abdecken
 
 Wenn ich mich beschränken müsste:
 
-1. **prompt-builder** — Stellt klärende Fragen zu deinem Ziel und formt daraus einen strukturierten Prompt — ob für einen Plan, die direkte Umsetzung oder jede andere Aufgabe.
-2. **plan-review** — Der wirkungsvollste Workflow. Vier parallele Review-Agents prüfen Architektur-Fit, Conventions, Risiken und Requirements. Ampel-Verdict *bevor* Code existiert. Rework vermeiden > Rework fixen.
-3. **tdd** — Echter Workflow mit Agent-Orchestrierung. Erzwingt, dass Tests Verhalten definieren statt Code zu bestätigen.
-4. **systematic-debugging** — Wenn etwas kaputt ist, verhindert die 4-Phasen-Methodik Shotgun-Debugging.
-5. **session-verify** — End-of-Session Review: Security, Code-Qualität, Architektur, saubere Imports, keine liegengebliebenen TODOs. Nichts geht ungeprüft raus.
+1. **brainstorm** — Strukturierte Ideation bevor alles andere beginnt. Divergent-dann-konvergentes Denken mit forschungsgestützten Techniken (Reverse Brainstorming, SCAMPER, Perspektivwechsel, Analogien). Produziert evaluierte Alternativen, nicht nur die erste Idee.
+2. **prompt-builder** — Stellt klärende Fragen zu deinem Ziel und formt daraus einen strukturierten Prompt — ob für einen Plan, die direkte Umsetzung oder jede andere Aufgabe.
+3. **plan-review** — Der wirkungsvollste Workflow. Vier parallele Review-Agents prüfen Architektur-Fit, Conventions, Risiken und Requirements. Ampel-Verdict *bevor* Code existiert. Rework vermeiden > Rework fixen.
+4. **tdd** — Echter Workflow mit Agent-Orchestrierung. Erzwingt, dass Tests Verhalten definieren statt Code zu bestätigen.
+5. **systematic-debugging** — Wenn etwas kaputt ist, verhindert die 4-Phasen-Methodik Shotgun-Debugging.
+6. **session-verify** — End-of-Session Review: Security, Code-Qualität, Architektur, saubere Imports, keine liegengebliebenen TODOs. Nichts geht ungeprüft raus.
 
-Die Logik: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Bauen + Testen** (tdd) → **Debuggen** (systematic-debugging) → **Verifizieren** (session-verify). Der gesamte Entwicklungszyklus, fünf Skills.
+Die Logik: **Ideation** (brainstorm) → **Prompt** (prompt-builder) → **Plan** (plan-review) → **Bauen + Testen** (tdd) → **Debuggen** (systematic-debugging) → **Verifizieren** (session-verify). Der gesamte Entwicklungszyklus, sechs Skills.
 
 > [!IMPORTANT]
 > Das ist ein defensiver, tokenintensiver Ansatz — plan-review und session-verify spawnen jeweils mehrere Agents. Wer schnell und günstig arbeiten will: tdd + systematic-debugging allein decken die Kernarbeit ab.
@@ -537,7 +540,7 @@ Die Logik: **Prompt** (prompt-builder) → **Plan** (plan-review) → **Bauen + 
 Der Rest ist Spezialisierung. Die Library ist ein Baukasten, kein Paket. Kopiere was du brauchst, nicht was du vielleicht irgendwann brauchen könntest.
 
 > [!IMPORTANT]
-> **Kernaussage:** Fünf Skills decken den gesamten Entwicklungszyklus ab. Installiere was du brauchst, nicht was du vielleicht irgendwann brauchst — jeder Header kostet Token bei jedem Call.
+> **Kernaussage:** Sechs Skills decken den gesamten Entwicklungszyklus ab. Installiere was du brauchst, nicht was du vielleicht irgendwann brauchst — jeder Header kostet Token bei jedem Call.
 
 ---
 

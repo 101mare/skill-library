@@ -2,10 +2,10 @@
 
 # Skill Library
 
-27 skills, 5 agents, 4 rules — plug into Claude Code, skip the prompt engineering.
+28 skills, 5 agents, 4 rules — plug into Claude Code, skip the prompt engineering.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills: 27](https://img.shields.io/badge/Skills-27-blue.svg)](docs/CATALOG.md)
+[![Skills: 28](https://img.shields.io/badge/Skills-28-blue.svg)](docs/CATALOG.md)
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 
@@ -57,19 +57,20 @@ Then tell Claude:
 
 Claude reads the skill, runs RED-GREEN-REFACTOR, and ships tested code — no manual prompting needed.
 
-## Start Here — The Core Five
+## Start Here — The Core Six
 
-If you only install five skills, these cover the entire development cycle:
+If you only install six skills, these cover the entire development cycle:
 
 | Skill | What it does | Phase |
 |-------|-------------|-------|
+| **brainstorm** | Divergent→convergent ideation with research-validated techniques | Ideate |
 | **prompt-builder** | Turns vague requests into structured prompts | Prompt |
 | **plan-review** | 4 parallel agents check arch, conventions, risks, reqs | Plan |
 | **tdd** | RED-GREEN-REFACTOR with agent orchestration | Build + Test |
 | **systematic-debugging** | Reproduce → Isolate → Root-Cause → Fix | Debug |
 | **session-verify** | End-of-session security + quality review | Verify |
 
-**Prompt** → **Plan** → **Build + Test** → **Debug** → **Verify** — the entire cycle.
+**Ideate** → **Prompt** → **Plan** → **Build + Test** → **Debug** → **Verify** — the entire cycle.
 
 > [!TIP]
 > plan-review and session-verify are token-intensive (multiple agents each). For speed: tdd + systematic-debugging alone cover the core work.

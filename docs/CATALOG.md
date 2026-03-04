@@ -20,7 +20,7 @@
 
 ---
 
-## Skills (27)
+## Skills (28)
 
 *Load on demand — teach Claude specialized workflows.*
 
@@ -51,10 +51,11 @@
 | [frontend-design](../skills/build/frontend/frontend-design/SKILL.md) | Creates distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics. |
 | [warmgold-frontend](../skills/build/frontend/warmgold-frontend/SKILL.md) | Design system and component patterns for warm, iOS-inspired vanilla frontends. |
 
-### Workflow (7)
+### Workflow (8)
 
 | Name | Description |
 |------|------------|
+| [brainstorm](../skills/workflow/brainstorm/SKILL.md) | Structured brainstorming through divergent-then-convergent thinking. Generates multiple approaches using research-validated techniques (Reverse Brainstorming, SCAMPER, Perspective Shifts, Analogies) before converging on a recommended design. Works for any domain: software features, architecture, thesis structure, process design, concepts, strategies. |
 | [deep-research](../skills/workflow/deep-research/SKILL.md) | Structured research workflow: Question → Sources (web + codebase) → Analyze → Synthesize → Document. |
 | [plan-review](../skills/workflow/plan-review/SKILL.md) | Reviews implementation plans before coding begins. Checks completeness, architecture fit, risks, and requirement alignment. Uses specialized agents in parallel for thorough analysis. Proactively asks clarifying questions when uncertainties are found. |
 | [pr-review](../skills/workflow/pr-review/SKILL.md) | Orchestrates pull request reviews using specialized agents in parallel. Reads PR diff, selects relevant reviewers, aggregates findings. |
