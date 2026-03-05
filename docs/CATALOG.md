@@ -15,12 +15,12 @@
 |------|------------|
 | [agent-behavior](../rules/agent-behavior.md) | Read-first workflow, scope discipline, minimal changes, subagent strategy, and bug fixing approach. |
 | [coding-conventions](../rules/coding-conventions.md) | DRY principles, naming & imports, error handling, function design, type hints, and testing conventions. |
-| [security](../rules/security.md) | Input validation, PII protection in logs, secrets management, and dependency policies. |
+| [security](../rules/security.md) | Input validation, authentication & sessions, PII protection in logs, secrets management, and dependency policies. |
 | [self-improvement](../rules/self-improvement.md) | Learn from corrections, capture patterns in memory, iterate on lessons. |
 
 ---
 
-## Skills (28)
+## Skills (30)
 
 *Load on demand — teach Claude specialized workflows.*
 
@@ -32,10 +32,11 @@
 | [skill-builder](../skills/meta/skill-builder/SKILL.md) | Knowledge for creating Claude Code skill files with SKILL.md format and best practices. |
 | [team-builder](../skills/meta/team-builder/SKILL.md) | Knowledge for orchestrating Claude Code agent teams — multiple independent sessions coordinated by a team lead with shared tasks and inter-agent messaging. |
 
-### Build — Backend (7)
+### Build — Backend (8)
 
 | Name | Description |
 |------|------------|
+| [architecture-builder](../skills/build/backend/architecture-builder/SKILL.md) | Interactive architecture design for Python projects. Asks discovery questions about purpose, scale, constraints, and security, then proposes a tailored architecture with folder structure, tech stack, and documented trade-offs. Iterates with the user until the design is solid. Covers architecture style decisions (monolith, modular monolith, microservices, serverless), Clean Architecture layers, scalability patterns, and maintainability principles. |
 | [ci-cd-builder](../skills/build/backend/ci-cd-builder/SKILL.md) | GitHub Actions CI/CD pipeline scaffolding: pytest, linting, Docker build, release. |
 | [config-builder](../skills/build/backend/config-builder/SKILL.md) | Scaffolds Python configuration infrastructure: Pydantic models, YAML loading, environment variable overrides. |
 | [docker-builder](../skills/build/backend/docker-builder/SKILL.md) | Scaffolds Dockerfile and docker-compose.yml for Python projects. Covers multi-stage builds, health checks, env vars, network isolation, and GPU setup. |
@@ -51,12 +52,13 @@
 | [frontend-design](../skills/build/frontend/frontend-design/SKILL.md) | Creates distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics. |
 | [warmgold-frontend](../skills/build/frontend/warmgold-frontend/SKILL.md) | Design system and component patterns for warm, iOS-inspired vanilla frontends. |
 
-### Workflow (8)
+### Workflow (9)
 
 | Name | Description |
 |------|------------|
 | [brainstorm](../skills/workflow/brainstorm/SKILL.md) | Structured brainstorming through divergent-then-convergent thinking. Generates multiple approaches using research-validated techniques (Reverse Brainstorming, SCAMPER, Perspective Shifts, Analogies) before converging on a recommended design. Works for any domain: software features, architecture, thesis structure, process design, concepts, strategies. |
 | [deep-research](../skills/workflow/deep-research/SKILL.md) | Structured research workflow: Question → Sources (web + codebase) → Analyze → Synthesize → Document. |
+| [make-no-mistakes](../skills/workflow/make-no-mistakes/SKILL.md) | Precision mode that raises the bar for accuracy and correctness. Activates systematic self-verification: every response is drafted, verified, and finalized before output. Based on Chain of Verification (CoVe) research and self-checking prompting techniques. |
 | [plan-review](../skills/workflow/plan-review/SKILL.md) | Reviews implementation plans before coding begins. Checks completeness, architecture fit, risks, and requirement alignment. Uses specialized agents in parallel for thorough analysis. Proactively asks clarifying questions when uncertainties are found. |
 | [pr-review](../skills/workflow/pr-review/SKILL.md) | Orchestrates pull request reviews using specialized agents in parallel. Reads PR diff, selects relevant reviewers, aggregates findings. |
 | [ralph-loop](../skills/workflow/ralph-loop/SKILL.md) | Start an autonomous work loop. Claude keeps working on the given task until it signals completion or the iteration limit is reached. |
