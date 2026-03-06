@@ -29,21 +29,21 @@
 | Name | Description |
 |------|------------|
 | [agent-builder](../skills/meta/agent-builder/SKILL.md) | Knowledge for designing Claude Code agents with research-backed identity design (Soul Formula). Teaches experiential identities, anti-patterns, multi-file structure, and consolidation patterns. |
-| [skill-builder](../skills/meta/skill-builder/SKILL.md) | Knowledge for creating Claude Code skill files with SKILL.md format and best practices. |
-| [team-builder](../skills/meta/team-builder/SKILL.md) | Knowledge for orchestrating Claude Code agent teams — multiple independent sessions coordinated by a team lead with shared tasks and inter-agent messaging. |
+| [skill-builder](../skills/meta/skill-builder/SKILL.md) | Knowledge for creating Claude Code skill files with SKILL.md format and best practices. Does NOT handle: agent design (use agent-builder), team orchestration (use team-builder), prompt building (use prompt-builder). |
+| [team-builder](../skills/meta/team-builder/SKILL.md) | Knowledge for orchestrating Claude Code agent teams — multiple independent sessions coordinated by a team lead with shared tasks and inter-agent messaging. Does NOT handle: agent design (use agent-builder), skill creation (use skill-builder), ralph-loop (use ralph-loop). |
 
 ### Build — Backend (8)
 
 | Name | Description |
 |------|------------|
 | [architecture-builder](../skills/build/backend/architecture-builder/SKILL.md) | Interactive architecture design for Python projects. Asks discovery questions about purpose, scale, constraints, and security, then proposes a tailored architecture with folder structure, tech stack, and documented trade-offs. Iterates with the user until the design is solid. Covers architecture style decisions (monolith, modular monolith, microservices, serverless), Clean Architecture layers, scalability patterns, and maintainability principles. |
-| [ci-cd-builder](../skills/build/backend/ci-cd-builder/SKILL.md) | GitHub Actions CI/CD pipeline scaffolding: pytest, linting, Docker build, release. |
+| [ci-cd-builder](../skills/build/backend/ci-cd-builder/SKILL.md) | GitHub Actions CI/CD pipeline scaffolding: pytest, linting, Docker build, release. Does NOT handle: Docker (use docker-builder), scaffolding (use project-scaffold), testing (use testing-patterns). |
 | [config-builder](../skills/build/backend/config-builder/SKILL.md) | Scaffolds Python configuration infrastructure: Pydantic models, YAML loading, environment variable overrides. |
 | [docker-builder](../skills/build/backend/docker-builder/SKILL.md) | Scaffolds Dockerfile and docker-compose.yml for Python projects. Covers multi-stage builds, health checks, env vars, network isolation, and GPU setup. |
-| [exception-builder](../skills/build/backend/exception-builder/SKILL.md) | Designs Python exception hierarchies for layered applications. Covers base exceptions, layer mapping, chaining, and handler patterns. |
+| [exception-builder](../skills/build/backend/exception-builder/SKILL.md) | Designs Python exception hierarchies for layered applications. Covers base exceptions, layer mapping, chaining, and handler patterns. Does NOT handle: layer error handling (use error-handling), resilience (use resilience-patterns), API errors (use api-design), logging (use logging-builder). |
 | [logging-builder](../skills/build/backend/logging-builder/SKILL.md) | Implements Python logging infrastructure following best practices. Creates logger configurations, adds logging to functions, sets up file rotation. |
 | [project-scaffold](../skills/build/backend/project-scaffold/SKILL.md) | Scaffolds production-ready Python project structure: directory layout, pyproject.toml, config, logging, exceptions, testing, and CI/CD basics. |
-| [prompt-builder](../skills/build/backend/prompt-builder/SKILL.md) | Transforms unstructured user requests into optimized, structured prompts. Systematically asks clarifying questions about goals, context, constraints, and output format. Suggests improvements before generating the final prompt. Adapts language to match user's input language automatically. |
+| [prompt-builder](../skills/build/backend/prompt-builder/SKILL.md) | Transforms unstructured user requests into optimized, structured prompts. Systematically asks clarifying questions about goals, context, constraints, and output format. Suggests improvements before generating the final prompt. Adapts language to match user's input language automatically. Does NOT handle: ralph-loop prompts (use ralph-loop-prompt-builder), agent design (use agent-builder), skill creation (use skill-builder). |
 
 ### Build — Frontend (2)
 
@@ -57,27 +57,27 @@
 | Name | Description |
 |------|------------|
 | [brainstorm](../skills/workflow/brainstorm/SKILL.md) | Structured brainstorming through divergent-then-convergent thinking. Generates multiple approaches using research-validated techniques (Reverse Brainstorming, SCAMPER, Perspective Shifts, Analogies) before converging on a recommended design. Works for any domain: software features, architecture, thesis structure, process design, concepts, strategies. |
-| [deep-research](../skills/workflow/deep-research/SKILL.md) | Structured research workflow: Question → Sources (web + codebase) → Analyze → Synthesize → Document. |
+| [deep-research](../skills/workflow/deep-research/SKILL.md) | Structured research workflow: Question → Sources (web + codebase) → Analyze → Synthesize → Document. Does NOT handle: planning (use plan-review), code review (use pr-review), brainstorming (use brainstorm), architecture (use architecture-builder). |
 | [make-no-mistakes](../skills/workflow/make-no-mistakes/SKILL.md) | Precision mode that raises the bar for accuracy and correctness. Activates systematic self-verification: every response is drafted, verified, and finalized before output. Based on Chain of Verification (CoVe) research and self-checking prompting techniques. |
-| [plan-review](../skills/workflow/plan-review/SKILL.md) | Reviews implementation plans before coding begins. Checks completeness, architecture fit, risks, and requirement alignment. Uses specialized agents in parallel for thorough analysis. Proactively asks clarifying questions when uncertainties are found. |
-| [pr-review](../skills/workflow/pr-review/SKILL.md) | Orchestrates pull request reviews using specialized agents in parallel. Reads PR diff, selects relevant reviewers, aggregates findings. |
-| [ralph-loop](../skills/workflow/ralph-loop/SKILL.md) | Start an autonomous work loop. Claude keeps working on the given task until it signals completion or the iteration limit is reached. |
-| [ralph-loop-prompt-builder](../skills/workflow/ralph-loop-prompt-builder/SKILL.md) | Builds effective prompts for the Ralph Loop autonomous work system. Asks clarifying questions about the task, then generates a structured prompt with clear requirements, verification steps, and completion criteria. |
-| [session-verify](../skills/workflow/session-verify/SKILL.md) | End-of-session verification skill that validates all changes made during a coding session. Checks for bugs, security vulnerabilities, dead code, efficiency issues, and documentation gaps. |
-| [tdd](../skills/workflow/tdd/SKILL.md) | Test-Driven Development workflow: RED-GREEN-REFACTOR cycle. Orchestrates test-architect (write failing test) → implementation → code-simplifier (refactor). Ensures tests define behavior BEFORE code exists — not after. |
+| [plan-review](../skills/workflow/plan-review/SKILL.md) | Reviews implementation plans before coding begins. Checks completeness, architecture fit, risks, and requirement alignment. Uses specialized agents in parallel for thorough analysis. Proactively asks clarifying questions when uncertainties are found. Does NOT handle: code review (use pr-review), research (use deep-research), implementation (use tdd), session verify (use session-verify). |
+| [pr-review](../skills/workflow/pr-review/SKILL.md) | Orchestrates pull request reviews using specialized agents in parallel. Reads PR diff, selects relevant reviewers, aggregates findings. Does NOT handle: plan review (use plan-review), implementation (use tdd), debugging (use systematic-debugging), session verify (use session-verify). |
+| [ralph-loop](../skills/workflow/ralph-loop/SKILL.md) | Start an autonomous work loop. Claude keeps working on the given task until it signals completion or the iteration limit is reached. Does NOT handle: prompt building (use ralph-loop-prompt-builder), plan review (use plan-review), code review (use pr-review). |
+| [ralph-loop-prompt-builder](../skills/workflow/ralph-loop-prompt-builder/SKILL.md) | Builds effective prompts for the Ralph Loop autonomous work system. Asks clarifying questions about the task, then generates a structured prompt with clear requirements, verification steps, and completion criteria. Does NOT handle: loop execution (use ralph-loop), general prompts (use prompt-builder). |
+| [session-verify](../skills/workflow/session-verify/SKILL.md) | End-of-session verification skill that validates all changes made during a coding session. Checks for bugs, security vulnerabilities, dead code, efficiency issues, and documentation gaps. Does NOT handle: plan review (use plan-review), PR review (use pr-review), debugging (use systematic-debugging), implementation (use tdd). |
+| [tdd](../skills/workflow/tdd/SKILL.md) | Test-Driven Development workflow: RED-GREEN-REFACTOR cycle. Orchestrates test-architect (write failing test) → implementation → code-simplifier (refactor). Ensures tests define behavior BEFORE code exists — not after. Does NOT handle: test patterns (use testing-patterns), debugging (use systematic-debugging), code review (use pr-review), plan review (use plan-review). |
 
 ### Patterns (8)
 
 | Name | Description |
 |------|------------|
-| [api-design](../skills/patterns/api-design/SKILL.md) | REST API design with FastAPI: routing, response models, error handling, dependencies. |
-| [di-container](../skills/patterns/di-container/SKILL.md) | Guides implementation of Dependency Injection containers using Python Protocols. |
-| [error-handling](../skills/patterns/error-handling/SKILL.md) | Patterns for exception handling across application layers: mapping, retry, severity, logging. |
-| [protocol-design](../skills/patterns/protocol-design/SKILL.md) | Guides proper use of Python typing.Protocol for structural subtyping and interface design. |
-| [resilience-patterns](../skills/patterns/resilience-patterns/SKILL.md) | Resilience patterns for Python: Retry with Backoff, Circuit Breaker, Timeout, Graceful Degradation. |
-| [strategy-registry](../skills/patterns/strategy-registry/SKILL.md) | Implements Strategy pattern with registry-based dispatch for extensible systems. |
-| [systematic-debugging](../skills/patterns/systematic-debugging/SKILL.md) | Structured 4-phase debugging: Reproduce, Isolate, Root-Cause, Fix+Defend. |
-| [testing-patterns](../skills/patterns/testing-patterns/SKILL.md) | pytest patterns, fixtures, mocking, parametrize, and property-based testing. |
+| [api-design](../skills/patterns/api-design/SKILL.md) | REST API design with FastAPI: routing, response models, error handling, dependencies. Does NOT handle: architecture (use architecture-builder), exceptions (use exception-builder), frontend clients (use frontend-design), CI/CD (use ci-cd-builder). |
+| [di-container](../skills/patterns/di-container/SKILL.md) | Guides implementation of Dependency Injection containers using Python Protocols. Does NOT handle: architecture (use architecture-builder), interface philosophy (use protocol-design), testing DI (use testing-patterns), scaffolding (use project-scaffold). |
+| [error-handling](../skills/patterns/error-handling/SKILL.md) | Patterns for exception handling across application layers: mapping, retry, severity, logging. Does NOT handle: exception hierarchies (use exception-builder), circuit breakers (use resilience-patterns), API errors (use api-design), logging config (use logging-builder). |
+| [protocol-design](../skills/patterns/protocol-design/SKILL.md) | Guides proper use of Python typing.Protocol for structural subtyping and interface design. Does NOT handle: DI containers (use di-container), full architecture (use architecture-builder), mock strategies (use testing-patterns). |
+| [resilience-patterns](../skills/patterns/resilience-patterns/SKILL.md) | Resilience patterns for Python: Retry with Backoff, Circuit Breaker, Timeout, Graceful Degradation. Does NOT handle: exception hierarchies (use exception-builder), layer error handling (use error-handling), API errors (use api-design), logging (use logging-builder). |
+| [strategy-registry](../skills/patterns/strategy-registry/SKILL.md) | Implements Strategy pattern with registry-based dispatch for extensible systems. Does NOT handle: Protocol design (use protocol-design), DI wiring (use di-container), architecture (use architecture-builder). |
+| [systematic-debugging](../skills/patterns/systematic-debugging/SKILL.md) | Structured 4-phase debugging: Reproduce, Isolate, Root-Cause, Fix+Defend. Does NOT handle: writing tests (use testing-patterns/tdd), error handling patterns (use error-handling), code review (use pr-review), research (use deep-research). |
+| [testing-patterns](../skills/patterns/testing-patterns/SKILL.md) | pytest patterns, fixtures, mocking, parametrize, and property-based testing. Does NOT handle: TDD orchestration (use tdd), debugging (use systematic-debugging), error handling (use error-handling). |
 
 ---
 

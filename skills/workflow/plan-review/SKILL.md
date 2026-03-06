@@ -4,6 +4,7 @@ description: |
   Reviews implementation plans before coding begins. Checks completeness, architecture fit,
   risks, and requirement alignment. Uses specialized agents in parallel for thorough analysis.
   Proactively asks clarifying questions when uncertainties are found.
+  Does NOT handle: code review (use pr-review), research (use deep-research), implementation (use tdd), session verify (use session-verify).
   Use when: reviewing plans, before implementation, user asks "is the plan good?",
   "review my plan", "check this approach", "before I start coding".
 ---

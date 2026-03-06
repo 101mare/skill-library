@@ -2,6 +2,7 @@
 name: skill-builder
 description: |
   Knowledge for creating Claude Code skill files with SKILL.md format and best practices.
+  Does NOT handle: agent design (use agent-builder), team orchestration (use team-builder), prompt building (use prompt-builder).
   Use when building skills to teach Claude specialized knowledge or workflows.
   Recognizes: "create a skill", "new skill for X", "teach Claude how to", "skill that does Y",
   "SKILL.md format", "skill vs agent?", "add knowledge to Claude", "skill frontmatter"

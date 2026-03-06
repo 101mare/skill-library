@@ -5,6 +5,7 @@ description: |
   Systematically asks clarifying questions about goals, context, constraints,
   and output format. Suggests improvements before generating the final prompt.
   Adapts language to match user's input language automatically.
+  Does NOT handle: ralph-loop prompts (use ralph-loop-prompt-builder), agent design (use agent-builder), skill creation (use skill-builder).
   Triggers: "build prompt", "structure request", "optimize prompt",
   "better prompt", "make a prompt from this", "improve prompt",
   "create a prompt for", "help me write a prompt"

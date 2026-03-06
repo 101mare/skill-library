@@ -2,6 +2,7 @@
 name: deep-research
 description: |
   Structured research workflow: Question → Sources (web + codebase) → Analyze → Synthesize → Document.
+  Does NOT handle: planning (use plan-review), code review (use pr-review), brainstorming (use brainstorm), architecture (use architecture-builder).
   Use before technical decisions, when evaluating libraries/tools, or investigating unknowns.
   Recognizes: "deep-research", "research this", "evaluate options", "which library",
   "compare approaches", "investigate", "technical decision", "what are the trade-offs",

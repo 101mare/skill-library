@@ -2,6 +2,7 @@
 name: api-design
 description: |
   REST API design with FastAPI: routing, response models, error handling, dependencies.
+  Does NOT handle: architecture (use architecture-builder), exceptions (use exception-builder), frontend clients (use frontend-design), CI/CD (use ci-cd-builder).
   Use when building APIs, designing endpoints, or setting up FastAPI projects.
   Recognizes: "api-design", "REST API", "FastAPI", "endpoint design", "response model",
   "API error handling", "OpenAPI", "build an API", "API patterns", "HTTP endpoints"

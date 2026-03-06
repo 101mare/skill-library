@@ -3,6 +3,7 @@ name: team-builder
 description: |
   Knowledge for orchestrating Claude Code agent teams — multiple independent sessions
   coordinated by a team lead with shared tasks and inter-agent messaging.
+  Does NOT handle: agent design (use agent-builder), skill creation (use skill-builder), ralph-loop (use ralph-loop).
   Use when work benefits from parallel exploration with communication between workers.
   Recognizes: "create a team", "agent team", "team-builder", "parallel teammates",
   "coordinate multiple agents", "spawn teammates", "team lead", "shared task list"

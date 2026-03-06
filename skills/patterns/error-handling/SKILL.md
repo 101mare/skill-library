@@ -2,6 +2,7 @@
 name: error-handling
 description: |
   Patterns for exception handling across application layers: mapping, retry, severity, logging.
+  Does NOT handle: exception hierarchies (use exception-builder), circuit breakers (use resilience-patterns), API errors (use api-design), logging config (use logging-builder).
   Use when designing error strategies, implementing retry logic, or mapping exceptions between layers.
   Recognizes: "error-handling", "exception handling", "retry pattern", "error strategy",
   "exception mapping", "error boundaries", "backoff pattern", "error propagation"

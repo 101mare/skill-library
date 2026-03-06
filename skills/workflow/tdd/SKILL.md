@@ -4,6 +4,7 @@ description: |
   Test-Driven Development workflow: RED-GREEN-REFACTOR cycle.
   Orchestrates test-architect (write failing test) → implementation → code-simplifier (refactor).
   Ensures tests define behavior BEFORE code exists — not after.
+  Does NOT handle: test patterns (use testing-patterns), debugging (use systematic-debugging), code review (use pr-review), plan review (use plan-review).
   Recognizes: "tdd", "TDD", "test-driven", "test first", "red green refactor",
   "write the test first", "RED-GREEN-REFACTOR", "test before code",
   "build this with tests first", "failing test first"

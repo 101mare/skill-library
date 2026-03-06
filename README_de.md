@@ -2,10 +2,10 @@
 
 # Skill Library
 
-28 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
+30 Skills, 5 Agents, 4 Rules — in Claude Code einstecken, Prompt-Engineering überspringen.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skills: 28](https://img.shields.io/badge/Skills-28-blue.svg)](docs/CATALOG.md)
+[![Skills: 30](https://img.shields.io/badge/Skills-30-blue.svg)](docs/CATALOG.md)
 [![Agents: 5](https://img.shields.io/badge/Agents-5-green.svg)](docs/CATALOG.md)
 [![Maintained: yes](https://img.shields.io/badge/Maintained-yes-brightgreen.svg)](https://github.com/101mare/skill-library)
 

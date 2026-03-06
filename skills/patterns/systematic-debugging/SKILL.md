@@ -2,6 +2,7 @@
 name: systematic-debugging
 description: |
   Structured 4-phase debugging: Reproduce, Isolate, Root-Cause, Fix+Defend.
+  Does NOT handle: writing tests (use testing-patterns/tdd), error handling patterns (use error-handling), code review (use pr-review), research (use deep-research).
   Use when tracking bugs, diagnosing failures, or investigating unexpected behavior.
   Recognizes: "systematic-debugging", "debug this", "why does this fail",
   "find the bug", "track down", "root cause", "investigate error",

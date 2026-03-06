@@ -3,6 +3,7 @@ name: ralph-loop
 description: |
   Start an autonomous work loop. Claude keeps working on the given task
   until it signals completion or the iteration limit is reached.
+  Does NOT handle: prompt building (use ralph-loop-prompt-builder), plan review (use plan-review), code review (use pr-review).
   Usage: /ralph-loop <task description>
   Optional: /ralph-loop max=20 <task description>
   Cancel: delete .claude/ralph-loop.local.md or press Escape/Ctrl+C

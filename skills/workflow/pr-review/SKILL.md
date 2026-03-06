@@ -3,6 +3,7 @@ name: pr-review
 description: |
   Orchestrates pull request reviews using specialized agents in parallel.
   Reads PR diff, selects relevant reviewers, aggregates findings.
+  Does NOT handle: plan review (use plan-review), implementation (use tdd), debugging (use systematic-debugging), session verify (use session-verify).
   Use when reviewing PRs, before merging, or when user asks "review this PR".
   Recognizes: "pr-review", "review PR", "review pull request", "check this PR",
   "PR review", "code review", "merge review", "review before merge"

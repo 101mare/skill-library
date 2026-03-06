@@ -2,6 +2,7 @@
 name: di-container
 description: |
   Guides implementation of Dependency Injection containers using Python Protocols.
+  Does NOT handle: architecture (use architecture-builder), interface philosophy (use protocol-design), testing DI (use testing-patterns), scaffolding (use project-scaffold).
   Use when designing service wiring, managing component lifecycle, or decoupling modules.
   Recognizes: "di-container", "dependency injection", "container pattern", "service wiring",
   "inversion of control", "IoC container", "lazy initialization", "protocol-based DI"

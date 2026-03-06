@@ -2,6 +2,7 @@
 name: strategy-registry
 description: |
   Implements Strategy pattern with registry-based dispatch for extensible systems.
+  Does NOT handle: Protocol design (use protocol-design), DI wiring (use di-container), architecture (use architecture-builder).
   Use when building plugin systems, file type handlers, or any dispatch-by-key pattern.
   Recognizes: "strategy-registry", "strategy pattern", "registry pattern", "dispatch",
   "plugin system", "handler registry", "extensible dispatch", "file type handler"

@@ -2,6 +2,7 @@
 name: testing-patterns
 description: |
   pytest patterns, fixtures, mocking, parametrize, and property-based testing.
+  Does NOT handle: TDD orchestration (use tdd), debugging (use systematic-debugging), error handling (use error-handling).
   Use when writing tests, improving coverage, or setting up test infrastructure.
   Recognizes: "testing-patterns", "write tests", "pytest patterns", "how to mock",
   "test fixtures", "parametrize", "property-based testing", "test organization",

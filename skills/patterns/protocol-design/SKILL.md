@@ -2,6 +2,7 @@
 name: protocol-design
 description: |
   Guides proper use of Python typing.Protocol for structural subtyping and interface design.
+  Does NOT handle: DI containers (use di-container), full architecture (use architecture-builder), mock strategies (use testing-patterns).
   Use when defining contracts between modules, creating testable interfaces, or choosing between Protocol and ABC.
   Recognizes: "protocol-design", "typing.Protocol", "structural subtyping", "interface design",
   "Protocol vs ABC", "duck typing", "mock with spec", "protocol pattern"

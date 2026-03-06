@@ -2,6 +2,7 @@
 name: ci-cd-builder
 description: |
   GitHub Actions CI/CD pipeline scaffolding: pytest, linting, Docker build, release.
+  Does NOT handle: Docker (use docker-builder), scaffolding (use project-scaffold), testing (use testing-patterns).
   Use when setting up CI/CD for Python projects, adding pipelines, or configuring GitHub Actions.
   Recognizes: "ci-cd-builder", "CI/CD", "GitHub Actions", "pipeline", "add CI",
   "setup CI/CD", "continuous integration", "automate tests", "build pipeline",

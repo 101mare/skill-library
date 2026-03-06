@@ -3,6 +3,7 @@ name: session-verify
 description: |
   End-of-session verification skill that validates all changes made during a coding session.
   Checks for bugs, security vulnerabilities, dead code, efficiency issues, and documentation gaps.
+  Does NOT handle: plan review (use plan-review), PR review (use pr-review), debugging (use systematic-debugging), implementation (use tdd).
   Use when: finishing a task, before committing, user says "verify", "check my changes",
   "review session", "are we done?", "everything correct?", or at end of coding sessions.
   Orchestrates specialized review agents and ensures documentation is updated.

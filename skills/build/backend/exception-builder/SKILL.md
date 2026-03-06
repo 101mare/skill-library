@@ -3,6 +3,7 @@ name: exception-builder
 description: |
   Designs Python exception hierarchies for layered applications.
   Covers base exceptions, layer mapping, chaining, and handler patterns.
+  Does NOT handle: layer error handling (use error-handling), resilience (use resilience-patterns), API errors (use api-design), logging (use logging-builder).
   Use when creating exception systems, adding error handling, or designing error boundaries.
   Recognizes: "exception-builder", "exception hierarchy", "custom exceptions",
   "error classes", "design exceptions", "exception mapping", "error types"

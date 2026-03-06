@@ -2,6 +2,7 @@
 name: resilience-patterns
 description: |
   Resilience patterns for Python: Retry with Backoff, Circuit Breaker, Timeout, Graceful Degradation.
+  Does NOT handle: exception hierarchies (use exception-builder), layer error handling (use error-handling), API errors (use api-design), logging (use logging-builder).
   Use when building code that depends on external services (APIs, databases, model servers).
   Recognizes: "resilience-patterns", "retry", "backoff", "circuit breaker", "timeout",
   "graceful degradation", "fault tolerance", "service unavailable", "connection error",
